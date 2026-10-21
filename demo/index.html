@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NetworkEvolveLab: Interactive Topological Phase Transition & Co-Evolution Simulator</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #1e293b;
+      --border: #334155;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --blue: #38bdf8;
+      --red: #f87171;
+      --green: #4ade80;
+      --accent: #818cf8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+    header {
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    header .badge {
+      background: rgba(129, 140, 248, 0.2);
+      color: var(--accent);
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-weight: 600;
+      border: 1px solid rgba(129, 140, 248, 0.4);
+    }
+    main {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+    #sidebar {
+      width: 320px;
+      background: var(--panel);
+      border-right: 1px solid var(--border);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow-y: auto;
+    }
+    .card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .card-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .control-group {
+      margin-bottom: 14px;
+    }
+    .control-group:last-child { margin-bottom: 0; }
+    .control-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+    }
+    .control-label span:last-child {
+      font-family: monospace;
+      color: var(--blue);
+      font-weight: 600;
+    }
+    input[type="range"] {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--border);
+      outline: none;
+      -webkit-appearance: none;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(129, 140, 248, 0.6);
+    }
+    .btn-row {
+      display: flex;
+      gap: 8px;
+    }
+    button {
+      flex: 1;
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    button:hover {
+      filter: brightness(1.15);
+      transform: translateY(-1px);
+    }
+    button.secondary {
+      background: var(--border);
+      color: var(--text);
+    }
+    button.policy {
+      background: #059669;
+    }
+    #viewport {
+      flex: 1;
+      position: relative;
+      background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    #hud {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      gap: 12px;
+      pointer-events: none;
+    }
+    .stat-pill {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      border-radius: 8px;
+      text-align: right;
+    }
+    .stat-val {
+      font-size: 1.4rem;
+      font-weight: 700;
+      font-family: monospace;
+      color: var(--blue);
+    }
+    .stat-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    #legend {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .legend-item { display: flex; align-items: center; gap: 8px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-blue { background: var(--blue); }
+    .dot-red { background: var(--red); }
+    .dot-green { background: var(--green); box-shadow: 0 0 6px var(--green); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>
+      <span>NetworkEvolveLab</span>
+      <span class="badge">Interactive Co-Evolution Simulator</span>
+    </h1>
+    <div style="font-size: 0.85rem; color: var(--muted);">
+      Paper: <em>Co-evolution of LLM Cognition and Dynamic Social Topology</em>
+    </div>
+  </header>
+
+  <main>
+    <div id="sidebar">
+      <div class="card">
+        <div class="card-title">Simulation Controls</div>
+        <div class="btn-row" style="margin-bottom: 8px;">
+          <button id="btnPlay">Start</button>
+          <button id="btnStep" class="secondary">Step</button>
+          <button id="btnReset" class="secondary">Reset</button>
+        </div>
+        <button id="btnPolicy" class="policy" style="width: 100%;">
+          ⚡ Apply Diversified Rec (15%)
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Cognitive & Topology Parameters</div>
+        <div class="control-group">
+          <div class="control-label">
+            <span>Cognitive Tolerance (&theta;)</span>
+            <span id="valTheta">0.40</span>
+          </div>
+          <input type="range" id="rngTheta" min="0.20" max="0.90" step="0.05" value="0.40">
+          <div style="font-size:0.7rem; color:var(--muted); margin-top:4px;">
+            Critical phase transition occurs at &theta;* &approx; 0.52
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>Block Dissonance Threshold</span>
+            <span id="valBlock">1.20</span>
+          </div>
+          <input type="range" id="rngBlock" min="0.60" max="1.80" step="0.10" value="1.20">
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>Diversified Rec Rate (&rho;<sub>div</sub>)</span>
+            <span id="valRho">0.00</span>
+          </div>
+          <input type="range" id="rngRho" min="0.00" max="0.30" step="0.05" value="0.00">
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Theoretical Bounds & Invariants</div>
+        <div style="font-size: 0.8rem; line-height: 1.4; color: var(--muted);">
+          <strong style="color:var(--text);">Proposition 1 (Newman Bound):</strong> In any bipolar 2-camp topology, Newman Modularity is analytically bounded by:
+          <div style="text-align:center; font-family:monospace; margin:6px 0; color:var(--blue); font-size:0.95rem;">
+            Q &le; 1 - 1/K = 0.500
+          </div>
+          <strong style="color:var(--text);">Proposition 2 (Bridger Resilience):</strong> Active Bridgers act as structural suspension cables maintaining global weak reachability.
+        </div>
+      </div>
+    </div>
+
+    <div id="viewport">
+      <canvas id="graphCanvas"></canvas>
+
+      <div id="hud">
+        <div class="stat-pill">
+          <div class="stat-val" id="hudRound">0</div>
+          <div class="stat-label">Simulation Round</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-val" id="hudQ">0.024</div>
+          <div class="stat-label">Newman Modularity Q</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-val" id="hudPi">0.450</div>
+          <div class="stat-label">Polarization Index &Pi;</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-val" id="hudEdges">0</div>
+          <div class="stat-label">Active Directed Edges</div>
+        </div>
+      </div>
+
+      <div id="legend">
+        <div class="legend-item"><div class="dot dot-blue"></div> Left Camp (Ideology &lt; 0)</div>
+        <div class="legend-item"><div class="dot dot-red"></div> Right Camp (Ideology &gt; 0)</div>
+        <div class="legend-item"><div class="dot dot-green"></div> Active Bridger (Suspension Cable)</div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // --- Canvas & Simulation Engine ---
+    const canvas = document.getElementById("graphCanvas");
+    const ctx = canvas.getContext("2d");
+
+    let width, height;
+    function resize() {
+      width = canvas.parentElement.clientWidth;
+      height = canvas.parentElement.clientHeight;
+      canvas.width = width * window.devicePixelRatio;
+      canvas.height = height * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    // Simulation State
+    const NUM_NODES = 50;
+    let nodes = [];
+    let edges = [];
+    let round = 0;
+    let isRunning = false;
+
+    // Controls
+    let theta = 0.40;
+    let blockThresh = 1.20;
+    let rhoDiv = 0.00;
+
+    const rngTheta = document.getElementById("rngTheta");
+    const rngBlock = document.getElementById("rngBlock");
+    const rngRho = document.getElementById("rngRho");
+    const valTheta = document.getElementById("valTheta");
+    const valBlock = document.getElementById("valBlock");
+    const valRho = document.getElementById("valRho");
+
+    rngTheta.oninput = (e) => { theta = parseFloat(e.target.value); valTheta.innerText = theta.toFixed(2); };
+    rngBlock.oninput = (e) => { blockThresh = parseFloat(e.target.value); valBlock.innerText = blockThresh.toFixed(2); };
+    rngRho.oninput = (e) => { rhoDiv = parseFloat(e.target.value); valRho.innerText = rhoDiv.toFixed(2); };
+
+    function initGraph() {
+      round = 0;
+      nodes = [];
+      edges = [];
+
+      for (let i = 0; i < NUM_NODES; i++) {
+        const isLeft = i < NUM_NODES / 2;
+        const isBridger = (i >= 2 && i <= 5) || (i >= NUM_NODES/2 + 2 && i <= NUM_NODES/2 + 5);
+        const isHub = (i === 0 || i === NUM_NODES / 2);
+
+        // Bipolar Ideology
+        const belief = isLeft ? -0.75 + (Math.random() - 0.5) * 0.3 : 0.75 + (Math.random() - 0.5) * 0.3;
+        const x = isLeft ? width * 0.3 + (Math.random() - 0.5) * 120 : width * 0.7 + (Math.random() - 0.5) * 120;
+        const y = height * 0.5 + (Math.random() - 0.5) * 260;
+
+        nodes.push({
+          id: i,
+          x: isBridger ? width * 0.5 + (isLeft ? -30 : 30) : x,
+          y: y,
+          vx: 0, vy: 0,
+          belief: belief,
+          isBridger: isBridger,
+          isHub: isHub,
+          camp: isLeft ? -1 : 1,
+          radius: isHub ? 9 : (isBridger ? 7 : 5)
+        });
+      }
+
+      // Initial intra-camp dense connections & sparse inter-camp edges
+      for (let i = 0; i < NUM_NODES; i++) {
+        for (let j = 0; j < NUM_NODES; j++) {
+          if (i === j) continue;
+          const sameCamp = nodes[i].camp === nodes[j].camp;
+          if (sameCamp && Math.random() < 0.22) {
+            edges.push({ source: i, target: j, weight: 0.8 });
+          } else if (!sameCamp) {
+            if ((nodes[i].isBridger || nodes[j].isBridger) && Math.random() < 0.25) {
+              edges.push({ source: i, target: j, weight: 0.6 });
+            } else if (Math.random() < 0.04) {
+              edges.push({ source: i, target: j, weight: 0.4 });
+            }
+          }
+        }
+      }
+      updateMetrics();
+    }
+
+    function stepSimulation() {
+      round++;
+      // 1. Social interaction & cognitive updates
+      nodes.forEach(u => {
+        // Sample statement from an incoming edge
+        const incoming = edges.filter(e => e.target === u.id);
+        if (incoming.length === 0) return;
+        const chosenEdge = incoming[Math.floor(Math.random() * incoming.length)];
+        const v = nodes[chosenEdge.source];
+
+        const diff = Math.abs(u.belief - v.belief);
+
+        // Belief update with damping
+        if (diff <= theta * 2.0) {
+          u.belief += (v.belief - u.belief) * 0.10 * (1 - diff / 2.0);
+        } else if (diff > theta * 2.0 && diff < blockThresh) {
+          // Backfire push
+          u.belief -= (v.belief - u.belief) * 0.03;
+        }
+        u.belief = Math.max(-1.0, Math.min(1.0, u.belief));
+
+        // Edge evolution & selective unfollow / block
+        if (diff > blockThresh) {
+          // Sever edge
+          edges = edges.filter(e => !(e.source === v.id && e.target === u.id));
+        } else {
+          chosenEdge.weight = Math.max(0.1, chosenEdge.weight + (diff <= theta ? 0.05 : -0.08));
+        }
+      });
+
+      // 2. Diversified recommendation injection
+      if (rhoDiv > 0 && Math.random() < rhoDiv * 3) {
+        const u = nodes[Math.floor(Math.random() * NUM_NODES)];
+        const oppNodes = nodes.filter(n => n.camp !== u.camp);
+        const v = oppNodes[Math.floor(Math.random() * oppNodes.length)];
+        if (!edges.some(e => e.source === v.id && e.target === u.id)) {
+          edges.push({ source: v.id, target: u.id, weight: 0.5 });
+        }
+      }
+
+      updateMetrics();
+    }
+
+    function updateMetrics() {
+      document.getElementById("hudRound").innerText = round;
+      document.getElementById("hudEdges").innerText = edges.length;
+
+      // Polarization (variance of beliefs)
+      const mean = nodes.reduce((acc, n) => acc + n.belief, 0) / NUM_NODES;
+      const pi = nodes.reduce((acc, n) => acc + Math.pow(n.belief - mean, 2), 0) / NUM_NODES;
+      document.getElementById("hudPi").innerText = pi.toFixed(3);
+
+      // Newman Modularity approximation Q = e_in/m - sum a_c^2
+      const m = edges.length;
+      if (m > 0) {
+        const intraEdges = edges.filter(e => nodes[e.source].camp === nodes[e.target].camp).length;
+        const q = Math.min(0.500, (intraEdges / m) - 0.500);
+        document.getElementById("hudQ").innerText = Math.max(0.000, q).toFixed(3);
+      } else {
+        document.getElementById("hudQ").innerText = "0.500";
+      }
+    }
+
+    // Force-directed graph rendering loop
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw edges
+      edges.forEach(e => {
+        const u = nodes[e.source];
+        const v = nodes[e.target];
+        const sameCamp = u.camp === v.camp;
+
+        ctx.beginPath();
+        ctx.moveTo(u.x, u.y);
+        ctx.lineTo(v.x, v.y);
+        ctx.strokeStyle = sameCamp
+          ? (u.camp < 0 ? "rgba(56, 189, 248, 0.18)" : "rgba(248, 113, 113, 0.18)")
+          : "rgba(74, 222, 128, 0.45)"; // Bridger cross-edge highlight
+        ctx.lineWidth = e.weight * 1.5;
+        ctx.stroke();
+      });
+
+      // Simple physics relaxation
+      nodes.forEach(u => {
+        // Center camp attraction
+        const targetX = u.isBridger ? width * 0.5 : (u.camp < 0 ? width * 0.32 : width * 0.68);
+        u.vx += (targetX - u.x) * 0.02;
+        u.vy += (height * 0.5 - u.y) * 0.01;
+
+        // Node repulsion
+        nodes.forEach(v => {
+          if (u === v) return;
+          const dx = u.x - v.x;
+          const dy = u.y - v.y;
+          const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+          if (dist < 50) {
+            const force = (50 - dist) / dist * 0.4;
+            u.vx += dx * force;
+            u.vy += dy * force;
+          }
+        });
+
+        u.vx *= 0.85;
+        u.vy *= 0.85;
+        u.x += u.vx;
+        u.y += u.vy;
+      });
+
+      // Draw nodes
+      nodes.forEach(u => {
+        ctx.beginPath();
+        ctx.arc(u.x, u.y, u.radius, 0, Math.PI * 2);
+        if (u.isBridger) {
+          ctx.fillStyle = "#4ade80";
+          ctx.shadowColor = "#4ade80";
+          ctx.shadowBlur = 10;
+        } else {
+          ctx.fillStyle = u.belief < 0 ? "#38bdf8" : "#f87171";
+          ctx.shadowBlur = 0;
+        }
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      });
+
+      if (isRunning && round < 100) {
+        stepSimulation();
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    // UI Listeners
+    const btnPlay = document.getElementById("btnPlay");
+    btnPlay.onclick = () => {
+      isRunning = !isRunning;
+      btnPlay.innerText = isRunning ? "Pause" : "Resume";
+      btnPlay.classList.toggle("secondary", isRunning);
+    };
+
+    document.getElementById("btnStep").onclick = () => {
+      isRunning = false;
+      btnPlay.innerText = "Resume";
+      stepSimulation();
+    };
+
+    document.getElementById("btnReset").onclick = () => {
+      isRunning = false;
+      btnPlay.innerText = "Start";
+      initGraph();
+    };
+
+    document.getElementById("btnPolicy").onclick = () => {
+      rngRho.value = 0.15;
+      rhoDiv = 0.15;
+      valRho.innerText = "0.15";
+      alert("Platform Governance Activated: 15% Diversified Cross-Camp Recommendations applied.");
+    };
+
+    initGraph();
+    animate();
+  </script>
+</body>
+</html>

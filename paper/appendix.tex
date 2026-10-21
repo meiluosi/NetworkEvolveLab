@@ -1,0 +1,162 @@
+% =============================================================
+% Supplementary Information / Technical Appendix
+% =============================================================
+
+\section{Formal Mathematical Proofs}
+\label{app:proofs}
+
+\subsection{Generalization of Proposition 1: Newman Modularity Upper Bound for Arbitrary $K$-Community Partitions}
+\label{app:proof_modularity}
+
+In Section~\ref{sec:theory}, Proposition~\ref{prop:modularity} established that for any undirected network symmetrically partitioned into $K=2$ communities, the Newman modularity satisfies $Q \leq 0.500$. Here we provide the complete general proof for an arbitrary number of communities $K \geq 2$.
+
+\begin{theorem}[Universal Modularity Upper Bound for $K$ Communities]
+\label{thm:general_modularity}
+Let $\mathcal{G} = (\mathcal{V}, \mathcal{E})$ be an undirected graph with $m = |\mathcal{E}|$ edges, partitioned into $K \geq 2$ non-empty disjoint communities $\mathcal{V}_1, \dots, \mathcal{V}_K$. Let $\mathrm{vol}(\mathcal{V}_c) = \sum_{i \in \mathcal{V}_c} d_i$ denote the degree volume of community $c$. Then:
+\begin{equation}
+    Q \leq 1 - \sum_{c=1}^K \left( \frac{\mathrm{vol}(\mathcal{V}_c)}{2m} \right)^2 \leq 1 - \frac{1}{K}.
+\end{equation}
+Equality $Q = 1 - 1/K$ holds if and only if the network has zero cross-community edges and all communities possess identical degree volumes: $\mathrm{vol}(\mathcal{V}_1) = \dots = \mathrm{vol}(\mathcal{V}_K) = 2m/K$.
+\end{theorem}
+
+\begin{proof}
+By Newman's definition \citep{newman2004finding,newman2006modularity}, modularity is formulated as:
+\begin{equation}
+    Q = \sum_{c=1}^K \left[ \frac{e_{cc}}{2m} - a_c^2 \right],
+\end{equation}
+where $e_{cc}$ is twice the number of edges with both endpoints in community $\mathcal{V}_c$, and $a_c = \frac{\mathrm{vol}(\mathcal{V}_c)}{2m}$ satisfies $\sum_{c=1}^K a_c = 1$ with $a_c > 0$.
+
+First, observe that every internal edge contributes 2 to $\sum_{c=1}^K e_{cc}$, while every cross-community edge $(u \in \mathcal{V}_c, v \in \mathcal{V}_{c'})$ with $c \neq c'$ contributes 0 to the sum. Since the total number of edge endpoints is $2m$, we have:
+\begin{equation}
+    \sum_{c=1}^K \frac{e_{cc}}{2m} = 1 - \sum_{c < c'} \frac{e_{cc'}}{2m} \leq 1,
+\end{equation}
+with equality holding if and only if the graph is completely disjoint across communities (i.e., cross-edges $e_{cc'} = 0$ for all $c \neq c'$).
+
+Second, consider the negative quadratic term $\sum_{c=1}^K a_c^2$. By the Cauchy-Schwarz inequality applied to vectors $\mathbf{a} = (a_1, \dots, a_K)^\top$ and $\mathbf{1} = (1, \dots, 1)^\top$:
+\begin{equation}
+    \left( \sum_{c=1}^K a_c \right)^2 \leq \left( \sum_{c=1}^K 1^2 \right) \left( \sum_{c=1}^K a_c^2 \right) \implies 1^2 \leq K \sum_{c=1}^K a_c^2.
+\end{equation}
+Thus, we obtain the strictly enforced lower bound:
+\begin{equation}
+    \sum_{c=1}^K a_c^2 \geq \frac{1}{K},
+\end{equation}
+with equality if and only if $a_1 = a_2 = \dots = a_K = 1/K$. Combining these two inequalities:
+\begin{equation}
+    Q = \sum_{c=1}^K \frac{e_{cc}}{2m} - \sum_{c=1}^K a_c^2 \leq 1 - \frac{1}{K}.
+\end{equation}
+For $K=2$ (bipolar polarization), $Q \leq 1 - 1/2 = 0.500$. For $K=4$ (e.g., the four distinct sub-forums in Reddit ConvoKit), $Q \leq 1 - 1/4 = 0.750$. This mathematically explains why experimental modularity on Reddit saturates around $Q \approx 0.654 \sim 0.735$, whereas bipolar networks strictly cap at $0.500$.
+\end{proof}
+
+\subsection{Detailed Derivation of Proposition 2: Positive Lebesgue Measure of Asymmetric Rupture Polytope}
+\label{app:proof_polytope}
+
+\begin{proof}
+Consider two agents $i$ and $j$ in a $d$-dimensional continuous ideological space with states $\mathbf{b}_i, \mathbf{b}_j \in [-1, 1]^d$. Each agent assigns attention weight vector $\mathbf{w}_i = (w_{i,1}, \dots, w_{i,d})^\top$ satisfying $\sum_{k=1}^d w_{i,k} = 1$ with $w_{i,k} > 0$. The perceived ideological distance evaluated by agent $i$ towards agent $j$ is:
+\begin{equation}
+    \mathcal{D}_i(\mathbf{b}_i, \mathbf{b}_j) = \sum_{k=1}^d w_{i,k} |b_{i,k} - b_{j,k}|.
+\end{equation}
+Let $\Theta_i$ and $\Theta_j$ be the respective severance thresholds. The set of configuration pairs $(\mathbf{b}_i, \mathbf{b}_j) \in [-1, 1]^{2d}$ under which agent $i$ severs the directed link $(i, j)$ while agent $j$ preserves $(j, i)$ is:
+\begin{equation}
+    \Omega_{\mathrm{asym}} = \left\{ (\mathbf{b}_i, \mathbf{b}_j) \in [-1, 1]^{2d} \;\middle|\; \sum_{k=1}^d w_{i,k} |b_{i,k} - b_{j,k}| > \Theta_i \;\land\; \sum_{k=1}^d w_{j,k} |b_{j,k} - b_{i,k}| \leq \Theta_j \right\}.
+\end{equation}
+Let $\Delta_k = |b_{i,k} - b_{j,k}| \in [0, 2]$. Rewriting the conditions in terms of difference vector $\boldsymbol{\Delta} = (\Delta_1, \dots, \Delta_d)^\top$:
+\begin{equation}
+    \mathbf{w}_i^\top \boldsymbol{\Delta} > \Theta_i \quad \text{and} \quad \mathbf{w}_j^\top \boldsymbol{\Delta} \leq \Theta_j.
+\end{equation}
+Whenever the weight vectors $\mathbf{w}_i$ and $\mathbf{w}_j$ are non-collinear (which occurs almost everywhere under heterogeneous archetypes), the two hyperplanes $H_i = \{\boldsymbol{\Delta} \mid \mathbf{w}_i^\top \boldsymbol{\Delta} = \Theta_i\}$ and $H_j = \{\boldsymbol{\Delta} \mid \mathbf{w}_j^\top \boldsymbol{\Delta} = \Theta_j\}$ intersect transversally. 
+
+For $d \geq 2$, the region bounded between these two non-parallel hyperplanes in the positive orthant $[0, 2]^d$ contains an open ball $B(\boldsymbol{\Delta}_0, \epsilon)$ with radius $\epsilon > 0$. Since the mapping $(\mathbf{b}_i, \mathbf{b}_j) \mapsto \boldsymbol{\Delta}$ is a surjective piecewise-linear submersion with full rank $d$, the pre-image $\Omega_{\mathrm{asym}}$ contains an open non-empty set in $\mathbb{R}^{2d}$. Therefore, the Lebesgue measure $\mu(\Omega_{\mathrm{asym}}) > 0$.
+\end{proof}
+
+% =============================================================
+\section{Hyperparameter Configuration and Experimental Protocols}
+\label{app:hyperparams}
+
+Table~\ref{tab:hyperparameters} summarizes the exact hyperparameter values across all simulation phases. All experimental runs were executed with explicit pseudo-random seeds ($s \in \{0, 1, \dots, S-1\}$) to guarantee bitwise reproducibility.
+
+\begin{table}[h]
+\centering
+\small
+\caption{\textbf{Comprehensive Hyperparameter Configuration Table across All Phases.}}
+\label{tab:hyperparameters}
+\begin{tabular}{llcc}
+\toprule
+\textbf{Phase / Module} & \textbf{Hyperparameter Description} & \textbf{Symbol} & \textbf{Nominal Value} \\
+\midrule
+\multirow{4}{*}{\textbf{Agent Archetypes}} 
+& Hub Broadcaster Proportion & $p_{\mathrm{hub}}$ & $0.02$ ($2\%$) \\
+& Active Bridger Proportion & $p_{\mathrm{bridger}}$ & $0.085$ ($8.5\%$) \\
+& Long-tail Responder Proportion & $p_{\mathrm{longtail}}$ & $0.895$ ($89.5\%$) \\
+& Belief Momentum Damping Coefficient & $\eta$ & $0.10$ \\
+\midrule
+\multirow{4}{*}{\textbf{Dynamic Topology}} 
+& Baseline Cognitive Tolerance & $\theta$ & $0.40$ (Phase 1b) / Sweep $[0.2, 0.9]$ \\
+& Dynamic Tie Severance (Block) Threshold & $\theta_{\mathrm{block}}$ & $1.20$ \\
+& Edge Weight Reinforcement Rate & $\alpha_{\mathrm{rec}}$ & $0.05$ \\
+& Edge Weight Cognitive Decay Rate & $\gamma_{\mathrm{dec}}$ & $0.10$ \\
+\midrule
+\multirow{3}{*}{\textbf{Platform Policies}} 
+& Diversified Recommendation Exposure Rate & $\rho_{\mathrm{div}}$ & $0.15$ (Sweep $0.05 \sim 0.30$) \\
+& Bridger Amplification Factor & $\mu_{\mathrm{bridge}}$ & $+50\%$ \\
+& Hub De-amplification Throttle & $\lambda_{\mathrm{hub}}$ & $-50\%$ \\
+\midrule
+\multirow{3}{*}{\textbf{Statistical Evaluation}} 
+& Phase 0 Parameter Sweep Repeats & $S_{\mathrm{phase0}}$ & $5$ seeds \\
+& Phase 1b Bridger Ablation Repeats & $S_{\mathrm{phase1b}}$ & $20$ seeds \\
+& SOTA Benchmark Suite Repeats & $S_{\mathrm{bench}}$ & $10$ seeds \\
+& Statistical Confidence Interval Level & $1 - \alpha$ & $95\%$ ($t_{0.025, df}$) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =============================================================
+\section{Empirical Dataset Topology and Structural Metrics}
+\label{app:datasets}
+
+Table~\ref{tab:dataset_metrics} reports the topological properties of the five benchmark networks integrated into the unified benchmark suite (`src/network_evolve/datasets.py`).
+
+\begin{table}[h]
+\centering
+\small
+\caption{\textbf{Topological and Ideological Characteristics of Integrated Benchmark Datasets.}}
+\label{tab:dataset_metrics}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Metric} & \textbf{\textsc{Debate}} & \textbf{SNAP Higgs} & \textbf{Twitter 2020} & \textbf{Reddit Convo} & \textbf{Birdwatch} \\
+\midrule
+Domain Source & NeurIPS 2024 & Stanford SNAP & US Presidential & Reddit Forums & X / Twitter \\
+Interaction Modality & Stance Arguments & Retweet/Cascade & Partisan Retweet & Reply Trees & Review Ratings \\
+Degree Distribution & Dense Bipartite & Power-Law ($\gamma \approx 2.1$) & Scale-Free BA & Small-World WS & Bipartite Rater \\
+Reciprocity $r$ & N/A & $0.12$ & $0.38$ & $0.24$ & $0.05$ \\
+Latent Ideology Space & Gaussian Prior & Continuous & Bipolar DW & 4 Sub-forums & Bipartisan Binary \\
+Baseline Modularity $Q$ & $0.21$ & $0.25$ & $0.46$ & $0.69$ & $0.32$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =============================================================
+\section{Agent Prompts and LLM Semantic Interaction Schemas}
+\label{app:prompts}
+
+To validate micro-cognitive fidelity under real foundation models, agents in Phase 2 query the API backend using standardized prompt contracts. The prompt instructs the model to act as a listener with personal multi-dimensional stances evaluating an incoming peer statement.
+
+\subsection{Prompt Specification Template}
+\begin{quote}
+\small
+\texttt{System: You are an autonomous agent in a social network simulation. You hold personal stances on 3 continuous political/technical issues in range [-1.0, 1.0]:}\\
+\texttt{- Dimension 1: Government AI Safety Regulation (Pro-Safety: +1.0 vs Pro-Innovation: -1.0)}\\
+\texttt{- Dimension 2: Privacy and Encryption Backdoors (Pro-Privacy: +1.0 vs Law Enforcement: -1.0)}\\
+\texttt{- Dimension 3: Frontier Model Open Weights (Pro-Open: +1.0 vs Pro-Closed: -1.0)}\\
+\texttt{Your current belief vector: [\{b1\}, \{b2\}, \{b3\}]. Your tolerance threshold is \{theta\}.}\\
+\texttt{You observe the following statement from speaker \{speaker\_id\}: "\{statement\}".}\\
+\texttt{Output strict JSON with format:}\\
+\texttt{\{ "cognitive\_dissonance": float [0.0, 2.0], "belief\_shift": [float, float, float], "relationship\_action": "reinforce" | "decay" | "unfollow" | "block", "reasoning": "brief string" \}}
+\end{quote}
+
+\subsection{API Cost Ledger and Token Accounting}
+All API requests were executed with batching ($K_{\mathrm{events}}=12$ per dispatch) and semantic caching. Across all 3 seeds of LLM evaluation, total consumption was strictly audited:
+\begin{itemize}[leftmargin=*]
+    \item Total API calls executed: 6 batch calls (covering 60 dyadic interaction evaluations).
+    \item Budget ceiling pre-registered: 100 API calls. Actual consumption: $6\%$ of budget.
+    \item Total cost incurred: $<\$0.01$ USD.
+\end{itemize}

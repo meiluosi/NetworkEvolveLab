@@ -118,10 +118,13 @@ python scripts/generate_figures.py
 
 ## 目录索引
 
+- [paper/main.tex](paper/main.tex) & [paper/appendix.tex](paper/appendix.tex)：**完整学术论文手稿与补充材料（LaTeX，可直接上传 Overleaf）**
+- [demo/index.html](demo/index.html)：**浏览器端单文件零依赖交互式动态相变模拟器（支持 GitHub Pages 直接部署）**
+- [demo/app.py](demo/app.py)：**Python Streamlit 交互式仿真仪表盘 (`streamlit run demo/app.py`)**
+- [notebooks/quickstart.ipynb](notebooks/quickstart.ipynb)：**5 分钟快速入门 Jupyter Notebook 教程**
 - [docs/EXPERIMENT_REPORT.md](docs/EXPERIMENT_REPORT.md)：**全阶段完整实验报告、SOTA 横向矩阵、统计检验与理论解释**
 - [paper/THEORY_AND_PROPOSITIONS.md](paper/THEORY_AND_PROPOSITIONS.md)：**形式化命题证明（双极模块度上界、非对称撕裂、推荐单调渗透）**
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)：动力学状态转移方程与数学形式化
-- [docs/EXPERIMENT_PLAN.md](docs/EXPERIMENT_PLAN.md)：四阶段实验计划与算力预算
 - [src/network_evolve/](src/network_evolve/)：动态加权图、数据集加载器、基线方法与政策干预引擎源码
 - [results/figures/](results/figures/)：出版级矢量与位图图表（Figure 1 至 Figure 6）
 - [results/](results/)：冻结的实验数据（JSON 与日志）
