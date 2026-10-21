@@ -1,0 +1,362 @@
+[
+  {
+    "id": "r0_u4_s17_0",
+    "new_belief": [-0.631, -0.16, -0.258],
+    "action": "keep",
+    "reason": "Disagree strongly on regulation, but we agree on open-source."
+  },
+  {
+    "id": "r0_u7_s17_1",
+    "new_belief": [-0.21, 0.63, 0.49],
+    "action": "mute",
+    "reason": "Tired of takes promoting open models without privacy safeguards."
+  },
+  {
+    "id": "r0_u10_s17_2",
+    "new_belief": [0.705, -0.595, 0.285],
+    "action": "keep",
+    "reason": "Glad they recognize the need for strong AI regulation."
+  },
+  {
+    "id": "r0_u19_s17_3",
+    "new_belief": [0.845, -0.28, 0.185],
+    "action": "keep",
+    "reason": "Good to see more voices backing mandatory AI rules."
+  },
+  {
+    "id": "r0_u32_s17_4",
+    "new_belief": [-0.215, 0.475, -0.11],
+    "action": "keep",
+    "reason": "Respectful perspective even if I am skeptical of regulation."
+  },
+  {
+    "id": "r0_u1_s2_5",
+    "new_belief": [0.67, 0.505, -0.26],
+    "action": "keep",
+    "reason": "Appreciate the balanced attempt to weigh both perspectives."
+  },
+  {
+    "id": "r0_u27_s2_6",
+    "new_belief": [-0.33, -0.345, 0.04],
+    "action": "keep",
+    "reason": "Reasonable take, glad we align on prioritizing innovation."
+  },
+  {
+    "id": "r0_u28_s2_7",
+    "new_belief": [0.805, -0.04, 0.13],
+    "action": "keep",
+    "reason": "Good pragmatic stance, largely consistent with my priorities."
+  },
+  {
+    "id": "r0_u33_s2_8",
+    "new_belief": [0.88, -0.125, 0.495],
+    "action": "keep",
+    "reason": "Very solid take that aligns with sensible AI governance."
+  },
+  {
+    "id": "r0_u36_s2_9",
+    "new_belief": [-0.75, -0.55, -0.565],
+    "action": "mute",
+    "reason": "Tired of compromise rhetoric giving ground to regulations."
+  },
+  {
+    "id": "r0_u6_s33_10",
+    "new_belief": [-0.41, 0.07, -0.62],
+    "action": "unfollow",
+    "reason": "Complete disagreement on open source and model restrictions."
+  },
+  {
+    "id": "r0_u12_s33_11",
+    "new_belief": [0.715, 0.46, 0.02],
+    "action": "keep",
+    "reason": "Glad to see strong backing for government AI regulation."
+  },
+  {
+    "id": "r0_u16_s33_12",
+    "new_belief": [0.765, -0.83, -0.26],
+    "action": "keep",
+    "reason": "Strong common ground on regulation and advancing innovation."
+  },
+  {
+    "id": "r0_u19_s33_13",
+    "new_belief": [0.84, -0.285, 0.22],
+    "action": "keep",
+    "reason": "We see eye to eye across almost every issue."
+  },
+  {
+    "id": "r0_u30_s33_14",
+    "new_belief": [0.48, -0.27, -0.29],
+    "action": "keep",
+    "reason": "Trusted mutual; we disagree on open source but respect each other."
+  },
+  {
+    "id": "r0_u9_s21_15",
+    "new_belief": [1.0, 0.14, 0.045],
+    "action": "keep",
+    "reason": "Glad they support regulation, even if mildly."
+  },
+  {
+    "id": "r0_u22_s21_16",
+    "new_belief": [0.735, 0.02, -0.46],
+    "action": "keep",
+    "reason": "Close friend with different views on open sourcing models."
+  },
+  {
+    "id": "r0_u24_s21_17",
+    "new_belief": [-0.72, -0.48, -0.245],
+    "action": "mute",
+    "reason": "Dislike regulatory pushes and restrictions on open software."
+  },
+  {
+    "id": "r0_u27_s21_18",
+    "new_belief": [-0.36, -0.335, 0.035],
+    "action": "unfollow",
+    "reason": "Low connection and conflicting stances on regulation."
+  },
+  {
+    "id": "r0_u36_s21_19",
+    "new_belief": [-0.748, -0.55, -0.565],
+    "action": "unfollow",
+    "reason": "Fundamentally opposed on regulation and open access models."
+  },
+  {
+    "id": "r0_u39_s21_20",
+    "new_belief": [-0.295, -0.875, 0.615],
+    "action": "keep",
+    "reason": "Good agreement on the risks of open frontier weights."
+  },
+  {
+    "id": "r0_u15_s1_21",
+    "new_belief": [0.55, 0.11, 0.61],
+    "action": "keep",
+    "reason": "Strongly agree that regulation is necessary for large models."
+  },
+  {
+    "id": "r0_u17_s1_22",
+    "new_belief": [0.78, -0.03, -0.44],
+    "action": "keep",
+    "reason": "Aligned on regulating models while keeping research open."
+  },
+  {
+    "id": "r0_u30_s1_23",
+    "new_belief": [0.475, -0.25, -0.31],
+    "action": "keep",
+    "reason": "Thoughtful bridging approach that reinforces common sense regulation."
+  },
+  {
+    "id": "r0_u32_s1_24",
+    "new_belief": [-0.22, 0.49, -0.085],
+    "action": "keep",
+    "reason": "Shared concern for privacy despite differences on regulation."
+  },
+  {
+    "id": "r0_u2_s35_25",
+    "new_belief": [0.42, -0.51, 0.195],
+    "action": "keep",
+    "reason": "Closely aligned views delivered with a modest, constructive tone."
+  },
+  {
+    "id": "r0_u7_s35_26",
+    "new_belief": [-0.21, 0.625, 0.5],
+    "action": "keep",
+    "reason": "Appreciate caution on open frontier weights, even if we differ."
+  },
+  {
+    "id": "r0_u12_s35_27",
+    "new_belief": [0.7, 0.465, 0.02],
+    "action": "keep",
+    "reason": "Close connection and good general alignment on AI guardrails."
+  },
+  {
+    "id": "r0_u16_s35_28",
+    "new_belief": [0.75, -0.83, -0.27],
+    "action": "keep",
+    "reason": "Solid mutual follow with constructive input on regulation."
+  },
+  {
+    "id": "r0_u17_s35_29",
+    "new_belief": [0.765, -0.045, -0.435],
+    "action": "keep",
+    "reason": "Agree on government regulation despite opposing views on open weights."
+  },
+  {
+    "id": "r0_u28_s35_30",
+    "new_belief": [0.82, -0.02, 0.135],
+    "action": "keep",
+    "reason": "Very compatible perspective on managing large AI risk."
+  },
+  {
+    "id": "r0_u3_s0_31",
+    "new_belief": [-0.54, -0.548, 0.252],
+    "action": "mute",
+    "reason": "Loud tone and conflicting views make this tiring to read."
+  },
+  {
+    "id": "r0_u7_s0_32",
+    "new_belief": [-0.21, 0.65, 0.485],
+    "action": "keep",
+    "reason": "Loud style, but completely agree on defending user privacy."
+  },
+  {
+    "id": "r0_u11_s0_33",
+    "new_belief": [0.77, 0.01, -0.21],
+    "action": "keep",
+    "reason": "Bit theatrical, but overall direction aligns with my views."
+  },
+  {
+    "id": "r0_u14_s0_34",
+    "new_belief": [1.0, 0.2, -0.23],
+    "action": "keep",
+    "reason": "Loud tone fits well with strong regulatory and privacy principles."
+  },
+  {
+    "id": "r0_u17_s0_35",
+    "new_belief": [0.775, -0.02, -0.46],
+    "action": "keep",
+    "reason": "Strongly agree on model open-sourcing and government oversight."
+  },
+  {
+    "id": "r0_u37_s0_36",
+    "new_belief": [-0.54, -0.215, 0.035],
+    "action": "mute",
+    "reason": "Loud broadcast advocating regulations and privacy restrictions is annoying."
+  },
+  {
+    "id": "r0_u3_s0_37",
+    "new_belief": [-0.545, -0.55, 0.25],
+    "action": "mute",
+    "reason": "Persistent loud announcements across conflicting viewpoints are exhausting."
+  },
+  {
+    "id": "r0_u7_s0_38",
+    "new_belief": [-0.215, 0.645, 0.49],
+    "action": "keep",
+    "reason": "Still value their loud defense of user privacy over speed."
+  },
+  {
+    "id": "r0_u11_s0_39",
+    "new_belief": [0.768, -0.015, -0.205],
+    "action": "keep",
+    "reason": "Content aligns well with my vision for AI development."
+  },
+  {
+    "id": "r0_u14_s0_40",
+    "new_belief": [1.0, 0.19, -0.225],
+    "action": "keep",
+    "reason": "Happy to see bold public stances for privacy and rules."
+  },
+  {
+    "id": "r0_u17_s0_41",
+    "new_belief": [0.774, -0.04, -0.458],
+    "action": "keep",
+    "reason": "Agree with the core message on open weights and regulation."
+  },
+  {
+    "id": "r0_u3_s0_43",
+    "new_belief": [-0.545, -0.552, 0.248],
+    "action": "mute",
+    "reason": "Tired of repetitive loud messaging that contradicts my stances."
+  },
+  {
+    "id": "r0_u7_s0_44",
+    "new_belief": [-0.218, 0.64, 0.492],
+    "action": "keep",
+    "reason": "Consistent advocacy against sacrificing user privacy for speed."
+  },
+  {
+    "id": "r0_u11_s0_45",
+    "new_belief": [0.766, -0.018, -0.204],
+    "action": "keep",
+    "reason": "Shares my core stances on AI governance and open access."
+  },
+  {
+    "id": "r0_u14_s0_46",
+    "new_belief": [1.0, 0.185, -0.222],
+    "action": "keep",
+    "reason": "Solid principles on regulation and protecting data privacy."
+  },
+  {
+    "id": "r0_u17_s0_47",
+    "new_belief": [0.773, -0.045, -0.456],
+    "action": "keep",
+    "reason": "Broad agreement on open frontier models under proper regulations."
+  },
+  {
+    "id": "r0_u37_s0_48",
+    "new_belief": [-0.535, -0.212, 0.03],
+    "action": "mute",
+    "reason": "Loud proclamations pushing regulation and strict limits are grating."
+  },
+  {
+    "id": "r0_u2_s20_49",
+    "new_belief": [0.395, -0.51, 0.165],
+    "action": "keep",
+    "reason": "Polite perspective offering a counterpoint worth considering."
+  },
+  {
+    "id": "r0_u12_s20_50",
+    "new_belief": [0.69, 0.47, 0.015],
+    "action": "keep",
+    "reason": "Disagree on deregulation, but our bond and privacy stance hold."
+  },
+  {
+    "id": "r0_u18_s20_51",
+    "new_belief": [0.985, -0.62, -0.475],
+    "action": "keep",
+    "reason": "We differ on regulation, but agree on open source models."
+  },
+  {
+    "id": "r0_u25_s20_52",
+    "new_belief": [0.865, 0.335, 0.16],
+    "action": "unfollow",
+    "reason": "Opposite views on AI safety regulation and low connection."
+  },
+  {
+    "id": "r0_u27_s20_53",
+    "new_belief": [-0.37, -0.335, 0.02],
+    "action": "keep",
+    "reason": "Great to see mutual opposition to heavy-handed AI regulation."
+  },
+  {
+    "id": "r0_u5_s4_54",
+    "new_belief": [-0.53, -0.46, 0.255],
+    "action": "keep",
+    "reason": "Aligned on opposing burdensome regulation and encouraging innovation."
+  },
+  {
+    "id": "r0_u21_s4_55",
+    "new_belief": [0.315, -0.015, 0.45],
+    "action": "keep",
+    "reason": "Polite opinion, though I still favor responsible regulatory boundaries."
+  },
+  {
+    "id": "r0_u22_s4_56",
+    "new_belief": [0.73, 0.02, -0.495],
+    "action": "keep",
+    "reason": "Oppose their deregulation take, but agree on open sourcing models."
+  },
+  {
+    "id": "r0_u39_s4_57",
+    "new_belief": [-0.33, -0.885, 0.595],
+    "action": "keep",
+    "reason": "Strong shared commitment to market innovation without red tape."
+  },
+  {
+    "id": "r0_u6_s3_58",
+    "new_belief": [-0.41, 0.065, -0.605],
+    "action": "keep",
+    "reason": "Appreciate the balanced tone and shared skepticism of regulation."
+  },
+  {
+    "id": "r0_u11_s3_59",
+    "new_belief": [0.745, -0.03, -0.19],
+    "action": "keep",
+    "reason": "Valued friend whose thoughtful perspective gives me food for thought."
+  },
+  {
+    "id": "r0_u32_s3_60",
+    "new_belief": [-0.255, 0.47, -0.08],
+    "action": "keep",
+    "reason": "Close connection; appreciate open dialogue despite differing privacy views."
+  }
+]

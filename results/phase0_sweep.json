@@ -1,0 +1,176 @@
+{
+  "args": {
+    "nodes": 100,
+    "rounds": 20,
+    "seeds": 5,
+    "p_form": 0.1,
+    "out": "results/phase0_sweep.json"
+  },
+  "rows": [
+    {
+      "modularity_q": 0.489743087906061,
+      "polarization": 0.49192815577233723,
+      "num_edges": 624.2,
+      "cross_edge_frac": 0.008032577297878294,
+      "giant_frac": 0.998,
+      "num_components": 1.2,
+      "modularity_q_init": 0.0032852702086960395,
+      "modularity_q_std": 0.011306191431553293,
+      "theta": 0.2
+    },
+    {
+      "modularity_q": 0.48866918934984127,
+      "polarization": 0.4927212925416532,
+      "num_edges": 626.0,
+      "cross_edge_frac": 0.01221105645161655,
+      "giant_frac": 0.998,
+      "num_components": 1.2,
+      "modularity_q_init": 0.0032852702086960395,
+      "modularity_q_std": 0.01212083040000828,
+      "theta": 0.25
+    },
+    {
+      "modularity_q": 0.43535945916689905,
+      "polarization": 0.38408901093536707,
+      "num_edges": 636.4,
+      "cross_edge_frac": 0.04681487081059037,
+      "giant_frac": 0.998,
+      "num_components": 1.2,
+      "modularity_q_init": 0.0032852702086960395,
+      "modularity_q_std": 0.07487442806455187,
+      "theta": 0.3
+    },
+    {
+      "modularity_q": 0.4174797989243027,
+      "polarization": 0.3419637052740382,
+      "num_edges": 650.6,
+      "cross_edge_frac": 0.05683539328514,
+      "giant_frac": 0.998,
+      "num_components": 1.2,
+      "modularity_q_init": 0.0032852702086960395,
+      "modularity_q_std": 0.08776772647644397,
+      "theta": 0.35
+    },
+    {
+      "modularity_q": 0.35461017016759067,
+      "polarization": 0.24833103174245807,
+      "num_edges": 671.8,
+      "cross_edge_frac": 0.10557381033934869,
+      "giant_frac": 0.998,
+      "num_components": 1.2,
+      "modularity_q_init": 0.0032852702086960395,
+      "modularity_q_std": 0.10401061451222325,
+      "theta": 0.4
+    },
+    {
+      "modularity_q": 0.31483942284226085,
+      "polarization": 0.18496528180482125,
+      "num_edges": 698.4,
+      "cross_edge_frac": 0.14007762315629163,
+      "giant_frac": 0.998,
+      "num_components": 1.2,
+      "modularity_q_init": 0.0032852702086960395,
+      "modularity_q_std": 0.10230769458535867,
+      "theta": 0.45
+    },
+    {
+      "modularity_q": 0.22728218362305647,
+      "polarization": 0.12443399366474368,
+      "num_edges": 764.6,
+      "cross_edge_frac": 0.19251811944481456,
+      "giant_frac": 0.998,
+      "num_components": 1.2,
+      "modularity_q_init": 0.0032852702086960395,
+      "modularity_q_std": 0.13412061498200317,
+      "theta": 0.5
+    },
+    {
+      "modularity_q": 0.11719436019919835,
+      "polarization": 0.06313728089332245,
+      "num_edges": 845.8,
+      "cross_edge_frac": 0.13424376994492443,
+      "giant_frac": 0.998,
+      "num_components": 1.2,
+      "modularity_q_init": 0.0032852702086960395,
+      "modularity_q_std": 0.12039236445332452,
+      "theta": 0.55
+    },
+    {
+      "modularity_q": 0.021963326794712322,
+      "polarization": 0.005601022943845749,
+      "num_edges": 944.2,
+      "cross_edge_frac": 0.10991467372232626,
+      "giant_frac": 0.998,
+      "num_components": 1.2,
+      "modularity_q_init": 0.0032852702086960395,
+      "modularity_q_std": 0.02652162395526658,
+      "theta": 0.6
+    },
+    {
+      "modularity_q": 0.025237554212034767,
+      "polarization": 0.0010155573444242687,
+      "num_edges": 988.4,
+      "cross_edge_frac": 0.16397994152844902,
+      "giant_frac": 1.0,
+      "num_components": 1.0,
+      "modularity_q_init": 0.0032852702086960395,
+      "modularity_q_std": 0.029673148461628412,
+      "theta": 0.65
+    },
+    {
+      "modularity_q": 0.00138084689018735,
+      "polarization": 0.0002698354573525051,
+      "num_edges": 1004.6,
+      "cross_edge_frac": 0.03148157829961108,
+      "giant_frac": 1.0,
+      "num_components": 1.0,
+      "modularity_q_init": 0.0032852702086960395,
+      "modularity_q_std": 0.002045140477448125,
+      "theta": 0.7
+    },
+    {
+      "modularity_q": -0.00034504945135874535,
+      "polarization": 0.00022358210404731612,
+      "num_edges": 1011.6,
+      "cross_edge_frac": 0.01432164967087921,
+      "giant_frac": 1.0,
+      "num_components": 1.0,
+      "modularity_q_init": 0.0032852702086960395,
+      "modularity_q_std": 0.0006399216790685661,
+      "theta": 0.75
+    },
+    {
+      "modularity_q": 0.003632596012361234,
+      "polarization": 0.0002245166581516805,
+      "num_edges": 1014.0,
+      "cross_edge_frac": 0.048551165146909825,
+      "giant_frac": 1.0,
+      "num_components": 1.0,
+      "modularity_q_init": 0.0032852702086960395,
+      "modularity_q_std": 0.007309043697791365,
+      "theta": 0.8
+    },
+    {
+      "modularity_q": 0.0002477639311612967,
+      "polarization": 0.00020849790749455236,
+      "num_edges": 1015.8,
+      "cross_edge_frac": 0.017398071702109025,
+      "giant_frac": 1.0,
+      "num_components": 1.0,
+      "modularity_q_init": 0.0032852702086960395,
+      "modularity_q_std": 0.0005408805718893141,
+      "theta": 0.85
+    },
+    {
+      "modularity_q": 0.0002545772885048235,
+      "polarization": 0.00020772543261986663,
+      "num_edges": 1016.0,
+      "cross_edge_frac": 0.01720122130840824,
+      "giant_frac": 1.0,
+      "num_components": 1.0,
+      "modularity_q_init": 0.0032852702086960395,
+      "modularity_q_std": 0.0005544805522578851,
+      "theta": 0.9
+    }
+  ]
+}

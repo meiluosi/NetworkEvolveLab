@@ -1,0 +1,29 @@
+{
+  "modularity": 0.28574427342135356,
+  "num_comms": 6,
+  "size_gini": 0.25833333333333336,
+  "small_comm_frac": 0.5,
+  "rupture_asymmetry": NaN,
+  "polarization": 0.6856890017441708,
+  "edges": 149,
+  "giant_frac": 1.0,
+  "cross_camp_edge_frac": 0.5100671140939598,
+  "ledger": {
+    "budget_calls": 100,
+    "calls": 1,
+    "cache_hits": 0,
+    "log": [
+      {
+        "call": 1,
+        "tag": "batch_42_pairs",
+        "items": 42
+      }
+    ]
+  },
+  "valid_stats": [
+    {
+      "valid": 42,
+      "fallback": 0
+    }
+  ]
+}

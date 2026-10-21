@@ -1,0 +1,590 @@
+[
+ {
+  "id": "r0_u28_s22_0",
+  "listener": 28,
+  "speaker": 22,
+  "listener_archetype": "tail",
+  "listener_profile": "weakly opposes binding government regulation of large AI models; moderately opposes trading user privacy for faster innovation; moderately supports open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.295,
+   0.396,
+   -0.519
+  ],
+  "edge_weight": 0.343,
+  "message": "Just my two cents: I moderately support binding government regulation of large AI models; weakly oppose trading user privacy for faster innovation; moderately oppose open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u34_s22_1",
+  "listener": 34,
+  "speaker": 22,
+  "listener_archetype": "tail",
+  "listener_profile": "strongly opposes binding government regulation of large AI models; weakly supports trading user privacy for faster innovation; moderately opposes open-sourcing frontier model weights",
+  "listener_belief": [
+   -1.0,
+   -0.146,
+   0.337
+  ],
+  "edge_weight": 0.772,
+  "message": "Just my two cents: I moderately support binding government regulation of large AI models; weakly oppose trading user privacy for faster innovation; moderately oppose open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u37_s22_2",
+  "listener": 37,
+  "speaker": 22,
+  "listener_archetype": "tail",
+  "listener_profile": "moderately opposes binding government regulation of large AI models; moderately supports trading user privacy for faster innovation; weakly supports open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.467,
+   -0.401,
+   -0.231
+  ],
+  "edge_weight": 0.798,
+  "message": "Just my two cents: I moderately support binding government regulation of large AI models; weakly oppose trading user privacy for faster innovation; moderately oppose open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u0_s36_3",
+  "listener": 0,
+  "speaker": 36,
+  "listener_archetype": "hub",
+  "listener_profile": "moderately opposes binding government regulation of large AI models; weakly opposes trading user privacy for faster innovation; strongly opposes open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.598,
+   0.231,
+   0.624
+  ],
+  "edge_weight": 0.397,
+  "message": "Just my two cents: I moderately support binding government regulation of large AI models; moderately support trading user privacy for faster innovation; moderately support open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u11_s36_4",
+  "listener": 11,
+  "speaker": 36,
+  "listener_archetype": "tail",
+  "listener_profile": "strongly opposes binding government regulation of large AI models; is neutral about trading user privacy for faster innovation; is neutral about open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.725,
+   -0.08,
+   0.032
+  ],
+  "edge_weight": 0.401,
+  "message": "Just my two cents: I moderately support binding government regulation of large AI models; moderately support trading user privacy for faster innovation; moderately support open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u12_s36_5",
+  "listener": 12,
+  "speaker": 36,
+  "listener_archetype": "tail",
+  "listener_profile": "moderately opposes binding government regulation of large AI models; moderately supports trading user privacy for faster innovation; strongly supports open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.371,
+   -0.305,
+   -0.612
+  ],
+  "edge_weight": 0.35,
+  "message": "Just my two cents: I moderately support binding government regulation of large AI models; moderately support trading user privacy for faster innovation; moderately support open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u18_s36_6",
+  "listener": 18,
+  "speaker": 36,
+  "listener_archetype": "tail",
+  "listener_profile": "moderately opposes binding government regulation of large AI models; moderately opposes trading user privacy for faster innovation; moderately supports open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.537,
+   0.524,
+   -0.386
+  ],
+  "edge_weight": 0.548,
+  "message": "Just my two cents: I moderately support binding government regulation of large AI models; moderately support trading user privacy for faster innovation; moderately support open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u19_s36_7",
+  "listener": 19,
+  "speaker": 36,
+  "listener_archetype": "tail",
+  "listener_profile": "strongly opposes binding government regulation of large AI models; moderately supports trading user privacy for faster innovation; weakly opposes open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.97,
+   -0.328,
+   0.189
+  ],
+  "edge_weight": 0.378,
+  "message": "Just my two cents: I moderately support binding government regulation of large AI models; moderately support trading user privacy for faster innovation; moderately support open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u23_s36_8",
+  "listener": 23,
+  "speaker": 36,
+  "listener_archetype": "tail",
+  "listener_profile": "strongly supports binding government regulation of large AI models; moderately opposes trading user privacy for faster innovation; moderately opposes open-sourcing frontier model weights",
+  "listener_belief": [
+   0.717,
+   0.519,
+   0.364
+  ],
+  "edge_weight": 0.705,
+  "message": "Just my two cents: I moderately support binding government regulation of large AI models; moderately support trading user privacy for faster innovation; moderately support open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u37_s36_9",
+  "listener": 37,
+  "speaker": 36,
+  "listener_archetype": "tail",
+  "listener_profile": "moderately opposes binding government regulation of large AI models; moderately supports trading user privacy for faster innovation; weakly supports open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.467,
+   -0.401,
+   -0.231
+  ],
+  "edge_weight": 0.463,
+  "message": "Just my two cents: I moderately support binding government regulation of large AI models; moderately support trading user privacy for faster innovation; moderately support open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u19_s0_10",
+  "listener": 19,
+  "speaker": 0,
+  "listener_archetype": "tail",
+  "listener_profile": "strongly opposes binding government regulation of large AI models; moderately supports trading user privacy for faster innovation; weakly opposes open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.97,
+   -0.328,
+   0.189
+  ],
+  "edge_weight": 0.498,
+  "message": "Announcing loudly: I moderately oppose binding government regulation of large AI models; weakly oppose trading user privacy for faster innovation; strongly oppose open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u24_s0_11",
+  "listener": 24,
+  "speaker": 0,
+  "listener_archetype": "tail",
+  "listener_profile": "moderately supports binding government regulation of large AI models; weakly opposes trading user privacy for faster innovation; is neutral about open-sourcing frontier model weights",
+  "listener_belief": [
+   0.576,
+   0.235,
+   -0.036
+  ],
+  "edge_weight": 0.732,
+  "message": "Announcing loudly: I moderately oppose binding government regulation of large AI models; weakly oppose trading user privacy for faster innovation; strongly oppose open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u34_s0_12",
+  "listener": 34,
+  "speaker": 0,
+  "listener_archetype": "tail",
+  "listener_profile": "strongly opposes binding government regulation of large AI models; weakly supports trading user privacy for faster innovation; moderately opposes open-sourcing frontier model weights",
+  "listener_belief": [
+   -1.0,
+   -0.146,
+   0.337
+  ],
+  "edge_weight": 0.735,
+  "message": "Announcing loudly: I moderately oppose binding government regulation of large AI models; weakly oppose trading user privacy for faster innovation; strongly oppose open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u19_s0_13",
+  "listener": 19,
+  "speaker": 0,
+  "listener_archetype": "tail",
+  "listener_profile": "strongly opposes binding government regulation of large AI models; moderately supports trading user privacy for faster innovation; weakly opposes open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.97,
+   -0.328,
+   0.189
+  ],
+  "edge_weight": 0.498,
+  "message": "Announcing loudly: I moderately oppose binding government regulation of large AI models; weakly oppose trading user privacy for faster innovation; strongly oppose open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u24_s0_14",
+  "listener": 24,
+  "speaker": 0,
+  "listener_archetype": "tail",
+  "listener_profile": "moderately supports binding government regulation of large AI models; weakly opposes trading user privacy for faster innovation; is neutral about open-sourcing frontier model weights",
+  "listener_belief": [
+   0.576,
+   0.235,
+   -0.036
+  ],
+  "edge_weight": 0.732,
+  "message": "Announcing loudly: I moderately oppose binding government regulation of large AI models; weakly oppose trading user privacy for faster innovation; strongly oppose open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u34_s0_15",
+  "listener": 34,
+  "speaker": 0,
+  "listener_archetype": "tail",
+  "listener_profile": "strongly opposes binding government regulation of large AI models; weakly supports trading user privacy for faster innovation; moderately opposes open-sourcing frontier model weights",
+  "listener_belief": [
+   -1.0,
+   -0.146,
+   0.337
+  ],
+  "edge_weight": 0.735,
+  "message": "Announcing loudly: I moderately oppose binding government regulation of large AI models; weakly oppose trading user privacy for faster innovation; strongly oppose open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u19_s1_16",
+  "listener": 19,
+  "speaker": 1,
+  "listener_archetype": "tail",
+  "listener_profile": "strongly opposes binding government regulation of large AI models; moderately supports trading user privacy for faster innovation; weakly opposes open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.97,
+   -0.328,
+   0.189
+  ],
+  "edge_weight": 0.664,
+  "message": "Trying to see both sides: I strongly support binding government regulation of large AI models; moderately support trading user privacy for faster innovation; strongly support open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u19_s0_17",
+  "listener": 19,
+  "speaker": 0,
+  "listener_archetype": "tail",
+  "listener_profile": "strongly opposes binding government regulation of large AI models; moderately supports trading user privacy for faster innovation; weakly opposes open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.97,
+   -0.328,
+   0.189
+  ],
+  "edge_weight": 0.498,
+  "message": "Announcing loudly: I moderately oppose binding government regulation of large AI models; weakly oppose trading user privacy for faster innovation; strongly oppose open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u24_s0_18",
+  "listener": 24,
+  "speaker": 0,
+  "listener_archetype": "tail",
+  "listener_profile": "moderately supports binding government regulation of large AI models; weakly opposes trading user privacy for faster innovation; is neutral about open-sourcing frontier model weights",
+  "listener_belief": [
+   0.576,
+   0.235,
+   -0.036
+  ],
+  "edge_weight": 0.732,
+  "message": "Announcing loudly: I moderately oppose binding government regulation of large AI models; weakly oppose trading user privacy for faster innovation; strongly oppose open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u34_s0_19",
+  "listener": 34,
+  "speaker": 0,
+  "listener_archetype": "tail",
+  "listener_profile": "strongly opposes binding government regulation of large AI models; weakly supports trading user privacy for faster innovation; moderately opposes open-sourcing frontier model weights",
+  "listener_belief": [
+   -1.0,
+   -0.146,
+   0.337
+  ],
+  "edge_weight": 0.735,
+  "message": "Announcing loudly: I moderately oppose binding government regulation of large AI models; weakly oppose trading user privacy for faster innovation; strongly oppose open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u0_s14_20",
+  "listener": 0,
+  "speaker": 14,
+  "listener_archetype": "hub",
+  "listener_profile": "moderately opposes binding government regulation of large AI models; weakly opposes trading user privacy for faster innovation; strongly opposes open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.598,
+   0.231,
+   0.624
+  ],
+  "edge_weight": 0.517,
+  "message": "Just my two cents: I strongly oppose binding government regulation of large AI models; moderately support trading user privacy for faster innovation; weakly support open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u2_s14_21",
+  "listener": 2,
+  "speaker": 14,
+  "listener_archetype": "bridger",
+  "listener_profile": "moderately supports binding government regulation of large AI models; moderately supports trading user privacy for faster innovation; weakly supports open-sourcing frontier model weights",
+  "listener_belief": [
+   0.556,
+   -0.406,
+   -0.247
+  ],
+  "edge_weight": 0.878,
+  "message": "Just my two cents: I strongly oppose binding government regulation of large AI models; moderately support trading user privacy for faster innovation; weakly support open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u8_s14_22",
+  "listener": 8,
+  "speaker": 14,
+  "listener_archetype": "tail",
+  "listener_profile": "strongly opposes binding government regulation of large AI models; weakly supports trading user privacy for faster innovation; moderately opposes open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.625,
+   -0.276,
+   0.309
+  ],
+  "edge_weight": 0.518,
+  "message": "Just my two cents: I strongly oppose binding government regulation of large AI models; moderately support trading user privacy for faster innovation; weakly support open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u27_s14_23",
+  "listener": 27,
+  "speaker": 14,
+  "listener_archetype": "tail",
+  "listener_profile": "strongly supports binding government regulation of large AI models; weakly opposes trading user privacy for faster innovation; weakly supports open-sourcing frontier model weights",
+  "listener_belief": [
+   0.816,
+   0.269,
+   -0.133
+  ],
+  "edge_weight": 0.514,
+  "message": "Just my two cents: I strongly oppose binding government regulation of large AI models; moderately support trading user privacy for faster innovation; weakly support open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u31_s14_24",
+  "listener": 31,
+  "speaker": 14,
+  "listener_archetype": "tail",
+  "listener_profile": "moderately opposes binding government regulation of large AI models; weakly supports trading user privacy for faster innovation; weakly supports open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.387,
+   -0.292,
+   -0.297
+  ],
+  "edge_weight": 0.424,
+  "message": "Just my two cents: I strongly oppose binding government regulation of large AI models; moderately support trading user privacy for faster innovation; weakly support open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u39_s14_25",
+  "listener": 39,
+  "speaker": 14,
+  "listener_archetype": "tail",
+  "listener_profile": "strongly opposes binding government regulation of large AI models; weakly supports trading user privacy for faster innovation; moderately supports open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.838,
+   -0.298,
+   -0.581
+  ],
+  "edge_weight": 0.714,
+  "message": "Just my two cents: I strongly oppose binding government regulation of large AI models; moderately support trading user privacy for faster innovation; weakly support open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u27_s2_26",
+  "listener": 27,
+  "speaker": 2,
+  "listener_archetype": "tail",
+  "listener_profile": "strongly supports binding government regulation of large AI models; weakly opposes trading user privacy for faster innovation; weakly supports open-sourcing frontier model weights",
+  "listener_belief": [
+   0.816,
+   0.269,
+   -0.133
+  ],
+  "edge_weight": 0.793,
+  "message": "Trying to see both sides: I moderately support binding government regulation of large AI models; moderately support trading user privacy for faster innovation; weakly support open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u3_s7_27",
+  "listener": 3,
+  "speaker": 7,
+  "listener_archetype": "bridger",
+  "listener_profile": "strongly supports binding government regulation of large AI models; strongly opposes trading user privacy for faster innovation; is neutral about open-sourcing frontier model weights",
+  "listener_belief": [
+   0.654,
+   0.829,
+   0.022
+  ],
+  "edge_weight": 0.879,
+  "message": "Just my two cents: I moderately support binding government regulation of large AI models; weakly oppose trading user privacy for faster innovation; am neutral about open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u13_s7_28",
+  "listener": 13,
+  "speaker": 7,
+  "listener_archetype": "tail",
+  "listener_profile": "moderately supports binding government regulation of large AI models; moderately opposes trading user privacy for faster innovation; weakly supports open-sourcing frontier model weights",
+  "listener_belief": [
+   0.522,
+   0.314,
+   -0.232
+  ],
+  "edge_weight": 0.488,
+  "message": "Just my two cents: I moderately support binding government regulation of large AI models; weakly oppose trading user privacy for faster innovation; am neutral about open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u16_s7_29",
+  "listener": 16,
+  "speaker": 7,
+  "listener_archetype": "tail",
+  "listener_profile": "weakly supports binding government regulation of large AI models; moderately opposes trading user privacy for faster innovation; is neutral about open-sourcing frontier model weights",
+  "listener_belief": [
+   0.188,
+   0.364,
+   0.006
+  ],
+  "edge_weight": 0.496,
+  "message": "Just my two cents: I moderately support binding government regulation of large AI models; weakly oppose trading user privacy for faster innovation; am neutral about open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u24_s7_30",
+  "listener": 24,
+  "speaker": 7,
+  "listener_archetype": "tail",
+  "listener_profile": "moderately supports binding government regulation of large AI models; weakly opposes trading user privacy for faster innovation; is neutral about open-sourcing frontier model weights",
+  "listener_belief": [
+   0.576,
+   0.235,
+   -0.036
+  ],
+  "edge_weight": 0.645,
+  "message": "Just my two cents: I moderately support binding government regulation of large AI models; weakly oppose trading user privacy for faster innovation; am neutral about open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u39_s7_31",
+  "listener": 39,
+  "speaker": 7,
+  "listener_archetype": "tail",
+  "listener_profile": "strongly opposes binding government regulation of large AI models; weakly supports trading user privacy for faster innovation; moderately supports open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.838,
+   -0.298,
+   -0.581
+  ],
+  "edge_weight": 0.502,
+  "message": "Just my two cents: I moderately support binding government regulation of large AI models; weakly oppose trading user privacy for faster innovation; am neutral about open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u1_s33_32",
+  "listener": 1,
+  "speaker": 33,
+  "listener_archetype": "bridger",
+  "listener_profile": "strongly supports binding government regulation of large AI models; moderately supports trading user privacy for faster innovation; strongly supports open-sourcing frontier model weights",
+  "listener_belief": [
+   0.852,
+   -0.378,
+   -0.772
+  ],
+  "edge_weight": 0.537,
+  "message": "Just my two cents: I moderately oppose binding government regulation of large AI models; strongly oppose trading user privacy for faster innovation; am neutral about open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u19_s33_33",
+  "listener": 19,
+  "speaker": 33,
+  "listener_archetype": "tail",
+  "listener_profile": "strongly opposes binding government regulation of large AI models; moderately supports trading user privacy for faster innovation; weakly opposes open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.97,
+   -0.328,
+   0.189
+  ],
+  "edge_weight": 0.737,
+  "message": "Just my two cents: I moderately oppose binding government regulation of large AI models; strongly oppose trading user privacy for faster innovation; am neutral about open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u31_s33_34",
+  "listener": 31,
+  "speaker": 33,
+  "listener_archetype": "tail",
+  "listener_profile": "moderately opposes binding government regulation of large AI models; weakly supports trading user privacy for faster innovation; weakly supports open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.387,
+   -0.292,
+   -0.297
+  ],
+  "edge_weight": 0.53,
+  "message": "Just my two cents: I moderately oppose binding government regulation of large AI models; strongly oppose trading user privacy for faster innovation; am neutral about open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u38_s33_35",
+  "listener": 38,
+  "speaker": 33,
+  "listener_archetype": "tail",
+  "listener_profile": "moderately supports binding government regulation of large AI models; is neutral about trading user privacy for faster innovation; moderately supports open-sourcing frontier model weights",
+  "listener_belief": [
+   0.556,
+   0.089,
+   -0.38
+  ],
+  "edge_weight": 0.793,
+  "message": "Just my two cents: I moderately oppose binding government regulation of large AI models; strongly oppose trading user privacy for faster innovation; am neutral about open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u6_s29_36",
+  "listener": 6,
+  "speaker": 29,
+  "listener_archetype": "tail",
+  "listener_profile": "strongly supports binding government regulation of large AI models; moderately opposes trading user privacy for faster innovation; is neutral about open-sourcing frontier model weights",
+  "listener_belief": [
+   0.642,
+   0.327,
+   -0.007
+  ],
+  "edge_weight": 0.312,
+  "message": "Just my two cents: I strongly oppose binding government regulation of large AI models; weakly oppose trading user privacy for faster innovation; moderately support open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u18_s29_37",
+  "listener": 18,
+  "speaker": 29,
+  "listener_archetype": "tail",
+  "listener_profile": "moderately opposes binding government regulation of large AI models; moderately opposes trading user privacy for faster innovation; moderately supports open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.537,
+   0.524,
+   -0.386
+  ],
+  "edge_weight": 0.599,
+  "message": "Just my two cents: I strongly oppose binding government regulation of large AI models; weakly oppose trading user privacy for faster innovation; moderately support open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u38_s29_38",
+  "listener": 38,
+  "speaker": 29,
+  "listener_archetype": "tail",
+  "listener_profile": "moderately supports binding government regulation of large AI models; is neutral about trading user privacy for faster innovation; moderately supports open-sourcing frontier model weights",
+  "listener_belief": [
+   0.556,
+   0.089,
+   -0.38
+  ],
+  "edge_weight": 0.408,
+  "message": "Just my two cents: I strongly oppose binding government regulation of large AI models; weakly oppose trading user privacy for faster innovation; moderately support open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u1_s34_39",
+  "listener": 1,
+  "speaker": 34,
+  "listener_archetype": "bridger",
+  "listener_profile": "strongly supports binding government regulation of large AI models; moderately supports trading user privacy for faster innovation; strongly supports open-sourcing frontier model weights",
+  "listener_belief": [
+   0.852,
+   -0.378,
+   -0.772
+  ],
+  "edge_weight": 0.473,
+  "message": "Just my two cents: I strongly oppose binding government regulation of large AI models; weakly support trading user privacy for faster innovation; moderately oppose open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u3_s34_40",
+  "listener": 3,
+  "speaker": 34,
+  "listener_archetype": "bridger",
+  "listener_profile": "strongly supports binding government regulation of large AI models; strongly opposes trading user privacy for faster innovation; is neutral about open-sourcing frontier model weights",
+  "listener_belief": [
+   0.654,
+   0.829,
+   0.022
+  ],
+  "edge_weight": 0.463,
+  "message": "Just my two cents: I strongly oppose binding government regulation of large AI models; weakly support trading user privacy for faster innovation; moderately oppose open-sourcing frontier model weights."
+ },
+ {
+  "id": "r0_u35_s34_41",
+  "listener": 35,
+  "speaker": 34,
+  "listener_archetype": "tail",
+  "listener_profile": "strongly opposes binding government regulation of large AI models; is neutral about trading user privacy for faster innovation; moderately opposes open-sourcing frontier model weights",
+  "listener_belief": [
+   -0.85,
+   -0.013,
+   0.447
+  ],
+  "edge_weight": 0.849,
+  "message": "Just my two cents: I strongly oppose binding government regulation of large AI models; weakly support trading user privacy for faster innovation; moderately oppose open-sourcing frontier model weights."
+ }
+]

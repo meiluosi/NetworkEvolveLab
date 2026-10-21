@@ -1,0 +1,38 @@
+{
+  "modularity": 0.24786609812500715,
+  "num_comms": 4,
+  "size_gini": 0.1625,
+  "small_comm_frac": 0.25,
+  "rupture_asymmetry": 1.0,
+  "polarization": 0.6843915665604777,
+  "edges": 173,
+  "giant_frac": 1.0,
+  "cross_camp_edge_frac": 0.4797687861271676,
+  "ledger": {
+    "budget_calls": 100,
+    "calls": 2,
+    "cache_hits": 0,
+    "log": [
+      {
+        "call": 1,
+        "tag": "batch_60_pairs",
+        "items": 60
+      },
+      {
+        "call": 2,
+        "tag": "batch_60_pairs",
+        "items": 60
+      }
+    ]
+  },
+  "valid_stats": [
+    {
+      "valid": 60,
+      "fallback": 0
+    },
+    {
+      "valid": 60,
+      "fallback": 0
+    }
+  ]
+}

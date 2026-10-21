@@ -1,0 +1,185 @@
+{
+  "args": {
+    "seeds": 10,
+    "rounds": 40,
+    "out": "results/robustness_sweep.json"
+  },
+  "theta_sweep_by_topology": {
+    "erdos_renyi": {
+      "0.35": {
+        "q_end": "0.467±0.019",
+        "polarization": "0.314±0.123",
+        "giant_frac": "0.910±0.134",
+        "cross_edges": "0.030±0.030"
+      },
+      "0.45": {
+        "q_end": "0.420±0.027",
+        "polarization": "0.089±0.048",
+        "giant_frac": "0.999±0.002",
+        "cross_edges": "0.085±0.047"
+      },
+      "0.55": {
+        "q_end": "0.338±0.042",
+        "polarization": "0.027±0.016",
+        "giant_frac": "0.999±0.002",
+        "cross_edges": "0.092±0.055"
+      },
+      "0.65": {
+        "q_end": "0.206±0.014",
+        "polarization": "0.004±0.003",
+        "giant_frac": "0.999±0.002",
+        "cross_edges": "0.010±0.009"
+      }
+    },
+    "scale_free": {
+      "0.35": {
+        "q_end": "0.406±0.029",
+        "polarization": "0.213±0.084",
+        "giant_frac": "0.982±0.011",
+        "cross_edges": "0.070±0.038"
+      },
+      "0.45": {
+        "q_end": "0.319±0.034",
+        "polarization": "0.110±0.024",
+        "giant_frac": "0.989±0.007",
+        "cross_edges": "0.112±0.047"
+      },
+      "0.55": {
+        "q_end": "0.278±0.022",
+        "polarization": "0.072±0.019",
+        "giant_frac": "0.996±0.005",
+        "cross_edges": "0.070±0.049"
+      },
+      "0.65": {
+        "q_end": "0.241±0.011",
+        "polarization": "0.035±0.011",
+        "giant_frac": "0.998±0.005",
+        "cross_edges": "0.049±0.044"
+      }
+    },
+    "small_world": {
+      "0.35": {
+        "q_end": "0.569±0.028",
+        "polarization": "0.385±0.071",
+        "giant_frac": "0.951±0.101",
+        "cross_edges": "0.010±0.006"
+      },
+      "0.45": {
+        "q_end": "0.561±0.026",
+        "polarization": "0.301±0.072",
+        "giant_frac": "0.994±0.009",
+        "cross_edges": "0.042±0.024"
+      },
+      "0.55": {
+        "q_end": "0.505±0.029",
+        "polarization": "0.198±0.083",
+        "giant_frac": "0.997±0.007",
+        "cross_edges": "0.067±0.026"
+      },
+      "0.65": {
+        "q_end": "0.418±0.034",
+        "polarization": "0.018±0.008",
+        "giant_frac": "1.000±0.000",
+        "cross_edges": "0.117±0.065"
+      }
+    },
+    "empirical_bipolar": {
+      "0.35": {
+        "q_end": "0.583±0.026",
+        "polarization": "0.323±0.095",
+        "giant_frac": "0.765±0.139",
+        "cross_edges": "0.024±0.028"
+      },
+      "0.45": {
+        "q_end": "0.522±0.039",
+        "polarization": "0.172±0.054",
+        "giant_frac": "0.962±0.042",
+        "cross_edges": "0.050±0.046"
+      },
+      "0.55": {
+        "q_end": "0.484±0.050",
+        "polarization": "0.125±0.062",
+        "giant_frac": "0.987±0.008",
+        "cross_edges": "0.065±0.044"
+      },
+      "0.65": {
+        "q_end": "0.413±0.029",
+        "polarization": "0.023±0.017",
+        "giant_frac": "0.993±0.008",
+        "cross_edges": "0.058±0.037"
+      }
+    }
+  },
+  "h2_bridger_by_topology": {
+    "erdos_renyi": {
+      "bridger_mean": 0.661469654464043,
+      "other_mean": 0.5160455284787251,
+      "relative_gap": -0.28180483689883057,
+      "p_value": 0.9999999999999936,
+      "H2_supported": false,
+      "gap_ci95": [
+        -0.3437420962375535,
+        -0.21162013292447596
+      ]
+    },
+    "scale_free": {
+      "bridger_mean": 0.7428762141806252,
+      "other_mean": 0.5607850561703891,
+      "relative_gap": -0.32470757914581355,
+      "p_value": 0.9999999999999668,
+      "H2_supported": false,
+      "gap_ci95": [
+        -0.38231302257045213,
+        -0.27420052420642366
+      ]
+    },
+    "small_world": {
+      "bridger_mean": 0.7597936754830138,
+      "other_mean": 0.49019487019949737,
+      "relative_gap": -0.5499829183724348,
+      "p_value": 1.0,
+      "H2_supported": false,
+      "gap_ci95": [
+        -0.6305252860537962,
+        -0.4780709618579709
+      ]
+    },
+    "empirical_bipolar": {
+      "bridger_mean": 0.7064596928591704,
+      "other_mean": 0.5604586021529008,
+      "relative_gap": -0.26050289913551644,
+      "p_value": 0.9999999967672477,
+      "H2_supported": false,
+      "gap_ci95": [
+        -0.33121845046518833,
+        -0.19914417650578542
+      ]
+    }
+  },
+  "intervention_by_topology": {
+    "erdos_renyi": {
+      "baseline_q": "0.449±0.021",
+      "policy_q": "0.425±0.026",
+      "delta_q": "-0.023±0.009",
+      "reach_gain": "85306.612±192976.424"
+    },
+    "scale_free": {
+      "baseline_q": "0.348±0.033",
+      "policy_q": "0.333±0.028",
+      "delta_q": "-0.015±0.023",
+      "reach_gain": "-0.071±0.210"
+    },
+    "small_world": {
+      "baseline_q": "0.572±0.028",
+      "policy_q": "0.572±0.022",
+      "delta_q": "-0.000±0.023",
+      "reach_gain": "51371.684±116209.734"
+    },
+    "empirical_bipolar": {
+      "baseline_q": "0.541±0.032",
+      "policy_q": "0.520±0.037",
+      "delta_q": "-0.021±0.023",
+      "reach_gain": "0.749±1.242"
+    }
+  }
+}
