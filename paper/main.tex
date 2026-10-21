@@ -54,7 +54,7 @@
 % Abstract
 % -------------------------------------------------------------
 \begin{abstract}
-Traditional computational opinion dynamics model information transmission as a passive diffusion process over fixed, static graph topologies. Here, we present a closed-loop framework where cognitive updates by Large Language Model (LLM) agents actively reshape social connectivity via selective unfollowing and blocking, while evolving topologies reciprocally constrain exposure. We formalize this co-evolutionary system and evaluate it across five gold-standard empirical datasets (\textsc{Debate} NeurIPS 2024, SNAP Higgs Twitter, Twitter 2020 US Election, Reddit ConvoKit, and Birdwatch Notes) against six baseline frameworks ranging from classical bounded confidence to unstructured generative agents. Our experimental findings establish three core results: (1) We prove analytically and verify empirically that Newman modularity for bipolar partitioned networks cannot exceed $Q \leq 0.500$, falsifying common heuristic expectations of unbounded modularity growth ($Q > 0.65$); (2) Microscopic semantic interactions generate non-trivial asymmetric ruptures ($A_{\mathrm{rupture}} \in [0.78, 1.00]$), where unilateral ties persist due to multi-dimensional alignment on secondary issues, contrasting sharply with the artificial symmetry ($A_{\mathrm{rupture}} = 0$) and over-fragmentation of scalar bounded-confidence models; and (3) Pre-registered ablation tests falsify the structural fragility hypothesis of boundary-spanning bridgers, showing instead that bridgers exhibit higher edge retention rates ($0.66 \sim 0.79$) than peripheral nodes ($0.51 \sim 0.74$), providing topological resilience against network bisection. Finally, counterfactual platform governance experiments reveal a strict monotonic dose-response between diversified recommendation exposure $\rho_{\mathrm{div}}$ and modularity reduction ($\Delta Q \approx -0.014$ per 5\% cross-cutting exposure), tripling cross-camp connectivity.
+Traditional computational opinion dynamics model information transmission as a passive diffusion process over fixed, static graph topologies. Here, we present a closed-loop framework where cognitive updates by Large Language Model (LLM) agents actively reshape social connectivity via selective unfollowing and blocking, while evolving topologies reciprocally constrain exposure. We formalize this co-evolutionary system and evaluate it across five gold-standard empirical datasets (\textsc{Debate} NeurIPS 2024, Stanford Network Analysis Platform (SNAP) Higgs Twitter, Twitter 2020 US Election, Reddit ConvoKit, and Birdwatch Notes) against six baseline frameworks ranging from classical bounded confidence to unstructured generative agents. Our experimental findings establish three core results: (1) We prove analytically and verify empirically that Newman modularity for bipolar partitioned networks cannot exceed $Q \leq 0.500$, falsifying common heuristic expectations of unbounded modularity growth ($Q > 0.65$); (2) Microscopic semantic interactions generate non-trivial asymmetric ruptures ($A_{\mathrm{rupture}} \in [0.78, 1.00]$), where unilateral ties persist due to multi-dimensional alignment on secondary issues, contrasting sharply with the artificial symmetry ($A_{\mathrm{rupture}} = 0$) and over-fragmentation of scalar bounded-confidence models; and (3) Pre-registered ablation tests falsify the structural fragility hypothesis of boundary-spanning bridgers, showing instead that bridgers exhibit higher edge retention rates ($0.66 \sim 0.79$) than peripheral nodes ($0.51 \sim 0.74$), providing topological resilience against network bisection. Finally, counterfactual platform governance experiments reveal a strict monotonic dose-response between diversified recommendation exposure $\rho_{\mathrm{div}}$ and modularity reduction ($\Delta Q \approx -0.014$ per 5\% cross-cutting exposure), tripling cross-camp connectivity.
 \end{abstract}
 
 \noindent\textbf{Keywords:} LLM Multi-Agent Simulation, Dynamic Social Networks, Topological Phase Transition, Polarization, Platform Governance.
@@ -65,10 +65,10 @@ Traditional computational opinion dynamics model information transmission as a p
 \section{Introduction}
 \label{sec:intro}
 
-The emergence of ideological polarization and segregated echo chambers across online platforms poses profound challenges to democratic deliberation and epistemic trust \citep{bail2018exposure,bakshy2015exposure}. A longstanding limitation in computational social science is the bifurcation between two distinct modeling traditions:
+The emergence of ideological polarization and segregated echo chambers across online platforms poses profound challenges to democratic deliberation and epistemic trust \citep{bail2018exposure,bakshy2015exposure,dandekar2013biased,centola2010spread}. A longstanding limitation in computational social science is the bifurcation between two distinct modeling traditions:
 \begin{enumerate}[leftmargin=*]
-    \item \textbf{Mathematical Opinion Dynamics}: Models such as DeGroot linear averaging \citep{degroot1974reaching}, Hegselmann-Krause bounded confidence \citep{hegselmann2002opinion}, and Friedkin-Johnsen stubborn anchor frameworks \citep{friedkin1990social} analyze scalar belief evolution over static or rigidly defined geometric thresholds. These models fail to capture the multi-dimensional semantic reasoning and asymmetrical relationship severance typical of human online interaction.
-    \item \textbf{Generative Multi-Agent Simulations}: Contemporary agentic simulations \citep{park2023generative} leverage LLM reasoning but treat social networks as exogenous static pipelines, ignoring how interpersonal friction alters underlying connectivity. Conversely, recent unstructured prompt-rewiring models \citep{gu2025promptrewire} exhibit stochastic volatility and lack dynamical momentum damping, leading to arbitrary topology dissolution.
+    \item \textbf{Mathematical Opinion Dynamics}: Models such as DeGroot linear averaging \citep{degroot1974reaching}, Hegselmann-Krause (HK) bounded confidence \citep{hegselmann2002opinion}, and Friedkin-Johnsen stubborn anchor frameworks \citep{friedkin1990social} analyze scalar belief evolution over static or rigidly defined geometric thresholds. These models fail to capture the multi-dimensional semantic reasoning and asymmetrical relationship severance typical of human online interaction.
+    \item \textbf{Generative Multi-Agent Simulations}: Contemporary agentic simulations \citep{park2023generative} employ Large Language Model (LLM) reasoning but treat social networks as exogenous static pipelines, ignoring how interpersonal friction alters underlying connectivity. Conversely, recent unstructured prompt-rewiring models \citep{gu2025promptrewire} exhibit stochastic volatility and lack dynamical momentum damping, leading to arbitrary topology dissolution.
 \end{enumerate}
 
 To bridge this fundamental divide, we introduce \textbf{NetworkEvolveLab}, an experimental platform modeling the dual-feedback loop between LLM cognitive states and evolving directed weighted graphs $\mathcal{G}(t) = (\mathcal{V}, \mathcal{E}(t), \mathcal{W}(t))$. In this environment, heterogeneous agents (Hub agenda-setters, Bridgers, and Long-tail responders) consume peer statements, update their internal multi-dimensional belief vectors via damped dissonance dynamics, and make unilateral relationship choices (reinforce, decay, or sever ties).
@@ -130,7 +130,7 @@ If $\delta_{ij}(t) > \theta_{\mathrm{block}}$ or $w_{ij}(t+1) \leq \epsilon_{\ma
 
 \begin{proposition}[Newman Modularity Bound for Bipolar Networks]
 \label{prop:modularity}
-Let $\mathcal{G} = (\mathcal{V}, \mathcal{E})$ be an undirected graph partitioned into $K=2$ symmetric non-empty communities $\mathcal{V}_1, \mathcal{V}_2$ with equal total degree sum $\mathrm{vol}(\mathcal{V}_1) = \mathrm{vol}(\mathcal{V}_2) = m$. Then the Newman modularity $Q$ satisfies:
+Let $\mathcal{G} = (\mathcal{V}, \mathcal{E})$ be an undirected graph partitioned into $K=2$ symmetric non-empty communities $\mathcal{V}_1, \mathcal{V}_2$ with equal total degree sum $\mathrm{vol}(\mathcal{V}_1) = \mathrm{vol}(\mathcal{V}_2) = m$. Then the Newman modularity $Q$ \citep{newman2004finding,newman2006modularity} satisfies:
 \begin{equation}
     Q \leq 1 - \frac{1}{K} = 0.500.
 \end{equation}
@@ -169,7 +169,7 @@ Conversely, in $d \geq 2$ dimensions, let agent $i$ prioritize dimension 1 (e.g.
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.98\textwidth]{figures/fig5_sota_benchmark.png}
-\caption{\textbf{SOTA Benchmark Comparison across Real-World Empirical Networks.} Evaluation of six baseline models across three real-world topologies (Twitter 2020 Election, SNAP Higgs Twitter, and Reddit ConvoKit). (A) Newman Modularity $Q$ showing bounded community segregation; (B) Opinion polarization $\Pi$; (C) Microscopic severance asymmetry $A_{\mathrm{rupture}}$, demonstrating that only agentic models capture non-trivial unilateral unfollowing.}
+\caption{\textbf{State-of-the-Art (SOTA) Benchmark Comparison across Real-World Empirical Networks.} Evaluation of six baseline models across three real-world topologies (Twitter 2020 Election, SNAP Higgs Twitter, and Reddit ConvoKit). (A) Newman Modularity $Q$ showing bounded community segregation; (B) Opinion polarization $\Pi$; (C) Microscopic severance asymmetry $A_{\mathrm{rupture}}$, demonstrating that only agentic models capture non-trivial unilateral unfollowing.}
 \label{fig:sota_benchmark}
 \end{figure*}
 
@@ -225,9 +225,9 @@ Conversely, in $d \geq 2$ dimensions, let agent $i$ prioritize dimension 1 (e.g.
 \subsection{Five Gold-Standard Benchmark Datasets}
 To ensure reproducibility and empirical alignment across diverse communication modes, our library standardizes five benchmark datasets (illustrated in Figure~\ref{fig:empirical_datasets}):
 \begin{enumerate}[leftmargin=*]
-    \item \textbf{\textsc{Debate} Benchmark \citep{neurips2024debate}}: Contains multi-turn stance records over contested policy propositions (AI regulation moratoriums, UBI taxation, encryption backdoors), equipped with empirical human prior distributions ($\mu, \sigma$).
-    \item \textbf{SNAP Higgs Twitter \citep{domenico2013anatomy}}: Real-world retweet and mention network featuring a power-law in-degree exponent ($\gamma \approx 2.1$) and low reciprocity ($r \approx 0.12$).
-    \item \textbf{Twitter 2020 US Election}: Retweet graph capturing polarized partisan alignments (Biden vs. Trump) parameterized via DW-NOMINATE ideological coordinates.
+    \item \textbf{\textsc{Debate} Benchmark \citep{neurips2024debate}}: Contains multi-turn stance records over contested policy propositions (Artificial Intelligence (AI) regulation moratoriums, Universal Basic Income (UBI) taxation, encryption backdoors), equipped with empirical human prior distributions ($\mu, \sigma$).
+    \item \textbf{Stanford Network Analysis Platform (SNAP) Higgs Twitter \citep{domenico2013anatomy}}: Real-world retweet and mention network featuring a power-law in-degree exponent ($\gamma \approx 2.1$) and low reciprocity ($r \approx 0.12$).
+    \item \textbf{Twitter 2020 US Election}: Retweet graph capturing polarized partisan alignments (Biden vs. Trump) parameterized via Dynamic Weighted NOMINATE (DW-NOMINATE) ideological coordinates.
     \item \textbf{Reddit ConvoKit \citep{chang2020convokit}}: Cross-community conversational trees across four politically diverse subreddits (\texttt{r/politics}, \texttt{r/The\_Donald}, \texttt{r/libertarian}, \texttt{r/neutralpolitics}).
     \item \textbf{Birdwatch / Community Notes \citep{wojcik2022birdwatch}}: Crowd-sourced fact-checking dataset annotated with bipartisan rater evaluations.
 \end{enumerate}
@@ -256,7 +256,7 @@ Table~\ref{tab:sota_matrix} summarizes cross-benchmark evaluations. These result
 \begin{minipage}{0.48\textwidth}
 \centering
 \includegraphics[width=\linewidth]{figures/fig1_phase_transition.png}
-\caption{\textbf{Topological Phase Transition Dynamics.} (A) Modularity $Q$ and polarization $\Pi$ as functions of cognitive tolerance $\theta$, identifying critical threshold $\theta^* \approx 0.52$; (B) Cross-topology robustness validation across ER, Scale-Free, Small-World, and Empirical Bipolar networks.}
+\caption{\textbf{Topological Phase Transition Dynamics.} (A) Modularity $Q$ and polarization $\Pi$ as functions of cognitive tolerance $\theta$, identifying critical threshold $\theta^* \approx 0.52$; (B) Cross-topology topological invariance validation across ER, Scale-Free, Small-World, and Empirical Bipolar networks.}
 \label{fig:phase_transition}
 \end{minipage}
 \hfill
@@ -296,8 +296,8 @@ Hypothesis H2 posited that boundary-spanning Bridgers, exposed to dual-sided cog
 
 The causal mechanism stems from topological centrality: peripheral nodes (Long-tail) quickly unfollow opposing Hubs after solitary dissonance spikes, whereas Bridgers, situated at cross-cutting structural holes, possess broader tolerance windows that absorb localized variance. Bridgers function as \emph{structural suspension cables} rather than fragile failure points. \textbf{H2 is formally Falsified}.
 
-\subsection{Cross-Topology Robustness (RQ2)}
-Phase transition sweeps across Erdos-Renyi, Barabasi-Albert Scale-Free, Watts-Strogatz Small-World, and Empirical Bipolar topologies confirm that the critical tolerance threshold consistently occurs within $\theta^* \in [0.50, 0.55]$ (Figure~\ref{fig:phase_transition}B). Homogeneous baseline networks devoid of Bridgers split into completely isolated subgraphs ($\text{Giant Component Fraction} = 0.543$, cross-edges $= 0$), whereas heterogeneous archetype graphs maintain global weak reachability ($\text{Giant Frac} = 0.999$, cross-edges $= 5.9\%$).
+\subsection{Cross-Topology Topological Invariance (RQ2)}
+Phase transition sweeps across Erdos-Renyi (ER), Barabasi-Albert (BA) Scale-Free \citep{barabasi1999emergence}, Watts-Strogatz (WS) Small-World \citep{watts1998collective}, and Empirical Bipolar topologies confirm that the critical tolerance threshold consistently occurs within $\theta^* \in [0.50, 0.55]$ (Figure~\ref{fig:phase_transition}B). Homogeneous baseline networks devoid of Bridgers split into completely isolated subgraphs ($\text{Giant Component Fraction} = 0.543$, cross-edges $= 0$), whereas heterogeneous archetype graphs maintain global weak reachability ($\text{Giant Frac} = 0.999$, cross-edges $= 5.9\%$).
 
 % -------------------------------------------------------------
 % 5. Counterfactual Platform Interventions
