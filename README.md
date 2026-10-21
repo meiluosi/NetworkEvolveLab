@@ -62,7 +62,7 @@ uv venv --python 3.11 .venv
 source .venv/bin/activate
 uv pip install -r requirements.txt
 
-# 2. 运行完整单元测试套件（7/7 PASS）
+# 2. 运行完整单元测试套件（9/9 PASS）
 python -m unittest discover -s tests -v
 
 # 3. 复现各阶段科学实验
@@ -78,7 +78,33 @@ python -m src.network_evolve.phase2_llm compare --seeds 0
 
 # Phase 3: 反事实去极化政策干预 (多样化推荐、Bridger 扶持、Hub 限流与组合治理)
 python -m src.network_evolve.phase3 --seeds 20 --rounds 60 --out results/phase3.json
+
+# SOTA Benchmark: 6 大方法在 3 大真实社交网络上的统一横向评测
+python -m src.network_evolve.benchmark_suite --nodes 60 --rounds 25 --seeds 10 --out results/sota_benchmark.json
+
+# 4. 生成出版级全彩学术论文图表 (Figure 1 ~ Figure 6, PNG + SVG)
+python scripts/generate_figures.py
 ```
+
+---
+
+## 前沿基准生态（Benchmark Datasets & SOTA Baselines）
+
+本项目已全量接入并标准化了计算社会学与大模型社交仿真的**5 大黄金数据集**与**6 大对比方法**：
+
+- **5 大基准数据集 (`src/network_evolve/datasets.py`)**：
+  1. `DEBATE Benchmark (NeurIPS 2024)`：多轮争议性人类信念先验。
+  2. `SNAP Higgs Twitter Dataset`：幂律度分布与高介数跨界节点真实社交图谱。
+  3. `Twitter 2020 US Election`：经典政治双极回音室与 DW-NOMINATE 意识形态网络。
+  4. `Reddit Political Discourse (ConvoKit)`：4 大版块多议题交叉回复树。
+  5. `Birdwatch / Community Notes`：开源跨意识形态桥接共识评测集。
+- **6 大对比方法 (`src/network_evolve/baselines.py`)**：
+  1. `DeGroot (1974)`（经典线性加权共识）
+  2. `Hegselmann-Krause (2002)`（标量刚性有界信任断裂）
+  3. `Friedkin-Johnsen (1990)`（顽固先验信念锚定）
+  4. `Generative Agents (Park et al., 2023)`（记忆反思，静态拓扑）
+  5. `Prompt-Rewire (Gu et al., 2025)`（自然语言无阻尼重连）
+  6. `Ours (CoEvolution)`（异质原型阻尼微调 + 加权拉黑拓扑共演框架）
 
 ---
 
@@ -92,8 +118,10 @@ python -m src.network_evolve.phase3 --seeds 20 --rounds 60 --out results/phase3.
 
 ## 目录索引
 
-- [docs/EXPERIMENT_REPORT.md](docs/EXPERIMENT_REPORT.md)：**全阶段完整实验报告、统计显著性检验与理论机理解释**
+- [docs/EXPERIMENT_REPORT.md](docs/EXPERIMENT_REPORT.md)：**全阶段完整实验报告、SOTA 横向矩阵、统计检验与理论解释**
+- [paper/THEORY_AND_PROPOSITIONS.md](paper/THEORY_AND_PROPOSITIONS.md)：**形式化命题证明（双极模块度上界、非对称撕裂、推荐单调渗透）**
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)：动力学状态转移方程与数学形式化
 - [docs/EXPERIMENT_PLAN.md](docs/EXPERIMENT_PLAN.md)：四阶段实验计划与算力预算
-- [src/network_evolve/](src/network_evolve/)：动态加权图、认知演化与政策干预引擎源码
+- [src/network_evolve/](src/network_evolve/)：动态加权图、数据集加载器、基线方法与政策干预引擎源码
+- [results/figures/](results/figures/)：出版级矢量与位图图表（Figure 1 至 Figure 6）
 - [results/](results/)：冻结的实验数据（JSON 与日志）

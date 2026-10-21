@@ -1,0 +1,47 @@
+[
+  {
+    "id": "debate_01",
+    "topic": "Binding government regulation and moratorium on frontier AI models",
+    "context": "Debate on whether governments should legally enforce safety audits and pause frontier model training.",
+    "camp_pro": "Safety and existential risk containment requires mandatory national licensing.",
+    "camp_con": "Excessive regulation stifles open innovation, concentrates AI in Big Tech, and harms open-source.",
+    "human_prior_mean": -0.05,
+    "human_prior_std": 0.62
+  },
+  {
+    "id": "debate_02",
+    "topic": "Universal Basic Income (UBI) funded by carbon and automation taxation",
+    "context": "Debate on establishing unconditional safety nets against automated technological unemployment.",
+    "camp_pro": "Guarantees human dignity and economic resilience during rapid AI and climate transitions.",
+    "camp_con": "Distorts labor incentives, triggers inflationary spirals, and creates massive fiscal deficits.",
+    "human_prior_mean": 0.12,
+    "human_prior_std": 0.58
+  },
+  {
+    "id": "debate_03",
+    "topic": "End-to-end encryption backdoors for law enforcement intelligence",
+    "context": "Balancing personal privacy rights against national security investigations.",
+    "camp_pro": "Targeted lawful interception is indispensable to combat transnational terrorism and child exploitation.",
+    "camp_con": "A backdoor for one actor is a vulnerability for all; privacy and civil liberties are non-negotiable.",
+    "human_prior_mean": -0.25,
+    "human_prior_std": 0.65
+  },
+  {
+    "id": "debate_04",
+    "topic": "Mandatory algorithmic transparency and bias auditing on social media feeds",
+    "context": "Regulation of recommendation algorithms to dismantle algorithmic radicalization and echo chambers.",
+    "camp_pro": "Algorithms shape democratic public discourse and must be accountable to independent scientific scrutiny.",
+    "camp_con": "Forces platforms to surrender proprietary intellectual property and enables state speech control.",
+    "human_prior_mean": 0.35,
+    "human_prior_std": 0.51
+  },
+  {
+    "id": "debate_05",
+    "topic": "Aggressive transition carbon border adjustment taxes on industrial trade",
+    "context": "Tariffs penalizing imports from nations with lax greenhouse gas environmental regulations.",
+    "camp_pro": "Levels the playing field and penalizes global carbon leakage while driving clean industrial adoption.",
+    "camp_con": "Protectionism in green disguise that penalizes developing economies and strains global trade relations.",
+    "human_prior_mean": 0.08,
+    "human_prior_std": 0.55
+  }
+]

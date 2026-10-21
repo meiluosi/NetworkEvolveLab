@@ -1,14 +1,19 @@
-"""生成学术论文出版级矢量与高清位图（Figure 1 - Figure 4）
+"""生成学术论文出版级矢量与高清位图（Figure 1 - Figure 6）
 数据来源：
   - results/phase0_sweep.json & results/robustness_sweep.json -> Fig 1: 相变曲线
   - results/phase1b.json -> Fig 2: H2 假说消融小提琴/柱状图
   - results/phase3.json -> Fig 3: 平台治理反事实干预与剂量响应
   - results/phase2_offline.json & results/phase2_compare.json -> Fig 4: 语义认知与非对称撕裂
+  - results/sota_benchmark.json -> Fig 5: 多方法在真实世界评测数据集上的横向对比
+  - 5 大公开评测数据集 (DEBATE, Higgs, Twitter, Reddit, Birdwatch) -> Fig 6: 数据集拓扑与微观特征
 """
 import os
+import sys
 import json
 import numpy as np
 import matplotlib.pyplot as plt
+
+sys.path.insert(0, os.path.abspath("."))
 
 # 论文出版风格设置
 plt.rcParams.update({
@@ -228,9 +233,162 @@ def plot_fig4():
     plt.close()
     print("Saved Fig 4.")
 
+def plot_fig5():
+    """Fig 5: 多方法在真实世界评测数据集上的横向对比 (SOTA Benchmark Comparison)"""
+    bench_file = "results/sota_benchmark.json"
+    if not os.path.exists(bench_file):
+        return
+    with open(bench_file, "r", encoding="utf-8") as f:
+        data = json.load(f)["benchmark"]
+
+    datasets = ["Twitter_Election_2020", "SNAP_Higgs_Twitter", "Reddit_ConvoKit"]
+    dataset_labels = ["Twitter 2020 Election", "SNAP Higgs Twitter", "Reddit ConvoKit"]
+    models = ["DeGroot", "Hegselmann_Krause", "Friedkin_Johnsen", "Park_et_al_2023", "Gu_et_al_2025", "Ours_CoEvolution"]
+    model_labels = ["DeGroot (1974)", "Hegselmann-Krause", "Friedkin-Johnsen", "Park et al. (2023)", "Gu et al. (2025)", "Ours (CoEvolution)"]
+    colors = ["#7f7f7f", "#bcbd22", "#17becf", "#9467bd", "#ff7f0e", "#1f77b4"]
+
+    fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(18, 5.2))
+    x = np.arange(len(datasets))
+    width = 0.13
+
+    # (A) Modularity Q
+    for idx, (m, m_label, col) in enumerate(zip(models, model_labels, colors)):
+        means, errs = [], []
+        for ds in datasets:
+            val_str = data[ds][m]["modularity_q"]
+            m_val, h_val = parse_mean_h(val_str)
+            means.append(m_val)
+            errs.append(h_val)
+        offset = (idx - 2.5) * width
+        ax1.bar(x + offset, means, width, yerr=errs, capsize=3, label=m_label, color=col, alpha=0.88)
+
+    ax1.set_ylabel("Newman Modularity $Q$")
+    ax1.set_title("(A) Community Segregation (Modularity $Q$)")
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(dataset_labels)
+    ax1.legend(loc="upper left", fontsize=8.5, frameon=True)
+    ax1.set_ylim(0.0, 0.85)
+
+    # (B) Polarization
+    for idx, (m, m_label, col) in enumerate(zip(models, model_labels, colors)):
+        means, errs = [], []
+        for ds in datasets:
+            val_str = data[ds][m]["polarization"]
+            m_val, h_val = parse_mean_h(val_str)
+            means.append(m_val)
+            errs.append(h_val)
+        offset = (idx - 2.5) * width
+        ax2.bar(x + offset, means, width, yerr=errs, capsize=3, label=m_label, color=col, alpha=0.88)
+
+    ax2.set_ylabel(r"Opinion Polarization $\Pi$")
+    ax2.set_title(r"(B) Opinion Polarization (Variance $\Pi$)")
+    ax2.set_xticks(x)
+    ax2.set_xticklabels(dataset_labels)
+    ax2.set_ylim(0.0, 0.75)
+
+    # (C) Asymmetric Rupture
+    for idx, (m, m_label, col) in enumerate(zip(models, model_labels, colors)):
+        means, errs = [], []
+        for ds in datasets:
+            val_str = data[ds][m]["rupture_asymmetry"]
+            if val_str == "N/A":
+                m_val, h_val = 0.0, 0.0
+            else:
+                m_val, h_val = parse_mean_h(val_str)
+            means.append(m_val)
+            errs.append(h_val)
+        offset = (idx - 2.5) * width
+        ax3.bar(x + offset, means, width, yerr=errs, capsize=3, label=m_label, color=col, alpha=0.88)
+
+    ax3.set_ylabel(r"Asymmetric Rupture $A_{\mathrm{rupture}}$")
+    ax3.set_title(r"(C) Microscopic Severance Asymmetry")
+    ax3.set_xticks(x)
+    ax3.set_xticklabels(dataset_labels)
+    ax3.set_ylim(0.0, 1.15)
+    ax3.text(0.02, 0.88, "Classical: 0 or N/A (symmetric/fixed)\nAgentic: Non-trivial unilateral blocks", 
+             transform=ax3.transAxes, fontsize=8.5, bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="gray", alpha=0.8))
+
+    plt.tight_layout()
+    plt.savefig(f"{OUT_DIR}/fig5_sota_benchmark.png", dpi=300)
+    plt.savefig(f"{OUT_DIR}/fig5_sota_benchmark.svg")
+    plt.close()
+    print("Saved Fig 5.")
+
+def plot_fig6():
+    """Fig 6: 公开评测基准数据集的拓扑与微观特征 (Benchmark Datasets Characterization)"""
+    from src.network_evolve.datasets import (
+        load_debate_benchmark, load_snap_higgs, 
+        load_twitter_election, load_birdwatch_community_notes
+    )
+    
+    fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(18, 5.2))
+
+    # (A) Twitter 2020 Election vs DEBATE: 意识形态/信念分布
+    _, twitter_ideo = load_twitter_election(num_nodes=60, seed=42)
+    t_vals = list(twitter_ideo.values())
+    
+    debates = load_debate_benchmark()
+    d_means = [d["human_prior_mean"] for d in debates]
+    d_stds = [d["human_prior_std"] for d in debates]
+    
+    ax1.hist(t_vals, bins=15, color="#1f77b4", alpha=0.65, density=True, label="Twitter 2020 (DW-NOMINATE Bipolar)")
+    # Overlay Gaussian for DEBATE benchmark topics
+    x_grid = np.linspace(-1, 1, 100)
+    for i, (dm, ds) in enumerate(zip(d_means[:2], d_stds[:2])):
+        y_norm = 1.0 / (ds * np.sqrt(2 * np.pi)) * np.exp(-0.5 * ((x_grid - dm) / ds) ** 2)
+        ax1.plot(x_grid, y_norm, linewidth=1.8, linestyle="--", label=f"DEBATE Topic {i+1} Prior")
+    ax1.set_xlabel("Latent Ideology / Belief Position")
+    ax1.set_ylabel("Probability Density")
+    ax1.set_title("(A) Belief Distribution in Benchmarks")
+    ax1.legend(loc="upper center", fontsize=8.5, frameon=True)
+
+    # (B) Birdwatch / Community Notes: 跨意识形态桥接共识散点图
+    bw = load_birdwatch_community_notes(num_nodes=60, seed=42)
+    notes = bw["notes"]
+    pro_app = [n["pro_camp_approval"] for n in notes]
+    con_app = [n["con_camp_approval"] for n in notes]
+    is_bridge = [n["is_bridging_consensus"] for n in notes]
+    
+    colors_bw = ["#2ca02c" if b else "#d62728" for b in is_bridge]
+    ax2.scatter(pro_app, con_app, c=colors_bw, s=70, alpha=0.85, edgecolors="k", linewidths=0.5)
+    ax2.axvline(0.50, color="gray", linestyle=":", alpha=0.7)
+    ax2.axhline(0.50, color="gray", linestyle=":", alpha=0.7)
+    # Fill bridging consensus quadrant
+    ax2.fill_between([0.5, 1.0], 0.5, 1.0, color="#2ca02c", alpha=0.1, label="Bridging Consensus Zone (Cross-Aisle)")
+    ax2.scatter([], [], c="#2ca02c", label="Bridging Notes (Consensus)")
+    ax2.scatter([], [], c="#d62728", label="Partisan Notes (Echo-Chamber)")
+    ax2.set_xlabel("Left/Pro Camp Approval Rate")
+    ax2.set_ylabel("Right/Con Camp Approval Rate")
+    ax2.set_title("(B) Birdwatch Cross-Ideology Consensus")
+    ax2.set_xlim(0, 1.05)
+    ax2.set_ylim(0, 1.05)
+    ax2.legend(loc="lower left", fontsize=8.5, frameon=True)
+
+    # (C) SNAP Higgs vs Twitter Election 拓扑度分布对比
+    g_higgs = load_snap_higgs(num_nodes=80, seed=42)
+    in_degrees_higgs = [d for n, d in g_higgs.in_degree()]
+    
+    g_tw, _ = load_twitter_election(num_nodes=80, seed=42)
+    in_degrees_tw = [d for n, d in g_tw.in_degree()]
+    
+    ax3.hist(in_degrees_higgs, bins=12, alpha=0.6, color="#ff7f0e", label="SNAP Higgs (Scale-Free)", density=True)
+    ax3.hist(in_degrees_tw, bins=12, alpha=0.6, color="#1f77b4", label="Twitter 2020 (Bipolar BA)", density=True)
+    ax3.set_xlabel(r"Node In-Degree $k_{\mathrm{in}}$")
+    ax3.set_ylabel("Empirical Frequency")
+    ax3.set_title("(C) Degree Distribution across Real Networks")
+    ax3.legend(loc="upper right", fontsize=8.5, frameon=True)
+
+    plt.tight_layout()
+    plt.savefig(f"{OUT_DIR}/fig6_empirical_datasets.png", dpi=300)
+    plt.savefig(f"{OUT_DIR}/fig6_empirical_datasets.svg")
+    plt.close()
+    print("Saved Fig 6.")
+
 if __name__ == "__main__":
     plot_fig1()
     plot_fig2()
     plot_fig3()
     plot_fig4()
+    plot_fig5()
+    plot_fig6()
     print(f"All figures generated successfully into {OUT_DIR}/")

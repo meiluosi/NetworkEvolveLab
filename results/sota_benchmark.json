@@ -1,0 +1,142 @@
+{
+  "args": {
+    "nodes": 60,
+    "rounds": 25,
+    "seeds": 10,
+    "out": "results/sota_benchmark.json"
+  },
+  "benchmark": {
+    "Twitter_Election_2020": {
+      "DeGroot": {
+        "modularity_q": "0.491±0.001",
+        "polarization": "0.320±0.031",
+        "giant_frac": "0.500±0.000",
+        "small_comm_frac": "0.000±0.000",
+        "rupture_asymmetry": "N/A"
+      },
+      "Hegselmann_Krause": {
+        "modularity_q": "0.500±0.000",
+        "polarization": "0.564±0.014",
+        "giant_frac": "0.500±0.000",
+        "small_comm_frac": "0.000±0.000",
+        "rupture_asymmetry": "0.000±0.000"
+      },
+      "Friedkin_Johnsen": {
+        "modularity_q": "0.491±0.001",
+        "polarization": "0.521±0.016",
+        "giant_frac": "0.500±0.000",
+        "small_comm_frac": "0.000±0.000",
+        "rupture_asymmetry": "N/A"
+      },
+      "Park_et_al_2023": {
+        "modularity_q": "0.491±0.001",
+        "polarization": "0.511±0.020",
+        "giant_frac": "0.500±0.000",
+        "small_comm_frac": "0.000±0.000",
+        "rupture_asymmetry": "N/A"
+      },
+      "Gu_et_al_2025": {
+        "modularity_q": "0.445±0.016",
+        "polarization": "0.589±0.014",
+        "giant_frac": "0.500±0.000",
+        "small_comm_frac": "0.000±0.000",
+        "rupture_asymmetry": "0.900±0.278"
+      },
+      "Ours_CoEvolution": {
+        "modularity_q": "0.465±0.006",
+        "polarization": "0.575±0.023",
+        "giant_frac": "0.500±0.000",
+        "small_comm_frac": "0.000±0.000",
+        "rupture_asymmetry": "0.778±0.424"
+      }
+    },
+    "SNAP_Higgs_Twitter": {
+      "DeGroot": {
+        "modularity_q": "0.249±0.005",
+        "polarization": "0.007±0.005",
+        "giant_frac": "0.255±0.029",
+        "small_comm_frac": "0.037±0.056",
+        "rupture_asymmetry": "N/A"
+      },
+      "Hegselmann_Krause": {
+        "modularity_q": "0.513±0.018",
+        "polarization": "0.480±0.046",
+        "giant_frac": "0.395±0.045",
+        "small_comm_frac": "0.335±0.101",
+        "rupture_asymmetry": "0.000±0.000"
+      },
+      "Friedkin_Johnsen": {
+        "modularity_q": "0.249±0.005",
+        "polarization": "0.073±0.009",
+        "giant_frac": "0.255±0.029",
+        "small_comm_frac": "0.037±0.056",
+        "rupture_asymmetry": "N/A"
+      },
+      "Park_et_al_2023": {
+        "modularity_q": "0.249±0.005",
+        "polarization": "0.021±0.007",
+        "giant_frac": "0.255±0.029",
+        "small_comm_frac": "0.037±0.056",
+        "rupture_asymmetry": "N/A"
+      },
+      "Gu_et_al_2025": {
+        "modularity_q": "0.197±0.009",
+        "polarization": "0.574±0.015",
+        "giant_frac": "0.275±0.025",
+        "small_comm_frac": "0.073±0.068",
+        "rupture_asymmetry": "0.851±0.098"
+      },
+      "Ours_CoEvolution": {
+        "modularity_q": "0.235±0.012",
+        "polarization": "0.465±0.024",
+        "giant_frac": "0.300±0.035",
+        "small_comm_frac": "0.057±0.066",
+        "rupture_asymmetry": "0.874±0.032"
+      }
+    },
+    "Reddit_ConvoKit": {
+      "DeGroot": {
+        "modularity_q": "0.697±0.005",
+        "polarization": "0.033±0.027",
+        "giant_frac": "0.250±0.000",
+        "small_comm_frac": "0.000±0.000",
+        "rupture_asymmetry": "N/A"
+      },
+      "Hegselmann_Krause": {
+        "modularity_q": "0.735±0.005",
+        "polarization": "0.342±0.049",
+        "giant_frac": "0.255±0.008",
+        "small_comm_frac": "0.020±0.045",
+        "rupture_asymmetry": "0.000±0.000"
+      },
+      "Friedkin_Johnsen": {
+        "modularity_q": "0.697±0.005",
+        "polarization": "0.264±0.027",
+        "giant_frac": "0.250±0.000",
+        "small_comm_frac": "0.000±0.000",
+        "rupture_asymmetry": "N/A"
+      },
+      "Park_et_al_2023": {
+        "modularity_q": "0.697±0.005",
+        "polarization": "0.239±0.034",
+        "giant_frac": "0.250±0.000",
+        "small_comm_frac": "0.000±0.000",
+        "rupture_asymmetry": "N/A"
+      },
+      "Gu_et_al_2025": {
+        "modularity_q": "0.527±0.007",
+        "polarization": "0.408±0.021",
+        "giant_frac": "0.252±0.004",
+        "small_comm_frac": "0.000±0.000",
+        "rupture_asymmetry": "N/A"
+      },
+      "Ours_CoEvolution": {
+        "modularity_q": "0.654±0.013",
+        "polarization": "0.393±0.020",
+        "giant_frac": "0.250±0.000",
+        "small_comm_frac": "0.000±0.000",
+        "rupture_asymmetry": "1.000±0.000"
+      }
+    }
+  }
+}

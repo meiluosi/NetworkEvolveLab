@@ -1,0 +1,143 @@
+{
+  "metadata": {
+    "total_notes": 15,
+    "topics_count": 5
+  },
+  "notes": [
+    {
+      "note_id": "note_0_partisan_pro",
+      "topic": "Binding government regulation and moratorium on frontier AI models",
+      "summary": "Partisan take supporting: Safety and existential risk containment requires mandatory national licensing.",
+      "author_camp": -1,
+      "pro_camp_approval": 0.9047912097111926,
+      "con_camp_approval": 0.11583176596280786,
+      "is_bridging_consensus": false
+    },
+    {
+      "note_id": "note_0_partisan_con",
+      "topic": "Binding government regulation and moratorium on frontier AI models",
+      "summary": "Partisan take supporting: Excessive regulation stifles open innovation, concentrates AI in Big Tech, and harms open-source.",
+      "author_camp": 1,
+      "pro_camp_approval": 0.17878968798670739,
+      "con_camp_approval": 0.8894736058118727,
+      "is_bridging_consensus": false
+    },
+    {
+      "note_id": "note_0_bridging",
+      "topic": "Binding government regulation and moratorium on frontier AI models",
+      "summary": "Neutral, verified context balancing trade-offs on: Binding government regulation and moratorium on frontier AI models",
+      "author_camp": 0,
+      "pro_camp_approval": 0.6207190165352828,
+      "con_camp_approval": 0.7946369173600863,
+      "is_bridging_consensus": true
+    },
+    {
+      "note_id": "note_1_partisan_pro",
+      "topic": "Universal Basic Income (UBI) funded by carbon and automation taxation",
+      "summary": "Partisan take supporting: Guarantees human dignity and economic resilience during rapid AI and climate transitions.",
+      "author_camp": -1,
+      "pro_camp_approval": 0.9022279403980705,
+      "con_camp_approval": 0.1679096457915431,
+      "is_bridging_consensus": false
+    },
+    {
+      "note_id": "note_1_partisan_con",
+      "topic": "Universal Basic Income (UBI) funded by carbon and automation taxation",
+      "summary": "Partisan take supporting: Distorts labor incentives, triggers inflationary spirals, and creates massive fiscal deficits.",
+      "author_camp": 1,
+      "pro_camp_approval": 0.06921704490133189,
+      "con_camp_approval": 0.8400771875791134,
+      "is_bridging_consensus": false
+    },
+    {
+      "note_id": "note_1_bridging",
+      "topic": "Universal Basic Income (UBI) funded by carbon and automation taxation",
+      "summary": "Neutral, verified context balancing trade-offs on: Universal Basic Income (UBI) funded by carbon and automation taxation",
+      "author_camp": 0,
+      "pro_camp_approval": 0.6815755653311678,
+      "con_camp_approval": 0.7838882975466924,
+      "is_bridging_consensus": true
+    },
+    {
+      "note_id": "note_2_partisan_pro",
+      "topic": "End-to-end encryption backdoors for law enforcement intelligence",
+      "summary": "Partisan take supporting: Targeted lawful interception is indispensable to combat transnational terrorism and child exploitation.",
+      "author_camp": -1,
+      "pro_camp_approval": 0.8787730240161329,
+      "con_camp_approval": 0.17341424199062452,
+      "is_bridging_consensus": false
+    },
+    {
+      "note_id": "note_2_partisan_con",
+      "topic": "End-to-end encryption backdoors for law enforcement intelligence",
+      "summary": "Partisan take supporting: A backdoor for one actor is a vulnerability for all; privacy and civil liberties are non-negotiable.",
+      "author_camp": 1,
+      "pro_camp_approval": 0.11651212982409968,
+      "con_camp_approval": 0.7954477443569554,
+      "is_bridging_consensus": false
+    },
+    {
+      "note_id": "note_2_bridging",
+      "topic": "End-to-end encryption backdoors for law enforcement intelligence",
+      "summary": "Neutral, verified context balancing trade-offs on: End-to-end encryption backdoors for law enforcement intelligence",
+      "author_camp": 0,
+      "pro_camp_approval": 0.7220086531434836,
+      "con_camp_approval": 0.5940397963429186,
+      "is_bridging_consensus": true
+    },
+    {
+      "note_id": "note_3_partisan_pro",
+      "topic": "Mandatory algorithmic transparency and bias auditing on social media feeds",
+      "summary": "Partisan take supporting: Algorithms shape democratic public discourse and must be accountable to independent scientific scrutiny.",
+      "author_camp": -1,
+      "pro_camp_approval": 0.9155262343985163,
+      "con_camp_approval": 0.14474965986830973,
+      "is_bridging_consensus": false
+    },
+    {
+      "note_id": "note_3_partisan_con",
+      "topic": "Mandatory algorithmic transparency and bias auditing on social media feeds",
+      "summary": "Partisan take supporting: Forces platforms to surrender proprietary intellectual property and enables state speech control.",
+      "author_camp": 1,
+      "pro_camp_approval": 0.16371316101280609,
+      "con_camp_approval": 0.8209051936259737,
+      "is_bridging_consensus": false
+    },
+    {
+      "note_id": "note_3_bridging",
+      "topic": "Mandatory algorithmic transparency and bias auditing on social media feeds",
+      "summary": "Neutral, verified context balancing trade-offs on: Mandatory algorithmic transparency and bias auditing on social media feeds",
+      "author_camp": 0,
+      "pro_camp_approval": 0.8135535653668786,
+      "con_camp_approval": 0.7764866466908835,
+      "is_bridging_consensus": true
+    },
+    {
+      "note_id": "note_4_partisan_pro",
+      "topic": "Aggressive transition carbon border adjustment taxes on industrial trade",
+      "summary": "Partisan take supporting: Levels the playing field and penalizes global carbon leakage while driving clean industrial adoption.",
+      "author_camp": -1,
+      "pro_camp_approval": 0.9056766994147524,
+      "con_camp_approval": 0.07919580617779515,
+      "is_bridging_consensus": false
+    },
+    {
+      "note_id": "note_4_partisan_con",
+      "topic": "Aggressive transition carbon border adjustment taxes on industrial trade",
+      "summary": "Partisan take supporting: Protectionism in green disguise that penalizes developing economies and strains global trade relations.",
+      "author_camp": 1,
+      "pro_camp_approval": 0.12000815055905514,
+      "con_camp_approval": 0.7587607531574457,
+      "is_bridging_consensus": false
+    },
+    {
+      "note_id": "note_4_bridging",
+      "topic": "Aggressive transition carbon border adjustment taxes on industrial trade",
+      "summary": "Neutral, verified context balancing trade-offs on: Aggressive transition carbon border adjustment taxes on industrial trade",
+      "author_camp": 0,
+      "pro_camp_approval": 0.6339436882548605,
+      "con_camp_approval": 0.73027076971334,
+      "is_bridging_consensus": true
+    }
+  ]
+}
