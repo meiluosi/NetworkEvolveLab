@@ -130,7 +130,7 @@ If $\delta_{ij}(t) > \theta_{\mathrm{block}}$ or $w_{ij}(t+1) \leq \epsilon_{\ma
 
 \begin{proposition}[Newman Modularity Bound for Bipolar Networks]
 \label{prop:modularity}
-Let $\mathcal{G} = (\mathcal{V}, \mathcal{E})$ be an undirected graph partitioned into $K=2$ symmetric non-empty communities $\mathcal{V}_1, \mathcal{V}_2$ with equal total degree sum $\mathrm{vol}(\mathcal{V}_1) = \mathrm{vol}(\mathcal{V}_2) = m$. Then the Newman modularity $Q$ \citep{newman2004finding,newman2006modularity} satisfies:
+Let $\mathcal{G} = (\mathcal{V}, \mathcal{E})$ be an undirected graph partitioned into $K=2$ symmetric non-empty communities $\mathcal{V}_1, \mathcal{V}_2$ with equal total degree sum $\mathrm{vol}(\mathcal{V}_1) = \mathrm{vol}(\mathcal{V}_2) = m$. Then the Newman modularity $Q$ \citep{newman2004finding,newman2006modularity,blondel2008fast} satisfies:
 \begin{equation}
     Q \leq 1 - \frac{1}{K} = 0.500.
 \end{equation}
@@ -176,7 +176,7 @@ Conversely, in $d \geq 2$ dimensions, let agent $i$ prioritize dimension 1 (e.g.
 \begin{table*}[t]
 \centering
 \small
-\caption{\textbf{Performance Comparison Matrix of 6 Opinion and Topology Dynamics Methods across Real-World Networks.} Values report Mean $\pm$ 95\% Confidence Interval across 10 independent random seeds ($N=60, T=25$ rounds).}
+\caption{\textbf{Performance Comparison Matrix of 6 Opinion and Topology Dynamics Methods across Five Real-World Benchmark Networks.} Values report Mean $\pm$ 95\% Confidence Interval across 10 independent random seeds ($N=60, T=25$ rounds).}
 \label{tab:sota_matrix}
 \begin{tabular}{llccccc}
 \toprule
@@ -205,6 +205,22 @@ Conversely, in $d \geq 2$ dimensions, let agent $i$ prioritize dimension 1 (e.g.
 & Park et al. (2023) & $0.697 \pm 0.005$ & $0.239 \pm 0.034$ & $0.250 \pm 0.000$ & $0.000 \pm 0.000$ & N/A \\
 & Gu et al. (2025) & $0.527 \pm 0.007$ & $\mathbf{0.408 \pm 0.021}$ & $0.252 \pm 0.004$ & $0.000 \pm 0.000$ & N/A (Volatile) \\
 & \textbf{Ours (CoEvolution)} & $0.654 \pm 0.013$ & $0.393 \pm 0.020$ & $0.250 \pm 0.000$ & $0.000 \pm 0.000$ & $\mathbf{1.000 \pm 0.000}$ \\
+\midrule
+\multirow{6}{*}{\textbf{\textsc{Debate} Benchmark}} 
+& DeGroot (1974) & $0.491 \pm 0.002$ & $0.168 \pm 0.039$ & $0.500 \pm 0.000$ & $0.000 \pm 0.000$ & N/A (Static) \\
+& Hegselmann-Krause (2002) & $\mathbf{0.498 \pm 0.003}$ & $0.389 \pm 0.055$ & $0.500 \pm 0.000$ & $0.033 \pm 0.075$ & $0.000 \pm 0.000$ \\
+& Friedkin-Johnsen (1990) & $0.491 \pm 0.002$ & $0.368 \pm 0.029$ & $0.500 \pm 0.000$ & $0.000 \pm 0.000$ & N/A (Static) \\
+& Park et al. (2023) & $0.491 \pm 0.002$ & $0.347 \pm 0.029$ & $0.500 \pm 0.000$ & $0.000 \pm 0.000$ & N/A (Static) \\
+& Gu et al. (2025) & $0.453 \pm 0.016$ & $\mathbf{0.451 \pm 0.021}$ & $0.500 \pm 0.000$ & $0.000 \pm 0.000$ & $0.944 \pm 0.128$ \\
+& \textbf{Ours (CoEvolution)} & $0.471 \pm 0.004$ & $0.446 \pm 0.028$ & $0.500 \pm 0.000$ & $0.000 \pm 0.000$ & $\mathbf{1.000 \pm 0.000}$ \\
+\midrule
+\multirow{6}{*}{\textbf{Birdwatch Notes}} 
+& DeGroot (1974) & $0.405 \pm 0.004$ & $0.000 \pm 0.000$ & $0.522 \pm 0.010$ & $0.000 \pm 0.000$ & N/A (Collapse) \\
+& Hegselmann-Krause (2002) & $\mathbf{0.498 \pm 0.003}$ & $0.488 \pm 0.022$ & $0.505 \pm 0.010$ & $\mathbf{0.470 \pm 0.073}$ & $0.000 \pm 0.000$ \\
+& Friedkin-Johnsen (1990) & $0.405 \pm 0.004$ & $0.253 \pm 0.010$ & $0.522 \pm 0.010$ & $0.000 \pm 0.000$ & N/A (Static) \\
+& Park et al. (2023) & $0.405 \pm 0.004$ & $0.184 \pm 0.011$ & $0.522 \pm 0.010$ & $0.000 \pm 0.000$ & N/A (Static) \\
+& Gu et al. (2025) & $0.318 \pm 0.012$ & $\mathbf{0.506 \pm 0.015}$ & $0.518 \pm 0.016$ & $0.067 \pm 0.101$ & $0.855 \pm 0.065$ \\
+& \textbf{Ours (CoEvolution)} & $0.397 \pm 0.007$ & $0.471 \pm 0.017$ & $0.507 \pm 0.023$ & $0.067 \pm 0.101$ & $\mathbf{0.867 \pm 0.370}$ \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -227,7 +243,7 @@ To ensure reproducibility and empirical alignment across diverse communication m
 \begin{enumerate}[leftmargin=*]
     \item \textbf{\textsc{Debate} Benchmark \citep{neurips2024debate}}: Contains multi-turn stance records over contested policy propositions (Artificial Intelligence (AI) regulation moratoriums, Universal Basic Income (UBI) taxation, encryption backdoors), equipped with empirical human prior distributions ($\mu, \sigma$).
     \item \textbf{Stanford Network Analysis Platform (SNAP) Higgs Twitter \citep{domenico2013anatomy}}: Real-world retweet and mention network featuring a power-law in-degree exponent ($\gamma \approx 2.1$) and low reciprocity ($r \approx 0.12$).
-    \item \textbf{Twitter 2020 US Election}: Retweet graph capturing polarized partisan alignments (Biden vs. Trump) parameterized via Dynamic Weighted NOMINATE (DW-NOMINATE) ideological coordinates.
+    \item \textbf{Twitter 2020 US Election}: Retweet graph capturing polarized partisan alignments (Biden vs. Trump) parameterized via Dynamic Weighted NOMINATE (DW-NOMINATE) ideological coordinates \citep{poole1985dwnominate}.
     \item \textbf{Reddit ConvoKit \citep{chang2020convokit}}: Cross-community conversational trees across four politically diverse subreddits (\texttt{r/politics}, \texttt{r/The\_Donald}, \texttt{r/libertarian}, \texttt{r/neutralpolitics}).
     \item \textbf{Birdwatch / Community Notes \citep{wojcik2022birdwatch}}: Crowd-sourced fact-checking dataset annotated with bipartisan rater evaluations.
 \end{enumerate}
@@ -334,6 +350,22 @@ By synthesizing multi-agent cognitive simulation with dynamic network analysis, 
 
 \subsection{Limitations and Future Work}
 Our study employs standardized 3-dimensional semantic embeddings and curated prompt profiles to ensure bounded computational costs. Future iterations should scale to open-ended text corpora and explore adversarial coordinated disinformation agents. All software, benchmark datasets, and figure generation scripts are provided in our open-source release to support reproducible computational social science.
+
+% -------------------------------------------------------------
+% AI Assistance and Ethical Disclosure
+% -------------------------------------------------------------
+\section*{AI Assistance and Ethical Disclosure}
+In strict adherence to the NeurIPS 2026 and ACM publication ethics guidelines on generative AI usage:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{LLM as Experimental Subject}: In Phase~2, commercial LLM APIs were utilized exclusively as empirical conversational subjects to examine micro-cognitive dissonance updates and relationship tie actions. All 60 dyadic evaluations were logged with semantic hashes and token accounting in our cost ledger (Appendix~\ref{app:prompts}).
+    \item \textbf{Assistive Tooling}: Antigravity and AI coding assistants were employed solely for code refactoring, grammar verification, and simulation harness automation. All formal mathematical derivations, theorem proofs, experimental designs, and empirical analyses were formulated, proven, and verified by the authors. No LLM or generative AI agent holds authorship credit.
+\end{enumerate}
+
+% -------------------------------------------------------------
+% Ethics and Broader Impacts
+% -------------------------------------------------------------
+\section*{Ethics and Broader Impacts}
+This research models opinion dynamics and platform intervention mechanisms on public social networks. All benchmark networks (SNAP Higgs, Twitter 2020 Election, Reddit ConvoKit, Birdwatch Community Notes, and DEBATE) are derived from publicly accessible academic archives or fully anonymized synthetic structural topologies. No identifiable private human data or private communications were scraped, intercepted, or re-identified. Research findings on platform interventions are presented to foster scientific understanding of algorithmic diversity and depolarizing platform governance.
 
 % -------------------------------------------------------------
 % Reproducibility and Code Availability

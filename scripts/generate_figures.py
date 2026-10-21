@@ -241,8 +241,13 @@ def plot_fig5():
     with open(bench_file, "r", encoding="utf-8") as f:
         data = json.load(f)["benchmark"]
 
-    datasets = ["Twitter_Election_2020", "SNAP_Higgs_Twitter", "Reddit_ConvoKit"]
-    dataset_labels = ["Twitter 2020 Election", "SNAP Higgs Twitter", "Reddit ConvoKit"]
+    datasets = [
+        "Twitter_Election_2020", "SNAP_Higgs_Twitter", "Reddit_ConvoKit",
+        "DEBATE_Benchmark", "Birdwatch_Community_Notes"
+    ]
+    dataset_labels = [
+        "Twitter 2020", "SNAP Higgs", "Reddit", "DEBATE", "Birdwatch"
+    ]
     models = ["DeGroot", "Hegselmann_Krause", "Friedkin_Johnsen", "Park_et_al_2023", "Gu_et_al_2025", "Ours_CoEvolution"]
     model_labels = ["DeGroot (1974)", "Hegselmann-Krause", "Friedkin-Johnsen", "Park et al. (2023)", "Gu et al. (2025)", "Ours (CoEvolution)"]
     colors = ["#7f7f7f", "#bcbd22", "#17becf", "#9467bd", "#ff7f0e", "#1f77b4"]

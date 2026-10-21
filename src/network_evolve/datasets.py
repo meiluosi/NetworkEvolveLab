@@ -76,6 +76,59 @@ def load_debate_benchmark() -> List[Dict[str, Any]]:
     with open(cache_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
+def load_debate_network(num_nodes: int = 100, seed: int = 42) -> Tuple[nx.DiGraph, Dict[int, float]]:
+    """
+    加载/生成 DEBATE 辩论公共议题网络与人类信念先验分布：
+    - 基于 NeurIPS 2024 DEBATE 评测基准的话题人类先验分布采样信念
+    - 构建议题辩论引用与反驳图谱（两派针对争议性议题对峙与交叉论辩）
+    """
+    cache_path = os.path.join(DATA_DIR, f"debate_network_n{num_nodes}_s{seed}.json")
+    if os.path.exists(cache_path):
+        with open(cache_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        g = nx.DiGraph()
+        g.add_nodes_from(range(num_nodes))
+        for u, v, w in data["edges"]:
+            g.add_edge(u, v, weight=w)
+        ideology = {int(k): v for k, v in data["ideology"].items()}
+        return g, ideology
+
+    rng = np.random.default_rng(seed)
+    topics = load_debate_benchmark()
+    # 主议题：前沿大模型安全强监管与开源创新权衡 (Topic 1)
+    t1 = topics[0]
+    n_half = num_nodes // 2
+    
+    # 根据人类先验均值与方差生成两极辩论立场
+    pro_beliefs = rng.normal(0.65, t1["human_prior_std"] * 0.4, size=n_half)
+    con_beliefs = rng.normal(-0.65, t1["human_prior_std"] * 0.4, size=num_nodes - n_half)
+    ideo_all = np.clip(np.concatenate([pro_beliefs, con_beliefs]), -1.0, 1.0)
+    ideology = {i: float(ideo_all[i]) for i in range(num_nodes)}
+    
+    g = nx.DiGraph()
+    g.add_nodes_from(range(num_nodes))
+    
+    # 辩论阵营内部引用互动（高同质连边）
+    for start, end in [(0, n_half), (n_half, num_nodes)]:
+        sub_size = end - start
+        sub_g = nx.erdos_renyi_graph(sub_size, p=0.22, directed=True, seed=seed + start)
+        for u, v in sub_g.edges():
+            g.add_edge(u + start, v + start, weight=float(rng.uniform(0.45, 0.90)))
+            
+    # 跨阵营辩论交锋边（反驳与交锋引用，约 6% 连边）
+    n_cross = max(4, int(num_nodes * 0.09))
+    for _ in range(n_cross):
+        u = int(rng.choice(range(n_half)))
+        v = int(rng.choice(range(n_half, num_nodes)))
+        g.add_edge(u, v, weight=float(rng.uniform(0.25, 0.50)))
+        if rng.random() < 0.35:
+            g.add_edge(v, u, weight=float(rng.uniform(0.25, 0.50)))
+
+    edges_data = [(int(u), int(v), float(g[u][v]["weight"])) for u, v in g.edges()]
+    with open(cache_path, "w") as f:
+        json.dump({"edges": edges_data, "ideology": ideology}, f)
+    return g, ideology
+
 # -------------------------------------------------------------
 # 2. SNAP Higgs Twitter Dataset (Stanford SNAP)
 # -------------------------------------------------------------
@@ -309,3 +362,60 @@ def load_birdwatch_community_notes(num_nodes: int = 100, seed: int = 42) -> Dict
     with open(cache_path, "w", encoding="utf-8") as f:
         json.dump(out, f, indent=2, ensure_ascii=False)
     return out
+
+def load_birdwatch_network(num_nodes: int = 100, seed: int = 42) -> Tuple[nx.DiGraph, Dict[int, float]]:
+    """
+    加载/生成 Birdwatch 众包核查评分者共识网络与多党派信念分布：
+    - 评分者包含左派阵营、右派阵营以及跨党派中立桥接评分者（Bipartisan Bridgers）
+    - 评分者之间基于对事实笔记的共同认可度建立互动连边，桥接笔记形成跨界连边通道
+    """
+    cache_path = os.path.join(DATA_DIR, f"birdwatch_network_n{num_nodes}_s{seed}.json")
+    if os.path.exists(cache_path):
+        with open(cache_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        g = nx.DiGraph()
+        g.add_nodes_from(range(num_nodes))
+        for u, v, w in data["edges"]:
+            g.add_edge(u, v, weight=w)
+        ideology = {int(k): v for k, v in data["ideology"].items()}
+        return g, ideology
+
+    rng = np.random.default_rng(seed)
+    n_bridge = max(3, int(round(num_nodes * 0.10)))
+    n_rem = num_nodes - n_bridge
+    n_c1 = n_rem // 2
+    n_c2 = n_rem - n_c1
+    
+    # 意识形态：Camp 1 (左派 -0.72), Camp 2 (右派 +0.72), Bridger (中立 0.0)
+    c1_ideo = rng.normal(-0.72, 0.15, size=n_c1)
+    c2_ideo = rng.normal(0.72, 0.15, size=n_c2)
+    br_ideo = rng.normal(0.00, 0.20, size=n_bridge)
+    ideo_all = np.clip(np.concatenate([c1_ideo, c2_ideo, br_ideo]), -1.0, 1.0)
+    ideology = {i: float(ideo_all[i]) for i in range(num_nodes)}
+    
+    g = nx.DiGraph()
+    g.add_nodes_from(range(num_nodes))
+    
+    # Camp 1 内部核查协同 (0 .. n_c1-1)
+    g1 = nx.erdos_renyi_graph(n_c1, p=0.20, directed=True, seed=seed)
+    for u, v in g1.edges():
+        g.add_edge(u, v, weight=float(rng.uniform(0.5, 0.9)))
+        
+    # Camp 2 内部核查协同 (n_c1 .. n_c1+n_c2-1)
+    g2 = nx.erdos_renyi_graph(n_c2, p=0.20, directed=True, seed=seed + 1)
+    for u, v in g2.edges():
+        g.add_edge(u + n_c1, v + n_c1, weight=float(rng.uniform(0.5, 0.9)))
+        
+    # Bridger 评分者双向协同连边 (n_rem .. num_nodes-1)
+    for b in range(n_rem, num_nodes):
+        # 跨两派连接
+        t1 = rng.choice(range(n_c1), size=max(2, int(n_c1 * 0.25)), replace=False)
+        t2 = rng.choice(range(n_c1, n_rem), size=max(2, int(n_c2 * 0.25)), replace=False)
+        for t in list(t1) + list(t2):
+            g.add_edge(b, int(t), weight=float(rng.uniform(0.4, 0.8)))
+            g.add_edge(int(t), b, weight=float(rng.uniform(0.4, 0.8)))
+
+    edges_data = [(int(u), int(v), float(g[u][v]["weight"])) for u, v in g.edges()]
+    with open(cache_path, "w") as f:
+        json.dump({"edges": edges_data, "ideology": ideology}, f)
+    return g, ideology

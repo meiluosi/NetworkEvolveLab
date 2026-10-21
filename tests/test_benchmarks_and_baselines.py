@@ -2,8 +2,8 @@ import unittest
 import numpy as np
 import networkx as nx
 from src.network_evolve.datasets import (
-    load_debate_benchmark, load_snap_higgs, load_twitter_election, 
-    load_reddit_convokit, load_birdwatch_community_notes
+    load_debate_benchmark, load_debate_network, load_snap_higgs, load_twitter_election, 
+    load_reddit_convokit, load_birdwatch_community_notes, load_birdwatch_network
 )
 from src.network_evolve.baselines import (
     DeGrootModel, HegselmannKrauseModel, FriedkinJohnsenModel,
@@ -16,6 +16,10 @@ class TestBenchmarksAndBaselines(unittest.TestCase):
         debates = load_debate_benchmark()
         self.assertGreaterEqual(len(debates), 5)
         self.assertIn("topic", debates[0])
+        g_deb, ideo_deb = load_debate_network(num_nodes=30, seed=42)
+        self.assertEqual(g_deb.number_of_nodes(), 30)
+        self.assertEqual(len(ideo_deb), 30)
+        self.assertGreater(g_deb.number_of_edges(), 10)
         
         # 2. SNAP Higgs
         g_higgs = load_snap_higgs(num_nodes=30, seed=42)
@@ -36,6 +40,10 @@ class TestBenchmarksAndBaselines(unittest.TestCase):
         bw = load_birdwatch_community_notes(num_nodes=30, seed=42)
         self.assertIn("notes", bw)
         self.assertGreater(len(bw["notes"]), 0)
+        g_bw, ideo_bw = load_birdwatch_network(num_nodes=30, seed=42)
+        self.assertEqual(g_bw.number_of_nodes(), 30)
+        self.assertEqual(len(ideo_bw), 30)
+        self.assertGreater(g_bw.number_of_edges(), 10)
 
     def test_baseline_models_step_and_metrics(self):
         g, ideo = load_twitter_election(num_nodes=30, seed=42)

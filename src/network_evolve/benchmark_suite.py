@@ -1,5 +1,5 @@
 """综合基准与多 SOTA 方法评测套件（Unified Benchmark & SOTA Suite）：
-跨三大黄金实证数据集（Twitter Election, SNAP Higgs, Reddit ConvoKit），
+跨五大黄金实证数据集（Twitter Election, SNAP Higgs, Reddit ConvoKit, DEBATE, Birdwatch），
 评测 6 种观点动力学与拓扑演化方法：
   1. DeGroot (1974)
   2. Hegselmann-Krause (2002)
@@ -12,14 +12,23 @@ import argparse
 import json
 import numpy as np
 from typing import Dict, List, Any
-from .datasets import load_twitter_election, load_snap_higgs, load_reddit_convokit
+from .datasets import (
+    load_twitter_election, load_snap_higgs, load_reddit_convokit,
+    load_debate_network, load_birdwatch_network
+)
 from .baselines import (
     DeGrootModel, HegselmannKrauseModel, FriedkinJohnsenModel,
     GenerativeAgentsMemoryModel, GuEtAlPromptRewireModel, OursCoEvolutionModel
 )
 from .expkit import mean_ci, fmt
 
-DATASETS = ["Twitter_Election_2020", "SNAP_Higgs_Twitter", "Reddit_ConvoKit"]
+DATASETS = [
+    "Twitter_Election_2020",
+    "SNAP_Higgs_Twitter",
+    "Reddit_ConvoKit",
+    "DEBATE_Benchmark",
+    "Birdwatch_Community_Notes"
+]
 MODELS = ["DeGroot", "Hegselmann_Krause", "Friedkin_Johnsen", "Park_et_al_2023", "Gu_et_al_2025", "Ours_CoEvolution"]
 
 def get_dataset(dname: str, n: int, s: int):
@@ -35,6 +44,10 @@ def get_dataset(dname: str, n: int, s: int):
         g, topics = load_reddit_convokit(num_nodes=n, seed=s)
         ideo = {i: topics[i][0] for i in range(n)}  # 主议题
         return g, ideo
+    elif dname == "DEBATE_Benchmark":
+        return load_debate_network(num_nodes=n, seed=s)
+    elif dname == "Birdwatch_Community_Notes":
+        return load_birdwatch_network(num_nodes=n, seed=s)
     raise ValueError(dname)
 
 def instantiate_model(mname: str, g, ideo, s: int):
