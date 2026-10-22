@@ -49,4 +49,4 @@ python scripts/score_human_validation.py \
 
 ## 规则审计（不要把规则审计当成人类标注）
 
-`human_validation/rule_audit/` 是按作者口述规则生成的**合成参照标签**，只用于内部诊断，不是人类标注，不能写成 human validation，也不能算人工 κ。真正的人工校验仍然使用本目录的中文外包包。
+`human_validation/rule_audit/` 是按**外包方提供的规则**机械生成的参照标签，只用于内部诊断。它不是外包逐条人工标注，不能写成 human validation，也不能算人工 κ。如果外包实际逐条标注了 300 条，请以回收的标注表为准。

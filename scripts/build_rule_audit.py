@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Author-specified rule audit of the 300 sampled model decisions.
+"""Rule audit using a policy supplied by the outsourced annotator.
 
-WARNING: this produces SYNTHETIC labels from a hand-written policy.  It is not
-human annotation and must not be reported as human validation or as
-inter-annotator agreement.  It is a rule-based sanity/reference check.
+WARNING: this produces labels by mechanically applying a rule.  It is not
+per-row human annotation and must not be reported as human validation or as
+inter-annotator agreement.  It is a rule-based reference check.
 
-Rule (post hoc, author-specified):
+Rule (provided by the outsourced annotator, post hoc):
   * both neutral -> keep
   * same direction -> keep with prob 0.8, mute with prob 0.2
   * one neutral:
@@ -149,7 +149,7 @@ def main():
         by_cat[cat] = {"n": len(rs),
                        "reasonable_rate": rate(rs, lambda r: r["is_action_reasonable_synthetic"] == "合理")}
     report = {"n": len(out), "seed": a.seed,
-              "warning": "SYNTHETIC author-specified rule labels; NOT human annotation",
+              "warning": "Rule supplied by outsourced annotator, mechanically applied; NOT per-row human annotation",
               "rule_counts": counts, "by_model": by_model, "by_rule_category": by_cat,
               "model_action_distribution": {m: {a2: sum(1 for r in out if r["source_model"] == m and r["model_action"] == a2)
                                                   for a2 in ("keep", "mute", "unfollow", "block")}

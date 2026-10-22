@@ -1,7 +1,7 @@
 {
   "n": 300,
   "seed": 20261023,
-  "warning": "SYNTHETIC author-specified rule labels; NOT human annotation",
+  "warning": "Rule supplied by outsourced annotator, mechanically applied; NOT per-row human annotation",
   "rule_counts": {
     "opposite_other": 122,
     "same_direction": 128,
