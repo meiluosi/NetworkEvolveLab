@@ -50,3 +50,12 @@ python scripts/score_human_validation.py \
 ## 规则审计（不要把规则审计当成人类标注）
 
 `human_validation/rule_audit/` 是按**外包方提供的规则**机械生成的参照标签，只用于内部诊断。它不是外包逐条人工标注，不能写成 human validation，也不能算人工 κ。如果外包实际逐条标注了 300 条，请以回收的标注表为准。
+
+
+## 预填审校包（推荐给外包）
+
+如果外包已经给出规则，可以先发预填审校包：
+
+`human_validation/outsourcing_review_package_zh.zip`
+
+里面是规则预填好的 `annotation_sheet_zh_prefilled.csv`、codebook 和审校说明。外包逐条复核/修改后交回；论文里应写成 **human-reviewed rule-prefilled audit**，并披露锚定效应，不能写成完全独立的人工标注。
