@@ -1,0 +1,1174 @@
+{
+  "args": {
+    "seeds": 10,
+    "rounds": 40,
+    "nodes": 100,
+    "theta_min": 0.15,
+    "theta_max": 0.85,
+    "theta_step": 0.05,
+    "procs": 10,
+    "matched_degree": 6.6,
+    "matched_reciprocity": 0.65,
+    "out": "results/phase1c_matched.json"
+  },
+  "theta_grid": [
+    0.15,
+    0.2,
+    0.25,
+    0.3,
+    0.35,
+    0.4,
+    0.45,
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75,
+    0.8,
+    0.85
+  ],
+  "preregistered_band": [
+    0.5,
+    0.55
+  ],
+  "giant_threshold": 0.99,
+  "matching": {
+    "target_degree": 6.6,
+    "target_reciprocity": 0.65,
+    "achieved": {
+      "erdos_renyi": {
+        "mean_out_degree": 6.6,
+        "mean_reciprocity": 0.6484848484848484,
+        "mean_edges": 660.0,
+        "per_seed": [
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          }
+        ]
+      },
+      "scale_free": {
+        "mean_out_degree": 6.6,
+        "mean_reciprocity": 0.6484848484848484,
+        "mean_edges": 660.0,
+        "per_seed": [
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          }
+        ]
+      },
+      "small_world": {
+        "mean_out_degree": 6.6,
+        "mean_reciprocity": 0.6484848484848484,
+        "mean_edges": 660.0,
+        "per_seed": [
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          }
+        ]
+      },
+      "empirical_bipolar": {
+        "mean_out_degree": 6.6,
+        "mean_reciprocity": 0.6484848484848484,
+        "mean_edges": 660.0,
+        "per_seed": [
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          },
+          {
+            "target_degree": 6.6,
+            "target_reciprocity": 0.65,
+            "mean_out_degree": 6.6,
+            "reciprocity": 0.6484848484848484,
+            "n_nodes": 100,
+            "n_edges": 660,
+            "n_mutual_edges": 214
+          }
+        ]
+      }
+    }
+  },
+  "criteria": {
+    "theta_frag": "giant_frac >= 0.99（碎裂→连通），相邻点线性插值",
+    "theta_q": "Q_end(θ) <= 0.5 * Q_end(θ_min)（模块度塌缩），相邻点线性插值",
+    "theta_pol": "polarization(θ) <= 0.5 * polarization(θ_min)（极化塌缩），相邻点线性插值"
+  },
+  "topologies": {
+    "erdos_renyi": {
+      "curve": {
+        "0.15": {
+          "q_end": "0.486±0.012",
+          "polarization": "0.488±0.022",
+          "giant_frac": "0.537±0.025",
+          "cross_edges": "0.000±0.000",
+          "n_edges": "710.600±24.010"
+        },
+        "0.2": {
+          "q_end": "0.488±0.012",
+          "polarization": "0.476±0.020",
+          "giant_frac": "0.629±0.141",
+          "cross_edges": "0.001±0.001",
+          "n_edges": "725.700±23.317"
+        },
+        "0.25": {
+          "q_end": "0.489±0.011",
+          "polarization": "0.472±0.027",
+          "giant_frac": "0.679±0.159",
+          "cross_edges": "0.001±0.002",
+          "n_edges": "727.100±22.608"
+        },
+        "0.3": {
+          "q_end": "0.488±0.012",
+          "polarization": "0.442±0.044",
+          "giant_frac": "0.772±0.168",
+          "cross_edges": "0.002±0.001",
+          "n_edges": "728.000±21.708"
+        },
+        "0.35": {
+          "q_end": "0.475±0.013",
+          "polarization": "0.322±0.094",
+          "giant_frac": "0.853±0.158",
+          "cross_edges": "0.018±0.016",
+          "n_edges": "729.600±24.747"
+        },
+        "0.4": {
+          "q_end": "0.459±0.016",
+          "polarization": "0.188±0.091",
+          "giant_frac": "0.992±0.009",
+          "cross_edges": "0.082±0.055",
+          "n_edges": "741.100±26.281"
+        },
+        "0.45": {
+          "q_end": "0.430±0.023",
+          "polarization": "0.120±0.063",
+          "giant_frac": "0.992±0.007",
+          "cross_edges": "0.089±0.043",
+          "n_edges": "756.600±29.882"
+        },
+        "0.5": {
+          "q_end": "0.403±0.031",
+          "polarization": "0.084±0.053",
+          "giant_frac": "0.992±0.008",
+          "cross_edges": "0.067±0.046",
+          "n_edges": "771.600±33.322"
+        },
+        "0.55": {
+          "q_end": "0.368±0.031",
+          "polarization": "0.050±0.038",
+          "giant_frac": "0.992±0.008",
+          "cross_edges": "0.101±0.057",
+          "n_edges": "795.900±39.973"
+        },
+        "0.6": {
+          "q_end": "0.327±0.029",
+          "polarization": "0.024±0.017",
+          "giant_frac": "0.993±0.007",
+          "cross_edges": "0.059±0.044",
+          "n_edges": "826.500±38.459"
+        },
+        "0.65": {
+          "q_end": "0.269±0.022",
+          "polarization": "0.012±0.007",
+          "giant_frac": "0.996±0.004",
+          "cross_edges": "0.060±0.072",
+          "n_edges": "902.200±33.127"
+        },
+        "0.7": {
+          "q_end": "0.229±0.010",
+          "polarization": "0.006±0.006",
+          "giant_frac": "0.998±0.003",
+          "cross_edges": "0.002±0.003",
+          "n_edges": "971.600±30.922"
+        },
+        "0.75": {
+          "q_end": "0.219±0.007",
+          "polarization": "0.004±0.005",
+          "giant_frac": "0.999±0.002",
+          "cross_edges": "0.014±0.014",
+          "n_edges": "1020.300±25.184"
+        },
+        "0.8": {
+          "q_end": "0.215±0.007",
+          "polarization": "0.002±0.002",
+          "giant_frac": "1.000±0.000",
+          "cross_edges": "0.002±0.002",
+          "n_edges": "1049.100±20.150"
+        },
+        "0.85": {
+          "q_end": "0.215±0.006",
+          "polarization": "0.001±0.002",
+          "giant_frac": "1.000±0.000",
+          "cross_edges": "0.003±0.006",
+          "n_edges": "1060.100±18.555"
+        }
+      },
+      "theta_frag": {
+        "per_seed": [
+          0.29886363636363633,
+          0.65,
+          0.199,
+          0.249,
+          0.4,
+          0.34891304347826085,
+          0.39893617021276595,
+          0.65,
+          0.19875,
+          0.35
+        ],
+        "mean": 0.3743462850054663,
+        "ci95": 0.1161979815721013,
+        "min": 0.19875,
+        "max": 0.65,
+        "n_censored": 0,
+        "frac_censored": 0.0
+      },
+      "theta_q": {
+        "per_seed": [
+          0.6773825938070926,
+          0.659651906626024,
+          0.6785934209093074,
+          0.6595336644668037,
+          0.6863294541574398,
+          0.642346580193488,
+          0.6800946799807599,
+          0.7413800307266457,
+          0.6834540907841492,
+          0.7548271937959283
+        ],
+        "mean": 0.686359361544764,
+        "ci95": 0.025318345201735634,
+        "min": 0.642346580193488,
+        "max": 0.7548271937959283,
+        "n_censored": 0,
+        "frac_censored": 0.0
+      },
+      "theta_pol": {
+        "per_seed": [
+          0.33276350674963384,
+          0.3432198409483903,
+          0.4472167855913303,
+          0.3275087795676821,
+          0.49105741976246126,
+          0.38826396291039345,
+          0.38252527916829837,
+          0.40015686459528704,
+          0.36172898071480314,
+          0.3773373166035963
+        ],
+        "mean": 0.3851778736611876,
+        "ci95": 0.03674412017516149,
+        "min": 0.3275087795676821,
+        "max": 0.49105741976246126,
+        "n_censored": 0,
+        "frac_censored": 0.0
+      },
+      "in_preregistered_band_frag": false,
+      "in_preregistered_band_q": false
+    },
+    "scale_free": {
+      "curve": {
+        "0.15": {
+          "q_end": "0.487±0.011",
+          "polarization": "0.504±0.030",
+          "giant_frac": "0.541±0.025",
+          "cross_edges": "0.000±0.000",
+          "n_edges": "694.000±20.774"
+        },
+        "0.2": {
+          "q_end": "0.487±0.010",
+          "polarization": "0.501±0.034",
+          "giant_frac": "0.541±0.024",
+          "cross_edges": "0.000±0.000",
+          "n_edges": "710.200±24.047"
+        },
+        "0.25": {
+          "q_end": "0.484±0.011",
+          "polarization": "0.472±0.062",
+          "giant_frac": "0.588±0.101",
+          "cross_edges": "0.002±0.004",
+          "n_edges": "713.300±21.511"
+        },
+        "0.3": {
+          "q_end": "0.443±0.034",
+          "polarization": "0.301±0.125",
+          "giant_frac": "0.844±0.144",
+          "cross_edges": "0.026±0.028",
+          "n_edges": "715.700±18.116"
+        },
+        "0.35": {
+          "q_end": "0.397±0.039",
+          "polarization": "0.170±0.126",
+          "giant_frac": "0.988±0.006",
+          "cross_edges": "0.051±0.042",
+          "n_edges": "739.100±24.914"
+        },
+        "0.4": {
+          "q_end": "0.347±0.042",
+          "polarization": "0.117±0.087",
+          "giant_frac": "0.988±0.008",
+          "cross_edges": "0.056±0.036",
+          "n_edges": "766.400±29.739"
+        },
+        "0.45": {
+          "q_end": "0.296±0.038",
+          "polarization": "0.055±0.039",
+          "giant_frac": "0.992±0.009",
+          "cross_edges": "0.070±0.053",
+          "n_edges": "817.400±32.544"
+        },
+        "0.5": {
+          "q_end": "0.281±0.028",
+          "polarization": "0.039±0.032",
+          "giant_frac": "0.998±0.003",
+          "cross_edges": "0.052±0.073",
+          "n_edges": "844.400±31.072"
+        },
+        "0.55": {
+          "q_end": "0.260±0.033",
+          "polarization": "0.034±0.029",
+          "giant_frac": "0.997±0.003",
+          "cross_edges": "0.026±0.017",
+          "n_edges": "862.400±31.113"
+        },
+        "0.6": {
+          "q_end": "0.245±0.027",
+          "polarization": "0.023±0.017",
+          "giant_frac": "0.999±0.002",
+          "cross_edges": "0.054±0.068",
+          "n_edges": "883.200±34.495"
+        },
+        "0.65": {
+          "q_end": "0.232±0.018",
+          "polarization": "0.012±0.008",
+          "giant_frac": "0.999±0.002",
+          "cross_edges": "0.024±0.038",
+          "n_edges": "942.400±34.552"
+        },
+        "0.7": {
+          "q_end": "0.218±0.010",
+          "polarization": "0.009±0.006",
+          "giant_frac": "0.999±0.002",
+          "cross_edges": "0.017±0.018",
+          "n_edges": "986.000±28.058"
+        },
+        "0.75": {
+          "q_end": "0.211±0.006",
+          "polarization": "0.004±0.004",
+          "giant_frac": "1.000±0.000",
+          "cross_edges": "0.005±0.009",
+          "n_edges": "1027.300±21.267"
+        },
+        "0.8": {
+          "q_end": "0.208±0.007",
+          "polarization": "0.001±0.001",
+          "giant_frac": "1.000±0.000",
+          "cross_edges": "0.000±0.001",
+          "n_edges": "1053.600±18.167"
+        },
+        "0.85": {
+          "q_end": "0.202±0.004",
+          "polarization": "0.001±0.001",
+          "giant_frac": "1.000±0.000",
+          "cross_edges": "0.000±0.001",
+          "n_edges": "1062.600±18.939"
+        }
+      },
+      "theta_frag": {
+        "per_seed": [
+          0.35,
+          0.299,
+          0.35,
+          0.35,
+          0.29891304347826086,
+          0.35,
+          0.3,
+          0.5,
+          0.35,
+          0.45
+        ],
+        "mean": 0.35979130434782614,
+        "ci95": 0.04724255901620231,
+        "min": 0.29891304347826086,
+        "max": 0.5,
+        "n_censored": 0,
+        "frac_censored": 0.0
+      },
+      "theta_q": {
+        "per_seed": [
+          0.4568814837774416,
+          0.5399960191555513,
+          0.5729303023316362,
+          0.5409037415329191,
+          0.6651677998592903,
+          0.49172075993167985,
+          0.4448344772955635,
+          0.6904990575793928,
+          0.570671606731753,
+          0.7272439428301515
+        ],
+        "mean": 0.5700849191025379,
+        "ci95": 0.06937619376423901,
+        "min": 0.4448344772955635,
+        "max": 0.7272439428301515,
+        "n_censored": 0,
+        "frac_censored": 0.0
+      },
+      "theta_pol": {
+        "per_seed": [
+          0.296957666452727,
+          0.27960646859440186,
+          0.2668378428810646,
+          0.2833801501879709,
+          0.4005456674321662,
+          0.3255483980041493,
+          0.2751894638295358,
+          0.4272938303359698,
+          0.325899034316715,
+          0.38231763242724226
+        ],
+        "mean": 0.32635761544619424,
+        "ci95": 0.041220015290134714,
+        "min": 0.2668378428810646,
+        "max": 0.4272938303359698,
+        "n_censored": 0,
+        "frac_censored": 0.0
+      },
+      "in_preregistered_band_frag": false,
+      "in_preregistered_band_q": false
+    },
+    "small_world": {
+      "curve": {
+        "0.15": {
+          "q_end": "0.526±0.020",
+          "polarization": "0.495±0.038",
+          "giant_frac": "0.541±0.025",
+          "cross_edges": "0.000±0.000",
+          "n_edges": "703.000±23.545"
+        },
+        "0.2": {
+          "q_end": "0.524±0.019",
+          "polarization": "0.498±0.038",
+          "giant_frac": "0.542±0.025",
+          "cross_edges": "0.000±0.000",
+          "n_edges": "720.300±23.268"
+        },
+        "0.25": {
+          "q_end": "0.531±0.022",
+          "polarization": "0.469±0.079",
+          "giant_frac": "0.590±0.106",
+          "cross_edges": "0.001±0.001",
+          "n_edges": "724.100±23.686"
+        },
+        "0.3": {
+          "q_end": "0.531±0.022",
+          "polarization": "0.359±0.132",
+          "giant_frac": "0.792±0.156",
+          "cross_edges": "0.023±0.029",
+          "n_edges": "720.100±22.016"
+        },
+        "0.35": {
+          "q_end": "0.519±0.016",
+          "polarization": "0.319±0.136",
+          "giant_frac": "0.868±0.152",
+          "cross_edges": "0.043±0.038",
+          "n_edges": "729.200±21.537"
+        },
+        "0.4": {
+          "q_end": "0.507±0.022",
+          "polarization": "0.290±0.123",
+          "giant_frac": "0.961±0.088",
+          "cross_edges": "0.043±0.039",
+          "n_edges": "740.500±20.538"
+        },
+        "0.45": {
+          "q_end": "0.498±0.020",
+          "polarization": "0.245±0.103",
+          "giant_frac": "1.000±0.000",
+          "cross_edges": "0.044±0.028",
+          "n_edges": "751.000±22.549"
+        },
+        "0.5": {
+          "q_end": "0.471±0.026",
+          "polarization": "0.197±0.102",
+          "giant_frac": "1.000±0.000",
+          "cross_edges": "0.064±0.034",
+          "n_edges": "771.700±26.193"
+        },
+        "0.55": {
+          "q_end": "0.445±0.032",
+          "polarization": "0.135±0.095",
+          "giant_frac": "1.000±0.000",
+          "cross_edges": "0.067±0.028",
+          "n_edges": "797.000±29.150"
+        },
+        "0.6": {
+          "q_end": "0.414±0.030",
+          "polarization": "0.091±0.077",
+          "giant_frac": "0.999±0.002",
+          "cross_edges": "0.065±0.025",
+          "n_edges": "822.000±31.405"
+        },
+        "0.65": {
+          "q_end": "0.356±0.026",
+          "polarization": "0.018±0.024",
+          "giant_frac": "1.000±0.000",
+          "cross_edges": "0.035±0.025",
+          "n_edges": "903.500±33.565"
+        },
+        "0.7": {
+          "q_end": "0.346±0.016",
+          "polarization": "0.002±0.003",
+          "giant_frac": "1.000±0.000",
+          "cross_edges": "0.017±0.024",
+          "n_edges": "972.900±26.663"
+        },
+        "0.75": {
+          "q_end": "0.342±0.011",
+          "polarization": "0.000±0.000",
+          "giant_frac": "1.000±0.000",
+          "cross_edges": "0.002±0.002",
+          "n_edges": "1025.900±26.565"
+        },
+        "0.8": {
+          "q_end": "0.342±0.012",
+          "polarization": "0.000±0.000",
+          "giant_frac": "1.000±0.000",
+          "cross_edges": "0.000±0.000",
+          "n_edges": "1053.000±22.465"
+        },
+        "0.85": {
+          "q_end": "0.341±0.012",
+          "polarization": "0.000±0.000",
+          "giant_frac": "1.000±0.000",
+          "cross_edges": "0.002±0.003",
+          "n_edges": "1065.300±22.002"
+        }
+      },
+      "theta_frag": {
+        "per_seed": [
+          0.34864864864864864,
+          0.299,
+          0.29897959183673467,
+          0.3,
+          0.3988888888888889,
+          0.29891304347826086,
+          0.24893617021276596,
+          0.3488636363636363,
+          0.34875,
+          0.39878048780487807
+        ],
+        "mean": 0.3289760467233813,
+        "ci95": 0.03445790892415209,
+        "min": 0.24893617021276596,
+        "max": 0.3988888888888889,
+        "n_censored": 0,
+        "frac_censored": 0.0
+      },
+      "theta_q": {
+        "per_seed": [
+          0.85,
+          0.85,
+          0.85,
+          0.85,
+          0.85,
+          0.85,
+          0.85,
+          0.85,
+          0.85,
+          0.85
+        ],
+        "mean": 0.85,
+        "ci95": 0.0,
+        "min": 0.85,
+        "max": 0.85,
+        "n_censored": 10,
+        "frac_censored": 1.0
+      },
+      "theta_pol": {
+        "per_seed": [
+          0.48047298926799936,
+          0.28199247375762143,
+          0.5258721232865805,
+          0.4559094779654673,
+          0.439994445392628,
+          0.2845796854087101,
+          0.24419960704766325,
+          0.6103100990594558,
+          0.3326261860736731,
+          0.5352210342986887
+        ],
+        "mean": 0.41911781215584876,
+        "ci95": 0.08984492138361583,
+        "min": 0.24419960704766325,
+        "max": 0.6103100990594558,
+        "n_censored": 0,
+        "frac_censored": 0.0
+      },
+      "in_preregistered_band_frag": false,
+      "in_preregistered_band_q": false
+    },
+    "empirical_bipolar": {
+      "curve": {
+        "0.15": {
+          "q_end": "0.488±0.009",
+          "polarization": "0.510±0.031",
+          "giant_frac": "0.534±0.027",
+          "cross_edges": "0.000±0.000",
+          "n_edges": "712.500±31.402"
+        },
+        "0.2": {
+          "q_end": "0.489±0.007",
+          "polarization": "0.506±0.030",
+          "giant_frac": "0.535±0.025",
+          "cross_edges": "0.000±0.000",
+          "n_edges": "724.400±26.961"
+        },
+        "0.25": {
+          "q_end": "0.487±0.008",
+          "polarization": "0.509±0.027",
+          "giant_frac": "0.534±0.023",
+          "cross_edges": "0.000±0.000",
+          "n_edges": "724.800±26.419"
+        },
+        "0.3": {
+          "q_end": "0.485±0.008",
+          "polarization": "0.454±0.097",
+          "giant_frac": "0.622±0.137",
+          "cross_edges": "0.007±0.014",
+          "n_edges": "724.000±27.077"
+        },
+        "0.35": {
+          "q_end": "0.468±0.017",
+          "polarization": "0.284±0.123",
+          "giant_frac": "0.853±0.147",
+          "cross_edges": "0.042±0.038",
+          "n_edges": "728.700±23.938"
+        },
+        "0.4": {
+          "q_end": "0.430±0.017",
+          "polarization": "0.133±0.046",
+          "giant_frac": "0.987±0.010",
+          "cross_edges": "0.077±0.029",
+          "n_edges": "751.900±29.203"
+        },
+        "0.45": {
+          "q_end": "0.397±0.027",
+          "polarization": "0.101±0.053",
+          "giant_frac": "0.989±0.007",
+          "cross_edges": "0.075±0.027",
+          "n_edges": "780.100±30.827"
+        },
+        "0.5": {
+          "q_end": "0.373±0.030",
+          "polarization": "0.072±0.054",
+          "giant_frac": "0.992±0.005",
+          "cross_edges": "0.087±0.046",
+          "n_edges": "805.700±34.359"
+        },
+        "0.55": {
+          "q_end": "0.353±0.032",
+          "polarization": "0.040±0.028",
+          "giant_frac": "0.992±0.005",
+          "cross_edges": "0.113±0.059",
+          "n_edges": "824.900±35.788"
+        },
+        "0.6": {
+          "q_end": "0.329±0.038",
+          "polarization": "0.029±0.024",
+          "giant_frac": "0.994±0.004",
+          "cross_edges": "0.067±0.047",
+          "n_edges": "847.500±37.591"
+        },
+        "0.65": {
+          "q_end": "0.276±0.023",
+          "polarization": "0.016±0.012",
+          "giant_frac": "0.995±0.005",
+          "cross_edges": "0.060±0.082",
+          "n_edges": "914.200±36.965"
+        },
+        "0.7": {
+          "q_end": "0.246±0.012",
+          "polarization": "0.009±0.009",
+          "giant_frac": "0.998±0.003",
+          "cross_edges": "0.014±0.010",
+          "n_edges": "975.200±37.704"
+        },
+        "0.75": {
+          "q_end": "0.238±0.012",
+          "polarization": "0.003±0.005",
+          "giant_frac": "0.999±0.002",
+          "cross_edges": "0.005±0.004",
+          "n_edges": "1017.600±26.102"
+        },
+        "0.8": {
+          "q_end": "0.242±0.010",
+          "polarization": "0.001±0.001",
+          "giant_frac": "1.000±0.000",
+          "cross_edges": "0.009±0.015",
+          "n_edges": "1044.700±23.151"
+        },
+        "0.85": {
+          "q_end": "0.235±0.009",
+          "polarization": "0.001±0.001",
+          "giant_frac": "1.000±0.000",
+          "cross_edges": "0.002±0.004",
+          "n_edges": "1063.100±23.573"
+        }
+      },
+      "theta_frag": {
+        "per_seed": [
+          0.5,
+          0.35,
+          0.6,
+          0.3989795918367347,
+          0.5,
+          0.375,
+          0.35,
+          0.4,
+          0.2988095238095238,
+          0.4
+        ],
+        "mean": 0.4172789115646259,
+        "ci95": 0.06437326545424593,
+        "min": 0.2988095238095238,
+        "max": 0.6,
+        "n_censored": 0,
+        "frac_censored": 0.0
+      },
+      "theta_q": {
+        "per_seed": [
+          0.6989840355597824,
+          0.7221339337909453,
+          0.7120695527832949,
+          0.6407803475400864,
+          0.6988650488722407,
+          0.6751333779022017,
+          0.6887924535497615,
+          0.8479633182259845,
+          0.85,
+          0.6853971702335984
+        ],
+        "mean": 0.7220119238457894,
+        "ci95": 0.05038625727757696,
+        "min": 0.6407803475400864,
+        "max": 0.85,
+        "n_censored": 1,
+        "frac_censored": 0.1
+      },
+      "theta_pol": {
+        "per_seed": [
+          0.286094145927156,
+          0.33178463560542226,
+          0.3341247097881349,
+          0.37577109802567116,
+          0.38931126587431314,
+          0.3638067579688895,
+          0.3284850574325549,
+          0.392242417796546,
+          0.3330352365369299,
+          0.38004656969695655
+        ],
+        "mean": 0.35147018946525743,
+        "ci95": 0.024415738680200205,
+        "min": 0.286094145927156,
+        "max": 0.392242417796546,
+        "n_censored": 0,
+        "frac_censored": 0.0
+      },
+      "in_preregistered_band_frag": false,
+      "in_preregistered_band_q": false
+    }
+  },
+  "summary": {
+    "theta_frag": {
+      "n_seed_estimates": 40,
+      "mean": 0.3700981369103249,
+      "min": 0.19875,
+      "max": 0.65,
+      "spread": 0.45125000000000004,
+      "n_in_preregistered_band": 3,
+      "frac_in_preregistered_band": 0.075,
+      "band_consistent": false,
+      "per_topology_means": {
+        "erdos_renyi": 0.3743462850054663,
+        "scale_free": 0.35979130434782614,
+        "small_world": 0.3289760467233813,
+        "empirical_bipolar": 0.4172789115646259
+      },
+      "per_topology_spread": 0.08830286484124455
+    },
+    "theta_q": {
+      "n_seed_estimates": 40,
+      "mean": 0.7071140511232729,
+      "min": 0.4448344772955635,
+      "max": 0.85,
+      "spread": 0.40516552270443645,
+      "n_in_preregistered_band": 2,
+      "frac_in_preregistered_band": 0.05,
+      "band_consistent": false,
+      "per_topology_means": {
+        "erdos_renyi": 0.686359361544764,
+        "scale_free": 0.5700849191025379,
+        "small_world": 0.85,
+        "empirical_bipolar": 0.7220119238457894
+      },
+      "per_topology_spread": 0.2799150808974621
+    },
+    "theta_pol": {
+      "n_seed_estimates": 40,
+      "mean": 0.37053087268212204,
+      "min": 0.24419960704766325,
+      "max": 0.6103100990594558,
+      "spread": 0.3661104920117925,
+      "n_in_preregistered_band": 2,
+      "frac_in_preregistered_band": 0.05,
+      "band_consistent": false,
+      "per_topology_means": {
+        "erdos_renyi": 0.3851778736611876,
+        "scale_free": 0.32635761544619424,
+        "small_world": 0.41911781215584876,
+        "empirical_bipolar": 0.35147018946525743
+      },
+      "per_topology_spread": 0.09276019670965452
+    }
+  }
+}

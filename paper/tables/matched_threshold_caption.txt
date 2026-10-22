@@ -1,0 +1,1 @@
+Degree- and reciprocity-matched Phase~1c rerun. All four topologies are matched to an initial mean out-degree of 6.60 and reciprocity 0.65 (10 seeds per θ cell); censored estimates are shown in parentheses. Generated from \texttt{results/phase1c\_matched.json} by \texttt{scripts/generate\_paper\_tables.py}.

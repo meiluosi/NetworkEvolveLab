@@ -51,7 +51,7 @@ class CoEvolutionEngine:
                  div_rec: float = 0.0, bridger_subsidy: float = 0.0, hub_limit: float = 0.0,
                  topology_type: str = "erdos_renyi", init_graph=None, init_beliefs=None,
                  llm_policy=None, llm_event_budget: int = 0,
-                 initial_density: float = 0.08):
+                 initial_density: float = 0.08, bridger_assignment: str = "index"):
         self.rng = np.random.default_rng(seed)
         self.num_nodes = num_nodes
         self.topology_type = topology_type
@@ -94,14 +94,58 @@ class CoEvolutionEngine:
                            # （有些计划事件因听众在轮内被拉黑/边先被切断而不会发生互动）
                            "n_applied": 0,
                            # actions: 已落地决策的动作分布
-                           "actions": {}}
+                           "actions": {},
+                           # 逐事件一致率：同一事件上「规则后端会做什么」与
+                           # LLM 决策（映射到 reinforce/decay/block 三分类）的对比
+                           "rule_agreement": {
+                               "n_compared": 0, "n_agree": 0,
+                               "confusion": {}, "llm_action_counts": {},
+                               "rule_action_counts": {},
+                           }}
+        # 随机断边（placebo）机制：只用于 Phase 6 安慰剂臂；默认关闭。
+        self.random_severance_budget = 0
+        self.random_severance_done = 0
+        self.random_severance_rounds = set()
+        self._round_counter = 0
+        self.placebo_stats = {"n_unfollows": 0}
         self.graph = DynamicSocialGraph(num_nodes=num_nodes, seed=seed, topology_type=topology_type,
                                         init_graph=init_graph, initial_density=initial_density)
 
         # 初始化异质原型分布（延续 2% Hub, 8.5% Bridger, 89.5% Long-tail）
         self.agents: Dict[int, EvolvingAgent] = {}
+        self.bridger_assignment = bridger_assignment
         num_hubs = max(1, int(round(num_nodes * 0.02)))
         num_bridgers = max(1, int(round(num_nodes * 0.085)))
+
+        # 结构位置对照臂：Hub 按度、Bridger 按 betweenness 选，而不是按节点索引。
+        # 这不改变原型比例，只改变「哪些节点承担哪种原型」。
+        if bridger_assignment == "structural":
+            import networkx as nx
+            und = self.graph.g.to_undirected()
+            deg = dict(und.degree())
+            hubs = sorted(range(num_nodes), key=lambda i: (-deg.get(i, 0), i))[:num_hubs]
+            hub_set = set(hubs)
+            btw = nx.betweenness_centrality(und, normalized=True)
+            candidates = [i for i in range(num_nodes) if i not in hub_set]
+            bridgers = sorted(candidates, key=lambda i: (-btw.get(i, 0.0), i))[:num_bridgers]
+            bridger_set = set(bridgers)
+            arch_by_node = {}
+            for i in range(num_nodes):
+                if i in hub_set:
+                    arch_by_node[i] = "hub_broadcaster"
+                elif i in bridger_set:
+                    arch_by_node[i] = "active_bridger"
+                else:
+                    arch_by_node[i] = "long_tail_responder"
+        else:
+            arch_by_node = {}
+            for i in range(num_nodes):
+                if i < num_hubs:
+                    arch_by_node[i] = "hub_broadcaster"
+                elif i < num_hubs + num_bridgers:
+                    arch_by_node[i] = "active_bridger"
+                else:
+                    arch_by_node[i] = "long_tail_responder"
 
         # 初始信念设为两极化分布或均匀分布 [-1.0, 1.0]
         if init_beliefs is not None:
@@ -112,12 +156,7 @@ class CoEvolutionEngine:
         initial_beliefs = np.clip(initial_beliefs, -1.0, 1.0)
         
         for i in range(num_nodes):
-            if i < num_hubs:
-                arch = "hub_broadcaster"
-            elif i < num_hubs + num_bridgers:
-                arch = "active_bridger"
-            else:
-                arch = "long_tail_responder"
+            arch = arch_by_node[i]
             
             self.agents[i] = EvolvingAgent(
                 agent_id=i,
@@ -315,6 +354,22 @@ class CoEvolutionEngine:
             self.llm_stats["n_cache_hits"] += 1
         self._llm_plan = {pr: dec for pr, dec in zip(pairs, decisions)}
 
+    def _rule_action(self, listener_id: int, speaker_id: int) -> str:
+        """规则后端在同一事件上会做的三分类动作（不修改任何状态）。
+
+        用于 Phase 6 的逐事件一致率：必须在 LLM 决策落地**之前**调用。
+        与 ``EvolvingAgent.perceive_and_react`` 的判定一致；Phase 6 的
+        BASE_CFG 不启用 bridger stress/subsidy，因此这里也不需要施加那些折减。
+        """
+        listener = self.agents[listener_id]
+        speaker = self.agents[speaker_id]
+        diff = abs(listener.belief - speaker.belief)
+        if diff <= listener.tolerance * 2.0:
+            return "reinforce"
+        if self.block_diff is not None and diff >= self.block_diff:
+            return "block"
+        return "decay"
+
     def _llm_apply(self, listener_id: int, speaker_id: int) -> Optional[Dict[str, Any]]:
         """若本轮计划中包含该二元组且尚未使用，则采用 LLM 决策并落地。"""
         from .llm_backend import apply_decision
@@ -323,6 +378,21 @@ class CoEvolutionEngine:
         if dec is None or key in self._llm_plan_used:
             return None
         self._llm_plan_used.add(key)
+
+        # 同一事件上的规则反事实（在 LLM 决策落地前计算）
+        rule_action = self._rule_action(listener_id, speaker_id)
+        mapped = {"keep": "reinforce", "mute": "decay",
+                  "unfollow": "block", "block": "block"}
+        llm_mapped = mapped.get(dec.action, "decay")
+        ag = self.llm_stats["rule_agreement"]
+        ag["n_compared"] += 1
+        if rule_action == llm_mapped:
+            ag["n_agree"] += 1
+        conf = ag["confusion"].setdefault(llm_mapped, {})
+        conf[rule_action] = conf.get(rule_action, 0) + 1
+        ag["llm_action_counts"][llm_mapped] = ag["llm_action_counts"].get(llm_mapped, 0) + 1
+        ag["rule_action_counts"][rule_action] = ag["rule_action_counts"].get(rule_action, 0) + 1
+
         before = float(self.agents[listener_id].belief)
         adapter = _EngineLLMAdapter(self)
         out = apply_decision(adapter, listener_id, speaker_id, dec,
@@ -396,6 +466,25 @@ class CoEvolutionEngine:
                 added += 1
         return added
 
+    def apply_random_severance(self, count: int = 1) -> int:
+        """Placebo intervention: remove ``count`` random currently-present edges.
+
+        This is deliberately *not* linked to any cognitive event; it is the
+        noise-floor arm for Phase 6 (same number of random unfollows as the LLM
+        arm's unfollow+block decisions, applied at pre-scheduled rounds).
+        """
+        removed = 0
+        for _ in range(int(count)):
+            edges = list(self.graph.g.edges())
+            if not edges:
+                break
+            u, v = edges[int(self.rng.integers(len(edges)))]
+            if self._drop_edge(int(u), int(v)):
+                removed += 1
+                self.placebo_stats["n_unfollows"] += 1
+        self.random_severance_done += removed
+        return removed
+
     def run_round(self) -> Dict[str, Any]:
         """一轮 = N 次发言（单次 step 的 N 倍）+ 一次三元闭包"""
         if self.llm_policy is not None and self.llm_event_budget > 0:
@@ -415,6 +504,11 @@ class CoEvolutionEngine:
             e[1] *= self.stress_decay
         res = {}
         res["edges_added"] = self.triadic_closure()
+        self._round_counter += 1
+        if (self.random_severance_budget > 0
+                and self.random_severance_done < self.random_severance_budget
+                and self._round_counter in self.random_severance_rounds):
+            self.apply_random_severance(1)
         return res
 
     def run_simulation(self, steps: int = 30) -> List[Dict[str, Any]]:

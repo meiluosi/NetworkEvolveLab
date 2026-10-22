@@ -34,6 +34,7 @@ from multiprocessing import Pool
 import numpy as np
 
 from .expkit import run_config, fmt, mean_ci
+from .matched_graph import build_matched_graph
 
 TOPOLOGIES = ["erdos_renyi", "scale_free", "small_world", "empirical_bipolar"]
 
@@ -94,8 +95,14 @@ def main():
     parser.add_argument("--theta-max", type=float, default=0.85)
     parser.add_argument("--theta-step", type=float, default=0.05)
     parser.add_argument("--procs", type=int, default=10)
+    parser.add_argument("--matched-degree", type=float, default=None,
+                        help="可选：把所有拓扑的初始平均出度匹配到该值")
+    parser.add_argument("--matched-reciprocity", type=float, default=None,
+                        help="可选：把所有拓扑的初始互惠率匹配到该值")
     parser.add_argument("--out", type=str, default="results/phase1c_threshold.json")
     args = parser.parse_args()
+    if (args.matched_degree is None) != (args.matched_reciprocity is None):
+        parser.error("--matched-degree 与 --matched-reciprocity 必须同时给出")
 
     seeds = list(range(args.seeds))
     thetas = _theta_grid(args.theta_min, args.theta_max, args.theta_step)
@@ -103,13 +110,37 @@ def main():
           f"(Seeds={args.seeds}, Rounds={args.rounds}, Nodes={args.nodes}) ===")
     print(f"θ grid: {thetas}")
 
+    matched_graphs = {}
+    matching = None
+    if args.matched_degree is not None:
+        matching = {"target_degree": float(args.matched_degree),
+                    "target_reciprocity": float(args.matched_reciprocity),
+                    "achieved": {}}
+        for topo in TOPOLOGIES:
+            rows = []
+            for s in seeds:
+                g, st = build_matched_graph(topo, args.nodes, s,
+                                            args.matched_degree, args.matched_reciprocity)
+                matched_graphs[(topo, s)] = g
+                rows.append(st)
+            matching["achieved"][topo] = {
+                "mean_out_degree": float(np.mean([r["mean_out_degree"] for r in rows])),
+                "mean_reciprocity": float(np.mean([r["reciprocity"] for r in rows])),
+                "mean_edges": float(np.mean([r["n_edges"] for r in rows])),
+                "per_seed": rows,
+            }
+            print(f"  matched {topo:<20} degree={matching['achieved'][topo]['mean_out_degree']:.3f} "
+                  f"reciprocity={matching['achieved'][topo]['mean_reciprocity']:.3f}")
+
     # —— 一次性并行跑完全部 (topology, θ, seed) 组合 ——
     jobs = []
     for topo in TOPOLOGIES:
         for th in thetas:
-            cfg = dict(topology_type=topo, theta=th, rounds=args.rounds,
-                       block=1.2, p_form=0.1, nodes=args.nodes)
             for s in seeds:
+                cfg = dict(topology_type=topo, theta=th, rounds=args.rounds,
+                           block=1.2, p_form=0.1, nodes=args.nodes)
+                if matching is not None:
+                    cfg["init_graph"] = matched_graphs[(topo, s)]
                 jobs.append((cfg, s))
     with Pool(args.procs) as pool:
         raw = pool.map(run_config, jobs)
@@ -128,6 +159,7 @@ def main():
         "theta_grid": thetas,
         "preregistered_band": list(PREREGISTERED_BAND),
         "giant_threshold": GIANT_THRESHOLD,
+        "matching": matching,
         "criteria": {
             "theta_frag": f"giant_frac >= {GIANT_THRESHOLD}（碎裂→连通），相邻点线性插值",
             "theta_q": "Q_end(θ) <= 0.5 * Q_end(θ_min)（模块度塌缩），相邻点线性插值",

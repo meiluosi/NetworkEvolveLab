@@ -383,6 +383,109 @@ constant. Furthermore, attributing cross-graph variation solely to macroscopic t
 complicated by initial density and reciprocity confounds (though lower-bound left-censoring is completely eliminated, \ThresholdFragLeftCensoredFrac, on the extended grid $[\ThresholdGridMin, \ThresholdGridMax]$).
 
 % =============================================================
+\section{Degree- and Reciprocity-Matched Critical Thresholds}
+\label{app:threshold-matched}
+
+The cross-topology comparison above is confounded by the fact that the four initial
+topologies differ in mean out-degree and reciprocity. To address this directly, we built a
+matched variant of each topology by preserving its skeleton family (ER, BA, WS, or the
+two-camp empirical-bipolar construction), adding/removing random edges to a common skeleton
+size, and orienting a fixed fraction of edges mutually. All four matched graphs therefore
+have initial mean out-degree \MatchedTargetDegree{} and reciprocity
+\MatchedTargetReciprocity{} (per-topology achieved values are reported in
+Table~\ref{tab:matched_threshold}).
+
+Under this matching, the connectivity-recovery estimates are
+\MatchedFragErdosRenyi{} (ER), \MatchedFragSmallWorld{} (WS),
+\MatchedFragScaleFree{} (BA), and \MatchedFragEmpiricalBipolar{} (empirical bipolar); the
+cross-topology spread falls from \ThresholdFragSpread{} in the unmatched sweep to
+\MatchedFragSpread{} in the matched sweep, and the ordering of ER/WS/BA is no longer stable.
+The matched estimate is in the originally asserted band for only \MatchedInBandFrag{} of the
+40 seed-level estimates. We therefore treat the matched rerun as evidence that degree and
+reciprocity account for a substantial part of the apparent cross-topology variation, and we
+keep the paper's conclusion at the weaker, defensible level: no stable topology-dependent
+critical tolerance is established. The full matched run is
+\texttt{results/phase1c\_matched.json}, generated with the same seeds, rounds, and criteria as
+the unmatched sweep.
+
+\begin{table*}[t]
+\centering
+\small
+\caption{\textbf{Degree- and reciprocity-matched Phase~1c rerun.} All four topologies are
+matched to the same initial mean out-degree and reciprocity; censored estimates are shown in
+parentheses. Generated from \texttt{results/phase1c\_matched.json} by
+\texttt{scripts/generate\_paper\_tables.py}.}
+\label{tab:matched_threshold}
+\input{tables/matched_threshold}
+\end{table*}
+
+% =============================================================
+\section{Structural-Position Bridger Control}
+\label{app:h2-structural}
+
+The H2 ablation in the main text assigns the Bridger label by node index. To check whether
+the retention result depends on that assignment rather than on structural position, we
+reran the base and equal-tolerance conditions with Hubs chosen by highest degree and
+Bridgers chosen by highest betweenness among the remaining nodes (the 2\%/8.5\%/89.5\%
+prototype proportions are unchanged). Table~\ref{tab:h2_structural} reports the result.
+The base retention gap is \HTwoStructuralBaseGap{} (95\% CI
+$[\HTwoStructuralBaseCILow, \HTwoStructuralBaseCIHigh]$), with Bridger retention
+\HTwoStructuralBaseBridger{} versus \HTwoStructuralBaseOther{} for other nodes; equalizing
+tolerance removes the gap (\HTwoStructuralEqualGap{}, 95\% CI
+$[\HTwoStructuralEqualCILow, \HTwoStructuralEqualCIHigh]$; $p=\HTwoStructuralEqualP$). H2
+remains falsified under structural assignment. We therefore describe the observed resilience
+as a tolerance-endowment effect of the assigned prototype rather than as a structural-hole
+mechanism.
+
+\begin{table*}[t]
+\centering
+\small
+\caption{\textbf{Structural-position Bridger control.} Hub = highest degree, Bridger =
+highest betweenness among non-Hubs; prototype proportions are unchanged. H2 remains
+falsified in both assignments. Generated from
+\texttt{results/phase1b\_structural.json} by
+\texttt{scripts/generate\_paper\_tables.py}.}
+\label{tab:h2_structural}
+\input{tables/h2_structural}
+\end{table*}
+
+% =============================================================
+\section{Placebo Arm and Per-Event Agreement for the LLM Layer}
+\label{app:llm-placebo}
+
+The Phase~6 null result may reflect either genuine behavioural equivalence or a design that
+is too noisy to detect a difference. We therefore add two controls. First, a placebo arm
+runs the same rule engine and seed but deletes the same number of random edges as the LLM
+arm's \texttt{unfollow}+\texttt{block} decisions (mean
+\LlmPlaceboUnfollowsMean{} random unfollows per seed), spread over pre-scheduled rounds.
+Second, for each of the \LlmRuleAgreementDecisions{} events in which the LLM decision was
+actually applied, we compute the action the rule backend would have taken in the same
+state (before applying the LLM decision) and compare the two after mapping
+keep/mute/unfollow/block to reinforce/decay/block.
+
+The placebo arm changes modularity by only $\LlmPlaceboQDelta$ ($p=\LlmPlaceboQP$), and the
+LLM arm differs from the placebo arm by $\LlmVsPlaceboQDelta$ in modularity
+($p=\LlmVsPlaceboQP$). The per-event agreement rate is \LlmRuleAgreementRate{}
+(\LlmRuleAgreementAgree{}/\LlmRuleAgreementDecisions{}); the dominant agreement cell is
+keep--reinforce, while most disagreements are mute decisions that the rule backend would
+have handled as decay or block. Both controls therefore point in the same direction: at this
+coverage, the LLM layer's structural null is not explained by the number of severed ties
+alone, and its action policy is close to, but not identical with, the rule backend.
+Table~\ref{tab:llm_placebo} reports the arm-level values.
+
+\begin{table*}[t]
+\centering
+\small
+\caption{\textbf{Phase~6 placebo arm and per-event agreement.} The placebo arm deletes the
+same number of random edges as the LLM arm's unfollow+block decisions. Agreement compares
+the LLM decision with the rule counterfactual on the same event. Generated from
+\texttt{results/phase6\_llm\_engine.json} by
+\texttt{scripts/generate\_paper\_tables.py}.}
+\label{tab:llm_placebo}
+\input{tables/llm_placebo}
+\end{table*}
+
+% =============================================================
 \section{Limitations, in Full}
 \label{app:limitations}
 
@@ -401,7 +504,9 @@ Six limitations are material.
     token accounting) is larger, but its \emph{interaction coverage} is only
     \LlmArmCoverage{}, yielding an estimated difference of $\Delta Q \in [\LlmArmQCILow, \LlmArmQCIHigh]$
     (95\% CI; paired $A_{\mathrm{rupture}}$ differences exhibit zero sample variance across all 10 seeds),
-    which bounds the effect size any such arm can detect.
+    which bounds the effect size any such arm can detect. The random-unfollow placebo arm and
+    per-event agreement audit in Appendix~\ref{app:llm-placebo} give a noise floor for this
+    null rather than replacing the missing full-coverage experiment.
     \item \textbf{Scope of the attribution ablation.} The ablation spans $d \in \{1,3\}$ and
     a 10-arm factorial combination of synchronous, asynchronous uniform-speaker, and
     asynchronous weighted-speaker schedules. The results demonstrate that asynchronous
@@ -427,6 +532,10 @@ Six limitations are material.
     residual community structure keeps modularity above the collapse level, though
     lower-bound left-censoring is completely eliminated (\ThresholdFragLeftCensoredFrac{} on
     the $[\ThresholdGridMin, \ThresholdGridMax]$ grid, minimum observed $\theta^*_{\mathrm{frag}}=\ThresholdFragMin$).
+    A degree/reciprocity-matched rerun (Appendix~\ref{app:threshold-matched}) reduces the
+    cross-topology spread of $\theta^*_{\mathrm{frag}}$ from \ThresholdFragSpread{} to
+    \MatchedFragSpread{}, but the remaining differences are still not stable across ER/WS/BA;
+    this is why the paper does not claim a topology-dependent critical threshold.
 \end{enumerate}
 
 All software, benchmark loaders, cached real-data subgraphs, figure scripts, and

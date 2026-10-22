@@ -1,0 +1,1 @@
+Bridger assignment by structural position (Hub = highest degree; Bridger = highest betweenness among non-Hubs; proportions unchanged). The structural-position arm does not rescue H2: the base retention gap is negative and equalizing tolerance removes it. Generated from \texttt{results/phase1b\_structural.json} by \texttt{scripts/generate\_paper\_tables.py}.

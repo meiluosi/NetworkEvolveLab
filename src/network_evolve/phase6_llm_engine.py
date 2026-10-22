@@ -54,12 +54,23 @@ def _checkpoint(out, path):
 
 
 def run_arm(arm: str, seed: int, nodes: int, rounds: int,
-            llm_events: int, client: LLMClient, policy: LLMCognitivePolicy):
-    """跑一个实验臂，返回 (指标, LLM 统计)。"""
+            llm_events: int, client: LLMClient, policy: LLMCognitivePolicy,
+            placebo_budget: int = 0):
+    """跑一个实验臂，返回 (指标, 统计)。
+
+    placebo 臂：与 rule 臂相同的引擎/种子，但在预先均匀抽取的 ``placebo_budget``
+    个轮次各删除一条随机边，使随机断边数量与 LLM 臂的 unfollow+block 数量一致。
+    """
     e = CoEvolutionEngine(num_nodes=nodes, seed=seed, **BASE_CFG)
     if arm == "llm_hybrid":
         e.llm_policy = policy
         e.llm_event_budget = llm_events
+    elif arm == "placebo" and placebo_budget > 0:
+        e.random_severance_budget = int(placebo_budget)
+        k = min(int(placebo_budget), rounds)
+        sched_rng = np.random.default_rng(seed + 777)
+        chosen = sched_rng.choice(np.arange(1, rounds + 1), size=k, replace=False)
+        e.random_severance_rounds = set(int(x) for x in chosen)
     init_edges = set(e.graph.g.edges())
     incident = init_incident_edges(e)
     for _ in range(rounds):
@@ -69,7 +80,17 @@ def run_arm(arm: str, seed: int, nodes: int, rounds: int,
     # LLM 决策的动作分布（真实落地到拓扑的那些）
     stats_llm = dict(e.llm_stats)
     stats_llm["actions"] = dict(stats_llm.get("actions", {}))
+    if "rule_agreement" in stats_llm:
+        ag = stats_llm["rule_agreement"]
+        stats_llm["rule_agreement"] = {
+            "n_compared": int(ag.get("n_compared", 0)),
+            "n_agree": int(ag.get("n_agree", 0)),
+            "confusion": {k: dict(v) for k, v in (ag.get("confusion") or {}).items()},
+            "llm_action_counts": dict(ag.get("llm_action_counts") or {}),
+            "rule_action_counts": dict(ag.get("rule_action_counts") or {}),
+        }
     stats_llm["n_interactions"] = int(e.n_interactions)
+    stats_llm["placebo"] = dict(e.placebo_stats)
     ret = retention_by_node(e, incident)
     bridger = [v for i, v in ret.items()
                if e.agents[i].archetype == "active_bridger"]
@@ -111,10 +132,14 @@ def main():
     out = {
         "args": vars(args),
         "design": {
-            "arms": ["rule", "llm_hybrid"],
+            "arms": ["rule", "llm_hybrid", "placebo"],
             "pairing": "同 seed ⇒ 同初始图与同初始信念（配对比较）",
             "statistical_unit": "seed",
             "llm_mode": "每轮一次批量调用，轮内命中的二元组采用 LLM 决策（闭环）",
+            "placebo": "与 rule 臂同种子，在均匀抽取的轮次删除与 LLM 臂 "
+                       "unfollow+block 数量相同的随机边；用于标定断边噪声底",
+            "agreement": "逐事件比较 LLM 决策（keep/mute/unfollow/block 映射为 "
+                         "reinforce/decay/block）与规则后端在同一事件上的反事实动作",
             "caveat": "llm_hybrid 是混合后端：未被 LLM 覆盖的互动仍走规则后端；"
                       "覆盖比例在 llm_coverage 中显式报告",
         },
@@ -123,12 +148,17 @@ def main():
         "verdict": {},
     }
 
-    per_seed = {"rule": [], "llm_hybrid": []}
+    per_seed = {"rule": [], "llm_hybrid": [], "placebo": []}
     llm_stats_acc = {"n_events": 0, "n_valid": 0, "n_invalid": 0,
                       "n_calls": 0, "n_cache_hits": 0, "n_rounds_with_llm": 0,
-                      "n_applied": 0, "n_interactions": 0, "actions": {}}
+                      "n_applied": 0, "n_interactions": 0, "actions": {},
+                      "rule_agreement": {"n_compared": 0, "n_agree": 0,
+                                          "confusion": {},
+                                          "llm_action_counts": {},
+                                          "rule_action_counts": {}}}
     for s in seeds:
         row = {}
+        severances = 0
         for arm in ("rule", "llm_hybrid"):
             m, st = run_arm(arm, s, args.nodes, args.rounds, args.llm_events,
                             client, policy)
@@ -141,15 +171,37 @@ def main():
                     llm_stats_acc[k] += st.get(k, 0)
                 for a, c in (st.get("actions") or {}).items():
                     llm_stats_acc["actions"][a] = llm_stats_acc["actions"].get(a, 0) + c
+                ag = st.get("rule_agreement") or {}
+                acc = llm_stats_acc["rule_agreement"]
+                acc["n_compared"] += int(ag.get("n_compared", 0))
+                acc["n_agree"] += int(ag.get("n_agree", 0))
+                for k, c in (ag.get("confusion") or {}).items():
+                    acc["confusion"].setdefault(k, {})
+                    for k2, c2 in c.items():
+                        acc["confusion"][k][k2] = acc["confusion"][k].get(k2, 0) + c2
+                for k, c in (ag.get("llm_action_counts") or {}).items():
+                    acc["llm_action_counts"][k] = acc["llm_action_counts"].get(k, 0) + c
+                for k, c in (ag.get("rule_action_counts") or {}).items():
+                    acc["rule_action_counts"][k] = acc["rule_action_counts"].get(k, 0) + c
                 row["llm_stats"] = st
+                severances = (st.get("actions") or {}).get("unfollow", 0) + \
+                             (st.get("actions") or {}).get("block", 0)
+        # 安慰剂臂：断边数量与 LLM 臂的 unfollow+block 数量一致
+        m_pl, st_pl = run_arm("placebo", s, args.nodes, args.rounds, args.llm_events,
+                              client, policy, placebo_budget=severances)
+        per_seed["placebo"].append(m_pl)
+        row["placebo"] = m_pl
+        row["placebo_stats"] = st_pl
         out["arms"] = out["arms"] or {}
         out.setdefault("per_seed", {})[str(s)] = row
         # 增量落盘：LLM 调用偶发网络故障时不至于丢掉已完成的种子
         _checkpoint(out, args.out)
         print(f"  seed {s}: rule Q={row['rule']['modularity_q']:.3f} "
               f"| llm Q={row['llm_hybrid']['modularity_q']:.3f} "
+              f"| placebo Q={row['placebo']['modularity_q']:.3f} "
               f"| llm 事件 {row['llm_stats']['n_events']} "
-              f"(有效 {row['llm_stats']['n_valid']}, 落地 {row['llm_stats']['n_applied']})")
+              f"(有效 {row['llm_stats']['n_valid']}, 落地 {row['llm_stats']['n_applied']}) "
+              f"| LLM 断边 {severances} vs placebo 断边 {st_pl['placebo']['n_unfollows']}")
 
     # —— 汇总 ——
     def agg(arm, key):
@@ -159,7 +211,7 @@ def main():
                 "per_seed": [float(x) for x in arr]}
 
     summary = {}
-    for arm in ("rule", "llm_hybrid"):
+    for arm in ("rule", "llm_hybrid", "placebo"):
         summary[arm] = {k: agg(arm, k) for k in
                         ("modularity_q", "polarization", "giant_frac",
                          "small_comm_frac", "rupture_asymmetry", "num_comms",
@@ -189,6 +241,37 @@ def main():
             "n_positive": int(np.sum(d > 0)), "n_pairs": int(d.size),
             "per_seed_diff": [float(x) for x in d],
         }
+
+    def _arm_contrast(a_arm, b_arm):
+        """种子级配对对比（a − b），供 placebo 臂对照使用。"""
+        out = {}
+        for key in ("modularity_q", "polarization", "giant_frac",
+                    "rupture_asymmetry", "num_edges", "bridger_retention_mean"):
+            a = np.array([m[key] for m in per_seed[a_arm]], dtype=float)
+            b = np.array([m[key] for m in per_seed[b_arm]], dtype=float)
+            d = a - b
+            mean, half = mean_ci(d)
+            if np.allclose(d, d[0]):
+                p_val = 1.0 if d[0] == 0 else 0.0
+            else:
+                p_val = float(stats.ttest_rel(a, b).pvalue)
+            out[key] = {
+                "mean_diff": float(mean), "ci95": [float(half), -float(half)],
+                "p_value_paired_t": p_val,
+                "n_positive": int(np.sum(d > 0)), "n_pairs": int(d.size),
+                "per_seed_diff": [float(x) for x in d],
+            }
+        return out
+
+    contrasts["placebo_vs_rule"] = _arm_contrast("placebo", "rule")
+    contrasts["llm_vs_placebo"] = _arm_contrast("llm_hybrid", "placebo")
+    out["placebo"] = {
+        "n_unfollows_per_seed": [
+            float(row.get("placebo_stats", {}).get("placebo", {}).get("n_unfollows", 0))
+            for row in out.get("per_seed", {}).values()
+        ],
+        "note": "每一 seed 的随机断边数量与 LLM 臂的 unfollow+block 数量一致",
+    }
 
     total_events = llm_stats_acc["n_events"]
     total_applied = llm_stats_acc["n_applied"]
@@ -225,6 +308,13 @@ def main():
                                if total_events else 0.0),
         "rounds_with_llm": llm_stats_acc["n_rounds_with_llm"],
         "action_distribution": llm_stats_acc["actions"],
+        "rule_agreement": {
+            **llm_stats_acc["rule_agreement"],
+            "agreement_rate": (
+                llm_stats_acc["rule_agreement"]["n_agree"] /
+                llm_stats_acc["rule_agreement"]["n_compared"]
+                if llm_stats_acc["rule_agreement"]["n_compared"] else 0.0),
+        },
         "note": "coverage_of_interactions = LLM 实际落地决策的互动数 / LLM 臂引擎全部互动数；"
                 "llm_hybrid 是混合后端，未被 LLM 覆盖的互动仍走规则后端（已显式披露）",
     }
@@ -234,6 +324,8 @@ def main():
             abs(contrasts["rupture_asymmetry"]["mean_diff_llm_minus_rule"]) > 0.01),
         "modularity_diff_significant": bool(contrasts["modularity_q"]["p_value_paired_t"] < 0.05),
         "rupture_diff_significant": bool(contrasts["rupture_asymmetry"]["p_value_paired_t"] < 0.05),
+        "placebo_changes_modularity": bool(
+            abs(contrasts["placebo_vs_rule"]["modularity_q"]["mean_diff"]) > 0.01),
     }
 
     os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
@@ -242,6 +334,8 @@ def main():
 
     print("\n--- 配对对比 (LLM − 规则，种子级) ---")
     for k, v in contrasts.items():
+        if "mean_diff_llm_minus_rule" not in v:
+            continue
         print(f"  {k:<24} Δ={v['mean_diff_llm_minus_rule']:+.4f} "
               f"p={v['p_value_paired_t']:.3g}  ({v['n_positive']}/{v['n_pairs']} 正向)")
     print(f"\nLLM 收据: {client.ledger()['api_calls']} 次 API 调用, "
@@ -252,6 +346,13 @@ def main():
           f"(LLM 落地 {total_applied} / 引擎互动 {total_interactions}); "
           f"计划命中率 {plan_hit:.1%}")
     print(f"LLM 动作分布: {llm_stats_acc['actions']}")
+    ag = out["llm_coverage"]["rule_agreement"]
+    print(f"逐事件一致率: {ag['agreement_rate']:.1%} "
+          f"({ag['n_agree']}/{ag['n_compared']}); 混淆矩阵={ag['confusion']}")
+    print(f"安慰剂 Q 差 (placebo − rule): "
+          f"{contrasts['placebo_vs_rule']['modularity_q']['mean_diff']:+.4f} "
+          f"(p={contrasts['placebo_vs_rule']['modularity_q']['p_value_paired_t']:.3g}); "
+          f"每 seed 随机断边 {out['placebo']['n_unfollows_per_seed']}")
     print(f"[Done] {args.out}")
 
 

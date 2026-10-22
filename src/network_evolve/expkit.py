@@ -10,7 +10,7 @@ BASE = dict(nodes=100, rounds=60, theta=0.4, bridger_dtheta=0.3, p_form=0.1,
             block=None, rho=1.0, hetero=True, checkpoints=(), reach=False)
 ENGINE_KEYS = ("bridger_moderate", "bridger_stress", "bridger_links", "stress_decay", "stress_sens",
                "stress_scale", "stress_diff", "div_rec", "bridger_subsidy", "hub_limit", "theta_attract",
-               "topology_type")
+               "topology_type", "init_graph", "bridger_assignment")
 
 
 def make_engine(cfg, seed):

@@ -1,0 +1,6 @@
+## H2 structural-position control (T=60, seeds=20)
+arm | bridger_ret | other_ret | gap(rel) [CI95] | p(seed-level) | H2
+index_base               | 0.664 | 0.511 | -0.299 [-0.359,-0.238] | 1 | False
+index_tol_equal          | 0.514 | 0.497 | -0.034 [-0.092,+0.014] | 0.89 | False
+structural_base          | 0.678 | 0.531 | -0.277 [-0.316,-0.244] | 1 | False
+structural_tol_equal     | 0.490 | 0.499 | +0.019 [-0.023,+0.061] | 0.204 | False

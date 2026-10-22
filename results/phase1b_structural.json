@@ -1,0 +1,98 @@
+{
+  "args": {
+    "seeds": 20,
+    "rounds": 60,
+    "out": "results/phase1b_structural.json"
+  },
+  "arms": {
+    "index_base": {
+      "bridger_mean": 0.6639777802836319,
+      "other_mean": 0.5111866586301925,
+      "relative_gap": -0.2988949712867466,
+      "p_value": 0.9999999930378412,
+      "H2_supported": false,
+      "gap_ci95": [
+        -0.3588582262113118,
+        -0.23766285561821823
+      ],
+      "seed_level": {
+        "seed_gap_mean": -0.29897548083488645,
+        "seed_gap_median": -0.30752912152257483,
+        "p_value_seed_level": 0.9999999930378412,
+        "p_value_threshold": 0.9999999999999972,
+        "p_value_sign_test": 1.0,
+        "frac_seeds_passing": 0.0,
+        "n_seeds": 20
+      },
+      "p_value_node_level": 1.0
+    },
+    "index_tol_equal": {
+      "bridger_mean": 0.5141198032403843,
+      "other_mean": 0.49718056158016494,
+      "relative_gap": -0.03407060325605289,
+      "p_value": 0.8897705980605377,
+      "H2_supported": false,
+      "gap_ci95": [
+        -0.09186815216286057,
+        0.013864290694694187
+      ],
+      "seed_level": {
+        "seed_gap_mean": -0.0360467702574368,
+        "seed_gap_median": -0.028025806997067026,
+        "p_value_seed_level": 0.8897705980605377,
+        "p_value_threshold": 0.9999999999981174,
+        "p_value_sign_test": 0.7482776641845703,
+        "frac_seeds_passing": 0.0,
+        "n_seeds": 20
+      },
+      "p_value_node_level": 0.9295386973969925
+    },
+    "structural_base": {
+      "bridger_mean": 0.6783022066704216,
+      "other_mean": 0.5313372324025735,
+      "relative_gap": -0.27659453414041674,
+      "p_value": 0.9999999999937276,
+      "H2_supported": false,
+      "gap_ci95": [
+        -0.3159977282184696,
+        -0.2439056331366522
+      ],
+      "seed_level": {
+        "seed_gap_mean": -0.2773142819315085,
+        "seed_gap_median": -0.24602376894810402,
+        "p_value_seed_level": 0.9999999999937276,
+        "p_value_threshold": 1.0,
+        "p_value_sign_test": 1.0,
+        "frac_seeds_passing": 0.0,
+        "n_seeds": 20
+      },
+      "p_value_node_level": 1.0
+    },
+    "structural_tol_equal": {
+      "bridger_mean": 0.48971936828931373,
+      "other_mean": 0.4992210920624089,
+      "relative_gap": 0.01903309760779764,
+      "p_value": 0.2036911183326528,
+      "H2_supported": false,
+      "gap_ci95": [
+        -0.02316387177503998,
+        0.06100553968391706
+      ],
+      "seed_level": {
+        "seed_gap_mean": 0.018778412444464637,
+        "seed_gap_median": 0.02721896193526006,
+        "p_value_seed_level": 0.2036911183326528,
+        "p_value_threshold": 0.9999999999997579,
+        "p_value_sign_test": 0.13158798217773438,
+        "frac_seeds_passing": 0.0,
+        "n_seeds": 20
+      },
+      "p_value_node_level": 0.18608443424707338
+    }
+  },
+  "design": {
+    "assignment": "hub=highest degree; bridger=highest betweenness among non-hubs; long-tail=rest",
+    "proportions": "2% hub / 8.5% bridger / 89.5% long-tail (unchanged)",
+    "purpose": "test whether the H2 retention advantage depends on structural position rather than on the assigned archetype label"
+  }
+}

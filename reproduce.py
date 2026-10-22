@@ -4,7 +4,7 @@
 Usage:
     python reproduce.py --all           # Run all benchmark evaluations and generate figures
     python reproduce.py --benchmarks    # Run the unified SOTA benchmark suite (6 datasets x 7 methods)
-    python reproduce.py --experiments   # Run every phase experiment (0, 1, 1b, 1c, 2, 3, 4, 5, 7)
+    python reproduce.py --experiments   # Run every phase experiment (0, 1, 1b, 1b-structural, 1c, 1c-matched, 2, 3, 4, 5, 7)
     python reproduce.py --llm-arm       # Phase 6: real-LLM cognitive layer vs rule backend (needs LLM credentials)
     python reproduce.py --figures       # Re-generate Figure 1 to Figure 7 + auto-generated paper tables
     python reproduce.py --paper         # Build the ICWSM single-file submission and compile the PDF
@@ -28,7 +28,7 @@ def main():
     parser = argparse.ArgumentParser(description="NetworkEvolveLab Reproduction Harness")
     parser.add_argument("--all", action="store_true", help="Run full benchmark suite and figure generation")
     parser.add_argument("--benchmarks", action="store_true", help="Run multi-method multi-dataset benchmark suite")
-    parser.add_argument("--experiments", action="store_true", help="Run all phase experiments (0/1/1b/2/3/4/5)")
+    parser.add_argument("--experiments", action="store_true", help="Run all phase experiments (0/1/1b/1b-structural/1c/1c-matched/2/3/4/5/7)")
     parser.add_argument("--figures", action="store_true", help="Render publication Figures 1-7 (PNG + SVG)")
     parser.add_argument("--paper", action="store_true",
                         help="Build the ICWSM single-file submission package and compile the PDF")
@@ -58,10 +58,16 @@ def main():
                 "Phase 1: homogeneous vs heterogeneous archetype A/B")
         run_cmd(f"{py} -m src.network_evolve.phase1b --seeds 20 --rounds 60 --out results/phase1b.json",
                 "Phase 1b: H2 ablation + H1 decision grid")
+        run_cmd(f"{py} -m src.network_evolve.phase1b_structural --seeds 20 --rounds 60 --out results/phase1b_structural.json",
+                "Phase 1b-structural: H2 structural-position Bridger control")
         run_cmd(f"{py} -m src.network_evolve.phase_robustness --seeds 10 --rounds 40 --out results/robustness_sweep.json",
                 "Cross-topology robustness sweep (H2 + intervention by topology)")
         run_cmd(f"{py} -m src.network_evolve.phase1c_threshold --seeds 10 --rounds 40 --nodes 100 --out results/phase1c_threshold.json",
                 "Phase 1c: cross-topology critical-threshold measurement (fine theta grid)")
+        run_cmd(f"{py} -m src.network_evolve.phase1c_threshold --seeds 10 --rounds 40 --nodes 100 "
+                "--theta-min 0.15 --theta-max 0.85 --matched-degree 6.6 --matched-reciprocity 0.65 "
+                "--out results/phase1c_matched.json",
+                "Phase 1c-matched: degree/reciprocity-matched critical-threshold robustness")
         run_cmd(f"{py} -m src.network_evolve.phase2_offline --seeds 20 --n 60 --rounds 30 --out results/phase2_offline.json",
                 "Phase 2: offline cognitive backends (DeGroot / HK / Proxy)")
         run_cmd(f"{py} -m src.network_evolve.phase3 --seeds 20 --rounds 60 --out results/phase3.json",

@@ -13,34 +13,37 @@
   "design": {
     "arms": [
       "rule",
-      "llm_hybrid"
+      "llm_hybrid",
+      "placebo"
     ],
     "pairing": "同 seed ⇒ 同初始图与同初始信念（配对比较）",
     "statistical_unit": "seed",
     "llm_mode": "每轮一次批量调用，轮内命中的二元组采用 LLM 决策（闭环）",
+    "placebo": "与 rule 臂同种子，在均匀抽取的轮次删除与 LLM 臂 unfollow+block 数量相同的随机边；用于标定断边噪声底",
+    "agreement": "逐事件比较 LLM 决策（keep/mute/unfollow/block 映射为 reinforce/decay/block）与规则后端在同一事件上的反事实动作",
     "caveat": "llm_hybrid 是混合后端：未被 LLM 覆盖的互动仍走规则后端；覆盖比例在 llm_coverage 中显式报告"
   },
   "arms": {
     "rule": {
       "modularity_q": {
         "mean": 0.4444351712084774,
-        "ci95": 0.018236080933400504,
+        "ci95": 0.018236080933851054,
         "per_seed": [
-          0.41461547164692797,
-          0.4629525126042253,
-          0.46763758419717194,
-          0.4745618220534904,
-          0.4485567892584593,
+          0.41461547164692825,
+          0.46295251260422554,
+          0.467637584197172,
+          0.4745618220534901,
+          0.4485567892584594,
           0.44421270042830663,
-          0.46224229179817583,
-          0.4545553857471028,
-          0.4093712237955642,
+          0.46224229179817555,
+          0.4545553857471031,
+          0.4093712237955641,
           0.4056459305553495
         ]
       },
       "polarization": {
         "mean": 0.3430563134208199,
-        "ci95": 0.05388285742977335,
+        "ci95": 0.0538828574311047,
         "per_seed": [
           0.2860753333896052,
           0.2745684238095462,
@@ -56,7 +59,7 @@
       },
       "giant_frac": {
         "mean": 0.9933333333333332,
-        "ci95": 0.006156811963153017,
+        "ci95": 0.006156811963305142,
         "per_seed": [
           0.9833333333333333,
           1.0,
@@ -72,7 +75,7 @@
       },
       "small_comm_frac": {
         "mean": 0.16666666666666666,
-        "ci95": 0.13477184977779338,
+        "ci95": 0.13477184978112336,
         "per_seed": [
           0.3333333333333333,
           0.0,
@@ -88,7 +91,7 @@
       },
       "rupture_asymmetry": {
         "mean": 0.08896825396825396,
-        "ci95": 0.0782664945021375,
+        "ci95": 0.07826649450407133,
         "per_seed": [
           0.14285714285714285,
           0.1111111111111111,
@@ -104,7 +107,7 @@
       },
       "num_comms": {
         "mean": 3.0,
-        "ci95": 0.6744449589073125,
+        "ci95": 0.6744449589239768,
         "per_seed": [
           3.0,
           2.0,
@@ -120,7 +123,7 @@
       },
       "num_edges": {
         "mean": 317.1,
-        "ci95": 23.053417611765703,
+        "ci95": 23.053417612335313,
         "per_seed": [
           347.0,
           317.0,
@@ -136,7 +139,7 @@
       },
       "bridger_retention_mean": {
         "mean": 0.6425522255522255,
-        "ci95": 0.050033084237589294,
+        "ci95": 0.05003308423882552,
         "per_seed": [
           0.7551282051282051,
           0.637922077922078,
@@ -152,7 +155,7 @@
       },
       "other_retention_mean": {
         "mean": 0.5112771681987838,
-        "ci95": 0.02645984852845159,
+        "ci95": 0.026459848529105365,
         "per_seed": [
           0.5087786500487035,
           0.5029322281996079,
@@ -168,7 +171,7 @@
       },
       "n_interactions": {
         "mean": 6879.2,
-        "ci95": 762.547406553239,
+        "ci95": 762.5474065720801,
         "per_seed": [
           6880.0,
           8551.0,
@@ -185,24 +188,24 @@
     },
     "llm_hybrid": {
       "modularity_q": {
-        "mean": 0.44043111690122244,
-        "ci95": 0.025165511301385786,
+        "mean": 0.4404311169012223,
+        "ci95": 0.02516551130200752,
         "per_seed": [
-          0.417376254549218,
-          0.4518352397913513,
-          0.47038337104859035,
-          0.48197047029588513,
-          0.4659539092846835,
-          0.43790840772166995,
-          0.4627179594294778,
-          0.44446423897282045,
+          0.4173762545492181,
+          0.4518352397913511,
+          0.47038337104859024,
+          0.48197047029588497,
+          0.46595390928468317,
+          0.4379084077216699,
+          0.46271795942947747,
+          0.4444642389728203,
           0.4048900541474934,
-          0.3668112637710342
+          0.3668112637710341
         ]
       },
       "polarization": {
         "mean": 0.33743933932413095,
-        "ci95": 0.05280118902484462,
+        "ci95": 0.05280118902614924,
         "per_seed": [
           0.20282601991654894,
           0.30023473669274137,
@@ -218,7 +221,7 @@
       },
       "giant_frac": {
         "mean": 0.9933333333333332,
-        "ci95": 0.006156811963153017,
+        "ci95": 0.006156811963305142,
         "per_seed": [
           1.0,
           1.0,
@@ -234,7 +237,7 @@
       },
       "small_comm_frac": {
         "mean": 0.19499999999999998,
-        "ci95": 0.13181546055303545,
+        "ci95": 0.13181546055629237,
         "per_seed": [
           0.0,
           0.0,
@@ -250,7 +253,7 @@
       },
       "rupture_asymmetry": {
         "mean": 0.08896825396825396,
-        "ci95": 0.0782664945021375,
+        "ci95": 0.07826649450407133,
         "per_seed": [
           0.14285714285714285,
           0.1111111111111111,
@@ -266,7 +269,7 @@
       },
       "num_comms": {
         "mean": 3.4,
-        "ci95": 0.9656582238663673,
+        "ci95": 0.9656582238902272,
         "per_seed": [
           3.0,
           2.0,
@@ -282,7 +285,7 @@
       },
       "num_edges": {
         "mean": 318.2,
-        "ci95": 18.074621574574625,
+        "ci95": 18.074621575021215,
         "per_seed": [
           330.0,
           340.0,
@@ -298,7 +301,7 @@
       },
       "bridger_retention_mean": {
         "mean": 0.6513759018759018,
-        "ci95": 0.05042139978541958,
+        "ci95": 0.050421399786665405,
         "per_seed": [
           0.7551282051282051,
           0.6772077922077921,
@@ -314,7 +317,7 @@
       },
       "other_retention_mean": {
         "mean": 0.5134447480936364,
-        "ci95": 0.026776988441636847,
+        "ci95": 0.02677698844229846,
         "per_seed": [
           0.5132075544776079,
           0.5120930673604471,
@@ -330,7 +333,7 @@
       },
       "n_interactions": {
         "mean": 6840.4,
-        "ci95": 483.5049764942584,
+        "ci95": 483.504976506205,
         "per_seed": [
           6921.0,
           8136.0,
@@ -344,38 +347,200 @@
           6466.0
         ]
       }
+    },
+    "placebo": {
+      "modularity_q": {
+        "mean": 0.4462192473774668,
+        "ci95": 0.020638410612518723,
+        "per_seed": [
+          0.4135762211815117,
+          0.46512069716378357,
+          0.4609985658607855,
+          0.47013735322469535,
+          0.4610148172156663,
+          0.4627758052660445,
+          0.4680855699770933,
+          0.4566073603880474,
+          0.4137088286636137,
+          0.39016725483342735
+        ]
+      },
+      "polarization": {
+        "mean": 0.3472536802034048,
+        "ci95": 0.05390660168979871,
+        "per_seed": [
+          0.24340356189764326,
+          0.31516984273105936,
+          0.33243803961051605,
+          0.48092225046238574,
+          0.4662556758303968,
+          0.32986467762068844,
+          0.3046709875766116,
+          0.3075101697603762,
+          0.30524279361567946,
+          0.3870588029286907
+        ]
+      },
+      "giant_frac": {
+        "mean": 0.9933333333333332,
+        "ci95": 0.006156811963305142,
+        "per_seed": [
+          0.9833333333333333,
+          1.0,
+          1.0,
+          0.9833333333333333,
+          0.9833333333333333,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.9833333333333333
+        ]
+      },
+      "small_comm_frac": {
+        "mean": 0.15333333333333332,
+        "ci95": 0.119067076676384,
+        "per_seed": [
+          0.3333333333333333,
+          0.0,
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.2
+        ]
+      },
+      "rupture_asymmetry": {
+        "mean": 0.08896825396825396,
+        "ci95": 0.07826649450407133,
+        "per_seed": [
+          0.14285714285714285,
+          0.1111111111111111,
+          0.0,
+          0.0,
+          0.0,
+          0.2857142857142857,
+          0.25,
+          0.1,
+          0.0,
+          0.0
+        ]
+      },
+      "num_comms": {
+        "mean": 3.0,
+        "ci95": 0.6744449589239768,
+        "per_seed": [
+          3.0,
+          2.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          2.0,
+          2.0,
+          4.0,
+          5.0
+        ]
+      },
+      "num_edges": {
+        "mean": 313.1,
+        "ci95": 23.29143204425648,
+        "per_seed": [
+          338.0,
+          323.0,
+          249.0,
+          341.0,
+          316.0,
+          306.0,
+          328.0,
+          338.0,
+          261.0,
+          331.0
+        ]
+      },
+      "bridger_retention_mean": {
+        "mean": 0.6377670107670108,
+        "ci95": 0.05111213576223671,
+        "per_seed": [
+          0.7551282051282051,
+          0.6236363636363638,
+          0.6406410256410257,
+          0.6539393939393939,
+          0.5987567987567988,
+          0.6975091575091575,
+          0.6141774891774892,
+          0.717113997113997,
+          0.54,
+          0.5367676767676768
+        ]
+      },
+      "other_retention_mean": {
+        "mean": 0.5052994431608984,
+        "ci95": 0.027123249210664124,
+        "per_seed": [
+          0.4952293205902832,
+          0.49299474144393945,
+          0.49677194018103105,
+          0.5074344253488637,
+          0.47027606232151686,
+          0.4527698564062199,
+          0.530225601789773,
+          0.5563096054272526,
+          0.4776190728463455,
+          0.5733638052537574
+        ]
+      },
+      "n_interactions": {
+        "mean": 6879.7,
+        "ci95": 647.4294019647124,
+        "per_seed": [
+          7134.0,
+          8109.0,
+          6066.0,
+          6804.0,
+          8455.0,
+          7311.0,
+          5805.0,
+          6574.0,
+          5786.0,
+          6753.0
+        ]
+      }
     }
   },
   "contrasts": {
     "modularity_q": {
-      "mean_diff_llm_minus_rule": -0.004004054307254978,
+      "mean_diff_llm_minus_rule": -0.00400405430725514,
       "ci95": [
-        0.010679874263999058,
-        -0.010679874263999058
+        0.010679874264262928,
+        -0.010679874264262928
       ],
-      "p_value_paired_t": 0.418356232058638,
-      "t_statistic": -0.8481186114637064,
+      "p_value_paired_t": 0.4183562320586194,
+      "t_statistic": -0.8481186114637412,
       "degenerate_zero_variance": false,
       "n_positive": 5,
       "n_pairs": 10,
       "per_seed_diff": [
-        0.0027607829022900376,
-        -0.011117272812874002,
-        0.002745786851418408,
-        0.007408648242394733,
-        0.017397120026224178,
-        -0.006304292706636683,
-        0.0004756676313019681,
-        -0.010091146774282356,
-        -0.004481169648070771,
-        -0.0388346667843153
+        0.002760782902289871,
+        -0.011117272812874446,
+        0.0027457868514182415,
+        0.007408648242394844,
+        0.01739712002622379,
+        -0.006304292706636738,
+        0.0004756676313019126,
+        -0.0100911467742828,
+        -0.004481169648070715,
+        -0.03883466678431535
       ]
     },
     "polarization": {
       "mean_diff_llm_minus_rule": -0.005616974096688968,
       "ci95": [
-        0.03985673267299642,
-        -0.03985673267299642
+        0.03985673267398121,
+        -0.03985673267398121
       ],
       "p_value_paired_t": 0.7571497718099051,
       "t_statistic": -0.31880380889038024,
@@ -398,8 +563,8 @@
     "giant_frac": {
       "mean_diff_llm_minus_rule": 0.0,
       "ci95": [
-        0.005620374657560956,
-        -0.005620374657560956
+        0.005620374657699826,
+        -0.005620374657699826
       ],
       "p_value_paired_t": 1.0,
       "t_statistic": 0.0,
@@ -446,10 +611,10 @@
     "num_edges": {
       "mean_diff_llm_minus_rule": 1.1,
       "ci95": [
-        14.145066125390054,
-        -14.145066125390054
+        14.145066125739554,
+        -14.145066125739554
       ],
-      "p_value_paired_t": 0.8642528896746657,
+      "p_value_paired_t": 0.8642528896746656,
       "t_statistic": 0.17591808034120504,
       "degenerate_zero_variance": false,
       "n_positive": 5,
@@ -470,10 +635,10 @@
     "bridger_retention_mean": {
       "mean_diff_llm_minus_rule": 0.00882367632367631,
       "ci95": [
-        0.009444475305462411,
-        -0.009444475305462411
+        0.009444475305695768,
+        -0.009444475305695768
       ],
-      "p_value_paired_t": 0.06371056366577554,
+      "p_value_paired_t": 0.06371056366577546,
       "t_statistic": 2.11346231021142,
       "degenerate_zero_variance": false,
       "n_positive": 4,
@@ -490,18 +655,287 @@
         0.0,
         0.0
       ]
+    },
+    "placebo_vs_rule": {
+      "modularity_q": {
+        "mean_diff": 0.0017840761689894512,
+        "ci95": [
+          0.006886914958060832,
+          -0.006886914958060832
+        ],
+        "p_value_paired_t": 0.5722641833325542,
+        "n_positive": 6,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          -0.0010392504654165302,
+          0.0021681845595580285,
+          -0.006639018336386471,
+          -0.00442446882879477,
+          0.012458027957206907,
+          0.018563104837737876,
+          0.005843278178917721,
+          0.0020519746409443096,
+          0.004337604868049572,
+          -0.01547867572192213
+        ]
+      },
+      "polarization": {
+        "mean_diff": 0.004197366782584847,
+        "ci95": [
+          0.02495644101609443,
+          -0.02495644101609443
+        ],
+        "p_value_paired_t": 0.7124229842249312,
+        "n_positive": 4,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          -0.04267177149196197,
+          0.040601418921513144,
+          -0.0006018276244844634,
+          0.012658674661739644,
+          -2.1605886301734323e-05,
+          0.07917604672822787,
+          -0.032077477465793314,
+          -0.014035425489860642,
+          -0.002042898623548395,
+          0.0009885340963183276
+        ]
+      },
+      "giant_frac": {
+        "mean_diff": 0.0,
+        "ci95": [
+          0.0,
+          -0.0
+        ],
+        "p_value_paired_t": 1.0,
+        "n_positive": 0,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "rupture_asymmetry": {
+        "mean_diff": 0.0,
+        "ci95": [
+          0.0,
+          -0.0
+        ],
+        "p_value_paired_t": 1.0,
+        "n_positive": 0,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "num_edges": {
+        "mean_diff": -4.0,
+        "ci95": [
+          3.216897427578116,
+          -3.216897427578116
+        ],
+        "p_value_paired_t": 0.02028265019016262,
+        "n_positive": 1,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          -9.0,
+          6.0,
+          -4.0,
+          -6.0,
+          0.0,
+          -8.0,
+          -5.0,
+          -4.0,
+          -8.0,
+          -2.0
+        ]
+      },
+      "bridger_retention_mean": {
+        "mean_diff": -0.004785214785214764,
+        "ci95": [
+          0.005553245059730704,
+          -0.005553245059730704
+        ],
+        "p_value_paired_t": 0.08306082130196772,
+        "n_positive": 0,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          0.0,
+          -0.014285714285714235,
+          0.0,
+          0.0,
+          -0.01538461538461533,
+          0.0,
+          -0.018181818181818077,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "llm_vs_placebo": {
+      "modularity_q": {
+        "mean_diff": -0.0057881304762445905,
+        "ci95": [
+          0.009315944638341135,
+          -0.009315944638341135
+        ],
+        "p_value_paired_t": 0.19343732521870835,
+        "n_positive": 4,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          0.0038000333677064013,
+          -0.013285457372432474,
+          0.009384805187804712,
+          0.011833117071189614,
+          0.004939092069016882,
+          -0.024867397544374614,
+          -0.005367610547615809,
+          -0.01214312141522711,
+          -0.008818774516120287,
+          -0.023355991062393222
+        ]
+      },
+      "polarization": {
+        "mean_diff": -0.009814340879273815,
+        "ci95": [
+          0.023903462446731704,
+          -0.023903462446731704
+        ],
+        "p_value_paired_t": 0.3772297855070388,
+        "n_positive": 2,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          -0.04057754198109431,
+          -0.014935106038317991,
+          -0.0009601353500183762,
+          -0.02304504513501593,
+          -0.04524562827543466,
+          0.02662876202753761,
+          -0.03199147627954102,
+          0.06453653611844246,
+          -0.008031491662045531,
+          -0.02452228221725039
+        ]
+      },
+      "giant_frac": {
+        "mean_diff": 0.0,
+        "ci95": [
+          0.005620374657699826,
+          -0.005620374657699826
+        ],
+        "p_value_paired_t": 1.0,
+        "n_positive": 1,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          0.01666666666666672,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.01666666666666672,
+          0.0
+        ]
+      },
+      "rupture_asymmetry": {
+        "mean_diff": 0.0,
+        "ci95": [
+          0.0,
+          -0.0
+        ],
+        "p_value_paired_t": 1.0,
+        "n_positive": 0,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "num_edges": {
+        "mean_diff": 5.1,
+        "ci95": [
+          13.214001648060234,
+          -13.214001648060234
+        ],
+        "p_value_paired_t": 0.40530645572668744,
+        "n_positive": 6,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          -8.0,
+          17.0,
+          40.0,
+          -26.0,
+          -2.0,
+          20.0,
+          13.0,
+          5.0,
+          2.0,
+          -10.0
+        ]
+      },
+      "bridger_retention_mean": {
+        "mean_diff": 0.013608891108891075,
+        "ci95": [
+          0.012757683441459913,
+          -0.012757683441459913
+        ],
+        "p_value_paired_t": 0.03905058708671274,
+        "n_positive": 5,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          0.0,
+          0.05357142857142838,
+          0.01538461538461533,
+          0.018181818181818188,
+          0.03076923076923077,
+          0.0,
+          0.018181818181818077,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
     }
   },
   "verdict": {
     "llm_changes_modularity": false,
     "llm_changes_rupture_asymmetry": false,
     "modularity_diff_significant": false,
-    "rupture_diff_significant": false
+    "rupture_diff_significant": false,
+    "placebo_changes_modularity": false
   },
   "per_seed": {
     "0": {
       "rule": {
-        "modularity_q": 0.41461547164692797,
+        "modularity_q": 0.41461547164692825,
         "polarization": 0.2860753333896052,
         "giant_frac": 0.9833333333333333,
         "small_comm_frac": 0.3333333333333333,
@@ -515,7 +949,7 @@
         "n_interactions": 6880
       },
       "llm_hybrid": {
-        "modularity_q": 0.417376254549218,
+        "modularity_q": 0.4173762545492181,
         "polarization": 0.20282601991654894,
         "giant_frac": 1.0,
         "small_comm_frac": 0.0,
@@ -541,12 +975,77 @@
           "keep": 163,
           "unfollow": 4
         },
-        "n_interactions": 6921
+        "rule_agreement": {
+          "n_compared": 172,
+          "n_agree": 166,
+          "confusion": {
+            "decay": {
+              "block": 2,
+              "reinforce": 3
+            },
+            "reinforce": {
+              "reinforce": 163
+            },
+            "block": {
+              "block": 3,
+              "decay": 1
+            }
+          },
+          "llm_action_counts": {
+            "decay": 5,
+            "reinforce": 163,
+            "block": 4
+          },
+          "rule_action_counts": {
+            "block": 5,
+            "reinforce": 166,
+            "decay": 1
+          }
+        },
+        "n_interactions": 6921,
+        "placebo": {
+          "n_unfollows": 0
+        }
+      },
+      "placebo": {
+        "modularity_q": 0.4135762211815117,
+        "polarization": 0.24340356189764326,
+        "giant_frac": 0.9833333333333333,
+        "small_comm_frac": 0.3333333333333333,
+        "rupture_asymmetry": 0.14285714285714285,
+        "num_edges": 338.0,
+        "num_comms": 3.0,
+        "n_mutual_broken": 7.0,
+        "bridger_retention_mean": 0.7551282051282051,
+        "other_retention_mean": 0.4952293205902832,
+        "n_bridger": 5,
+        "n_interactions": 7134
+      },
+      "placebo_stats": {
+        "n_events": 0,
+        "n_valid": 0,
+        "n_invalid": 0,
+        "n_calls": 0,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 0,
+        "n_applied": 0,
+        "actions": {},
+        "rule_agreement": {
+          "n_compared": 0,
+          "n_agree": 0,
+          "confusion": {},
+          "llm_action_counts": {},
+          "rule_action_counts": {}
+        },
+        "n_interactions": 7134,
+        "placebo": {
+          "n_unfollows": 4
+        }
       }
     },
     "1": {
       "rule": {
-        "modularity_q": 0.4629525126042253,
+        "modularity_q": 0.46295251260422554,
         "polarization": 0.2745684238095462,
         "giant_frac": 1.0,
         "small_comm_frac": 0.0,
@@ -560,7 +1059,7 @@
         "n_interactions": 8551
       },
       "llm_hybrid": {
-        "modularity_q": 0.4518352397913513,
+        "modularity_q": 0.4518352397913511,
         "polarization": 0.30023473669274137,
         "giant_frac": 1.0,
         "small_comm_frac": 0.0,
@@ -586,12 +1085,78 @@
           "unfollow": 4,
           "mute": 9
         },
-        "n_interactions": 8136
+        "rule_agreement": {
+          "n_compared": 171,
+          "n_agree": 162,
+          "confusion": {
+            "reinforce": {
+              "reinforce": 158
+            },
+            "block": {
+              "block": 3,
+              "decay": 1
+            },
+            "decay": {
+              "block": 2,
+              "reinforce": 6,
+              "decay": 1
+            }
+          },
+          "llm_action_counts": {
+            "reinforce": 158,
+            "block": 4,
+            "decay": 9
+          },
+          "rule_action_counts": {
+            "reinforce": 164,
+            "block": 5,
+            "decay": 2
+          }
+        },
+        "n_interactions": 8136,
+        "placebo": {
+          "n_unfollows": 0
+        }
+      },
+      "placebo": {
+        "modularity_q": 0.46512069716378357,
+        "polarization": 0.31516984273105936,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.0,
+        "rupture_asymmetry": 0.1111111111111111,
+        "num_edges": 323.0,
+        "num_comms": 2.0,
+        "n_mutual_broken": 9.0,
+        "bridger_retention_mean": 0.6236363636363638,
+        "other_retention_mean": 0.49299474144393945,
+        "n_bridger": 5,
+        "n_interactions": 8109
+      },
+      "placebo_stats": {
+        "n_events": 0,
+        "n_valid": 0,
+        "n_invalid": 0,
+        "n_calls": 0,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 0,
+        "n_applied": 0,
+        "actions": {},
+        "rule_agreement": {
+          "n_compared": 0,
+          "n_agree": 0,
+          "confusion": {},
+          "llm_action_counts": {},
+          "rule_action_counts": {}
+        },
+        "n_interactions": 8109,
+        "placebo": {
+          "n_unfollows": 4
+        }
       }
     },
     "2": {
       "rule": {
-        "modularity_q": 0.46763758419717194,
+        "modularity_q": 0.467637584197172,
         "polarization": 0.3330398672350005,
         "giant_frac": 1.0,
         "small_comm_frac": 0.5,
@@ -605,7 +1170,7 @@
         "n_interactions": 6044
       },
       "llm_hybrid": {
-        "modularity_q": 0.47038337104859035,
+        "modularity_q": 0.47038337104859024,
         "polarization": 0.33147790426049767,
         "giant_frac": 1.0,
         "small_comm_frac": 0.5,
@@ -631,12 +1196,77 @@
           "mute": 6,
           "unfollow": 2
         },
-        "n_interactions": 6789
+        "rule_agreement": {
+          "n_compared": 173,
+          "n_agree": 167,
+          "confusion": {
+            "reinforce": {
+              "reinforce": 164,
+              "block": 1
+            },
+            "decay": {
+              "decay": 1,
+              "block": 5
+            },
+            "block": {
+              "block": 2
+            }
+          },
+          "llm_action_counts": {
+            "reinforce": 165,
+            "decay": 6,
+            "block": 2
+          },
+          "rule_action_counts": {
+            "reinforce": 164,
+            "decay": 1,
+            "block": 8
+          }
+        },
+        "n_interactions": 6789,
+        "placebo": {
+          "n_unfollows": 0
+        }
+      },
+      "placebo": {
+        "modularity_q": 0.4609985658607855,
+        "polarization": 0.33243803961051605,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.3333333333333333,
+        "rupture_asymmetry": 0.0,
+        "num_edges": 249.0,
+        "num_comms": 3.0,
+        "n_mutual_broken": 2.0,
+        "bridger_retention_mean": 0.6406410256410257,
+        "other_retention_mean": 0.49677194018103105,
+        "n_bridger": 5,
+        "n_interactions": 6066
+      },
+      "placebo_stats": {
+        "n_events": 0,
+        "n_valid": 0,
+        "n_invalid": 0,
+        "n_calls": 0,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 0,
+        "n_applied": 0,
+        "actions": {},
+        "rule_agreement": {
+          "n_compared": 0,
+          "n_agree": 0,
+          "confusion": {},
+          "llm_action_counts": {},
+          "rule_action_counts": {}
+        },
+        "n_interactions": 6066,
+        "placebo": {
+          "n_unfollows": 2
+        }
       }
     },
     "3": {
       "rule": {
-        "modularity_q": 0.4745618220534904,
+        "modularity_q": 0.4745618220534901,
         "polarization": 0.4682635758006461,
         "giant_frac": 0.9833333333333333,
         "small_comm_frac": 0.3333333333333333,
@@ -650,7 +1280,7 @@
         "n_interactions": 6741
       },
       "llm_hybrid": {
-        "modularity_q": 0.48197047029588513,
+        "modularity_q": 0.48197047029588497,
         "polarization": 0.4578772053273698,
         "giant_frac": 0.9833333333333333,
         "small_comm_frac": 0.25,
@@ -676,12 +1306,77 @@
           "mute": 8,
           "unfollow": 3
         },
-        "n_interactions": 6732
+        "rule_agreement": {
+          "n_compared": 164,
+          "n_agree": 161,
+          "confusion": {
+            "reinforce": {
+              "reinforce": 153
+            },
+            "decay": {
+              "block": 2,
+              "decay": 5,
+              "reinforce": 1
+            },
+            "block": {
+              "block": 3
+            }
+          },
+          "llm_action_counts": {
+            "reinforce": 153,
+            "decay": 8,
+            "block": 3
+          },
+          "rule_action_counts": {
+            "reinforce": 154,
+            "block": 5,
+            "decay": 5
+          }
+        },
+        "n_interactions": 6732,
+        "placebo": {
+          "n_unfollows": 0
+        }
+      },
+      "placebo": {
+        "modularity_q": 0.47013735322469535,
+        "polarization": 0.48092225046238574,
+        "giant_frac": 0.9833333333333333,
+        "small_comm_frac": 0.3333333333333333,
+        "rupture_asymmetry": 0.0,
+        "num_edges": 341.0,
+        "num_comms": 3.0,
+        "n_mutual_broken": 3.0,
+        "bridger_retention_mean": 0.6539393939393939,
+        "other_retention_mean": 0.5074344253488637,
+        "n_bridger": 5,
+        "n_interactions": 6804
+      },
+      "placebo_stats": {
+        "n_events": 0,
+        "n_valid": 0,
+        "n_invalid": 0,
+        "n_calls": 0,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 0,
+        "n_applied": 0,
+        "actions": {},
+        "rule_agreement": {
+          "n_compared": 0,
+          "n_agree": 0,
+          "confusion": {},
+          "llm_action_counts": {},
+          "rule_action_counts": {}
+        },
+        "n_interactions": 6804,
+        "placebo": {
+          "n_unfollows": 3
+        }
       }
     },
     "4": {
       "rule": {
-        "modularity_q": 0.4485567892584593,
+        "modularity_q": 0.4485567892584594,
         "polarization": 0.4662772817166985,
         "giant_frac": 0.9833333333333333,
         "small_comm_frac": 0.25,
@@ -695,7 +1390,7 @@
         "n_interactions": 8735
       },
       "llm_hybrid": {
-        "modularity_q": 0.4659539092846835,
+        "modularity_q": 0.46595390928468317,
         "polarization": 0.42101004755496213,
         "giant_frac": 0.9833333333333333,
         "small_comm_frac": 0.3333333333333333,
@@ -721,7 +1416,74 @@
           "mute": 6,
           "unfollow": 3
         },
-        "n_interactions": 7056
+        "rule_agreement": {
+          "n_compared": 178,
+          "n_agree": 168,
+          "confusion": {
+            "reinforce": {
+              "block": 2,
+              "decay": 1,
+              "reinforce": 166
+            },
+            "decay": {
+              "block": 5,
+              "decay": 1
+            },
+            "block": {
+              "block": 1,
+              "decay": 2
+            }
+          },
+          "llm_action_counts": {
+            "reinforce": 169,
+            "decay": 6,
+            "block": 3
+          },
+          "rule_action_counts": {
+            "block": 8,
+            "decay": 4,
+            "reinforce": 166
+          }
+        },
+        "n_interactions": 7056,
+        "placebo": {
+          "n_unfollows": 0
+        }
+      },
+      "placebo": {
+        "modularity_q": 0.4610148172156663,
+        "polarization": 0.4662556758303968,
+        "giant_frac": 0.9833333333333333,
+        "small_comm_frac": 0.3333333333333333,
+        "rupture_asymmetry": 0.0,
+        "num_edges": 316.0,
+        "num_comms": 3.0,
+        "n_mutual_broken": 5.0,
+        "bridger_retention_mean": 0.5987567987567988,
+        "other_retention_mean": 0.47027606232151686,
+        "n_bridger": 5,
+        "n_interactions": 8455
+      },
+      "placebo_stats": {
+        "n_events": 0,
+        "n_valid": 0,
+        "n_invalid": 0,
+        "n_calls": 0,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 0,
+        "n_applied": 0,
+        "actions": {},
+        "rule_agreement": {
+          "n_compared": 0,
+          "n_agree": 0,
+          "confusion": {},
+          "llm_action_counts": {},
+          "rule_action_counts": {}
+        },
+        "n_interactions": 8455,
+        "placebo": {
+          "n_unfollows": 3
+        }
       }
     },
     "5": {
@@ -740,7 +1502,7 @@
         "n_interactions": 7127
       },
       "llm_hybrid": {
-        "modularity_q": 0.43790840772166995,
+        "modularity_q": 0.4379084077216699,
         "polarization": 0.35649343964822605,
         "giant_frac": 1.0,
         "small_comm_frac": 0.3333333333333333,
@@ -766,12 +1528,80 @@
           "keep": 163,
           "unfollow": 3
         },
-        "n_interactions": 7458
+        "rule_agreement": {
+          "n_compared": 173,
+          "n_agree": 166,
+          "confusion": {
+            "decay": {
+              "decay": 4,
+              "block": 1,
+              "reinforce": 2
+            },
+            "reinforce": {
+              "reinforce": 161,
+              "decay": 1,
+              "block": 1
+            },
+            "block": {
+              "decay": 2,
+              "block": 1
+            }
+          },
+          "llm_action_counts": {
+            "decay": 7,
+            "reinforce": 163,
+            "block": 3
+          },
+          "rule_action_counts": {
+            "decay": 7,
+            "reinforce": 163,
+            "block": 3
+          }
+        },
+        "n_interactions": 7458,
+        "placebo": {
+          "n_unfollows": 0
+        }
+      },
+      "placebo": {
+        "modularity_q": 0.4627758052660445,
+        "polarization": 0.32986467762068844,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.0,
+        "rupture_asymmetry": 0.2857142857142857,
+        "num_edges": 306.0,
+        "num_comms": 3.0,
+        "n_mutual_broken": 7.0,
+        "bridger_retention_mean": 0.6975091575091575,
+        "other_retention_mean": 0.4527698564062199,
+        "n_bridger": 5,
+        "n_interactions": 7311
+      },
+      "placebo_stats": {
+        "n_events": 0,
+        "n_valid": 0,
+        "n_invalid": 0,
+        "n_calls": 0,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 0,
+        "n_applied": 0,
+        "actions": {},
+        "rule_agreement": {
+          "n_compared": 0,
+          "n_agree": 0,
+          "confusion": {},
+          "llm_action_counts": {},
+          "rule_action_counts": {}
+        },
+        "n_interactions": 7311,
+        "placebo": {
+          "n_unfollows": 3
+        }
       }
     },
     "6": {
       "rule": {
-        "modularity_q": 0.46224229179817583,
+        "modularity_q": 0.46224229179817555,
         "polarization": 0.3367484650424049,
         "giant_frac": 1.0,
         "small_comm_frac": 0.0,
@@ -785,7 +1615,7 @@
         "n_interactions": 5492
       },
       "llm_hybrid": {
-        "modularity_q": 0.4627179594294778,
+        "modularity_q": 0.46271795942947747,
         "polarization": 0.2726795112970706,
         "giant_frac": 1.0,
         "small_comm_frac": 0.0,
@@ -811,12 +1641,78 @@
           "keep": 164,
           "unfollow": 2
         },
-        "n_interactions": 6007
+        "rule_agreement": {
+          "n_compared": 171,
+          "n_agree": 167,
+          "confusion": {
+            "decay": {
+              "block": 2,
+              "decay": 2,
+              "reinforce": 1
+            },
+            "reinforce": {
+              "reinforce": 164
+            },
+            "block": {
+              "block": 1,
+              "decay": 1
+            }
+          },
+          "llm_action_counts": {
+            "decay": 5,
+            "reinforce": 164,
+            "block": 2
+          },
+          "rule_action_counts": {
+            "block": 3,
+            "reinforce": 165,
+            "decay": 3
+          }
+        },
+        "n_interactions": 6007,
+        "placebo": {
+          "n_unfollows": 0
+        }
+      },
+      "placebo": {
+        "modularity_q": 0.4680855699770933,
+        "polarization": 0.3046709875766116,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.0,
+        "rupture_asymmetry": 0.25,
+        "num_edges": 328.0,
+        "num_comms": 2.0,
+        "n_mutual_broken": 8.0,
+        "bridger_retention_mean": 0.6141774891774892,
+        "other_retention_mean": 0.530225601789773,
+        "n_bridger": 5,
+        "n_interactions": 5805
+      },
+      "placebo_stats": {
+        "n_events": 0,
+        "n_valid": 0,
+        "n_invalid": 0,
+        "n_calls": 0,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 0,
+        "n_applied": 0,
+        "actions": {},
+        "rule_agreement": {
+          "n_compared": 0,
+          "n_agree": 0,
+          "confusion": {},
+          "llm_action_counts": {},
+          "rule_action_counts": {}
+        },
+        "n_interactions": 5805,
+        "placebo": {
+          "n_unfollows": 2
+        }
       }
     },
     "7": {
       "rule": {
-        "modularity_q": 0.4545553857471028,
+        "modularity_q": 0.4545553857471031,
         "polarization": 0.32154559525023685,
         "giant_frac": 1.0,
         "small_comm_frac": 0.0,
@@ -830,7 +1726,7 @@
         "n_interactions": 6596
       },
       "llm_hybrid": {
-        "modularity_q": 0.44446423897282045,
+        "modularity_q": 0.4444642389728203,
         "polarization": 0.37204670587881866,
         "giant_frac": 1.0,
         "small_comm_frac": 0.0,
@@ -856,12 +1752,79 @@
           "keep": 167,
           "mute": 4
         },
-        "n_interactions": 7050
+        "rule_agreement": {
+          "n_compared": 173,
+          "n_agree": 168,
+          "confusion": {
+            "block": {
+              "block": 1,
+              "decay": 1
+            },
+            "reinforce": {
+              "reinforce": 165,
+              "decay": 1,
+              "block": 1
+            },
+            "decay": {
+              "decay": 2,
+              "block": 2
+            }
+          },
+          "llm_action_counts": {
+            "block": 2,
+            "reinforce": 167,
+            "decay": 4
+          },
+          "rule_action_counts": {
+            "block": 4,
+            "reinforce": 165,
+            "decay": 4
+          }
+        },
+        "n_interactions": 7050,
+        "placebo": {
+          "n_unfollows": 0
+        }
+      },
+      "placebo": {
+        "modularity_q": 0.4566073603880474,
+        "polarization": 0.3075101697603762,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.0,
+        "rupture_asymmetry": 0.1,
+        "num_edges": 338.0,
+        "num_comms": 2.0,
+        "n_mutual_broken": 10.0,
+        "bridger_retention_mean": 0.717113997113997,
+        "other_retention_mean": 0.5563096054272526,
+        "n_bridger": 5,
+        "n_interactions": 6574
+      },
+      "placebo_stats": {
+        "n_events": 0,
+        "n_valid": 0,
+        "n_invalid": 0,
+        "n_calls": 0,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 0,
+        "n_applied": 0,
+        "actions": {},
+        "rule_agreement": {
+          "n_compared": 0,
+          "n_agree": 0,
+          "confusion": {},
+          "llm_action_counts": {},
+          "rule_action_counts": {}
+        },
+        "n_interactions": 6574,
+        "placebo": {
+          "n_unfollows": 2
+        }
       }
     },
     "8": {
       "rule": {
-        "modularity_q": 0.4093712237955642,
+        "modularity_q": 0.4093712237955641,
         "polarization": 0.30728569223922786,
         "giant_frac": 1.0,
         "small_comm_frac": 0.0,
@@ -902,7 +1865,72 @@
           "unfollow": 3,
           "block": 1
         },
-        "n_interactions": 5789
+        "rule_agreement": {
+          "n_compared": 175,
+          "n_agree": 171,
+          "confusion": {
+            "reinforce": {
+              "reinforce": 167
+            },
+            "decay": {
+              "decay": 2,
+              "reinforce": 2
+            },
+            "block": {
+              "block": 2,
+              "decay": 2
+            }
+          },
+          "llm_action_counts": {
+            "reinforce": 167,
+            "decay": 4,
+            "block": 4
+          },
+          "rule_action_counts": {
+            "reinforce": 169,
+            "decay": 4,
+            "block": 2
+          }
+        },
+        "n_interactions": 5789,
+        "placebo": {
+          "n_unfollows": 0
+        }
+      },
+      "placebo": {
+        "modularity_q": 0.4137088286636137,
+        "polarization": 0.30524279361567946,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.0,
+        "rupture_asymmetry": 0.0,
+        "num_edges": 261.0,
+        "num_comms": 4.0,
+        "n_mutual_broken": 5.0,
+        "bridger_retention_mean": 0.54,
+        "other_retention_mean": 0.4776190728463455,
+        "n_bridger": 5,
+        "n_interactions": 5786
+      },
+      "placebo_stats": {
+        "n_events": 0,
+        "n_valid": 0,
+        "n_invalid": 0,
+        "n_calls": 0,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 0,
+        "n_applied": 0,
+        "actions": {},
+        "rule_agreement": {
+          "n_compared": 0,
+          "n_agree": 0,
+          "confusion": {},
+          "llm_action_counts": {},
+          "rule_action_counts": {}
+        },
+        "n_interactions": 5786,
+        "placebo": {
+          "n_unfollows": 4
+        }
       }
     },
     "9": {
@@ -921,7 +1949,7 @@
         "n_interactions": 6844
       },
       "llm_hybrid": {
-        "modularity_q": 0.3668112637710342,
+        "modularity_q": 0.3668112637710341,
         "polarization": 0.3625365207114403,
         "giant_frac": 0.9833333333333333,
         "small_comm_frac": 0.2,
@@ -947,9 +1975,90 @@
           "mute": 7,
           "keep": 162
         },
-        "n_interactions": 6466
+        "rule_agreement": {
+          "n_compared": 171,
+          "n_agree": 161,
+          "confusion": {
+            "block": {
+              "block": 2
+            },
+            "decay": {
+              "block": 6,
+              "reinforce": 1
+            },
+            "reinforce": {
+              "block": 2,
+              "reinforce": 159,
+              "decay": 1
+            }
+          },
+          "llm_action_counts": {
+            "block": 2,
+            "decay": 7,
+            "reinforce": 162
+          },
+          "rule_action_counts": {
+            "block": 10,
+            "reinforce": 160,
+            "decay": 1
+          }
+        },
+        "n_interactions": 6466,
+        "placebo": {
+          "n_unfollows": 0
+        }
+      },
+      "placebo": {
+        "modularity_q": 0.39016725483342735,
+        "polarization": 0.3870588029286907,
+        "giant_frac": 0.9833333333333333,
+        "small_comm_frac": 0.2,
+        "rupture_asymmetry": 0.0,
+        "num_edges": 331.0,
+        "num_comms": 5.0,
+        "n_mutual_broken": 11.0,
+        "bridger_retention_mean": 0.5367676767676768,
+        "other_retention_mean": 0.5733638052537574,
+        "n_bridger": 5,
+        "n_interactions": 6753
+      },
+      "placebo_stats": {
+        "n_events": 0,
+        "n_valid": 0,
+        "n_invalid": 0,
+        "n_calls": 0,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 0,
+        "n_applied": 0,
+        "actions": {},
+        "rule_agreement": {
+          "n_compared": 0,
+          "n_agree": 0,
+          "confusion": {},
+          "llm_action_counts": {},
+          "rule_action_counts": {}
+        },
+        "n_interactions": 6753,
+        "placebo": {
+          "n_unfollows": 2
+        }
       }
     }
+  },
+  "placebo": {
+    "n_unfollows_per_seed": [
+      4.0,
+      4.0,
+      2.0,
+      3.0,
+      3.0,
+      3.0,
+      2.0,
+      2.0,
+      4.0,
+      2.0
+    ],
+    "note": "每一 seed 的随机断边数量与 LLM 臂的 unfollow+block 数量一致"
   },
   "llm_ledger": {
     "model": "MiniMax-M3.1-Flash",
@@ -5485,6 +6594,36 @@
       "keep": 1631,
       "unfollow": 28,
       "block": 1
+    },
+    "rule_agreement": {
+      "n_compared": 1721,
+      "n_agree": 1657,
+      "confusion": {
+        "decay": {
+          "block": 27,
+          "reinforce": 16,
+          "decay": 18
+        },
+        "reinforce": {
+          "reinforce": 1620,
+          "block": 7,
+          "decay": 4
+        },
+        "block": {
+          "block": 19,
+          "decay": 10
+        }
+      },
+      "llm_action_counts": {
+        "decay": 61,
+        "reinforce": 1631,
+        "block": 29
+      },
+      "rule_action_counts": {
+        "block": 53,
+        "reinforce": 1636,
+        "decay": 32
+      }
     }
   },
   "llm_coverage": {
@@ -5503,6 +6642,37 @@
       "keep": 1631,
       "unfollow": 28,
       "block": 1
+    },
+    "rule_agreement": {
+      "n_compared": 1721,
+      "n_agree": 1657,
+      "confusion": {
+        "decay": {
+          "block": 27,
+          "reinforce": 16,
+          "decay": 18
+        },
+        "reinforce": {
+          "reinforce": 1620,
+          "block": 7,
+          "decay": 4
+        },
+        "block": {
+          "block": 19,
+          "decay": 10
+        }
+      },
+      "llm_action_counts": {
+        "decay": 61,
+        "reinforce": 1631,
+        "block": 29
+      },
+      "rule_action_counts": {
+        "block": 53,
+        "reinforce": 1636,
+        "decay": 32
+      },
+      "agreement_rate": 0.9628123184195235
     },
     "note": "coverage_of_interactions = LLM 实际落地决策的互动数 / LLM 臂引擎全部互动数；llm_hybrid 是混合后端，未被 LLM 覆盖的互动仍走规则后端（已显式披露）"
   }

@@ -76,9 +76,15 @@ python -m src.network_evolve.phase0 --nodes 100 --rounds 20 --seeds 5 --out resu
 
 # Phase 1b: 异质原型 Bridger 受压消融 (H2) 与 超长演化 H1 判定网格
 python -m src.network_evolve.phase1b --seeds 20 --rounds 60 --out results/phase1b.json
+# Phase 1b-structural: H2 结构位置对照（Hub=度最高，Bridger=betweenness 最高）
+python -m src.network_evolve.phase1b_structural --seeds 20 --rounds 60 --out results/phase1b_structural.json
 
 # Phase 1c (新增): 跨拓扑相变临界点测量（细网格 θ + 三个可操作判据）
 python -m src.network_evolve.phase1c_threshold --seeds 10 --rounds 40 --nodes 100 --out results/phase1c_threshold.json
+# Phase 1c-matched: 度数/互惠率匹配后的 robustness 重跑
+python -m src.network_evolve.phase1c_threshold --seeds 10 --rounds 40 --nodes 100 \
+    --theta-min 0.15 --theta-max 0.85 --matched-degree 6.6 --matched-reciprocity 0.65 \
+    --out results/phase1c_matched.json
 
 # Phase 2: 多维语义信念对照 (DeGroot vs HK vs Proxy vs 真实 LLM)
 python -m src.network_evolve.phase2_offline --seeds 20 --out results/phase2_offline.json
@@ -94,6 +100,7 @@ python -m src.network_evolve.phase4_attribution --seeds 20 --rounds 30 --nodes 6
 python -m src.network_evolve.phase5_bound_audit --seeds 10 --rounds 60 --out results/phase5_bound_audit.json
 
 # Phase 6 (新增): 真实 LLM 认知层挂进旗舰引擎 vs 规则后端（同 seed 配对对照）
+#   输出同时包含 placebo 臂（等量随机 unfollow）与逐事件 LLM-vs-规则一致率；
 #   需要 LLM 凭据：NETWORK_EVOLVE_LLM_BASE_URL / NETWORK_EVOLVE_LLM_API_KEY
 python -m src.network_evolve.phase6_llm_engine --seeds 10 --rounds 30 --nodes 60 \
     --llm-events 6 --budget-calls 400 --out results/phase6_llm_engine.json
@@ -156,9 +163,10 @@ python reproduce.py --all
 ## 核心发现速览
 
 - **H1 证伪，但证伪理由被严格化**：模块度推广上界为 $Q \le 1-1/K$（$K$ = 实现划分的社群数），$K=2$ 时为 0.500；$Q>0.65$ 需 $K\ge 3$。本引擎的划分在 70–90% 的运行中为双极、最多三裂，但社群度体积不均衡使可达 $Q$ 始终 $\le 0.500$，故 H1 被经验证伪。Phase 5 对基准矩阵 42 个单元与 12 组演化网格逐一核验该不等式，**零违反**。
-- **RQ2 的相变阈值被重新测量，原「跨拓扑一致」断言被证伪**（Phase 1c 临界点测量）：此前用于支撑该断言的 $\theta$ 采样网格在待检验区间 $[0.50,0.55]$ 内只有一个点，原理上无法判定。改用步长 0.05 的扩展细网格（$\theta\in[0.15,0.85]$，4 拓扑 × 10 种子）与三个可操作判据重测：连通性恢复、模块度塌缩、极化塌缩三个判据分别只有 **1/40、2/40、3/40** 的种子级估计落在该区间内。连通性恢复阈值 $\theta^*_{\mathrm{frag}}$ 的估计为 ER 0.334、BA 0.400、WS 0.357、实证双极 0.520，扩展网格下最小值 0.249，**左删失已完全消除（0/40）**；但该阈值与初始平均度、互惠率混淆，**不能单独归因于宏观拓扑**。模块度塌缩判据在小世界与实证双极网络上 **10/10 种子右删失**，这类删失被显式报告而非隐藏。
-- **H2 证伪**：Bridger 留存率显著高于外围节点，但该优势来自**容忍度禀赋**而非结构洞位置；等容忍度时差距消失（gap $-0.034$，95% CI 跨 0）。判定统计量以**种子**为独立单元（避免节点级伪重复）。
+- **RQ2 的相变阈值被重新测量，原「跨拓扑一致」断言被证伪**（Phase 1c 临界点测量）：此前用于支撑该断言的 $\theta$ 采样网格在待检验区间 $[0.50,0.55]$ 内只有一个点，原理上无法判定。改用步长 0.05 的扩展细网格（$\theta\in[0.15,0.85]$，4 拓扑 × 10 种子）与三个可操作判据重测：连通性恢复、模块度塌缩、极化塌缩三个判据分别只有 **1/40、2/40、3/40** 的种子级估计落在该区间内。连通性恢复阈值 $\theta^*_{\mathrm{frag}}$ 的估计为 ER 0.334、BA 0.400、WS 0.357、实证双极 0.520，扩展网格下最小值 0.249，**左删失已完全消除（0/40）**；但该阈值与初始平均度、互惠率混淆，**不能单独归因于宏观拓扑**。把四个拓扑都匹配到初始平均出度 6.60、互惠率 0.648 后重跑，$\theta^*_{\mathrm{frag}}$ 的拓扑间极差从 **0.186 降到 0.088**，ER/WS/BA 排序不再稳定，进一步说明残余差异不是稳健的拓扑效应。模块度塌缩判据在小世界与实证双极网络上 **10/10 种子右删失**，这类删失被显式报告而非隐藏。
+- **H2 证伪**：Bridger 留存率显著高于外围节点，但该优势来自**容忍度禀赋**而非结构洞位置；等容忍度时差距消失（gap $-0.034$，95% CI 跨 0）。按 betweenness 选择结构位置 Bridger 的对照臂给出同样的判定（base gap $-0.277$；等容忍度 gap $+0.019$，95% CI 跨 0），H2 仍被证伪。判定统计量以**种子**为独立单元（避免节点级伪重复）。
 - **RQ1 归因被分离并收窄**（Phase 4 十臂受控消融）：同步调度下，标量模型与各向同性多维模型的断裂**严格对称**（$A_{\mathrm{rupture}} \equiv 0$，20/20 种子）；只有引入**个体各向异性语义判据**后才出现单向断裂（$A_{\mathrm{rupture}}=0.216$，20/20 种子，Wilcoxon $p=1.9\times10^{-6}$）；**纯时序异步**在纯标量模型、均匀发言概率下即可制造非对称断裂（$A_{\mathrm{rupture}}=0.053$，$\Delta A=+0.053$，$p=6.5\times10^{-4}$），而发言频率偏置无显著效应（$\Delta A=+0.006$，$p=0.711$）。各向异性下的调度效应为 $+0.002$（$p=0.648$），但其与各向同性下的调度效应之差（交互项）为 $-0.039$（95% CI $[-0.088,+0.010]$，$p=0.143$），因此只能表述为**描述性次可加、交互项不显著**，不能声称已证明饱和。
+- **Phase 6 阴性结论加强**：新增“等量随机 unfollow”安慰剂臂（每 seed 平均 2.9 条随机断边）与逐事件规则反事实一致率。安慰剂臂的模块度差为 $+0.002$（$p=0.572$）；LLM 与规则臂的 Q 差为 $-0.004$（$p=0.418$），LLM 与安慰剂臂差为 $-0.006$（$p=0.193$）。逐事件一致率为 **96.3%（1657/1721）**，说明 LLM 的动作策略接近但不完全等同于规则后端，“结构 regime 不变”不是随机断边数量造成的假象。
 - **H3 不成立**：多样化推荐确有单调剂量响应地压低模块度（$\Delta Q=-0.038$，$p=7.4\times10^{-8}$）并提升跨阵营连边（$0.020\to0.043$，组合治理 $0.020\to0.062$），但到达率增益与模块度降幅**均未达到预设定阈值**，显示"同质性惯性"。
 
 ---
