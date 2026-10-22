@@ -30,7 +30,7 @@ COMMANDS = {
     "phase0_sweep.json": "python -m src.network_evolve.phase0 --nodes 100 --rounds 20 --seeds 5 --out results/phase0_sweep.json",
     "phase1.json": "python -m src.network_evolve.phase1 --nodes 100 --rounds 20 --seeds 10 --theta 0.4 --block 1.2 --out results/phase1.json",
     "phase1b.json": "python -m src.network_evolve.phase1b --seeds 20 --rounds 60 --out results/phase1b.json",
-    "phase1c_threshold.json": "python -m src.network_evolve.phase1c_threshold --seeds 10 --rounds 40 --nodes 100 --out results/phase1c_threshold.json",
+    "phase1c_threshold.json": "python -m src.network_evolve.phase1c_threshold --seeds 10 --rounds 40 --nodes 100 --theta-min 0.15 --theta-max 0.85 --out results/phase1c_threshold.json",
     "phase2_offline.json": "python -m src.network_evolve.phase2_offline --seeds 20 --n 60 --rounds 30 --out results/phase2_offline.json",
     "phase2_compare.json": "python -m src.network_evolve.phase2_llm replay --seeds 0,1,2 --n 40",
     "phase3.json": "python -m src.network_evolve.phase3 --seeds 20 --rounds 60 --out results/phase3.json",
@@ -137,11 +137,13 @@ def build_manifest(previous=None):
             env[pkg] = getattr(mod, "__version__", "unknown")
         except Exception:
             env[pkg] = "missing"
+    dirty_lines = [line.strip() for line in git("status", "--porcelain").splitlines()
+                   if line.strip() and not line.strip().endswith("results/PROVENANCE.json")]
     return {
         "schema": "network-evolve/provenance/1.0",
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
         "repo_commit": git("rev-parse", "HEAD"),
-        "repo_dirty": bool(git("status", "--porcelain")),
+        "repo_dirty": bool(dirty_lines),
         "environment": env,
         "artifacts": entries,
     }

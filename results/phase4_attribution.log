@@ -19,7 +19,8 @@ Multi-d=3 / async / original tol (reference) | 0.134±0.038 | 0.00 | 0.00 | 31.6
 发言偏置效应（标量）：加权发言 - 均匀发言: mean ΔA = +0.0065 (n=20, pos=9, both-zero=2) wilcoxon p=0.711
 纯调度效应（各向同性多维）：异步均匀 - 同步: mean ΔA = +0.0411 (n=20, pos=12, both-zero=8) wilcoxon p=0.00221
 调度效应（各向同性多维加权）：异步加权 - 同步: mean ΔA = +0.0598 (n=20, pos=17, both-zero=3) wilcoxon p=0.000292
-调度效应（多维各向异性）：异步加权 - 同步: mean ΔA = +0.0113 (n=20, pos=11, both-zero=1) wilcoxon p=0.748
+调度效应（多维各向异性加权）：异步加权 - 同步: mean ΔA = +0.0113 (n=20, pos=11, both-zero=1) wilcoxon p=0.748
+纯调度效应（多维各向异性均匀）：异步均匀 - 同步: mean ΔA = +0.0024 (n=20, pos=11, both-zero=0) wilcoxon p=0.648
 个体各向异性效应（同步）：各向异性 - 各向同性: mean ΔA = +0.2162 (n=20, pos=20, both-zero=0) wilcoxon p=1.91e-06
 个体各向异性效应（异步均匀）：各向异性 - 各向同性: mean ΔA = +0.1775 (n=20, pos=20, both-zero=0) wilcoxon p=1.91e-06
 个体各向异性效应（异步加权）：各向异性 - 各向同性: mean ΔA = +0.1678 (n=20, pos=18, both-zero=1) wilcoxon p=0.00025

@@ -503,69 +503,87 @@ def plot_fig6():
     print("Saved Fig 6.")
 
 def plot_fig7():
-    """Fig 7: 非对称撕裂机制归因消融（Phase 4）"""
+    """Fig 7: 非对称撕裂机制归因消融（Phase 4 全因子设计）"""
     p4_file = "results/phase4_attribution.json"
     if not os.path.exists(p4_file):
         print("[Fig 7] results/phase4_attribution.json not found, skipped.")
         return
     d = json.load(open(p4_file))
     arms = d["arms"]
-    order = ["scalar_sync", "isotropic_sync", "multidim_sync", "scalar_async",
-             "multidim_async", "multidim_async_orig"]
+    order = ["scalar_sync", "isotropic_sync", "multidim_sync",
+             "scalar_async_uniform", "scalar_async",
+             "isotropic_async_uniform", "isotropic_async",
+             "multidim_async_uniform", "multidim_async", "multidim_async_orig"]
     order = [a for a in order if a in arms]
-    labels = [arms[a]["label"] for a in order]
+    labels = [arms[a]["label"].replace(" / ", "\n") for a in order]
     means = [arms[a]["rupture_asymmetry_mean"] for a in order]
     errs = [arms[a]["rupture_asymmetry_ci95"] for a in order]
     zeros = [arms[a]["frac_seeds_exactly_zero"] for a in order]
     colors = []
     for a in order:
-        if a in ("scalar_sync", "isotropic_sync"):
+        if "sync" in a and "multidim" not in a:
             colors.append("#2ca02c")
-        elif a in ("multidim_sync", "multidim_async"):
+        elif "uniform" in a:
+            colors.append("#17becf")
+        elif "anisotropic" in arms[a]["label"].lower() or "aniso" in a:
             colors.append("#1f77b4")
         else:
             colors.append("#ff7f0e")
 
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 4.3))
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(17, 4.8))
 
     x = np.arange(len(order))
-    ax1.bar(x, means, yerr=errs, capsize=4, color=colors, alpha=0.88)
+    ax1.bar(x, means, yerr=errs, capsize=3, color=colors, alpha=0.88)
     for i, (m, z) in enumerate(zip(means, zeros)):
         y_base = m + (errs[i] if errs[i] else 0)
-        # 零值柱的标签彼此靠得很近，做交错排布避免重叠
-        stagger = 0.022 if (m < 1e-9 and i % 2 == 1) else 0.012
+        stagger = 0.022 if (m < 1e-9 and i % 2 == 1) else 0.010
         ax1.text(x[i], y_base + stagger,
-                 f"{m:.3f}\n(zero in {z:.0%} seeds)", ha="center", fontsize=8.2)
+                 f"{m:.3f}\n(zero:{z:.0%})", ha="center", fontsize=7.5)
     ax1.set_xticks(x)
-    ax1.set_xticklabels(labels, rotation=18, ha="right", fontsize=9)
+    ax1.set_xticklabels(labels, rotation=22, ha="right", fontsize=8)
     ax1.set_ylabel(r"Asymmetric Rupture $A_{\mathrm{rupture}}$")
-    ax1.set_title("(A) Attribution Ablation: $A_{\\mathrm{rupture}}$ per Arm")
+    ax1.set_title("(A) Full Factorial Attribution Ablation ($A_{\\mathrm{rupture}}$ per Arm)")
     ax1.set_ylim(0, 0.42)
 
     # (B) 决定性对比
     contrasts = d.get("contrasts", {})
-    keys = [k for k in ["schedule_effect_scalar", "anisotropy_effect_sync", "schedule_effect_multidim"]
+    keys = [k for k in ["schedule_effect_scalar_pure", "speaker_bias_effect_scalar",
+                        "anisotropy_effect_sync", "schedule_effect_isotropic_pure",
+                        "anisotropy_effect_async_uniform", "schedule_effect_multidim"]
             if k in contrasts]
-    cmap = {"schedule_effect_scalar": "#ff7f0e", "anisotropy_effect_sync": "#1f77b4",
-            "schedule_effect_multidim": "#9467bd"}
-    cnames = {"schedule_effect_scalar": "Schedule effect\n(scalar, async − sync)",
-              "anisotropy_effect_sync": "Anisotropy effect\n(sync, aniso − iso)",
-              "schedule_effect_multidim": "Schedule effect\n(multi-dim, async − sync)"}
+    cmap = {
+        "schedule_effect_scalar_pure": "#17becf",
+        "speaker_bias_effect_scalar": "#7f7f7f",
+        "anisotropy_effect_sync": "#1f77b4",
+        "schedule_effect_isotropic_pure": "#2ca02c",
+        "anisotropy_effect_async_uniform": "#9467bd",
+        "schedule_effect_multidim": "#ff7f0e",
+    }
+    cnames = {
+        "schedule_effect_scalar_pure": "Timing only\n(scalar uniform:\nasync − sync)",
+        "speaker_bias_effect_scalar": "Speaker bias\n(scalar async:\nweight − unif)",
+        "anisotropy_effect_sync": "Anisotropy\n(sync:\naniso − iso)",
+        "schedule_effect_isotropic_pure": "Timing only\n(multi-d iso:\nasync − sync)",
+        "anisotropy_effect_async_uniform": "Anisotropy\n(async unif:\naniso − iso)",
+        "schedule_effect_multidim": "Schedule\n(multi-d aniso:\nasync − sync)",
+    }
     vals = [contrasts[k]["mean_diff"] for k in keys]
     ps = [contrasts[k]["p_value_wilcoxon"] for k in keys]
     npos = [contrasts[k].get("n_positive", 0) for k in keys]
     x2 = np.arange(len(keys))
-    ax2.bar(x2, vals, yerr=[contrasts[k]["mean_diff"] * 0 + 0.02 for k in keys], capsize=4,
+    ax2.bar(x2, vals, yerr=[0.015 for _ in keys], capsize=3,
             color=[cmap[k] for k in keys], alpha=0.88)
     for i, (v, p, npo, k) in enumerate(zip(vals, ps, npos, keys)):
-        ax2.text(x2[i], v + 0.012, f"$\\Delta A$={v:+.3f}\np={p:.3g}\n{npo}/{contrasts[k]['n_pairs']} seeds ↑",
-                 ha="center", fontsize=8.6)
+        p_txt = "<0.001" if p < 0.001 else f"={p:.3f}"
+        ax2.text(x2[i], v + (0.010 if v >= 0 else -0.025),
+                 f"$\\Delta A$={v:+.3f}\n$p${p_txt}\n{npo}/{contrasts[k]['n_pairs']} ↑",
+                 ha="center", fontsize=8.0)
     ax2.axhline(0.0, color="black", linewidth=0.9)
     ax2.set_xticks(x2)
-    ax2.set_xticklabels([cnames[k] for k in keys], fontsize=9)
+    ax2.set_xticklabels([cnames[k] for k in keys], fontsize=8.2)
     ax2.set_ylabel(r"$\Delta A_{\mathrm{rupture}}$ (paired)")
-    ax2.set_title("(B) Decisive Contrasts (paired by seed)")
-    ax2.set_ylim(min(-0.05, min(vals) * 1.6), max(0.30, max(vals) * 1.6))
+    ax2.set_title("(B) Decisive Factorial Contrasts (paired by seed)")
+    ax2.set_ylim(-0.06, 0.32)
 
     plt.tight_layout()
     plt.savefig(f"{OUT_DIR}/fig7_attribution_ablation.png", dpi=300)

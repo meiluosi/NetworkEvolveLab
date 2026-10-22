@@ -569,6 +569,7 @@ def build_attribution():
         "anisotropy_effect_sync": "Per-agent salience anisotropy (synchronous baseline)",
         "anisotropy_effect_async_uniform": "Per-agent salience anisotropy (async uniform speaker)",
         "schedule_effect_isotropic_pure": "Pure temporal asynchrony (multi-d isotropic)",
+        "schedule_effect_multidim_pure": "Schedule effect under anisotropy (multi-d uniform: async - sync)",
         "schedule_effect_multidim": "Asynchronous schedule (multi-dimensional)",
         "tolerance_rule_effect": "Tolerance rule (asymmetric theta_ij)",
     }
@@ -748,6 +749,7 @@ def build_macros():
         "ARupScalarAsyncUniform": "n/a", "ARupIsoAsync": "n/a",
         "ARupIsoAsyncUniform": "n/a", "ARupAnisoAsyncUniform": "n/a",
         "ScheduleEffectPure": "n/a", "ScheduleEffectPureP": "n/a",
+        "ScheduleEffectMultidimPure": "n/a", "ScheduleEffectMultidimPureP": "n/a",
         "SpeakerBiasEffect": "n/a", "SpeakerBiasEffectP": "n/a",
         "AnisotropyEffectUniform": "n/a", "AnisotropyEffectUniformP": "n/a",
         "ARupScalarAsyncUniformZeroFrac": "n/a",
@@ -849,6 +851,9 @@ def build_macros():
         if "schedule_effect_scalar_pure" in c:
             macro("ScheduleEffectPure", f"{c['schedule_effect_scalar_pure']['mean_diff']:+.3f}")
             macro("ScheduleEffectPureP", f"{c['schedule_effect_scalar_pure']['p_value_wilcoxon']:.3g}")
+        if "schedule_effect_multidim_pure" in c:
+            macro("ScheduleEffectMultidimPure", f"{c['schedule_effect_multidim_pure']['mean_diff']:+.3f}")
+            macro("ScheduleEffectMultidimPureP", f"{c['schedule_effect_multidim_pure']['p_value_wilcoxon']:.3g}")
         if "speaker_bias_effect_scalar" in c:
             macro("SpeakerBiasEffect", f"{c['speaker_bias_effect_scalar']['mean_diff']:+.3f}")
             macro("SpeakerBiasEffectP", f"{c['speaker_bias_effect_scalar']['p_value_wilcoxon']:.3g}")

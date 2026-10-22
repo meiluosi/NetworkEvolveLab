@@ -441,7 +441,7 @@
       "n_both_zero": 3
     },
     "schedule_effect_multidim": {
-      "contrast": "调度效应（多维各向异性）：异步加权 - 同步",
+      "contrast": "调度效应（多维各向异性加权）：异步加权 - 同步",
       "n_pairs": 20,
       "mean_diff": 0.011335126073830004,
       "median_diff": 0.025448697764383077,
@@ -449,6 +449,16 @@
       "p_value_paired_t": 0.6506329791430023,
       "n_positive": 11,
       "n_both_zero": 1
+    },
+    "schedule_effect_multidim_pure": {
+      "contrast": "纯调度效应（多维各向异性均匀）：异步均匀 - 同步",
+      "n_pairs": 20,
+      "mean_diff": 0.002448427555415934,
+      "median_diff": 0.02370405456612352,
+      "p_value_wilcoxon": 0.6476554870605469,
+      "p_value_paired_t": 0.9055178616173789,
+      "n_positive": 11,
+      "n_both_zero": 0
     },
     "anisotropy_effect_sync": {
       "contrast": "个体各向异性效应（同步）：各向异性 - 各向同性",
