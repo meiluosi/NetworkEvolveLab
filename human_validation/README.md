@@ -6,7 +6,8 @@ reasoning. The key is only for analysis after both sheets are returned.
 
 ## Files
 
-- `annotation_sheet.csv` — 300 blind rows; send this to each annotator.
+- **Chinese package:** `outsourcing_package_zh.zip` — send this to Chinese-speaking annotators.
+- `annotation_sheet.csv` — 300 blind rows; send this to each annotator (English).
 - `annotation_key.csv` — source model / action / reasoning / receipt path; analysis only.
 - `codebook.md` — instructions and examples; send with the sheet.
 - `../scripts/score_human_validation.py` — computes agreement after annotation.

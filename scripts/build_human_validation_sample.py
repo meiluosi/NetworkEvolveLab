@@ -16,6 +16,7 @@ import hashlib
 import json
 import os
 import random
+import re
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 ARCH = os.path.join(ROOT, "data", "llm_archive")
@@ -60,6 +61,64 @@ def parse_receipt(path):
             "source_receipt": os.path.relpath(path, ROOT),
         })
     return out
+
+
+ARCH_ZH = {"hub": "枢纽型（hub）", "bridger": "桥梁型（bridger）", "tail": "长尾型（tail）"}
+ACTION_ZH = {"keep": "保持", "mute": "静音", "unfollow": "取关", "block": "拉黑"}
+PREFIX_ZH = {"Just my two cents: ": "一点个人看法：",
+             "Trying to see both sides: ": "尽量兼顾双方：",
+             "Announcing loudly: ": "大声宣布："}
+DEGREE_ZH = {"weakly": "轻度", "moderately": "中等程度", "strongly": "强烈"}
+
+
+def zh_profile(text: str) -> str:
+    t = text.strip()
+    if t.startswith("is neutral about"):
+        return "对争议政策轴保持中立"
+    m = re.match(r"(weakly|moderately|strongly) strongly (for|against) the incumbent policy directions the contested policy axis", t)
+    if m:
+        return f"{DEGREE_ZH[m.group(1)]}{'支持' if m.group(2) == 'for' else '反对'}现任政策方向（争议政策轴）"
+    return t
+
+
+def zh_message(text: str) -> str:
+    t = text.strip()
+    prefix = ""
+    for p, z in PREFIX_ZH.items():
+        if t.startswith(p):
+            prefix, t = z, t[len(p):]
+            break
+    if t.startswith("I am neutral about the contested policy axis."):
+        return prefix + "我对争议政策轴保持中立。"
+    m = re.match(r"I (weakly|moderately|strongly) strongly (for|against) the incumbent policy direction the contested policy axis\.", t)
+    if m:
+        return prefix + f"我{DEGREE_ZH[m.group(1)]}{'支持' if m.group(2) == 'for' else '反对'}现任政策方向（争议政策轴）。"
+    return prefix + t
+
+
+def write_zh(picked, out_dir):
+    cols = ["事件编号", "听众类型", "听众立场", "听众立场描述", "对方发言",
+            "关系强度", "模型动作", "动作是否合理", "你会选择的动作",
+            "把握程度1到5", "备注"]
+    path = os.path.join(out_dir, "annotation_sheet_zh.csv")
+    with open(path, "w", newline="", encoding="utf-8-sig") as f:
+        w = csv.DictWriter(f, fieldnames=cols)
+        w.writeheader()
+        for r in picked:
+            w.writerow({
+                "事件编号": r["event_uid"],
+                "听众类型": ARCH_ZH.get(r["listener_archetype"], r["listener_archetype"]),
+                "听众立场": r["listener_stance"],
+                "听众立场描述": zh_profile(r["listener_profile"]),
+                "对方发言": zh_message(r["peer_message"]),
+                "关系强度": r["tie_strength"],
+                "模型动作": ACTION_ZH.get(r["model_action"], r["model_action"]),
+                "动作是否合理": "",
+                "你会选择的动作": "",
+                "把握程度1到5": "",
+                "备注": "",
+            })
+    return path
 
 
 def main():
@@ -111,8 +170,10 @@ def main():
         w.writeheader()
         for r in picked:
             w.writerow(r)
+    zh = write_zh(picked, OUT)
     print(f"[write] {blind} ({len(picked)} rows)")
     print(f"[write] {key} ({len(picked)} rows)")
+    print(f"[write] {zh} ({len(picked)} rows)")
 
 
 if __name__ == "__main__":

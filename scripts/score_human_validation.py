@@ -16,6 +16,26 @@ from typing import Dict, List, Optional, Tuple
 REASONABLE = {"reasonable", "unreasonable", "cannot_judge"}
 ACTIONS = {"keep", "mute", "unfollow", "block"}
 
+# Chinese outsourcing sheet (annotation_sheet_zh.csv) support.
+COL_ALIASES = {
+    "事件编号": "event_uid",
+    "动作是否合理": "is_action_reasonable",
+    "你会选择的动作": "preferred_action",
+    "把握程度1到5": "confidence_1_5",
+    "备注": "comments",
+}
+VALUE_ALIASES = {
+    "合理": "reasonable", "不合理": "unreasonable", "无法判断": "cannot_judge",
+    "保持": "keep", "静音": "mute", "取关": "unfollow", "拉黑": "block",
+}
+
+
+def normalize_row(row: dict) -> dict:
+    out = {}
+    for k, v in row.items():
+        out[COL_ALIASES.get(k, k)] = VALUE_ALIASES.get((v or "").strip(), v)
+    return out
+
 
 def cohen_kappa(a: List[str], b: List[str]) -> Optional[float]:
     pairs = [(x, y) for x, y in zip(a, b) if x and y]
@@ -34,8 +54,8 @@ def cohen_kappa(a: List[str], b: List[str]) -> Optional[float]:
 
 
 def read_sheet(path: str) -> Dict[str, dict]:
-    with open(path, newline="", encoding="utf-8") as f:
-        rows = list(csv.DictReader(f))
+    with open(path, newline="", encoding="utf-8-sig") as f:
+        rows = [normalize_row(r) for r in csv.DictReader(f)]
     return {r.get("event_uid", "").strip(): r for r in rows if r.get("event_uid")}
 
 
