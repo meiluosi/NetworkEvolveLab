@@ -299,12 +299,20 @@ class LLMClient:
                  budget_calls: int = 1000,
                  timeout: int = DEFAULT_TIMEOUT,
                  archive: Optional[LLMArchive] = None,
-                 thinking_budget: int = DEFAULT_THINKING_BUDGET):
+                 thinking_budget: int = DEFAULT_THINKING_BUDGET,
+                 api_style: Optional[str] = None):
         self.model = model
         self.temperature = temperature
         self.max_tokens = max_tokens
         self.thinking_budget = int(thinking_budget)
         self.base_url, self.api_key = resolve_endpoint(base_url, api_key)
+        style = (api_style or os.environ.get("NETWORK_EVOLVE_LLM_API_STYLE") or "").lower()
+        if style not in ("anthropic", "openai"):
+            style = ("openai" if any(x in (self.base_url or "").lower()
+                                     for x in ("deepseek", "openai", "chat/completions"))
+                     or "deepseek" in (self.model or "").lower()
+                     else "anthropic")
+        self.api_style = style
         self.budget_calls = budget_calls
         self.timeout = timeout
         self.archive = archive or LLMArchive()
@@ -323,6 +331,7 @@ class LLMClient:
     def ledger(self) -> Dict[str, Any]:
         return {
             "model": self.model,
+            "api_style": self.api_style,
             "temperature": self.temperature,
             "max_tokens": self.max_tokens,
             "budget_calls": self.budget_calls,
@@ -336,9 +345,16 @@ class LLMClient:
     # ---- 请求哈希 ----
     @staticmethod
     def request_hash(system: str, prompt: str, model: str, temperature: float,
-                     max_tokens: int, thinking_budget: int = 0) -> str:
-        blob = "\x1f".join([model, f"{temperature}", str(max_tokens),
-                            str(thinking_budget), system, prompt])
+                     max_tokens: int, thinking_budget: int = 0,
+                     api_style: str = "anthropic") -> str:
+        # Keep the historical hash for the default Anthropic/MiniMax path so
+        # that existing content-addressed receipts still replay at zero cost;
+        # only the OpenAI-compatible path adds the style marker.
+        parts = [model]
+        if api_style != "anthropic":
+            parts.append(api_style)
+        parts += [f"{temperature}", str(max_tokens), str(thinking_budget), system, prompt]
+        blob = "\x1f".join(parts)
         return hashlib.sha256(blob.encode("utf-8")).hexdigest()
 
     # ---- 凭据保鲜 ----
@@ -377,7 +393,7 @@ class LLMClient:
                  n_events: int = 0) -> Tuple[str, LLMReceipt]:
         """返回 (响应文本, 收据)。命中归档时不产生 API 调用。"""
         rh = self.request_hash(system, prompt, self.model, self.temperature,
-                                self.max_tokens, self.thinking_budget)
+                                self.max_tokens, self.thinking_budget, self.api_style)
         self.seen_hashes.add(rh)
         cached = self.archive.get(self.model, rh)
         if cached is not None:
@@ -413,24 +429,38 @@ class LLMClient:
                 "NETWORK_EVOLVE_LLM_API_KEY 环境变量。")
         # 发送前先做一次凭据保鲜：若磁盘上的 access token 已过期（本机 TTL ~1h），
         # 先等到运行时刷新出新 token，避免白白消耗一次 401。
-        self._refresh_credentials(wait=True, max_wait=120.0)
+        if self.api_style != "openai":
+            self._refresh_credentials(wait=True, max_wait=120.0)
 
-        body = {
-            "model": self.model,
-            "max_tokens": self.max_tokens,
-            "temperature": self.temperature,
-            "system": system,
-            "messages": [{"role": "user", "content": prompt}],
-        }
-        # 该模型强制 adaptive thinking（thinking.type=disabled 会被拒），
-        # 但思考预算可封顶，否则会吃满 max_tokens 导致 JSON 响应被截断。
-        if self.thinking_budget > 0:
-            body["thinking"] = {"type": "enabled", "budget_tokens": self.thinking_budget}
+        if self.api_style == "openai":
+            body = {
+                "model": self.model,
+                "messages": [
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": prompt},
+                ],
+                "temperature": self.temperature,
+                "max_tokens": self.max_tokens,
+            }
+            endpoint = self.base_url.rstrip("/") + "/chat/completions"
+        else:
+            body = {
+                "model": self.model,
+                "max_tokens": self.max_tokens,
+                "temperature": self.temperature,
+                "system": system,
+                "messages": [{"role": "user", "content": prompt}],
+            }
+            # 该模型强制 adaptive thinking（thinking.type=disabled 会被拒），
+            # 但思考预算可封顶，否则会吃满 max_tokens 导致 JSON 响应被截断。
+            if self.thinking_budget > 0:
+                body["thinking"] = {"type": "enabled", "budget_tokens": self.thinking_budget}
+            endpoint = self.base_url.rstrip("/") + "/messages"
         payload_bytes = json.dumps(body).encode("utf-8")
 
         def _make_req() -> urllib.request.Request:
             return urllib.request.Request(
-                self.base_url.rstrip("/") + "/messages",
+                endpoint,
                 data=payload_bytes,
                 headers={"Content-Type": "application/json",
                          "Authorization": f"Bearer {self.api_key}"},
@@ -469,25 +499,45 @@ class LLMClient:
                                f"{type(last_err).__name__}: {last_err}")
 
         self.calls_made += 1
-        text_parts = [c.get("text", "") for c in payload.get("content", [])
-                      if isinstance(c, dict) and c.get("type") == "text"]
-        response_text = "".join(text_parts).strip()
-        usage = payload.get("usage", {}) or {}
-        details = usage.get("output_tokens_details", {}) or {}
-        receipt = LLMReceipt(
-            model=payload.get("model", self.model),
-            temperature=self.temperature,
-            max_tokens=self.max_tokens,
-            request_hash=rh,
-            response_id=payload.get("id"),
-            stop_reason=payload.get("stop_reason"),
-            input_tokens=int(usage.get("input_tokens", 0)),
-            output_tokens=int(usage.get("output_tokens", 0)),
-            thinking_tokens=int(details.get("thinking_tokens", 0)),
-            cached=False,
-            truncated=(payload.get("stop_reason") == "max_tokens"),
-            n_events=n_events,
-        )
+        if self.api_style == "openai":
+            choice = (payload.get("choices") or [{}])[0]
+            response_text = str((choice.get("message") or {}).get("content", "")).strip()
+            usage = payload.get("usage", {}) or {}
+            details = usage.get("completion_tokens_details", {}) or {}
+            receipt = LLMReceipt(
+                model=payload.get("model", self.model),
+                temperature=self.temperature,
+                max_tokens=self.max_tokens,
+                request_hash=rh,
+                response_id=payload.get("id"),
+                stop_reason=choice.get("finish_reason"),
+                input_tokens=int(usage.get("prompt_tokens", 0)),
+                output_tokens=int(usage.get("completion_tokens", 0)),
+                thinking_tokens=int(details.get("reasoning_tokens", 0)),
+                cached=False,
+                truncated=(choice.get("finish_reason") == "length"),
+                n_events=n_events,
+            )
+        else:
+            text_parts = [c.get("text", "") for c in payload.get("content", [])
+                          if isinstance(c, dict) and c.get("type") == "text"]
+            response_text = "".join(text_parts).strip()
+            usage = payload.get("usage", {}) or {}
+            details = usage.get("output_tokens_details", {}) or {}
+            receipt = LLMReceipt(
+                model=payload.get("model", self.model),
+                temperature=self.temperature,
+                max_tokens=self.max_tokens,
+                request_hash=rh,
+                response_id=payload.get("id"),
+                stop_reason=payload.get("stop_reason"),
+                input_tokens=int(usage.get("input_tokens", 0)),
+                output_tokens=int(usage.get("output_tokens", 0)),
+                thinking_tokens=int(details.get("thinking_tokens", 0)),
+                cached=False,
+                truncated=(payload.get("stop_reason") == "max_tokens"),
+                n_events=n_events,
+            )
         self.totals["input_tokens"] += receipt.input_tokens
         self.totals["output_tokens"] += receipt.output_tokens
         self.totals["thinking_tokens"] += receipt.thinking_tokens

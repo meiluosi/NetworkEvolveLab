@@ -286,3 +286,21 @@ def _direct(pol, events, payload):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestOpenAICompatibleAdapter(unittest.TestCase):
+    """The DeepSeek/OpenAI-compatible adapter must be selected without network."""
+
+    def test_deepseek_base_selects_openai_style(self):
+        c = LLMClient(model="deepseek-chat",
+                      base_url="https://api.deepseek.com/v1",
+                      api_key="test-key", budget_calls=1, thinking_budget=0)
+        self.assertEqual(c.api_style, "openai")
+        self.assertEqual(c.base_url, "https://api.deepseek.com/v1")
+
+    def test_api_style_is_part_of_request_hash(self):
+        a = LLMClient.request_hash("sys", "prompt", "deepseek-chat", 0.0, 128,
+                                   0, "anthropic")
+        b = LLMClient.request_hash("sys", "prompt", "deepseek-chat", 0.0, 128,
+                                   0, "openai")
+        self.assertNotEqual(a, b)

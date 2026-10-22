@@ -189,7 +189,8 @@ python reproduce.py --all
 ## 目录索引
 
 - [paper/main.tex](paper/main.tex) & [paper/appendix.tex](paper/appendix.tex)：**完整学术论文手稿与补充材料（LaTeX）**
-- [benchmark/](benchmark/README.md)：benchmark registry、缓存 manifest 与验证器
+- [docs/LLM_BACKENDS.md](docs/LLM_BACKENDS.md)：MiniMax/DeepSeek 后端与密钥配置
+[benchmark/](benchmark/README.md)：benchmark registry、缓存 manifest 与验证器
 [paper/tables/](paper/tables/)：**由结果 JSON 自动生成的论文表格与数值宏**（`scripts/generate_paper_tables.py`）
 - [docs/archive/ARS_FULL_CHAIN_AUDIT.md](docs/archive/ARS_FULL_CHAIN_AUDIT.md)：历史复核记录（已归档；当前数字以 paper/tables/macros.tex 与 results/ 为准）
 - [docs/archive/EXPERIMENT_REPORT.md](docs/archive/EXPERIMENT_REPORT.md)：历史实验报告（已归档）
