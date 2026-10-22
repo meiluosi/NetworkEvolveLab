@@ -106,6 +106,8 @@ def run_arm(arm: str, seed: int, nodes: int, rounds: int,
 def main():
     ap = argparse.ArgumentParser(description="Phase 6: real-LLM cognitive layer vs rule backend")
     ap.add_argument("--seeds", type=int, default=5)
+    ap.add_argument("--seed-start", type=int, default=0,
+                    help="first seed (for per-seed sharded parallel runs)")
     ap.add_argument("--rounds", type=int, default=30)
     ap.add_argument("--nodes", type=int, default=60)
     ap.add_argument("--llm-events", type=int, default=6,
@@ -117,14 +119,15 @@ def main():
     ap.add_argument("--out", type=str, default="results/phase6_llm_engine.json")
     args = ap.parse_args()
 
-    seeds = list(range(args.seeds))
+    seeds = list(range(args.seed_start, args.seed_start + args.seeds))
     topics, poles = split_topics(SCALAR_TOPICS)
     client = LLMClient(model=args.model, temperature=0.0, max_tokens=args.max_tokens,
                        budget_calls=args.budget_calls, thinking_budget=args.thinking_budget)
     policy = LLMCognitivePolicy(client, topics=topics, poles=poles)
 
     print(f"=== Phase 6: 真 LLM 认知层 vs 规则后端 "
-          f"(Seeds={args.seeds}, Rounds={args.rounds}, N={args.nodes}, "
+          f"(Seeds={args.seed_start}..{args.seed_start + args.seeds - 1}, "
+          f"Rounds={args.rounds}, N={args.nodes}, "
           f"LLM events/round={args.llm_events}) ===")
     print(f"model={args.model}  max_tokens={args.max_tokens}  "
           f"thinking_budget={args.thinking_budget}")

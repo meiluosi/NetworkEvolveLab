@@ -1,0 +1,1 @@
+Coverage sensitivity of the Phase~6 structural null. The archived arm runs at 2.5\% coverage with MiniMax-M3.1-Flash; the high-coverage pilot increases the event budget and uses MiniMax-M3. Both are paired by seed against the rule backend. Generated from \texttt{results/phase6\_highcov\_60\_m3.json}.

@@ -22,7 +22,7 @@ DOCS = [os.path.join(PAPER, "main.tex"),
 MACROS = os.path.join(PAPER, "tables", "macros.tex")
 GENERATED = ["sota_matrix.tex", "sota_matrix_compact.tex", "hypothesis_verdicts.tex",
              "attribution.tex", "dataset_metrics.tex", "llm_arm.tex", "scaling.tex",
-             "matched_threshold.tex", "h2_structural.tex", "llm_placebo.tex", "real_stance.tex"]
+             "matched_threshold.tex", "h2_structural.tex", "llm_placebo.tex", "llm_highcov.tex", "real_stance.tex"]
 
 # LaTeX 内建/其它包提供的命令，不应由本项目定义
 BUILTIN = {

@@ -99,6 +99,11 @@ python -m src.network_evolve.phase4_attribution --seeds 20 --rounds 30 --nodes 6
 # Phase 5 (新增): 模块度 K 社群推广上界的一致性审计
 python -m src.network_evolve.phase5_bound_audit --seeds 10 --rounds 60 --out results/phase5_bound_audit.json
 
+# Phase 6 高覆盖 + 多模型（MiniMax-M3/M3.1）
+python scripts/run_phase6_parallel.py --seeds 10 --jobs 10 --rounds 30 --nodes 60 \
+    --llm-events 60 --model MiniMax-M3 --max-tokens 8192 --thinking-budget 0 \
+    --out results/phase6_highcov_60_m3.json
+
 # Phase 8 (新增): 公开真实立场图 PolBlogs 外部效度检查
 python scripts/build_polblogs_caches.py --nodes 100 --seeds 0-9
 python -m src.network_evolve.phase8_real_stance --seeds 10 --rounds 25 --nodes 100 \
