@@ -37,7 +37,7 @@
 | 环节 | 复核动作 | 证据 |
 | :--- | :--- | :--- |
 | 源码 | 通读 `src/network_evolve/` 全部 18 个模块（约 2200 行） | 见 §3 |
-| 结果 | 逐一比对 `results/*.json` 与 `paper/main.tex`、`docs/EXPERIMENT_REPORT.md` 的每个数值断言 | 见 §3、§4 |
+| 结果 | 逐一比对 `results/*.json` 与 `paper/main.tex`、`EXPERIMENT_REPORT.md` 的每个数值断言 | 见 §3、§4 |
 | 流水线 | 实际执行 `reproduce.py --test`、全部 Phase 实验、基准套件、绘图管线 | 见 §5 |
 | 失败模式 | 按 ARS 7 类失败模式逐条判定（CLEAR / SUSPECTED / INSUFFICIENT EVIDENCE / NOT APPLICABLE） | 见 §6 |
 | 引用 | 核对 `paper/references.bib` 与正文引用一致性 | 见 §4.4 |
@@ -60,7 +60,7 @@
 
 ### 3.1 P0 — 阻断级：实验结果与论文断言不一致
 
-#### F-01 `docs/EXPERIMENT_REPORT.md` 的「Real LLM 认知真机」整行数据无对应产物（Mode 3 / Mode 6）
+#### F-01 `EXPERIMENT_REPORT.md` 的「Real LLM 认知真机」整行数据无对应产物（Mode 3 / Mode 6）
 
 报告 §4.1 表格中「Real LLM 认知真机」一行报告
 $Q=0.482$、$\Pi=0.735$、巨片 $0.850$、小群 $58.3\%$、$A_{\mathrm{rupture}}=0.286$、跨阵营 $5.8\%$。

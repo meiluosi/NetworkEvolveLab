@@ -295,6 +295,24 @@ def main():
         "每条恰好对应一次真实 API 调用；重跑时全部命中归档（零成本、逐位可复现）。")
     out["llm_ledger"] = ledger
     out["llm_stats_total"] = llm_stats_acc
+    # 逐事件一致率的补充统计：Cohen's kappa 与「规则会断边」子集上的一致率。
+    # 仅报告 raw agreement 会被多数类（keep/reinforce）吞没，因此同时给出 kappa
+    # 和 rule∈{block,decay} 的 severe-event 子集。
+    ag_raw = llm_stats_acc["rule_agreement"]
+    conf = ag_raw.get("confusion") or {}
+    n_ag = int(ag_raw.get("n_compared", 0))
+    actions3 = ("reinforce", "decay", "block")
+    row_tot = {r: sum(conf.get(r, {}).values()) for r in actions3}
+    col_tot = {c: sum((conf.get(r) or {}).get(c, 0) for r in actions3) for c in actions3}
+    trace = sum((conf.get(a) or {}).get(a, 0) for a in actions3)
+    p_o = trace / n_ag if n_ag else 0.0
+    p_e = sum(row_tot[a] * col_tot[a] for a in actions3) / (n_ag * n_ag) if n_ag else 0.0
+    kappa = (p_o - p_e) / (1.0 - p_e) if n_ag and p_e < 1.0 else 0.0
+    rule_block = int(col_tot.get("block", 0))
+    rule_decay = int(col_tot.get("decay", 0))
+    rule_severe = rule_block + rule_decay
+    severe_agree = int((conf.get("block") or {}).get("block", 0)
+                       + (conf.get("decay") or {}).get("decay", 0))
     out["llm_coverage"] = {
         "llm_asked_events": total_events,
         "llm_decided_events": total_applied,
@@ -310,10 +328,14 @@ def main():
         "action_distribution": llm_stats_acc["actions"],
         "rule_agreement": {
             **llm_stats_acc["rule_agreement"],
-            "agreement_rate": (
-                llm_stats_acc["rule_agreement"]["n_agree"] /
-                llm_stats_acc["rule_agreement"]["n_compared"]
-                if llm_stats_acc["rule_agreement"]["n_compared"] else 0.0),
+            "agreement_rate": (trace / n_ag if n_ag else 0.0),
+            "cohen_kappa": float(kappa),
+            "rule_block_events": rule_block,
+            "rule_decay_events": rule_decay,
+            "rule_severe_events": rule_severe,
+            "severe_agreement": severe_agree,
+            "severe_agreement_rate": (severe_agree / rule_severe
+                                      if rule_severe else 0.0),
         },
         "note": "coverage_of_interactions = LLM 实际落地决策的互动数 / LLM 臂引擎全部互动数；"
                 "llm_hybrid 是混合后端，未被 LLM 覆盖的互动仍走规则后端（已显式披露）",

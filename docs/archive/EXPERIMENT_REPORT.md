@@ -9,7 +9,7 @@
 
 > 本报告的每一个数字都来自 `results/` 下的冻结产物，可由 `python reproduce.py --all` 完整重算。
 > 论文中对应的表格由 `scripts/generate_paper_tables.py` 自动生成，CI 会在漂移时失败。
-> 本轮全链路复核所发现并修复的缺陷清单见 [`docs/ARS_FULL_CHAIN_AUDIT.md`](ARS_FULL_CHAIN_AUDIT.md)。
+> 本轮全链路复核所发现并修复的缺陷清单见 [`ARS_FULL_CHAIN_AUDIT.md`](ARS_FULL_CHAIN_AUDIT.md)。
 
 ---
 

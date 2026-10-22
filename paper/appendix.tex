@@ -47,32 +47,6 @@ with equality if and only if $a_1 = a_2 = \dots = a_K = 1/K$. Combining these tw
 For $K=2$ (bipolar polarization), $Q \leq 1 - 1/2 = 0.500$. For $K=4$ (e.g., the four distinct sub-forums in Reddit ConvoKit), $Q \leq 1 - 1/4 = 0.750$. This mathematically explains why experimental modularity on Reddit saturates around $Q \approx \RedditOursSimplifiedQ \sim \RedditHKQ$, whereas bipolar networks strictly cap at $0.500$.
 \end{proof}
 
-\subsection{Detailed Derivation of Proposition 2: Positive Lebesgue Measure of Asymmetric Rupture Polytope}
-\label{app:proof_polytope}
-
-\begin{proof}
-Consider two agents $i$ and $j$ in a $d$-dimensional continuous ideological space with states $\mathbf{b}_i, \mathbf{b}_j \in [-1, 1]^d$. Each agent assigns attention weight vector $\mathbf{w}_i = (w_{i,1}, \dots, w_{i,d})^\top$ satisfying $\sum_{k=1}^d w_{i,k} = 1$ with $w_{i,k} > 0$. The perceived ideological distance evaluated by agent $i$ towards agent $j$ is:
-\begin{equation}
-    \mathcal{D}_i(\mathbf{b}_i, \mathbf{b}_j) = \sum_{k=1}^d w_{i,k} |b_{i,k} - b_{j,k}|.
-\end{equation}
-Let $\Theta_i$ and $\Theta_j$ be the respective severance thresholds. The set of configuration pairs $(\mathbf{b}_i, \mathbf{b}_j) \in [-1, 1]^{2d}$ under which agent $i$ severs the directed link $(i, j)$ while agent $j$ preserves $(j, i)$ is:
-\begin{equation}
-    \Omega_{\mathrm{asym}} = \left\{ (\mathbf{b}_i, \mathbf{b}_j) \in [-1, 1]^{2d} \;\middle|\;
-    \begin{aligned}
-        \textstyle\sum_{k=1}^d w_{i,k} |b_{i,k} - b_{j,k}| > \Theta_i \;\land \\
-        \textstyle\sum_{k=1}^d w_{j,k} |b_{j,k} - b_{i,k}| \leq \Theta_j
-    \end{aligned}
-    \right\}.
-\end{equation}
-Let $\Delta_k = |b_{i,k} - b_{j,k}| \in [0, 2]$. Rewriting the conditions in terms of difference vector $\boldsymbol{\Delta} = (\Delta_1, \dots, \Delta_d)^\top$:
-\begin{equation}
-    \mathbf{w}_i^\top \boldsymbol{\Delta} > \Theta_i \quad \text{and} \quad \mathbf{w}_j^\top \boldsymbol{\Delta} \leq \Theta_j.
-\end{equation}
-Whenever the weight vectors $\mathbf{w}_i$ and $\mathbf{w}_j$ are non-collinear (which occurs almost everywhere under heterogeneous archetypes), the two hyperplanes $H_i = \{\boldsymbol{\Delta} \mid \mathbf{w}_i^\top \boldsymbol{\Delta} = \Theta_i\}$ and $H_j = \{\boldsymbol{\Delta} \mid \mathbf{w}_j^\top \boldsymbol{\Delta} = \Theta_j\}$ intersect transversally. 
-
-For $d \geq 2$, the region bounded between these two non-parallel hyperplanes in the positive orthant $[0, 2]^d$ contains an open ball $B(\boldsymbol{\Delta}_0, \epsilon)$ with radius $\epsilon > 0$. Since the mapping $(\mathbf{b}_i, \mathbf{b}_j) \mapsto \boldsymbol{\Delta}$ is a surjective piecewise-linear submersion with full rank $d$, the pre-image $\Omega_{\mathrm{asym}}$ contains an open non-empty set in $\mathbb{R}^{2d}$. Therefore, the Lebesgue measure $\mu(\Omega_{\mathrm{asym}}) > 0$.
-\end{proof}
-
 \subsection{The Multi-Dimensional Update Kernel}
 \label{app:kernel}
 
@@ -196,17 +170,6 @@ Table~\ref{tab:hyperparameters} summarizes the exact hyperparameter values acros
 \label{fig:empirical_datasets}
 \end{figure*}
 
-Figure~\ref{fig:cognitive_backends} preserves the historical micro-cognitive backend
-comparison --- scalar DeGroot and bounded confidence against the semantic proxy and the
-archived three-seed LLM arm --- together with the rupture asymmetry each produced, so
-that the superseded experiment stays inspectable rather than merely cited.
-\begin{figure*}[t]
-\centering
-\includegraphics[width=\textwidth]{figures/fig4_cognitive_backends.png}
-\caption{\textbf{Historical Micro-Cognitive Backends and Rupture Asymmetry (RQ1).} Scalar DeGroot/HK against the semantic proxy and the \emph{historical} three-seed LLM arm. This figure is retained for provenance: it is superseded by the ten-seed, receipt-complete Phase~6 experiment of Section~\ref{sec:llm-arm}, which mounts a real LLM inside the flagship engine and reports its interaction coverage explicitly. Note that non-zero $A_{\mathrm{rupture}}$ in this asynchronous setting is not by itself evidence of semantic dimensionality; see Figure~\ref{fig:attribution}.}
-\label{fig:cognitive_backends}
-\end{figure*}
-
 \subsection{Complete Benchmark Comparison Matrix}
 \label{app:benchmark-matrix}
 
@@ -317,29 +280,6 @@ dormant graph.
 \end{table*}
 
 % =============================================================
-\section{Exhaustive Numerical Audit of the Generalised Modularity Bound}
-\label{app:bound-audit}
-
-The generalized bound of Proposition~\ref{prop:modularity} makes a falsifiable prediction
-for every cell of the benchmark matrix: the reported $Q$ must not exceed $1-1/K$ for the
-realized community count $K$. We verify this exhaustively over all \AuditCellsChecked{}
-(dataset $\times$ method) cells and over the \HOneGridCount{}-configuration evolution grid.
-The audit reports \AuditViolations{} violations, and the realized community counts span
-$K=2$ (bipolar surrogates), $K \in \{3,4,5\}$ (multi-community surrogates) and
-$K \in \{8,9\}$ (the empirical SNAP Higgs subgraph). Every high-modularity cell in
-Table~\ref{tab:sota_matrix} --- for instance $Q=\RedditHKQ$ on Reddit ConvoKit under
-Hegselmann--Krause --- is therefore fully consistent with the theory: it corresponds to a
-realized $K=\RedditHKK$ partition whose bound is \RedditHKBound, not to a violation of a universal $0.500$
-cap. This closes the contradiction between the theory and the benchmark matrix that the
-earlier version of this manuscript left open.
-
-The audit is generated by \texttt{scripts/generate\_paper\_tables.py} directly from
-\texttt{results/phase5\_bound\_audit.json} and \texttt{results/sota\_benchmark.json}; the
-machine-readable violation list is stored in the bound-audit result file rather than
-transcribed here, so the claim ``\AuditViolations{} violations'' is reproducible rather
-than asserted.
-
-% =============================================================
 \section{Cross-Topology Critical Tolerance: All Three Criteria}
 \label{app:threshold}
 
@@ -393,7 +333,10 @@ two-camp empirical-bipolar construction), adding/removing random edges to a comm
 size, and orienting a fixed fraction of edges mutually. All four matched graphs therefore
 have initial mean out-degree \MatchedTargetDegree{} and reciprocity
 \MatchedTargetReciprocity{} (per-topology achieved values are reported in
-Table~\ref{tab:matched_threshold}).
+Table~\ref{tab:matched_threshold}). Because the matched graphs are obtained by random edge
+addition/removal on each skeleton, the empirical-bipolar variant may lose some of its sparse
+cross-camp structure; the rerun should therefore be read as a conservative control for
+degree and reciprocity, not as a reconstruction of each topology family.
 
 Under this matching, the connectivity-recovery estimates are
 \MatchedFragErdosRenyi{} (ER), \MatchedFragSmallWorld{} (WS),
@@ -433,8 +376,12 @@ $[\HTwoStructuralBaseCILow, \HTwoStructuralBaseCIHigh]$), with Bridger retention
 \HTwoStructuralBaseBridger{} versus \HTwoStructuralBaseOther{} for other nodes; equalizing
 tolerance removes the gap (\HTwoStructuralEqualGap{}, 95\% CI
 $[\HTwoStructuralEqualCILow, \HTwoStructuralEqualCIHigh]$; $p=\HTwoStructuralEqualP$). H2
-remains falsified under structural assignment. We therefore describe the observed resilience
-as a tolerance-endowment effect of the assigned prototype rather than as a structural-hole
+remains falsified under structural assignment. This control uses ER-initialized graphs in
+which camps are determined by beliefs independent of topology, so it identifies
+high-betweenness nodes rather than necessarily cross-camp brokers; it tests whether the H2
+verdict depends on assigning the Bridger label by index, not whether structural-hole
+centrality per se matters. Within that scope, we describe the observed resilience as a
+tolerance-endowment effect of the assigned prototype rather than as a structural-hole
 mechanism.
 
 \begin{table*}[t]
@@ -465,12 +412,17 @@ keep/mute/unfollow/block to reinforce/decay/block.
 
 The placebo arm changes modularity by only $\LlmPlaceboQDelta$ ($p=\LlmPlaceboQP$), and the
 LLM arm differs from the placebo arm by $\LlmVsPlaceboQDelta$ in modularity
-($p=\LlmVsPlaceboQP$). The per-event agreement rate is \LlmRuleAgreementRate{}
-(\LlmRuleAgreementAgree{}/\LlmRuleAgreementDecisions{}); the dominant agreement cell is
-keep--reinforce, while most disagreements are mute decisions that the rule backend would
-have handled as decay or block. Both controls therefore point in the same direction: at this
-coverage, the LLM layer's structural null is not explained by the number of severed ties
-alone, and its action policy is close to, but not identical with, the rule backend.
+($p=\LlmVsPlaceboQP$). Raw per-event agreement is \LlmRuleAgreementRate{}
+(\LlmRuleAgreementAgree{}/\LlmRuleAgreementDecisions{}), but this is dominated by the
+majority keep--reinforce cell (Cohen's $\kappa=\LlmAgreementKappa$). On the
+\LlmSevereEvents{} events where the rule backend would disconnect a tie
+(\LlmRuleBlockEvents{} blocks plus \LlmRuleDecayEvents{} decays), agreement is only
+\LlmSevereAgree{}/\LlmSevereEvents{} (\LlmSevereAgreementRate); the LLM issued
+\LlmArmActionUnfollow{} unfollows and \LlmArmActionBlock{} block, versus
+\LlmRuleBlockEvents{} rule blocks. The aggregate structural null is therefore robust, while
+the action policy is not identical: the LLM is more conservative than the rule backend
+exactly on the minority of events that can change topology. Both controls point in the same
+direction: at this coverage, the null is not explained by the number of severed ties alone.
 Table~\ref{tab:llm_placebo} reports the arm-level values.
 
 \begin{table*}[t]
@@ -496,17 +448,15 @@ Six limitations are material.
     \emph{surrogate} calibrations of published statistics rather than the published datasets
     themselves; only \textsc{SNAP Higgs (REAL)} uses an unmodified public edge list, and even
     there the camps are topology-derived proxies because the file carries no stance labels.
-    \item \textbf{Scale of the real-LLM arms.} The historical Phase~2 arm remains small
-    (\LlmSeeds{} seeds, \LlmPairs{} dyadic decisions, \LlmCalls{} batched API calls) and its
-    responses lack a full execution receipt (model identifier and token accounting) in the
-    archived artifacts. The receipt-complete Phase~6 arm (\LlmArmSeeds{} seeds,
-    \LlmArmDecidedEvents{} LLM-decided interactions, \LlmArmApiCalls{} API calls with full
-    token accounting) is larger, but its \emph{interaction coverage} is only
-    \LlmArmCoverage{}, yielding an estimated difference of $\Delta Q \in [\LlmArmQCILow, \LlmArmQCIHigh]$
-    (95\% CI; paired $A_{\mathrm{rupture}}$ differences exhibit zero sample variance across all 10 seeds),
-    which bounds the effect size any such arm can detect. The random-unfollow placebo arm and
+    \item \textbf{Scale of the real-LLM arm.} The receipt-complete Phase~6 arm
+    (\LlmArmSeeds{} seeds, \LlmArmDecidedEvents{} LLM-decided interactions,
+    \LlmArmApiCalls{} API calls with full token accounting) is larger than a pilot, but its
+    \emph{interaction coverage} is only \LlmArmCoverage{}, yielding an estimated difference
+    of $\Delta Q \in [\LlmArmQCILow, \LlmArmQCIHigh]$ (95\% CI; paired
+    $A_{\mathrm{rupture}}$ differences exhibit zero sample variance across all 10 seeds),
+    which bounds the effect size the arm can detect. The random-unfollow placebo arm and
     per-event agreement audit in Appendix~\ref{app:llm-placebo} give a noise floor for this
-    null rather than replacing the missing full-coverage experiment.
+    null rather than replacing a full-coverage experiment.
     \item \textbf{Scope of the attribution ablation.} The ablation spans $d \in \{1,3\}$ and
     a 10-arm factorial combination of synchronous, asynchronous uniform-speaker, and
     asynchronous weighted-speaker schedules. The results demonstrate that asynchronous
@@ -574,34 +524,3 @@ Mitigations are concrete rather than aspirational: every run is seeded and audit
 raw public edge list is excluded from version control and published only as a hash, the real
 network's ideology variable is labelled a topology-derived proxy, and the raw LLM call
 archive makes the LLM arm replayable without further API spend.
-
-% =============================================================
-\section{Agent Prompts and LLM Semantic Interaction Schemas}
-\label{app:prompts}
-
-To validate micro-cognitive fidelity under real foundation models, agents in Phase 2 query the API backend using standardized prompt contracts. The prompt instructs the model to act as a listener with personal multi-dimensional stances evaluating an incoming peer statement.
-
-\subsection{Prompt Specification Template}
-\begin{quote}
-\small
-\texttt{System: You are an autonomous agent in a social network simulation. You hold personal stances on 3 continuous political/technical issues in range [-1.0, 1.0]:}\\
-\texttt{- Dimension 1: Government AI Safety Regulation (Pro-Safety: +1.0 vs Pro-Innovation: -1.0)}\\
-\texttt{- Dimension 2: Privacy and Encryption Backdoors (Pro-Privacy: +1.0 vs Law Enforcement: -1.0)}\\
-\texttt{- Dimension 3: Frontier Model Open Weights (Pro-Open: +1.0 vs Pro-Closed: -1.0)}\\
-\texttt{Your current belief vector: [\{b1\}, \{b2\}, \{b3\}]. Your tolerance threshold is \{theta\}.}\\
-\texttt{You observe the following statement from speaker \{speaker\_id\}: "\{statement\}".}\\
-\texttt{Output strict JSON with format:}\\
-\texttt{\{ "cognitive\_dissonance": float [0.0, 2.0], "belief\_shift": [float, float, float], "relationship\_action": "reinforce" | "decay" | "unfollow" | "block", "reasoning": "brief string" \}}
-\end{quote}
-
-\subsection{API Cost Ledger and Token Accounting}
-All API requests were executed with batching ($K_{\mathrm{events}}=12$ per dispatch) and semantic caching. The archived execution receipts in \texttt{data/llm/seed*/final.json} record:
-\begin{itemize}
-    \item Total batched API calls executed: \LlmCalls{} (covering \LlmPairs{} dyadic interaction evaluations across \LlmSeeds{} seeds).
-    \item Budget ceiling pre-specified: 100 API calls. Actual consumption: \LlmCalls\% of budget.
-    \item Each dyadic decision was logged with the listener profile, the observed statement, the returned belief vector, the relationship action and a natural-language rationale.
-\end{itemize}
-\paragraph{Disclosed receipt gap for the historical arm, and how it is closed.}
-The \emph{historical} Phase~2 artifacts (\texttt{data/llm/seed*/final.json}) record the number of calls, the number of validated responses and the semantic-hash cache behaviour, but \emph{not} the model identifier, sampling temperature, or per-call token counts. That arm therefore cannot be re-executed bit-for-bit against a pinned model, and the paper makes no claim that depends on those fields; we report it as \emph{qualitative semantic evidence} (decision rationales such as ``disagree strongly on regulation, but we agree on open-source'').
-
-The gap is closed for all new work by the unified backend of Section~\ref{sec:llm-arm}: every call now writes a content-addressed receipt recording the model identifier, the temperature, the input/output/thinking token counts, the provider response identifier and the stop reason, plus the parse-success rate and the action distribution (Table~\ref{tab:llm_arm}). Because the archive is keyed by a hash of the full request, a re-run of the same experiment produces \emph{zero} API calls and a bit-identical result, which is a strictly stronger reproducibility property than a fresh call with a possibly different model version. The one thing that remains unrecoverable is the identity of the model that produced the \emph{historical} artifacts, and we state that limitation rather than guessing it.

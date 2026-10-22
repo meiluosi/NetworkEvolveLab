@@ -175,9 +175,8 @@ python reproduce.py --all
 
 - [paper/main.tex](paper/main.tex) & [paper/appendix.tex](paper/appendix.tex)：**完整学术论文手稿与补充材料（LaTeX）**
 - [paper/tables/](paper/tables/)：**由结果 JSON 自动生成的论文表格与数值宏**（`scripts/generate_paper_tables.py`）
-- [docs/ARS_FULL_CHAIN_AUDIT.md](docs/ARS_FULL_CHAIN_AUDIT.md)：**ARS 全链路复核报告（缺陷清单、修复动作、7 类失败模式判定）**
-- [docs/EXPERIMENT_REPORT.md](docs/EXPERIMENT_REPORT.md)：全阶段实验报告、SOTA 横向矩阵、统计检验与理论解释
-- [paper/THEORY_AND_PROPOSITIONS.md](paper/THEORY_AND_PROPOSITIONS.md)：形式化命题证明（模块度上界、非对称撕裂、推荐单调渗透）
+- [docs/archive/ARS_FULL_CHAIN_AUDIT.md](docs/archive/ARS_FULL_CHAIN_AUDIT.md)：历史复核记录（已归档；当前数字以 paper/tables/macros.tex 与 results/ 为准）
+- [docs/archive/EXPERIMENT_REPORT.md](docs/archive/EXPERIMENT_REPORT.md)：历史实验报告（已归档）
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)：动力学状态转移方程与数学形式化
 - [src/network_evolve/](src/network_evolve/)：动态加权图、数据集加载器、基线方法与政策干预引擎源码
 - [results/figures/](results/figures/)：出版级矢量与位图图表（Figure 1 至 Figure 7）

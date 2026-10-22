@@ -6672,7 +6672,13 @@
         "reinforce": 1636,
         "decay": 32
       },
-      "agreement_rate": 0.9628123184195235
+      "agreement_rate": 0.9628123184195235,
+      "cohen_kappa": 0.6202402460384226,
+      "rule_block_events": 53,
+      "rule_decay_events": 32,
+      "rule_severe_events": 85,
+      "severe_agreement": 37,
+      "severe_agreement_rate": 0.43529411764705883
     },
     "note": "coverage_of_interactions = LLM 实际落地决策的互动数 / LLM 臂引擎全部互动数；llm_hybrid 是混合后端，未被 LLM 覆盖的互动仍走规则后端（已显式披露）"
   }

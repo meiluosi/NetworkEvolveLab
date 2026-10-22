@@ -37,7 +37,7 @@
     \answerYes{Yes. Five of the six benchmark networks are explicitly labelled \emph{surrogate} calibrations that reproduce published structural statistics but are not the datasets themselves; only \textsc{SNAP Higgs} is derived from the real public edge list. The SNAP file contains no ideology labels, so the two camps used as initial beliefs are a \emph{topology-derived structural proxy} obtained from Louvain communities of the induced subgraph, and are not human-annotated stance. The induced-subgraph sampling (high-degree node pools) is a further selection bias, and both facts are stated in Section~\ref{sec:benchmark} and Appendix~\ref{app:datasets}.}
 
     \item Did you describe the limitations of your work?
-    \answerYes{Yes. Section~\ref{sec:discussion} and Appendix~\ref{app:prompts} state the limitations explicitly: the LLM arm is a \emph{mixed} backend whose interaction coverage is reported rather than hidden; the earlier LLM arm's receipts were incomplete and this is disclosed; the surrogate networks are not the real datasets; and the engine's scalar update rule is an abstraction, not a model of human cognition.}
+    \answerYes{Yes. Section~\ref{sec:discussion} and Appendix~\ref{app:limitations} state the limitations explicitly: the LLM arm is a \emph{mixed} backend whose interaction coverage is reported rather than hidden; the surrogate networks are not the real datasets; and the engine's scalar update rule is an abstraction, not a model of human cognition.}
 
     \item Did you discuss any potential negative societal impacts of your work?
     \answerYes{Yes. Section~\ref{sec:ethics} discusses that (i) a validated model of asymmetric rupture could be used to design interventions that accelerate polarization, (ii) the counterfactual platform policies are efficiency findings, not prescriptions, and (iii) the surrogate calibrations must not be cited as measurements of any real population.}
@@ -55,10 +55,10 @@
 \item Additionally, if your study involves hypotheses testing\ldots
 \begin{enumerate}
     \item Did you clearly state the assumptions underlying all theoretical results?
-    \answerYes{Yes. Proposition~\ref{prop:modularity} assumes a partition into $K$ non-empty groups and a symmetric weighted adjacency matrix; Proposition~\ref{prop:asym} assumes $d \geq 2$, per-agent anisotropic attention profiles $\mathbf{w}_i \neq \mathbf{w}_j$ that are non-collinear, and a synchronous update schedule (the asynchronous case is separated out in Remark~\ref{rem:twosources}).}
+    \answerYes{Yes. Proposition~\ref{prop:modularity} assumes a partition into $K$ non-empty groups and a symmetric weighted adjacency matrix; Remark~\ref{rem:twosources} separates the anisotropy and schedule mechanisms without claiming a measure-theoretic theorem.}
 
     \item Have you provided justifications for all theoretical results?
-    \answerYes{Yes. Both propositions are proved in Appendix~\ref{app:proofs}, and the numerical claim that every reported modularity value satisfies the bound is discharged by an exhaustive per-configuration audit (Phase~5, Section~\ref{sec:bound-audit-num}) rather than by assertion.}
+    \answerYes{Yes. Both propositions are proved in Appendix~\ref{app:proofs}, and the numerical claim that every reported modularity value satisfies the bound is discharged by the Phase~5 audit rather than by assertion.}
 
     \item Did you discuss competing hypotheses or theories that might challenge or complement your theoretical results?
     \answerYes{Yes. Remark~\ref{rem:twosources} separates two distinct generators of asymmetric rupture --- per-agent anisotropy and asynchronous scheduling --- and the attribution ablation (Section~\ref{sec:attribution}) shows that both contribute, so the asymmetry we measure is not evidence for semantic dimensionality per se.}
@@ -79,10 +79,10 @@
 \item Additionally, if you are including theoretical proofs\ldots
 \begin{enumerate}
     \item Did you state the full set of assumptions of all theoretical results?
-    \answerYes{Yes, in the statements of Proposition~\ref{prop:modularity} and Proposition~\ref{prop:asym} and in Appendix~\ref{app:proofs}, where the assumptions are restated before each derivation.}
+    \answerYes{Yes, in the statement of Proposition~\ref{prop:modularity} and in Appendix~\ref{app:proofs}, where the assumptions are restated before the derivation.}
 
     \item Did you include complete proofs of all theoretical results?
-    \answerYes{Yes, Appendix~\ref{app:proofs} contains the full derivation of the generalized modularity bound (Appendix~\ref{app:proof_modularity}) and of the positive-measure asymmetry result (Appendix~\ref{app:proof_polytope}), including the construction of the open ball in the difference-vector coordinates.}
+    \answerYes{Yes, Appendix~\ref{app:proofs} contains the full derivation of the generalized modularity bound (Appendix~\ref{app:proof_modularity}).}
 \end{enumerate}
 
 \item Additionally, if you ran machine learning experiments\ldots
