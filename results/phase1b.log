@@ -1,13 +1,13 @@
 ## (A) H2 消融：Bridger 机制（theta=0.4, block=1.2, T=60, seeds=20）
 config | bridger_ret | other_ret | gap(rel) [CI95] | p | H2
 base(原模型,bridger_tol=0.7) | 0.664 | 0.511 | -0.299 [-0.359,-0.238] | 1 | False
-base,bridger_tol=θ(无天然包容优势) | 0.514 | 0.497 | -0.034 [-0.092,+0.014] | 0.93 | False
+base,bridger_tol=θ(无天然包容优势) | 0.514 | 0.497 | -0.034 [-0.092,+0.014] | 0.89 | False
 moderate(结构) | 0.923 | 0.762 | -0.211 [-0.239,-0.190] | 1 | False
 stress(动力学) | 0.634 | 0.507 | -0.249 [-0.312,-0.183] | 1 | False
 moderate+stress sens=0.3 | 0.914 | 0.759 | -0.204 [-0.229,-0.185] | 1 | False
 moderate+stress sens=0.6 | 0.890 | 0.747 | -0.192 [-0.216,-0.173] | 1 | False
 moderate+stress sens=0.9 | 0.854 | 0.741 | -0.153 [-0.176,-0.136] | 1 | False
-moderate+stress sens=0.9,bridger_tol=θ | 0.787 | 0.736 | -0.070 [-0.086,-0.054] | 0.991 | False
+moderate+stress sens=0.9,bridger_tol=θ | 0.787 | 0.736 | -0.070 [-0.086,-0.054] | 1 | False
 
 ## (B) block_diff 扫描（T=60）：Louvain Q_end / giant / blocks / cross
 model | block | Q_end | giant | blocks | cross | H2gap

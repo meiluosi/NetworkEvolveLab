@@ -1,0 +1,540 @@
+{
+  "args": {
+    "seeds": 10,
+    "rounds": 60,
+    "out": "results/phase5_bound_audit.json",
+    "procs": 10
+  },
+  "theory": {
+    "statement": "对 K 个社群的任意划分，Q <= 1 - 1/K（等号需等量且无跨社群边）",
+    "bound_by_k": {
+      "2": 0.5,
+      "3": 0.6666666666666667,
+      "4": 0.75,
+      "5": 0.8,
+      "6": 0.8333333333333334,
+      "7": 0.8571428571428572,
+      "8": 0.875
+    },
+    "min_communities_for_q_above_0.65": 3,
+    "note": "K=2 -> 0.500；K=3 -> 0.667；K=4 -> 0.750。故 Q>0.65 需 K>=3，原论文以 K=2 特例断言『Q>0.65 数学上不可能』属过度推广。"
+  },
+  "benchmark_bound_check": {
+    "n_cells_checked": 42,
+    "n_violations": 0,
+    "violations": [],
+    "cells": [
+      {
+        "dataset": "Twitter_Election_2020",
+        "model": "DeGroot",
+        "Q": 0.491,
+        "K": 2,
+        "upper_bound": 0.5,
+        "holds": true
+      },
+      {
+        "dataset": "Twitter_Election_2020",
+        "model": "Hegselmann_Krause",
+        "Q": 0.5,
+        "K": 2,
+        "upper_bound": 0.5,
+        "holds": true
+      },
+      {
+        "dataset": "Twitter_Election_2020",
+        "model": "Friedkin_Johnsen",
+        "Q": 0.491,
+        "K": 2,
+        "upper_bound": 0.5,
+        "holds": true
+      },
+      {
+        "dataset": "Twitter_Election_2020",
+        "model": "Park_et_al_2023",
+        "Q": 0.491,
+        "K": 2,
+        "upper_bound": 0.5,
+        "holds": true
+      },
+      {
+        "dataset": "Twitter_Election_2020",
+        "model": "Gu_et_al_2025",
+        "Q": 0.445,
+        "K": 2,
+        "upper_bound": 0.5,
+        "holds": true
+      },
+      {
+        "dataset": "Twitter_Election_2020",
+        "model": "Ours_CoEvolution_Simplified",
+        "Q": 0.465,
+        "K": 2,
+        "upper_bound": 0.5,
+        "holds": true
+      },
+      {
+        "dataset": "Twitter_Election_2020",
+        "model": "Ours_CoEvolution_Engine",
+        "Q": 0.5,
+        "K": 2,
+        "upper_bound": 0.5,
+        "holds": true
+      },
+      {
+        "dataset": "SNAP_Higgs_Twitter",
+        "model": "DeGroot",
+        "Q": 0.249,
+        "K": 5,
+        "upper_bound": 0.8,
+        "holds": true
+      },
+      {
+        "dataset": "SNAP_Higgs_Twitter",
+        "model": "Hegselmann_Krause",
+        "Q": 0.513,
+        "K": 5,
+        "upper_bound": 0.8,
+        "holds": true
+      },
+      {
+        "dataset": "SNAP_Higgs_Twitter",
+        "model": "Friedkin_Johnsen",
+        "Q": 0.249,
+        "K": 5,
+        "upper_bound": 0.8,
+        "holds": true
+      },
+      {
+        "dataset": "SNAP_Higgs_Twitter",
+        "model": "Park_et_al_2023",
+        "Q": 0.249,
+        "K": 5,
+        "upper_bound": 0.8,
+        "holds": true
+      },
+      {
+        "dataset": "SNAP_Higgs_Twitter",
+        "model": "Gu_et_al_2025",
+        "Q": 0.197,
+        "K": 5,
+        "upper_bound": 0.8,
+        "holds": true
+      },
+      {
+        "dataset": "SNAP_Higgs_Twitter",
+        "model": "Ours_CoEvolution_Simplified",
+        "Q": 0.235,
+        "K": 4,
+        "upper_bound": 0.75,
+        "holds": true
+      },
+      {
+        "dataset": "SNAP_Higgs_Twitter",
+        "model": "Ours_CoEvolution_Engine",
+        "Q": 0.322,
+        "K": 4,
+        "upper_bound": 0.75,
+        "holds": true
+      },
+      {
+        "dataset": "Reddit_ConvoKit",
+        "model": "DeGroot",
+        "Q": 0.697,
+        "K": 4,
+        "upper_bound": 0.75,
+        "holds": true
+      },
+      {
+        "dataset": "Reddit_ConvoKit",
+        "model": "Hegselmann_Krause",
+        "Q": 0.735,
+        "K": 4,
+        "upper_bound": 0.75,
+        "holds": true
+      },
+      {
+        "dataset": "Reddit_ConvoKit",
+        "model": "Friedkin_Johnsen",
+        "Q": 0.697,
+        "K": 4,
+        "upper_bound": 0.75,
+        "holds": true
+      },
+      {
+        "dataset": "Reddit_ConvoKit",
+        "model": "Park_et_al_2023",
+        "Q": 0.697,
+        "K": 4,
+        "upper_bound": 0.75,
+        "holds": true
+      },
+      {
+        "dataset": "Reddit_ConvoKit",
+        "model": "Gu_et_al_2025",
+        "Q": 0.527,
+        "K": 4,
+        "upper_bound": 0.75,
+        "holds": true
+      },
+      {
+        "dataset": "Reddit_ConvoKit",
+        "model": "Ours_CoEvolution_Simplified",
+        "Q": 0.654,
+        "K": 4,
+        "upper_bound": 0.75,
+        "holds": true
+      },
+      {
+        "dataset": "Reddit_ConvoKit",
+        "model": "Ours_CoEvolution_Engine",
+        "Q": 0.686,
+        "K": 4,
+        "upper_bound": 0.75,
+        "holds": true
+      },
+      {
+        "dataset": "DEBATE_Benchmark",
+        "model": "DeGroot",
+        "Q": 0.491,
+        "K": 2,
+        "upper_bound": 0.5,
+        "holds": true
+      },
+      {
+        "dataset": "DEBATE_Benchmark",
+        "model": "Hegselmann_Krause",
+        "Q": 0.498,
+        "K": 2,
+        "upper_bound": 0.5,
+        "holds": true
+      },
+      {
+        "dataset": "DEBATE_Benchmark",
+        "model": "Friedkin_Johnsen",
+        "Q": 0.491,
+        "K": 2,
+        "upper_bound": 0.5,
+        "holds": true
+      },
+      {
+        "dataset": "DEBATE_Benchmark",
+        "model": "Park_et_al_2023",
+        "Q": 0.491,
+        "K": 2,
+        "upper_bound": 0.5,
+        "holds": true
+      },
+      {
+        "dataset": "DEBATE_Benchmark",
+        "model": "Gu_et_al_2025",
+        "Q": 0.453,
+        "K": 2,
+        "upper_bound": 0.5,
+        "holds": true
+      },
+      {
+        "dataset": "DEBATE_Benchmark",
+        "model": "Ours_CoEvolution_Simplified",
+        "Q": 0.471,
+        "K": 2,
+        "upper_bound": 0.5,
+        "holds": true
+      },
+      {
+        "dataset": "DEBATE_Benchmark",
+        "model": "Ours_CoEvolution_Engine",
+        "Q": 0.497,
+        "K": 2,
+        "upper_bound": 0.5,
+        "holds": true
+      },
+      {
+        "dataset": "Birdwatch_Community_Notes",
+        "model": "DeGroot",
+        "Q": 0.405,
+        "K": 2,
+        "upper_bound": 0.5,
+        "holds": true
+      },
+      {
+        "dataset": "Birdwatch_Community_Notes",
+        "model": "Hegselmann_Krause",
+        "Q": 0.498,
+        "K": 3,
+        "upper_bound": 0.6666666666666667,
+        "holds": true
+      },
+      {
+        "dataset": "Birdwatch_Community_Notes",
+        "model": "Friedkin_Johnsen",
+        "Q": 0.405,
+        "K": 2,
+        "upper_bound": 0.5,
+        "holds": true
+      },
+      {
+        "dataset": "Birdwatch_Community_Notes",
+        "model": "Park_et_al_2023",
+        "Q": 0.405,
+        "K": 2,
+        "upper_bound": 0.5,
+        "holds": true
+      },
+      {
+        "dataset": "Birdwatch_Community_Notes",
+        "model": "Gu_et_al_2025",
+        "Q": 0.318,
+        "K": 2,
+        "upper_bound": 0.5,
+        "holds": true
+      },
+      {
+        "dataset": "Birdwatch_Community_Notes",
+        "model": "Ours_CoEvolution_Simplified",
+        "Q": 0.397,
+        "K": 2,
+        "upper_bound": 0.5,
+        "holds": true
+      },
+      {
+        "dataset": "Birdwatch_Community_Notes",
+        "model": "Ours_CoEvolution_Engine",
+        "Q": 0.486,
+        "K": 2,
+        "upper_bound": 0.5,
+        "holds": true
+      },
+      {
+        "dataset": "SNAP_Higgs_Real",
+        "model": "DeGroot",
+        "Q": 0.377,
+        "K": 9,
+        "upper_bound": 0.8888888888888888,
+        "holds": true
+      },
+      {
+        "dataset": "SNAP_Higgs_Real",
+        "model": "Hegselmann_Krause",
+        "Q": 0.662,
+        "K": 8,
+        "upper_bound": 0.875,
+        "holds": true
+      },
+      {
+        "dataset": "SNAP_Higgs_Real",
+        "model": "Friedkin_Johnsen",
+        "Q": 0.377,
+        "K": 9,
+        "upper_bound": 0.8888888888888888,
+        "holds": true
+      },
+      {
+        "dataset": "SNAP_Higgs_Real",
+        "model": "Park_et_al_2023",
+        "Q": 0.377,
+        "K": 9,
+        "upper_bound": 0.8888888888888888,
+        "holds": true
+      },
+      {
+        "dataset": "SNAP_Higgs_Real",
+        "model": "Gu_et_al_2025",
+        "Q": 0.287,
+        "K": 8,
+        "upper_bound": 0.875,
+        "holds": true
+      },
+      {
+        "dataset": "SNAP_Higgs_Real",
+        "model": "Ours_CoEvolution_Simplified",
+        "Q": 0.393,
+        "K": 5,
+        "upper_bound": 0.8,
+        "holds": true
+      },
+      {
+        "dataset": "SNAP_Higgs_Real",
+        "model": "Ours_CoEvolution_Engine",
+        "Q": 0.414,
+        "K": 8,
+        "upper_bound": 0.875,
+        "holds": true
+      }
+    ],
+    "note": "Q>0.5 的单元必然对应 K>=3 的碎裂结构，与 K=2 特例不矛盾。",
+    "K_distribution": {
+      "2": 20,
+      "5": 6,
+      "4": 9,
+      "3": 1,
+      "9": 3,
+      "8": 3
+    }
+  },
+  "engine_grid": [
+    {
+      "config": "theta=0.2|block=None|p_form=0.1",
+      "Q_mean": 0.4856617213673481,
+      "Q_max": 0.4999990134668489,
+      "K_mean": 2.1,
+      "K_max": 3,
+      "K_min": 2,
+      "frac_seeds_bipolar_K2": 0.9,
+      "bound_max": 0.6666666666666667,
+      "all_cells_within_bound": true,
+      "h1_threshold_0.65_reached": false,
+      "homo_comms_max": 3
+    },
+    {
+      "config": "theta=0.2|block=None|p_form=0.3",
+      "Q_mean": 0.4884679249731919,
+      "Q_max": 0.49999990937232053,
+      "K_mean": 2.1,
+      "K_max": 3,
+      "K_min": 2,
+      "frac_seeds_bipolar_K2": 0.9,
+      "bound_max": 0.6666666666666667,
+      "all_cells_within_bound": true,
+      "h1_threshold_0.65_reached": false,
+      "homo_comms_max": 3
+    },
+    {
+      "config": "theta=0.2|block=1.2|p_form=0.1",
+      "Q_mean": 0.4853390426214764,
+      "Q_max": 0.4999889611274248,
+      "K_mean": 2.1,
+      "K_max": 3,
+      "K_min": 2,
+      "frac_seeds_bipolar_K2": 0.9,
+      "bound_max": 0.6666666666666667,
+      "all_cells_within_bound": true,
+      "h1_threshold_0.65_reached": false,
+      "homo_comms_max": 3
+    },
+    {
+      "config": "theta=0.2|block=1.2|p_form=0.3",
+      "Q_mean": 0.4873833867806791,
+      "Q_max": 0.4999992931607841,
+      "K_mean": 2.1,
+      "K_max": 3,
+      "K_min": 2,
+      "frac_seeds_bipolar_K2": 0.9,
+      "bound_max": 0.6666666666666667,
+      "all_cells_within_bound": true,
+      "h1_threshold_0.65_reached": false,
+      "homo_comms_max": 3
+    },
+    {
+      "config": "theta=0.3|block=None|p_form=0.1",
+      "Q_mean": 0.4721786065114766,
+      "Q_max": 0.4999990134668489,
+      "K_mean": 2.2,
+      "K_max": 3,
+      "K_min": 2,
+      "frac_seeds_bipolar_K2": 0.8,
+      "bound_max": 0.6666666666666667,
+      "all_cells_within_bound": true,
+      "h1_threshold_0.65_reached": false,
+      "homo_comms_max": 3
+    },
+    {
+      "config": "theta=0.3|block=None|p_form=0.3",
+      "Q_mean": 0.4727330794930659,
+      "Q_max": 0.4998876540550829,
+      "K_mean": 2.1,
+      "K_max": 3,
+      "K_min": 2,
+      "frac_seeds_bipolar_K2": 0.9,
+      "bound_max": 0.6666666666666667,
+      "all_cells_within_bound": true,
+      "h1_threshold_0.65_reached": false,
+      "homo_comms_max": 3
+    },
+    {
+      "config": "theta=0.3|block=1.2|p_form=0.1",
+      "Q_mean": 0.48107548558671454,
+      "Q_max": 0.4999889611274248,
+      "K_mean": 2.1,
+      "K_max": 3,
+      "K_min": 2,
+      "frac_seeds_bipolar_K2": 0.9,
+      "bound_max": 0.6666666666666667,
+      "all_cells_within_bound": true,
+      "h1_threshold_0.65_reached": false,
+      "homo_comms_max": 3
+    },
+    {
+      "config": "theta=0.3|block=1.2|p_form=0.3",
+      "Q_mean": 0.48504505995895186,
+      "Q_max": 0.4999992931607841,
+      "K_mean": 2.1,
+      "K_max": 3,
+      "K_min": 2,
+      "frac_seeds_bipolar_K2": 0.9,
+      "bound_max": 0.6666666666666667,
+      "all_cells_within_bound": true,
+      "h1_threshold_0.65_reached": false,
+      "homo_comms_max": 3
+    },
+    {
+      "config": "theta=0.4|block=None|p_form=0.1",
+      "Q_mean": 0.40306684453299946,
+      "Q_max": 0.4712356549257234,
+      "K_mean": 2.2,
+      "K_max": 3,
+      "K_min": 2,
+      "frac_seeds_bipolar_K2": 0.8,
+      "bound_max": 0.6666666666666667,
+      "all_cells_within_bound": true,
+      "h1_threshold_0.65_reached": false,
+      "homo_comms_max": 3
+    },
+    {
+      "config": "theta=0.4|block=None|p_form=0.3",
+      "Q_mean": 0.33874545143070006,
+      "Q_max": 0.47663639015321796,
+      "K_mean": 2.1,
+      "K_max": 3,
+      "K_min": 2,
+      "frac_seeds_bipolar_K2": 0.9,
+      "bound_max": 0.6666666666666667,
+      "all_cells_within_bound": true,
+      "h1_threshold_0.65_reached": false,
+      "homo_comms_max": 3
+    },
+    {
+      "config": "theta=0.4|block=1.2|p_form=0.1",
+      "Q_mean": 0.4464298408848138,
+      "Q_max": 0.4907224712318271,
+      "K_mean": 2.1,
+      "K_max": 3,
+      "K_min": 2,
+      "frac_seeds_bipolar_K2": 0.9,
+      "bound_max": 0.6666666666666667,
+      "all_cells_within_bound": true,
+      "h1_threshold_0.65_reached": false,
+      "homo_comms_max": 3
+    },
+    {
+      "config": "theta=0.4|block=1.2|p_form=0.3",
+      "Q_mean": 0.4271807876641846,
+      "Q_max": 0.4939825597777363,
+      "K_mean": 2.3,
+      "K_max": 3,
+      "K_min": 2,
+      "frac_seeds_bipolar_K2": 0.7,
+      "bound_max": 0.6666666666666667,
+      "all_cells_within_bound": true,
+      "h1_threshold_0.65_reached": false,
+      "homo_comms_max": 3
+    }
+  ],
+  "summary": {
+    "n_grid_configs": 12,
+    "all_grid_cells_within_bound": true,
+    "any_grid_config_reaching_q_above_0.65": false,
+    "max_K_observed_in_engine": 3,
+    "engine_stays_bipolar": true,
+    "benchmark_violations": 0
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "modularity": 0.2677163326933832,
+  "num_comms": 4,
+  "size_gini": 0.1,
+  "small_comm_frac": 0.0,
+  "rupture_asymmetry": 1.0,
+  "polarization": 0.6843915665604777,
+  "edges": 176,
+  "giant_frac": 1.0,
+  "n_mutual": 10.0,
+  "n_mutual_broken": 1.0,
+  "n_one_sided": 1.0,
+  "cross_camp_edge_frac": 0.4659090909090909,
+  "ledger": {
+    "budget_calls": 100,
+    "calls": 2,
+    "cache_hits": 0,
+    "log": [
+      {
+        "call": 1,
+        "tag": "batch_60_pairs",
+        "items": 60
+      },
+      {
+        "call": 2,
+        "tag": "batch_60_pairs",
+        "items": 60
+      }
+    ]
+  },
+  "valid_stats": [
+    {
+      "valid": 60,
+      "fallback": 0
+    },
+    {
+      "valid": 60,
+      "fallback": 0
+    }
+  ],
+  "replayed": true
+}

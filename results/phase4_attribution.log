@@ -1,0 +1,23 @@
+=== Phase 4 归因消融 (seeds=20, rounds=30, nodes=60, p_edge=0.15) ===
+所有实验臂共享同一 seed 的初始图与初始信念（单因子受控对比）；互惠边初始权重已对称化
+
+arm | A_rupture mean±CI | frac(A≡0) | frac(A未定义) | n_mutual_broken | polarization | modularity
+Scalar d=1 / async                         | 0.059±0.021 | 0.15 | 0.00 | 24.700±2.132 | 0.382±0.025 | 0.497±0.039
+Scalar d=1 / sync                          | 0.000±0.000 | 1.00 | 0.00 | 23.850±2.016 | 0.384±0.044 | 0.481±0.024
+Multi-d=3 / async / anisotropic            | 0.228±0.062 | 0.05 | 0.00 | 26.450±3.579 | 0.610±0.101 | 0.379±0.041
+Multi-d=3 / sync / anisotropic             | 0.216±0.051 | 0.00 | 0.00 | 26.600±3.054 | 0.541±0.094 | 0.355±0.032
+Multi-d=3 / sync / isotropic               | 0.000±0.000 | 1.00 | 0.00 | 28.150±2.760 | 0.824±0.103 | 0.487±0.042
+Multi-d=3 / async / original tol (reference) | 0.134±0.038 | 0.00 | 0.00 | 31.600±3.477 | 1.084±0.113 | 0.544±0.049
+
+=== 决定性对比（配对，同 seed）===
+调度效应（标量）：异步 - 同步: mean ΔA = +0.0593 (n=20, pos=17, both-zero=3) wilcoxon p=0.000291
+调度效应（多维）：异步 - 同步: mean ΔA = +0.0113 (n=20, pos=11, both-zero=1) wilcoxon p=0.748
+个体各向异性效应（同步）：各向异性 - 各向同性: mean ΔA = +0.2162 (n=20, pos=20, both-zero=0) wilcoxon p=1.91e-06
+容忍度规则效应（异步）：原始规则 - 听者依赖规则: mean ΔA = -0.0934 (n=20, pos=5, both-zero=0) wilcoxon p=0.000851
+
+=== 归因判定 ===
+scalar_sync_is_exactly_symmetric: True
+isotropic_sync_is_exactly_symmetric: True
+multidim_sync_asymmetry_positive: True
+async_scheduler_creates_asymmetry_in_scalar_model: True
+conclusion: SUPPORTED_WITH_SCOPE: 同步调度下，标量模型与各向同性多维模型的断裂严格对称（A≡0），仅当引入『个体各向异性语义判据』后才产生非对称撕裂；同时异步调度本身即可在标量模型中制造非对称断裂，故原论文把 A_rupture 全部归因于『多维语义』属于过度归因，正确表述为『个体各向异性语义判据』与『异步调度』的联合效应。

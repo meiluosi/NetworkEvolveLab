@@ -1,0 +1,16 @@
+{
+ "model": "MiniMax-M3.1-Flash",
+ "temperature": 0.0,
+ "max_tokens": 2048,
+ "request_hash": "300d680c6754d28ded614e84bd11d9f529018410837dd458282f547215ad1f5b",
+ "response_id": "072821afd6ecfe3b150369a3db981646",
+ "stop_reason": "end_turn",
+ "input_tokens": 689,
+ "output_tokens": 222,
+ "thinking_tokens": 126,
+ "created_at": "2026-10-21T16:56:19.612431+00:00",
+ "n_events": 2,
+ "system": "You are an autonomous agent in a social network simulation.\nYou hold a personal stance on each issue below, expressed as a number in [-1.0, 1.0]\n(-1.0 = most negative pole, 0.0 = neutral, +1.0 = most positive pole).\nA peer has just spoken to you. Decide (a) how your own stance shifts and\n(b) what you do with the relationship.\n\nOutput STRICT JSON only, with no prose and no code fence:\n{\"decisions\": [{\"id\": \"<event id>\", \"new_belief\": [ ...one number per issue... ],\n\"action\": \"keep\" | \"mute\" | \"unfollow\" | \"block\", \"reasoning\": \"<max 25 words>\"}]}\n\nRules:\n- Return exactly one decision per input event, in the same order, reusing each \"id\".\n- \"new_belief\" must have the same length as the issue list of that event.\n- Use \"keep\" when you accept the statement, \"mute\" when you want to see less of this\n  speaker, \"unfollow\" when you end the follow, \"block\" when you also refuse any future\n  contact.\n- Shifts must be small (at most 0.5 in absolute value) and must be plausible given your\n  archetype. A hub is stubborn, a bridger is tolerant, a long-tail responder is volatile.\n- If the statement is close to your own stance, keep the tie; if it is far, consider\n  muting, unfollowing or blocking.\n",
+ "prompt": "Decide for every event in the JSON below. Reply with the strict JSON object described in your instructions.\n\n{\"issues\": [{\"issue\": \"the contested policy axis\", \"negative_pole\": \"strongly against the incumbent policy direction\", \"positive_pole\": \"strongly for the incumbent policy direction\"}], \"archetypes\": {\"hub\": \"high-reach agenda setter, stubborn, amplifies its own position\", \"bridger\": \"spans opposing clusters, tolerant, keeps weak ties alive\", \"tail\": \"low-reach responder, volatile, easily swayed and easily lost\"}, \"events\": [{\"id\": \"e14_s0\", \"your_archetype\": \"tail\", \"your_stance\": [0.84], \"your_profile\": \"strongly strongly for the incumbent policy directions the contested policy axis\", \"your_tolerance\": 0.4, \"tie_strength\": 0.675, \"peer_says\": \"Announcing loudly: I strongly strongly for the incumbent policy direction the contested policy axis.\"}, {\"id\": \"e15_s0\", \"your_archetype\": \"tail\", \"your_stance\": [0.706], \"your_profile\": \"strongly strongly for the incumbent policy directions the contested policy axis\", \"your_tolerance\": 0.4, \"tie_strength\": 0.367, \"peer_says\": \"Announcing loudly: I strongly strongly for the incumbent policy direction the contested policy axis.\"}]}",
+ "response_text": "{\"decisions\":[{\"id\":\"e14_s0\",\"new_belief\":[0.84],\"action\":\"keep\",\"reasoning\":\"The peer strongly agrees with my position, reinforcing my existing stance without warranting any relationship change.\"},{\"id\":\"e15_s0\",\"new_belief\":[0.706],\"action\":\"keep\",\"reasoning\":\"The peer aligns with my strongly positive view, so I retain the tie and leave my stance unchanged.\"}]}"
+}
