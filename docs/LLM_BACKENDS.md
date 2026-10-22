@@ -1,10 +1,10 @@
 # LLM backends: MiniMax (used in the paper) and DeepSeek (optional second family)
 
-The paper's LLM arms use MiniMax-M3.1-Flash (2.5% coverage) and MiniMax-M3
-(19.3% coverage). The two are the same model family; the paper explicitly does
-not claim a cross-family model effect. DeepSeek can be added as a genuinely
-different family, but **the DeepSeek key is not stored in this repository** and
-must be supplied through environment variables.
+The paper's LLM arms use MiniMax-M3.1-Flash (2.5% coverage), MiniMax-M3
+(19.3% coverage), and DeepSeek-flash (19.4% coverage). DeepSeek supplies the
+independent second model family in the high-coverage comparison. **The DeepSeek
+key is not stored in this repository** and must be supplied through environment
+variables.
 
 ## How the adapter works
 
@@ -91,8 +91,7 @@ non-thinking-compatible choice.
 
 1. add the new result to `scripts/record_provenance.py`;
 2. add a model row to `paper/tables/llm_highcov.tex` / `llm_models` table;
-3. update the paper limitation text: it currently says no second independent
-   model family was available. Once the DeepSeek arm exists, that sentence
-   must be replaced with the actual comparison and its caveats;
+3. update the paper limitation text with the actual comparison and its caveats
+   (the current paper already includes the DeepSeek arm);
 4. run `record_provenance.py`, `check_paper_integrity.py`,
    `generate_paper_tables.py --check`, tests, and compile.
