@@ -1,6 +1,8 @@
 # 大模型认知驱动网络拓扑共演实验室：全阶段实验报告
 ## Co-evolution of LLM Cognition & Social Topology: Comprehensive Experimental Report
 
+> **文档状态（2026-10-22）**：本文件是历史实验报告，保留当时的数字与判断用于审计溯源，**不应当作为当前结果的引用来源**。Phase 1c 已在后续版本扩展到 $\theta\in[0.15,0.85]$，Phase 4 已扩展到 10 臂并加入交互项检验；当前论文数字以 [`paper/tables/macros.tex`](../paper/tables/macros.tex) 与 `results/*.json` 为准。本文中出现的旧网格 $[0.30,0.90]$、旧阈值均值及“随拓扑而变”等表述均为历史版本。
+
 **项目名称**: NetworkEvolveLab
 **研究周期**: Phase 0 (统计基线) -> Phase 1/1b (异质原型与受压消融) -> Phase 2 (语义认知与 LLM 真机) -> Phase 3 (去极化平台干预) -> Phase 4 (归因消融) -> Phase 5 (上界一致性审计)
 **实验准则**: 固定随机种子、95% 置信区间（Student's t / Bootstrap / Wilcoxon）、H2 判定以**种子**为独立统计单元、API 成本全量记账、所有产物纳入 `results/PROVENANCE.json` 溯源清单。

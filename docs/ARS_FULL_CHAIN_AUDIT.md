@@ -1,5 +1,7 @@
 # ARS 全链路复核报告（Academic Research Skills — Full-Chain Audit）
 
+> **文档状态（2026-10-22）**：本文件是历史审计报告，保留当时的缺陷清单与修复记录用于审计溯源；其中的旧 Phase 1c 网格 $[0.30,0.90]$、旧阈值均值、Phase 4 六臂时期的表格等均可能已被后续版本取代。当前论文数字以 [`paper/tables/macros.tex`](../paper/tables/macros.tex) 与 `results/*.json` 为准；§8 的自动判定块由 `scripts/generate_paper_tables.py` 保持更新。
+
 > 复核对象：`NetworkEvolveLab`（LLM 认知 × 动态社交拓扑双向共演）
 > 复核方法：ARS（Academic Research Skills for Claude Code, `Imbad0202/academic-research-skills`）的
 > `academic-paper` / `academic-pipeline` 完整性门协议，特别是
