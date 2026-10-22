@@ -1,0 +1,301 @@
+event_uid,source_model,model_action,model_new_belief,model_reasoning,source_receipt
+HR0001,deepseek-flash,mute,[-0.6],Far opposite statement; low-tolerance tail mutes but is swayed slightly.,data/llm_archive/deepseek-flash/7a4063f307dbb711ac0557ef21734d132e6176e4cf3a022c8a06d7074acb8a8d.json
+HR0002,deepseek-flash,unfollow,[-0.88],Far opposite and weak tie; end follow.,data/llm_archive/deepseek-flash/7167fe364fd6d058817717e4d52789437077ebb8294f25cdf0e12fd76f5080bf.json
+HR0003,MiniMax-M3,mute,[0.137],"Their opposition conflicts with my pro-policy stance, so I would reduce their visibility.",data/llm_archive/MiniMax-M3/105751c928f78bf757da4960f743550aecdbb779506ad38b78498d871129d70c.json
+HR0004,MiniMax-M3,keep,[-0.707],Strong agreement with my strongly negative stance.,data/llm_archive/MiniMax-M3/f1556feb0ccc36c16e07fa7400a0fa5d81299ae638f96b01e0b03e8a13159bf2.json
+HR0005,deepseek-flash,mute,[0.65],"Far opposite but strong tie; mute, small shift.",data/llm_archive/deepseek-flash/3803ef13184af7eb3c25debb6d6d3274fd3196ee2c2519bc2c4ace63c3da0d48.json
+HR0006,MiniMax-M3,keep,[-0.571],Reinforces my negative policy stance.,data/llm_archive/MiniMax-M3/52cbbc9629cda870eb93f4bbebae354d5b8d2d73a88b3bc018ddbb48eed46afd.json
+HR0007,deepseek-flash,keep,[0.74],At tolerance and aligned; keep and shift slightly toward peer.,data/llm_archive/deepseek-flash/739d870c4b4f5529d3f3eeabfaa28f796e33b5ff37e99ff5850f6914907417da.json
+HR0008,deepseek-flash,mute,[-0.88],Opposite but strong tie; mute rather than unfollow.,data/llm_archive/deepseek-flash/68592f49a2bc1d36d423e99f05fe659af4170b1658c299675f892350ae3ec93b.json
+HR0009,deepseek-flash,unfollow,[0.035],"Opposing pole, weak tie; disengage to limit exposure.",data/llm_archive/deepseek-flash/1cbf0f6df3695dbfce71e7cdb483f686fed3330a1018392d99887c511c313866.json
+HR0010,MiniMax-M3,keep,[0.66],Strong agreement reinforces my support and supports keeping the relationship.,data/llm_archive/MiniMax-M3/79ee0b64d5b27dfe8ab700c61e7c794de7252af71fb484338bd551e86190eff8.json
+HR0011,MiniMax-M3,mute,[0.673],"Strong opposition conflicts with me, so I reduce exposure despite the strong prior tie.",data/llm_archive/MiniMax-M3/9e76b0081cef6710c893945e826382b7f84d7b980772d3ac7d19bc542c12bfb5.json
+HR0012,deepseek-flash,keep,[-0.705],Peer strongly agrees; slight shift and keep tie.,data/llm_archive/deepseek-flash/955116480ce47f5cd99a488193b1dd97df54754584ac7f4583eb21174e020dcb.json
+HR0013,deepseek-flash,keep,[0.62],Same side and near; tail adjusts slightly and keeps tie.,data/llm_archive/deepseek-flash/f66fa4f2d89b80554bb99c529fc47f3376c4fed94023f115f61970af9a147551.json
+HR0014,MiniMax-M3,keep,[0.638],Their strongly aligned statement reinforces my own position and existing strong tie.,data/llm_archive/MiniMax-M3/c044c038dd325c71f97bc25b7a2083675be8340f10b98d29a068ca139a1af884.json
+HR0015,deepseek-flash,mute,[-0.115],"Opposite pole, moderate tie; mute to reduce friction.",data/llm_archive/deepseek-flash/1cbf0f6df3695dbfce71e7cdb483f686fed3330a1018392d99887c511c313866.json
+HR0016,deepseek-flash,mute,[-0.55],Same side but more extreme and only moderate tie; mute to reduce exposure.,data/llm_archive/deepseek-flash/0e43e545eb20849e85c30ce086760d1391ee75f16c341e0e927db0fb0f1cc9c4.json
+HR0017,MiniMax-M3,mute,[-0.621],"The peer's strong support is far from my opposition, so I reduce exposure.",data/llm_archive/MiniMax-M3/ebad7ac5dabe91458ad3b964e085771529cadbe1293fef7f63d7ebd49a33948d.json
+HR0018,deepseek-flash,mute,[-0.52],Peer is far opposite with weak tie; I mute and hold my stance.,data/llm_archive/deepseek-flash/8bd02e84d41645f4470d8903cfac23cc6096ca84363756d02ecf8be75673db57.json
+HR0019,deepseek-flash,mute,[-0.5],"Peer is on opposite side, outside tolerance; mute and only slight drift.",data/llm_archive/deepseek-flash/52fefc59b77013264b542d035feef3c2b63a48dfb5f85dc2bef0e8206fc38bac.json
+HR0020,deepseek-flash,keep,[0.675],Peer agrees with my position; slight shift toward them and keep the tie.,data/llm_archive/deepseek-flash/975c79c1a33e9000024887bc76ab5c33bdfbac9072576d935f6cf9131d512292.json
+HR0021,deepseek-flash,keep,[-0.724],Peer is close to my anti-incumbent stance; small adjustment and keep.,data/llm_archive/deepseek-flash/b8edb41949695323cf51a22c950821a9711033a82328671715979f23edba0b55.json
+HR0022,deepseek-flash,keep,[-0.75],"Bridger tolerates cross-cutting view; same side but milder, keep tie and shift slightly.",data/llm_archive/deepseek-flash/fb6b2a563bd5f6ca784b2c63781e8fb84a3ff93132ec3af90a62e74aa2dc664d.json
+HR0023,MiniMax-M3,mute,[0.421],"Their opposition is far from my positive stance, so I reduce exposure.",data/llm_archive/MiniMax-M3/c9f6d1023ba37dba130a95e4a77e31cd6db565b9a83e1d18fdd2c2679ddc3cb5.json
+HR0024,MiniMax-M3,mute,[0.289],"Their emphatic opposition conflicts with my strong support, so I reduce exposure rather than blocking.",data/llm_archive/MiniMax-M3/dbdacbfde33caf1fe8ec616124226d4f555c08fa112b9e209dea5b0661ae0a22.json
+HR0025,MiniMax-M3,mute,[-0.18],Support conflicts with my opposition and weakly motivates reducing exposure.,data/llm_archive/MiniMax-M3/3a76a47705811009e78d9da95598d9260ce84d833f531af3882d18463a60c99a.json
+HR0026,MiniMax-M3,keep,[-0.669],Our positions remain strongly aligned on the contested policy.,data/llm_archive/MiniMax-M3/3827b3bf13ddf099966cdf98a87dc190509568f5fcb9146a6cb6ebed2cb35cae.json
+HR0027,deepseek-flash,mute,[0.589],"Peer is more extreme than my moderate stance; weak tie and beyond tolerance, so mute.",data/llm_archive/deepseek-flash/6d20da1a5acf31d228044d2d8786fcf7da16a73ebd01238aaa85b6046c7f79e3.json
+HR0028,MiniMax-M3,keep,[0.62],Enthusiastic support reinforces my positive stance.,data/llm_archive/MiniMax-M3/8dae9499dacb89f202ed2e3a78a070a226e0be71161870c8efbdb58331d59a30.json
+HR0029,deepseek-flash,mute,[-0.65],Opposite moderate statement is far; mute while staying opposed.,data/llm_archive/deepseek-flash/c38293127fd77c8cdc24388231d88296faf80f1ef080180a8f038071974e25b1.json
+HR0030,MiniMax-M3,keep,[0.556],"Peer agrees; weak tie, small shift.",data/llm_archive/MiniMax-M3/9f1aeeb7989da6306d8a81950d7e08bff53823c32942a04987fafba3323beb34.json
+HR0031,deepseek-flash,keep,[0.664],"Peer aligns closely; tiny adjustment toward them, keep tie.",data/llm_archive/deepseek-flash/567d07355d34501ba9f286169e8f9aa22d06f726068a41f2ae15117b10d6f7fc.json
+HR0032,deepseek-flash,keep,[0.753],Bridger keeps the tie; minor adjustment toward peer's pro-incumbent stance.,data/llm_archive/deepseek-flash/8fa6afef4f0141a1fe83992b857cd9f184a468e3fdef74a917fefa28abfeefc5.json
+HR0033,MiniMax-M3,mute,[0.5],Strong opposition to my positive stance; volatile tail mutes.,data/llm_archive/MiniMax-M3/88cc28b5a94845d3590de4a87a18f4fda4d36d4ee1e28f5488429da04d8f9012.json
+HR0034,deepseek-flash,mute,[0.43],Moderate stance meets far opposite post; mute while shifting slightly.,data/llm_archive/deepseek-flash/26646cc553f3c3a94c55149d905599daa6e012fdd74b56645808046ba153e45e.json
+HR0035,MiniMax-M3,keep,[-0.407],Volatile tail shifts toward support but preserves weak tie.,data/llm_archive/MiniMax-M3/8e891cc6e309833176737b8334724dc3ab35febe70c6e30dc6ad5ad5968c892b.json
+HR0036,deepseek-flash,mute,[-0.86],Strong disagreement beyond tolerance; mute rather than engage.,data/llm_archive/deepseek-flash/1ed5cd01b6f2a709692df2a09c9fd504a972ccf669a3e6831c1a3296cf239a3b.json
+HR0037,MiniMax-M3,mute,[0.147],"Their opposition is far from my stance, though I retain the weak tie.",data/llm_archive/MiniMax-M3/c9f6d1023ba37dba130a95e4a77e31cd6db565b9a83e1d18fdd2c2679ddc3cb5.json
+HR0038,deepseek-flash,keep,[-0.576],Peer is moderately aligned with my stance; keep.,data/llm_archive/deepseek-flash/4f609c09dd0c997e7c9919536c16f10b722d9c2ea9745b1de515147c2d381086.json
+HR0039,MiniMax-M3,keep,[0.619],Strong agreement; keep tie.,data/llm_archive/MiniMax-M3/6ebc5872adf6fe48943bad8d618f40e4cdf72fa0bd972d87ad0575a9fae6e279.json
+HR0040,deepseek-flash,unfollow,[-0.375],"Strong opposite view; far from my stance, so I end the follow.",data/llm_archive/deepseek-flash/57c4bb98333b4fd1938d9faa6ff6d0e31a62030a68c517eda0b0117037510719.json
+HR0041,deepseek-flash,mute,[0.16],Opposing and distant from my stance; mute to see less despite a decent tie.,data/llm_archive/deepseek-flash/739d870c4b4f5529d3f3eeabfaa28f796e33b5ff37e99ff5850f6914907417da.json
+HR0042,MiniMax-M3,keep,[0.67],Strong agreement reinforces my strongly positive stance.,data/llm_archive/MiniMax-M3/8dae9499dacb89f202ed2e3a78a070a226e0be71161870c8efbdb58331d59a30.json
+HR0043,deepseek-flash,mute,[-0.62],"Far opposite post; weak-ish tie, tail mutes.",data/llm_archive/deepseek-flash/26646cc553f3c3a94c55149d905599daa6e012fdd74b56645808046ba153e45e.json
+HR0044,MiniMax-M3,mute,[0.512],"Opposition conflicts materially, and the tie is already weak.",data/llm_archive/MiniMax-M3/2436901c8a5296d168be1cbe857dfe769306fe94246b30aa395e94e93af95e60.json
+HR0045,MiniMax-M3,keep,[-0.65],"Agreement supports my view, though the relationship is weak.",data/llm_archive/MiniMax-M3/db87a3677729748d32dba9ed28ff9152fcfee092d27fce9e814c98406bb8bda0.json
+HR0046,MiniMax-M3,keep,[-0.713],"Their opposition aligns with mine, and our strong tie warrants continued contact.",data/llm_archive/MiniMax-M3/204346e2bf32b66742e37e7e25efd2284428013f97b1428ff469f9fcb51aadfc.json
+HR0047,deepseek-flash,unfollow,[0.637],"Opposite and far; weak tie, so I shift slightly toward them but unfollow.",data/llm_archive/deepseek-flash/4d78cc8ab6c17a4ec4bdb478e71c5db00f0c204fe588dde7ee24998e2ccfac81.json
+HR0048,MiniMax-M3,keep,[-0.658],"Identical strong anti; reinforce, keep tie.",data/llm_archive/MiniMax-M3/b147f84a8b0735d2a93d0b623eb323c82bcfe0b0e77f4dc585361fbe98971ccc.json
+HR0049,MiniMax-M3,keep,[0.634],Closely aligned view modestly increases support while preserving a strong tie.,data/llm_archive/MiniMax-M3/7c7b5a2eb4792603494bd60b370904f7fb0a211c36e17e897fa67cef96fc4fdf.json
+HR0050,MiniMax-M3,unfollow,[-0.307],Opposing view on held anti stance; tail unfollows.,data/llm_archive/MiniMax-M3/f11432fd1e4b765363dd81cf552dd5b383ec1b2af472e0a53f671635751771a2.json
+HR0051,MiniMax-M3,keep,[0.28],Volatility allows a meaningful shift toward opposition without ending the tie.,data/llm_archive/MiniMax-M3/a192662a160ebd6ebc201a6d5e86df388f1b7a0a1cd317697299afeebf773982.json
+HR0052,MiniMax-M3,keep,[0.686],"The peer strongly supports the same direction, validating my positive position.",data/llm_archive/MiniMax-M3/d100313d2cc39107ae7564f28630ff8db5938caeeafbd40cac6954344f512e83.json
+HR0053,MiniMax-M3,keep,[0.74],Strong agreement with my pro-policy position; preserving the tie.,data/llm_archive/MiniMax-M3/91aaf018cac6ef0de689e786815a2633f7db826c1af44eda1bfdf24a10305d55.json
+HR0054,deepseek-flash,keep,[0.531],Peer closely aligned; tiny update; keep tie.,data/llm_archive/deepseek-flash/6381e6ba536e9f162b7eee753343f07f9b1d04bbe0b66c9e2f3a6bddcdda2954.json
+HR0055,deepseek-flash,mute,[0.47],Peer is on opposite side; moderate tie and low tolerance mean mute.,data/llm_archive/deepseek-flash/7ae8d86b00fb3acb4c1429640fa3f708bbb5e473b5926473481e116df6e70fc9.json
+HR0056,deepseek-flash,keep,[0.59],Bridger tolerates the intensity gap and preserves the tie.,data/llm_archive/deepseek-flash/3bcefafacdd1123b8dccc9aa0b3875c4a1ec35c5fa45fa1ab1c8520250e327f1.json
+HR0057,MiniMax-M3,keep,[0.653],"The peer strongly shares my support, modestly reinforcing alignment.",data/llm_archive/MiniMax-M3/dfc373c7f743581c50df6d115aa838f09bc8a7afde587e25146a88c8b7f255c3.json
+HR0058,deepseek-flash,mute,[0.421],Moderate opposition; strong tie but I mute and adjust down.,data/llm_archive/deepseek-flash/026675ddbdd6a8091bc7624ef669d9509b07ee3d90c9e51eb13bd35f73758cd1.json
+HR0059,MiniMax-M3,mute,[0.407],"Meaningfully opposes my view, so reducing exposure is sensible.",data/llm_archive/MiniMax-M3/7f7bc2b73bfce2096386cde7fef26ebf93eba7bd3b64934c98d88c5b8cfc88dd.json
+HR0060,deepseek-flash,mute,[-0.365],Opposite pole; tail shifts toward peer and mutes.,data/llm_archive/deepseek-flash/5e0a1b47e9260204e95c3d1ac883436f0a4af6b83b5cc1391e1a645abde3e5bd.json
+HR0061,deepseek-flash,keep,[-0.755],"Same negative pole; strong tie, small adjustment and keep.",data/llm_archive/deepseek-flash/61b8f8041be6596736bdfbc6bfafc813c62e28056608b6a9eea35e6ffc0dff26.json
+HR0062,MiniMax-M3,keep,[-0.757],"Strong opposition matches my stance, though the tie is weak.",data/llm_archive/MiniMax-M3/481c7dd603bf24beedcb26708cbd6bb17ef84dfcce32a31c75c296a18aabb5c4.json
+HR0063,MiniMax-M3,keep,[0.794],"The peer's strong support matches my position, warranting a small reinforcement.",data/llm_archive/MiniMax-M3/9eae2f9088ac5503656d2041967abbdbf6e98bf0c482be4a20ccc5f6d9fd60a6.json
+HR0064,MiniMax-M3,mute,[0.4],"Opposed view conflicts sharply, though the tie is weak.",data/llm_archive/MiniMax-M3/6a3d5f11c6df67cf8217a0692b8b41d85a5d5e7289318fb4ad64ca4f9e374d1e.json
+HR0065,deepseek-flash,keep,[0.73],Same-side strong view; small update toward speaker.,data/llm_archive/deepseek-flash/aa8b85d5c63a4544d6ab16ddecd5e31779367e9681e93fdcd9b6856afcf84ba1.json
+HR0066,deepseek-flash,keep,[-0.85],"Same anti-incumbent side; slight reinforcement, keep tie.",data/llm_archive/deepseek-flash/dd5875a43137f5a9a53cd60a87b3e21d806decbc34fe0c3cb4619cc8d8c52647.json
+HR0067,deepseek-flash,keep,[-0.242],Same side; keep.,data/llm_archive/deepseek-flash/24f28cf4efa982ca23f669499de45a3f6fa280d8fe671d33274554c1e2198f38.json
+HR0068,deepseek-flash,keep,[-0.7],Near-identical opposition; keep strong tie.,data/llm_archive/deepseek-flash/ae73acd9d5e4637f17b0c99446e41d332f74296b66c9c75b15d01bda7467b76b.json
+HR0069,deepseek-flash,mute,[-0.72],Far opposite view; mute while drifting slightly toward peer.,data/llm_archive/deepseek-flash/7a4063f307dbb711ac0557ef21734d132e6176e4cf3a022c8a06d7074acb8a8d.json
+HR0070,deepseek-flash,mute,[0.714],Peer is far opposite; mute to reduce exposure but shift somewhat.,data/llm_archive/deepseek-flash/cb3d1486daa72dce28c0a9e689c2e3282cd54cfb9d8853688ee7a59918e3a1af.json
+HR0071,MiniMax-M3,mute,[-0.44],"The claim opposes my opposition and is far from my stance, so I reduce exposure.",data/llm_archive/MiniMax-M3/79ee0b64d5b27dfe8ab700c61e7c794de7252af71fb484338bd551e86190eff8.json
+HR0072,MiniMax-M3,unfollow,[0.439],Repeated opposition on an especially weak tie makes the volatile connection less valuable.,data/llm_archive/MiniMax-M3/54691c6c566fd748a0141b2f90b23504996b85d7ddf264e0d810a4c03bff07cb.json
+HR0073,MiniMax-M3,keep,[0.564],Agreement supports my positive stance.,data/llm_archive/MiniMax-M3/ca084bab9d8fa994f22aabf922e9a9d277c9162f825c62d57030fafcaac52bbd.json
+HR0074,deepseek-flash,keep,[0.685],"Same-side agreement; small reinforcing shift, keep tie.",data/llm_archive/deepseek-flash/6f484f23630aa97946491d75abbfdca383910399a73c58dc3c368dd551cdbdff.json
+HR0075,deepseek-flash,keep,[0.686],Aligned; hub holds firm and keeps tie.,data/llm_archive/deepseek-flash/ca795550ccb0d0b22297271dea8199c56c0709878cf2206a2afcc6d50cb1ec1d.json
+HR0076,MiniMax-M3,mute,[-0.737],The peer's strong support directly conflicts with my strongly negative view.,data/llm_archive/MiniMax-M3/ebad7ac5dabe91458ad3b964e085771529cadbe1293fef7f63d7ebd49a33948d.json
+HR0077,MiniMax-M3,unfollow,[-0.36],"Their pro stance conflicts with my strongly anti view, and the tie is already weak.",data/llm_archive/MiniMax-M3/5e7e7855556a318793393f60503a38f149ca3888e35fb08e0c17f89094b42578.json
+HR0078,deepseek-flash,keep,[0.608],Moderately same-side; close enough to keep.,data/llm_archive/deepseek-flash/57c4bb98333b4fd1938d9faa6ff6d0e31a62030a68c517eda0b0117037510719.json
+HR0079,MiniMax-M3,keep,[-0.42],"We share opposition, with the peer's intensity slightly lower.",data/llm_archive/MiniMax-M3/2797fdbb2ee69ec91e7d9c20bca1a76755a6add2696009ba496b22027ebfb857.json
+HR0080,deepseek-flash,mute,[0.61],Opposite but moderate tie; mute rather than cut.,data/llm_archive/deepseek-flash/68592f49a2bc1d36d423e99f05fe659af4170b1658c299675f892350ae3ec93b.json
+HR0081,MiniMax-M3,mute,[-0.472],"Far opposite stance, vol tail mutes opposition.",data/llm_archive/MiniMax-M3/2eae1cdbfb728d150c3bd7b4f3c3cf63325e263d3e7365a5d432b5ce8b7dd26e.json
+HR0082,MiniMax-M3,mute,[0.673],"Strong opposition conflicts with me, so I reduce exposure despite the strong prior tie.",data/llm_archive/MiniMax-M3/9e76b0081cef6710c893945e826382b7f84d7b980772d3ac7d19bc542c12bfb5.json
+HR0083,deepseek-flash,keep,[0.73],"Same-side strong statement; slight shift toward peer, keep tie.",data/llm_archive/deepseek-flash/693f3a6fa73cc029bb1d00e34a64bfb119c051230c9df71411acb62eed03f5e4.json
+HR0084,deepseek-flash,keep,[0.7],Strongly aligned same-side statement; keep tie.,data/llm_archive/deepseek-flash/53d048bf096166181e351c7516f884ba0c30501411e564ac052ad5ff5ee747ea.json
+HR0085,deepseek-flash,keep,[0.72],"Aligned with my stance; slight shift toward peer, keep tie.",data/llm_archive/deepseek-flash/524626928a80c4b1d7b01be49c4df267ee73cb8d44636ebdf180124e91c918cc.json
+HR0086,deepseek-flash,mute,[-0.621],Opposed but strong tie; I shift and mute.,data/llm_archive/deepseek-flash/aa3c77e8c84a9f4b8bd58b409dc5c41a55df3ec5b2774c4e9c713c9aeca44b3e.json
+HR0087,deepseek-flash,mute,[-0.64],Far opposite view; seeing less while stance barely moves.,data/llm_archive/deepseek-flash/68592f49a2bc1d36d423e99f05fe659af4170b1658c299675f892350ae3ec93b.json
+HR0088,deepseek-flash,keep,[0.755],Peer echoes my pro-incumbent stance; keep the tie and adjust slightly.,data/llm_archive/deepseek-flash/51331f56e2de13ff14494a20206020295c1dee95e7c591df96b7055c36deb1a4.json
+HR0089,MiniMax-M3,mute,[0.528],"Strong opposition materially challenges my view, so I want less of this speaker.",data/llm_archive/MiniMax-M3/0925528c72027215ee1e0bb23e81213fefee4ffecd4fc4cb749c804d04084dee.json
+HR0090,deepseek-flash,unfollow,[-0.242],Strongly opposite and weak tie; unfollow.,data/llm_archive/deepseek-flash/1a88e09a5e3fb027d4b38aad4143734b77cd2777c2f91668f21c35842922ebc7.json
+HR0091,MiniMax-M3,unfollow,[-0.241],Strong opposition to my anti stance; volatile tail unfollows.,data/llm_archive/MiniMax-M3/f11432fd1e4b765363dd81cf552dd5b383ec1b2af472e0a53f671635751771a2.json
+HR0092,MiniMax-M3,keep,[0.67],Strong agreement reinforces my support; keep the relationship.,data/llm_archive/MiniMax-M3/1f13a26fbbd9f62b7819b574c3e18bd83368478c334b4359a3661da635c103fc.json
+HR0093,deepseek-flash,keep,[0.714],Close aligned view; keep relationship with small tail shift.,data/llm_archive/deepseek-flash/4ddaca1b2c793d2379c328465852a83722b7ef60ebe506df24194a6eb86c34e6.json
+HR0094,MiniMax-M3,mute,[-0.5],Their incumbent-positive view conflicts with my moderately negative stance.,data/llm_archive/MiniMax-M3/2b1c5ea499f36f121d4ff6d46212a00881f140653883b4ee97c377920b9b18cc.json
+HR0095,MiniMax-M3,mute,[0.292],"Moderate opposition conflicts with me, so I reduce exposure while retaining contact.",data/llm_archive/MiniMax-M3/9e76b0081cef6710c893945e826382b7f84d7b980772d3ac7d19bc542c12bfb5.json
+HR0096,deepseek-flash,keep,[-0.644],"Same-side; close, keep tie.",data/llm_archive/deepseek-flash/6ab710b50541772aca0147efddc7107481676b788ec9586b70f630689bc8f54f.json
+HR0097,deepseek-flash,unfollow,[-0.54],Far opposing view and weak tie; ending follow with slight adjustment.,data/llm_archive/deepseek-flash/e60987e7331e385d673603f79a0480db3797f51ae99ba5af0b37379908e62465.json
+HR0098,MiniMax-M3,mute,[-0.387],"Strongly opposing view conflicts with my stance, so reduce exposure.",data/llm_archive/MiniMax-M3/1884661c0e74679cfcae4a49ade4bbf3278363df31582037e5a78dbb5ef79386.json
+HR0099,deepseek-flash,mute,[-0.468],Far cross-cutting view with weak tie; tail mutes but shifts slightly.,data/llm_archive/deepseek-flash/b647434b3d240dba4aeffcbf3c98fce140425eda16d0deca265243f9aca9b09a.json
+HR0100,MiniMax-M3,keep,[-0.462],Close agreement outweighs the relatively weak tie.,data/llm_archive/MiniMax-M3/c036935590a298aaed79cea9fec96fe54dc14bad09dea6d98c78489c82804dc3.json
+HR0101,MiniMax-M3,mute,[0.35],"Strong policy opposition conflicts with my positive view, so mute.",data/llm_archive/MiniMax-M3/ac7103b0f340df7ef01509a663d47fa906b5c735cc6720ef8ed946b09647bb3c.json
+HR0102,MiniMax-M3,mute,[-0.54],Their strong pro-policy stance conflicts with my opposition; mute rather than sever contact.,data/llm_archive/MiniMax-M3/0daff2014b31e7544d3bef803455091c07ea0d4a4ae6e92d4941e53fdd057504.json
+HR0103,deepseek-flash,keep,[0.68],"Same-side statement; slight update, strong tie kept.",data/llm_archive/deepseek-flash/e98f08e54404340571bb3a6fe200007934f924763d9abbc7b864cce8dca6bdeb.json
+HR0104,MiniMax-M3,keep,[-0.69],Strong agreement with my opposition supports keeping the tie.,data/llm_archive/MiniMax-M3/af5174ab4269e51ca260180bbae24ff707cd0522b04950fc37c7432deec1e9b8.json
+HR0105,deepseek-flash,unfollow,[-0.62],Far opposite and weak tie; end follow.,data/llm_archive/deepseek-flash/3851ade79ca2ca8a4c12f70fe15cdc75e35c17f0ab76a96ec55eeaccbdf9dad4.json
+HR0106,deepseek-flash,keep,[0.696],"Same side, strong tie; accept small shift.",data/llm_archive/deepseek-flash/208fd4fd87f61f4965eda8e3ccedcf1a6ebb17da80fc65a3a16cbc4a6619a4e9.json
+HR0107,MiniMax-M3,keep,[-0.734],Strong opposition closely reinforces my stance and preserves the close tie.,data/llm_archive/MiniMax-M3/647d1884ce6b3b00eac8e9ff70d0167ece11241a3114419ea34eb11750174fd0.json
+HR0108,deepseek-flash,keep,[0.571],"Peer echoes my support; small reinforcement, keep.",data/llm_archive/deepseek-flash/b11f71f5dfb64735eefc0d3d38e4f2f88aca4485c7b9247fc1e1258a794ee9a1.json
+HR0109,deepseek-flash,keep,[-0.68],Strong anti-incumbent alignment; retain the connection.,data/llm_archive/deepseek-flash/01a0c8d5732461ff3299a6159eb59da478592aee6926d653e995d583b5acf866.json
+HR0110,deepseek-flash,mute,[0.13],Far opposite and moderate tie; mute and shift toward peer.,data/llm_archive/deepseek-flash/403afacf4d4369135d9dbd76a7081b3f1fde9cc9267dd418f32936d84fcd5ee4.json
+HR0111,MiniMax-M3,keep,[0.67],The statement supports my policy direction and does not threaten the relationship.,data/llm_archive/MiniMax-M3/dc7f9699a3427b90af332c4041f581bc9530216383271115871a4b247ba23c30.json
+HR0112,deepseek-flash,keep,[0.84],Same side and strong tie; keep with small adjustment.,data/llm_archive/deepseek-flash/61f34aa897b2b66c0c2d42239278e04727d5ac7e4c57711a962f432c026b7865.json
+HR0113,MiniMax-M3,mute,[-0.387],"Directly opposing view, though one exposure only slightly shifts me.",data/llm_archive/MiniMax-M3/1884661c0e74679cfcae4a49ade4bbf3278363df31582037e5a78dbb5ef79386.json
+HR0114,MiniMax-M3,mute,[0.25],"Strong opposition is far from my positive position, so I want less of this speaker.",data/llm_archive/MiniMax-M3/264b40b8f60ae731a77c09b13a0ae3bf7df14f4f2af4313f5ee3d6a626f605f2.json
+HR0115,deepseek-flash,mute,[0.49],"Far opposite, strong tie; mute and shift slightly.",data/llm_archive/deepseek-flash/a3d7bffce570cd0c464b74557e8cfa36dc1075268cf3d3ba706d880922923e83.json
+HR0116,deepseek-flash,keep,[-0.798],Peer shares my anti-incumbent position; keep tie.,data/llm_archive/deepseek-flash/c041a0d36405cc67709f03e0428629e74c7ea9a224c7cb023a08c1011e688db7.json
+HR0117,deepseek-flash,mute,[0.466],Far opposite statement; mute and shift somewhat.,data/llm_archive/deepseek-flash/cb3d1486daa72dce28c0a9e689c2e3282cd54cfb9d8853688ee7a59918e3a1af.json
+HR0118,deepseek-flash,mute,[0.48],Opposite pole; hub resists and mutes the challenge.,data/llm_archive/deepseek-flash/5e0a1b47e9260204e95c3d1ac883436f0a4af6b83b5cc1391e1a645abde3e5bd.json
+HR0119,MiniMax-M3,mute,[0.08],"Opposing view is far from mine, though the tie remains worth preserving.",data/llm_archive/MiniMax-M3/a192662a160ebd6ebc201a6d5e86df388f1b7a0a1cd317697299afeebf773982.json
+HR0120,MiniMax-M3,keep,[-0.698],"The peer's strong opposition aligns with mine, so I keep the connection.",data/llm_archive/MiniMax-M3/4aac93f4256b007d12019a272eccd63a9866104d1e7a748be026a0329d665de4.json
+HR0121,MiniMax-M3,mute,[0.34],Peer's opposition conflicts with my positive stance enough to warrant muting.,data/llm_archive/MiniMax-M3/ac7103b0f340df7ef01509a663d47fa906b5c735cc6720ef8ed946b09647bb3c.json
+HR0122,MiniMax-M3,keep,[-0.543],Peer strengthens my anti-incumbent direction; my position shifts slightly more negative.,data/llm_archive/MiniMax-M3/524defc7540c8d1f31a40ec7396713827b1cecb770f94a1e73741ce8655b84a5.json
+HR0123,deepseek-flash,keep,[0.647],Peer strongly agrees; tolerant bridger keeps tie.,data/llm_archive/deepseek-flash/0318e726a63dd8562aab473d36d9b983e605f2c0cb02e52291a6273401fb1609.json
+HR0124,MiniMax-M3,keep,[0.61],Peer's positive position closely matches mine.,data/llm_archive/MiniMax-M3/dbee09aa6182151ec34d98a0b1fdfc4982ab9cad1b0c5a9134d92ce01a5d786c.json
+HR0125,MiniMax-M3,keep,[0.17],Strong opposition from peer pulls weakly pro tail toward center.,data/llm_archive/MiniMax-M3/963fd82ff9c35168bfacf45e20444c1137150f0bc095e9dabdca2865d151501f.json
+HR0126,MiniMax-M3,mute,[-0.36],"Strong opposition creates conflict, but not a full relationship break.",data/llm_archive/MiniMax-M3/2dd3574b041680c67a443c19c00d6fdb4c297bf00909ffa0f534671bd5f3ac41.json
+HR0127,deepseek-flash,keep,[-0.568],Close same-side statement; keep tie and adjust slightly.,data/llm_archive/deepseek-flash/9c2d20cbee766035dfa1c8273466a945550f7b97a8f75e779a35dc59e3b9a681.json
+HR0128,MiniMax-M3,keep,[-0.686],"Shared opposition produces a small positive shift toward the peer, with the tie retained.",data/llm_archive/MiniMax-M3/779b5b0c3d270fc166ba3602ebaeebca79350d4accfe02c447f3b81a496d79f1.json
+HR0129,MiniMax-M3,mute,[-0.5],"Their pro-policy statement conflicts with my opposition, so I limit further exposure.",data/llm_archive/MiniMax-M3/0daff2014b31e7544d3bef803455091c07ea0d4a4ae6e92d4941e53fdd057504.json
+HR0130,MiniMax-M3,mute,[-0.3],Strong opposition to my negative stance; volatile tail mutes opposing voice.,data/llm_archive/MiniMax-M3/88cc28b5a94845d3590de4a87a18f4fda4d36d4ee1e28f5488429da04d8f9012.json
+HR0131,MiniMax-M3,mute,[0.305],"The loud opposition claim causes a meaningful shift, though I retain a weak tie.",data/llm_archive/MiniMax-M3/515d89a3111c9ccf81b3a575800f6a0c3bdbdbb199e0dd428aa8c7769fc8ab71.json
+HR0132,deepseek-flash,mute,[0.49],Far opposite despite strong tie; mute and shift somewhat.,data/llm_archive/deepseek-flash/403afacf4d4369135d9dbd76a7081b3f1fde9cc9267dd418f32936d84fcd5ee4.json
+HR0133,MiniMax-M3,keep,[0.678],The peer's position aligns closely with mine and warrants continued engagement.,data/llm_archive/MiniMax-M3/ccba63cea8ef514f432ff250f4aa40ed113b30e25995beff96e45c3f12c25e20.json
+HR0134,MiniMax-M3,keep,[0.783],"The peer strongly supports the incumbent direction, matching my stance and preserving this valuable bridge.",data/llm_archive/MiniMax-M3/d100313d2cc39107ae7564f28630ff8db5938caeeafbd40cac6954344f512e83.json
+HR0135,MiniMax-M3,keep,[-0.119],Their neutrality moves me closer to the center without overwhelming my opposition.,data/llm_archive/MiniMax-M3/e4bb2f3f63dc4e41f5a02bc1d77ea595afbc4d4f96cc7e91fd8d607f63dabfeb.json
+HR0136,MiniMax-M3,mute,[0.3],"Duplicate; same reasoning, mute opposing voice.",data/llm_archive/MiniMax-M3/88cc28b5a94845d3590de4a87a18f4fda4d36d4ee1e28f5488429da04d8f9012.json
+HR0137,deepseek-flash,keep,[0.52],Close agreement; bridger maintains ties.,data/llm_archive/deepseek-flash/8f425786402e4bcdb6745bdf970f67b9526024c2b9f0ac27538c810869579247.json
+HR0138,MiniMax-M3,keep,[-0.519],The peer's opposition aligns with mine and modestly strengthens it.,data/llm_archive/MiniMax-M3/87f61dd3e193e33abd346ff0fbad9ebc4eef70f2385813421715f0b46599c61c.json
+HR0139,deepseek-flash,mute,[-0.446],Opposite pole; tail sways but mutes the loud disagreement.,data/llm_archive/deepseek-flash/5e0a1b47e9260204e95c3d1ac883436f0a4af6b83b5cc1391e1a645abde3e5bd.json
+HR0140,MiniMax-M3,mute,[-0.573],Opposing view conflicts sharply with my strong opposition and weak tie.,data/llm_archive/MiniMax-M3/4f655f9be8e660ae1db552fd19edf14c210cb0761456910ccbb30ac3e0b14a3a.json
+HR0141,deepseek-flash,unfollow,[-0.68],Far opposite and weak tie; end follow.,data/llm_archive/deepseek-flash/3803ef13184af7eb3c25debb6d6d3274fd3196ee2c2519bc2c4ace63c3da0d48.json
+HR0142,deepseek-flash,keep,[0.862],"Aligned strongly pro-incumbent; tiny tempering, keep tie.",data/llm_archive/deepseek-flash/e25dab65b7aef9f86b8698566bb2399556c4aff4d843c8d5d0c16e4e811888be.json
+HR0143,MiniMax-M3,keep,[0.677],Strong agreement supports my positive stance and justifies maintaining the tie.,data/llm_archive/MiniMax-M3/1a5d996d170d1b4a25d9b07dcbeb67925f723080bd9c07117bd2f3c9c262906a.json
+HR0144,deepseek-flash,keep,[0.667],"Tail keeps same-side tie, small volatile shift toward peer.",data/llm_archive/deepseek-flash/59a3988dba7469c87089db31a480f38625e35bc252101df434126121f510dc90.json
+HR0145,deepseek-flash,keep,[0.674],Peer aligns with my stance; keep tie.,data/llm_archive/deepseek-flash/ffb9f5ecff797fcab2c5095a83e2e5453015f3b25b32ffd4240f184d165f4df2.json
+HR0146,deepseek-flash,mute,[0.445],Far opposite statement; mute while shifting somewhat toward peer.,data/llm_archive/deepseek-flash/cb3d1486daa72dce28c0a9e689c2e3282cd54cfb9d8853688ee7a59918e3a1af.json
+HR0147,MiniMax-M3,keep,[-0.6],"Peer strongly opposes the policy, reinforcing my negative stance.",data/llm_archive/MiniMax-M3/97d65396775082e7470daa0e9756ff7b82c1b21a8881ca3aac128503bf7ec302.json
+HR0148,deepseek-flash,keep,[-0.67],"Peer shares my anti-incumbent stance; small update toward them, keep tie.",data/llm_archive/deepseek-flash/a0e0984012424bdb913180fbe8b76cff6b03d653bd742e8c74724d5d11873035.json
+HR0149,deepseek-flash,mute,[0.054],Strongly opposing view; tail mutes while shifting substantially toward the peer.,data/llm_archive/deepseek-flash/739d870c4b4f5529d3f3eeabfaa28f796e33b5ff37e99ff5850f6914907417da.json
+HR0150,MiniMax-M3,mute,[-0.567],"The opposing message is far from my stance, so I want less of it.",data/llm_archive/MiniMax-M3/ebad7ac5dabe91458ad3b964e085771529cadbe1293fef7f63d7ebd49a33948d.json
+HR0151,MiniMax-M3,mute,[0.6],"Strong opposition conflicts with my stance, so I reduce contact.",data/llm_archive/MiniMax-M3/7a4dc8e8c7770c5f9a3c9e9fce8a96642abba340ab5ca0fbca5632a9d0e3cf4a.json
+HR0152,deepseek-flash,keep,[-0.798],Strong anti-incumbent peer matches me; keep.,data/llm_archive/deepseek-flash/c041a0d36405cc67709f03e0428629e74c7ea9a224c7cb023a08c1011e688db7.json
+HR0153,deepseek-flash,mute,[-0.4],Opposite view despite strong tie; mute and shift slightly toward peer.,data/llm_archive/deepseek-flash/22a8ab39b14a803d9495c2e9dae775784f63d65aba464c31204b678abd5cbe1b.json
+HR0154,MiniMax-M3,keep,[0.567],Statement closely matches my support and reinforces the existing tie.,data/llm_archive/MiniMax-M3/ae52349daed58b978f645f465a48ee99328ee627cde15a795af039cada725c91.json
+HR0155,MiniMax-M3,keep,[0.717],Strong pro-incumbent agreement is close to my own view.,data/llm_archive/MiniMax-M3/d5b1099302bdaacefa2d9ba8f55fbe2a4ddbeed63852e5fb836b956cbfe7fd1b.json
+HR0156,deepseek-flash,unfollow,[0.744],Far opposing view with weak tie; unfollow.,data/llm_archive/deepseek-flash/3a5416b23602d08771fb865372df3915b5aa58b3685431592c3ecb059eec13cf.json
+HR0157,MiniMax-M3,mute,[0.442],"Direct opposition conflicts sharply, but the weak tie warrants reducing exposure rather than leaving.",data/llm_archive/MiniMax-M3/80b5180962ed6e96654ed546379e8ad9772caf5cc42ed0b8142f15d57408fc9e.json
+HR0158,deepseek-flash,mute,[0.54],Far opposite view; reduce exposure without ending tie.,data/llm_archive/deepseek-flash/e2c693dad170cf024084d012c15b952447aa2def54bc352a41a61479d1baa272.json
+HR0159,MiniMax-M3,mute,[-0.5],"Strong disagreement directly conflicts with my opposition, so I reduce exposure while retaining the tie.",data/llm_archive/MiniMax-M3/71e268c2900d512165a3caa77bbae1b42b94beec024912f25c386103e0d0175a.json
+HR0160,MiniMax-M3,keep,[0.72],Strong agreement with my supportive stance reinforces the existing tie.,data/llm_archive/MiniMax-M3/eadb1284a2ab3059d7d20dd955ca5fdded65ccf0334e733dc11b921bdbb5b6b5.json
+HR0161,deepseek-flash,keep,[0.697],"Peer strongly for, close to my stance; keep tie.",data/llm_archive/deepseek-flash/c58737c179ce9fdd2aa3a57cebe2e4a7a07ce17185cafb8ff2645ba2c315cee8.json
+HR0162,deepseek-flash,unfollow,[-0.205],Strongly opposite and weak tie; unfollow.,data/llm_archive/deepseek-flash/1a88e09a5e3fb027d4b38aad4143734b77cd2777c2f91668f21c35842922ebc7.json
+HR0163,deepseek-flash,keep,[0.742],Peer strongly aligns; tail adjusts slightly toward speaker; keep tie.,data/llm_archive/deepseek-flash/b1fc70e3fb4bfa9ceb8d076d1ee5b00096477f51c3d846badfce6219f59ae3ee.json
+HR0164,deepseek-flash,keep,[0.713],"Peer aligns; modest tail shift upward, keep tie.",data/llm_archive/deepseek-flash/76ad49b98795bb240e45ef4a7ba05a7f13d7f1308dfebaaf164bf763d968f10e.json
+HR0165,deepseek-flash,mute,[0.584],"Opposite and far; mute, slight shift toward speaker.",data/llm_archive/deepseek-flash/6ab710b50541772aca0147efddc7107481676b788ec9586b70f630689bc8f54f.json
+HR0166,MiniMax-M3,mute,[-0.414],Sharp support conflicts with my strong opposition.,data/llm_archive/MiniMax-M3/2b9a5fcea33b02ef48d8a395939074af976dedd21eba6c8e66a9bc7888954106.json
+HR0167,deepseek-flash,keep,[0.66],Peer strongly pro is close; keep tie with modest adjustment.,data/llm_archive/deepseek-flash/52fefc59b77013264b542d035feef3c2b63a48dfb5f85dc2bef0e8206fc38bac.json
+HR0168,MiniMax-M3,keep,[0.64],"Peer closely aligns with my pro-incumbent position, so I keep the tie.",data/llm_archive/MiniMax-M3/2c4f5c4a6fc28b77422b19336976762f300a2821caac050b011009ac8c0bf00d.json
+HR0169,deepseek-flash,unfollow,[0.52],Strong opposite statement with very weak tie; end follow.,data/llm_archive/deepseek-flash/f0afe2032c90e314e45c3bf3bf55c067baaaac8b4800e23f87e5ca3dc655b302.json
+HR0170,MiniMax-M3,mute,[-0.503],"The pro-policy claim pulls me away, while the strong tie prevents ending contact.",data/llm_archive/MiniMax-M3/515d89a3111c9ccf81b3a575800f6a0c3bdbdbb199e0dd428aa8c7769fc8ab71.json
+HR0171,MiniMax-M3,mute,[-0.679],"The peer's strong support is far from my opposition, so I mute to reduce conflict.",data/llm_archive/MiniMax-M3/ebad7ac5dabe91458ad3b964e085771529cadbe1293fef7f63d7ebd49a33948d.json
+HR0172,deepseek-flash,mute,[0.618],Opposing view and weak tie; I will see less.,data/llm_archive/deepseek-flash/8da1c1eee7c5cf5225f58395ee18fe7d527d4b98a58532d930bfc29dccdaaa03.json
+HR0173,deepseek-flash,keep,[-0.272],Bridger role; tolerate difference and keep weak tie.,data/llm_archive/deepseek-flash/e1d9c52f33eb21c45d8b87f13a4a9ca51a2c056d0bb7e6371a45697e722b2d5f.json
+HR0174,MiniMax-M3,mute,[-0.439],A sharp disagreement from a weak tie makes less exposure preferable.,data/llm_archive/MiniMax-M3/2d672a5abefc7f00f78753ea6ac34ec1be671209d4f4b49711ab40c0c100f298.json
+HR0175,deepseek-flash,keep,[-0.75],Aligned anti view; keep despite weak tie.,data/llm_archive/deepseek-flash/8da1c1eee7c5cf5225f58395ee18fe7d527d4b98a58532d930bfc29dccdaaa03.json
+HR0176,deepseek-flash,mute,[0.657],Opposite strong view; tail mutes and shifts slightly toward peer.,data/llm_archive/deepseek-flash/1ebe9ca228701ccbae26f72dcc406e08505c2ec3f8ce9505d4ec96160bf9736d.json
+HR0177,deepseek-flash,mute,[-0.45],"Opposite and distant; moderate tie, mute and nudge slightly.",data/llm_archive/deepseek-flash/9ec1aabb2b0b27adef37a62d5e6d223e3b7bd72044805353d7cb2c069c23a9d0.json
+HR0178,MiniMax-M3,mute,[-0.3],Opposes my negative stance; volatile tail mutes opposing voice.,data/llm_archive/MiniMax-M3/88cc28b5a94845d3590de4a87a18f4fda4d36d4ee1e28f5488429da04d8f9012.json
+HR0179,MiniMax-M3,mute,[0.497],Opposing extreme; volatile tail mutes.,data/llm_archive/MiniMax-M3/f11432fd1e4b765363dd81cf552dd5b383ec1b2af472e0a53f671635751771a2.json
+HR0180,deepseek-flash,unfollow,[-0.424],Distant opposing view and weak tie; tail unfollows.,data/llm_archive/deepseek-flash/65ed0399fa9bf915f8a34425ded604cf083e8d7b351c7ce38ad27b91f8dfc81f.json
+HR0181,deepseek-flash,keep,[-0.31],"Neutral statement is near tolerance; small shift toward center, tie kept.",data/llm_archive/deepseek-flash/693f3a6fa73cc029bb1d00e34a64bfb119c051230c9df71411acb62eed03f5e4.json
+HR0182,deepseek-flash,keep,[-0.73],Strong same-side negative agreement; tail keeps tie and shifts slightly.,data/llm_archive/deepseek-flash/f477b436ca6c11603a16141b4f12113a5d050cf21f2bf081facaeae61e845aa9.json
+HR0183,MiniMax-M3,keep,[-0.618],Strong agreement with my opposition; maintain the relationship.,data/llm_archive/MiniMax-M3/e0a20d44396dc41024a55b1c96219afd20d9e7b3bdc2b508d4452a8e5c3f8b21.json
+HR0184,deepseek-flash,unfollow,[0.3],Peer is far opposite with almost no tie; I end follow and shift somewhat toward them.,data/llm_archive/deepseek-flash/52e9d29a208639cf698f888f60159165eee45b459317fc12d631fd5f880d0549.json
+HR0185,MiniMax-M3,mute,[-0.276],"Their pro-incumbent position conflicts with my negative stance, so I reduce exposure.",data/llm_archive/MiniMax-M3/c9f6d1023ba37dba130a95e4a77e31cd6db565b9a83e1d18fdd2c2679ddc3cb5.json
+HR0186,deepseek-flash,keep,[-0.687],Peer echoes my strong opposition; reinforce slightly and keep tie.,data/llm_archive/deepseek-flash/b5de80143d0fe4b5d2f9d6ca9305a0ae68adb6cee2c121f6fccb7bc30f03bfd6.json
+HR0187,deepseek-flash,keep,[0.59],Close pro-incumbent agreement; keep tie with slight reinforcement.,data/llm_archive/deepseek-flash/adf8c48dc25d8c14548af0df53c18fae945ac52058b0bc8f61824070bc441fb2.json
+HR0188,deepseek-flash,mute,[0.55],Opposite view; mute to reduce exposure while keeping weak tie.,data/llm_archive/deepseek-flash/22a8ab39b14a803d9495c2e9dae775784f63d65aba464c31204b678abd5cbe1b.json
+HR0189,MiniMax-M3,mute,[0.08],"Their position is sharply opposed to mine, but the tie is weak enough to reduce exposure.",data/llm_archive/MiniMax-M3/105751c928f78bf757da4960f743550aecdbb779506ad38b78498d871129d70c.json
+HR0190,MiniMax-M3,keep,[0.62],Peer's moderate support aligns with my current positive view.,data/llm_archive/MiniMax-M3/902dd69da6932e7bc4017d1b38bb63e7e98d19d138c7ebbef4fb63473366f4b6.json
+HR0191,MiniMax-M3,keep,[0.695],Very strong agreement; preserve the connection.,data/llm_archive/MiniMax-M3/3eff6b4ee57f143cd1d0f840ecd800e8c24f274ac054319cdfb478f3919ff45e.json
+HR0192,MiniMax-M3,keep,[0.678],Clear alignment strengthens my positive position without requiring any relationship change.,data/llm_archive/MiniMax-M3/982b10bd7eda058e37e7e70531cfeeeab8518492c99e95a7f4612b3c9174333d.json
+HR0193,deepseek-flash,keep,[-0.578],Same anti-incumbent direction; tail shifts slightly and keeps.,data/llm_archive/deepseek-flash/f843547821081a320b81906fc3007981e7e46cede4933a279e9c0850410316dd.json
+HR0194,MiniMax-M3,keep,[-0.58],"The peer's opposition aligns with my stance, so I keep the connection.",data/llm_archive/MiniMax-M3/9b279a0443fa52bb20ee86c5a7518f5078d43a86629a02d4471eda35503b050b.json
+HR0195,deepseek-flash,keep,[0.568],"Aligned statement; small adjustment, keep tie.",data/llm_archive/deepseek-flash/055de056fc40ce616815760a4f89ee0b6b519a636feeee4aa1632d8f513b54ab.json
+HR0196,MiniMax-M3,mute,[-0.417],Strong opposing view with a weak tie; reduce exposure without severing contact.,data/llm_archive/MiniMax-M3/481c7dd603bf24beedcb26708cbd6bb17ef84dfcce32a31c75c296a18aabb5c4.json
+HR0197,deepseek-flash,mute,[-0.365],Opposing strongly with moderate tie; mute.,data/llm_archive/deepseek-flash/1cbf0f6df3695dbfce71e7cdb483f686fed3330a1018392d99887c511c313866.json
+HR0198,MiniMax-M3,mute,[0.2],Strong opposition conflicts with my positive stance; I want less of this speaker.,data/llm_archive/MiniMax-M3/264b40b8f60ae731a77c09b13a0ae3bf7df14f4f2af4313f5ee3d6a626f605f2.json
+HR0199,deepseek-flash,keep,[-0.71],Same side; keep despite weaker tie.,data/llm_archive/deepseek-flash/5217e966df7ba1aaf17b236c6da67c52037f091cd36ac02243d5e571d7a26307.json
+HR0200,MiniMax-M3,keep,[-0.547],The peer's moderate opposition closely matches my own position.,data/llm_archive/MiniMax-M3/84108b00e79cfa7a8fda74dd12200083905dcdff45d02c07516d10b9368f6245.json
+HR0201,MiniMax-M3,keep,[0.48],Peer agrees with my moderate support and keeps the connection constructive.,data/llm_archive/MiniMax-M3/6d38d29bca47b01d77c94649d94bad614af4859132e43c4e4d2e7e3913ce584c.json
+HR0202,deepseek-flash,mute,[0.56],Opposing view far from my agenda; hold and mute.,data/llm_archive/deepseek-flash/8bd02e84d41645f4470d8903cfac23cc6096ca84363756d02ecf8be75673db57.json
+HR0203,MiniMax-M3,keep,[0.66],Loud support reinforces my pro-incumbent position.,data/llm_archive/MiniMax-M3/db87a3677729748d32dba9ed28ff9152fcfee092d27fce9e814c98406bb8bda0.json
+HR0204,MiniMax-M3,mute,[-0.572],Opposite stance; weak tie; mute opposing voice.,data/llm_archive/MiniMax-M3/9f1aeeb7989da6306d8a81950d7e08bff53823c32942a04987fafba3323beb34.json
+HR0205,deepseek-flash,keep,[0.59],Weak tie but within tolerance; keep and adjust slightly.,data/llm_archive/deepseek-flash/c8c1b0ae73acd3c11d08fe594841723fe77bfba72e50f76c964874f1dbed5afc.json
+HR0206,deepseek-flash,keep,[0.69],Peer strongly pro is close; keep tie and shift slightly toward them.,data/llm_archive/deepseek-flash/52fefc59b77013264b542d035feef3c2b63a48dfb5f85dc2bef0e8206fc38bac.json
+HR0207,deepseek-flash,mute,[-0.428],Far opposition; mute despite moderate tie.,data/llm_archive/deepseek-flash/bf6fedad32808be637fb77eb4a90630888a0f3235ba614c498e5f0b5ac170154.json
+HR0208,deepseek-flash,mute,[-1.0],Far opposite and my stance is extreme; mute.,data/llm_archive/deepseek-flash/8bd02e84d41645f4470d8903cfac23cc6096ca84363756d02ecf8be75673db57.json
+HR0209,deepseek-flash,keep,[0.588],"Peer echoes my pro-incumbent stance; close tie, keep and nudge slightly stronger.",data/llm_archive/deepseek-flash/81709901a5ad87daaa28bae8b25dc4f80136900919b9f42d6a1ba15785dfe457.json
+HR0210,deepseek-flash,keep,[-0.645],Consistent with my stance; keep the connection and reinforce slightly.,data/llm_archive/deepseek-flash/adf8c48dc25d8c14548af0df53c18fae945ac52058b0bc8f61824070bc441fb2.json
+HR0211,MiniMax-M3,keep,[0.66],Strong agreement reinforces my strongly positive stance.,data/llm_archive/MiniMax-M3/8dae9499dacb89f202ed2e3a78a070a226e0be71161870c8efbdb58331d59a30.json
+HR0212,MiniMax-M3,keep,[0.295],Peer's support is compatible with my mild support.,data/llm_archive/MiniMax-M3/021da2fcf9cf8318fe7c617fa30f131cf46f38823a24fc279903dadb68be7e89.json
+HR0213,MiniMax-M3,mute,[-0.545],The strong pro-policy claim shifts me away; reduced exposure suits my low tolerance.,data/llm_archive/MiniMax-M3/515d89a3111c9ccf81b3a575800f6a0c3bdbdbb199e0dd428aa8c7769fc8ab71.json
+HR0214,deepseek-flash,keep,[0.58],Same side though stronger; keep tie and shift toward their intensity.,data/llm_archive/deepseek-flash/4d78cc8ab6c17a4ec4bdb478e71c5db00f0c204fe588dde7ee24998e2ccfac81.json
+HR0215,MiniMax-M3,keep,[0.566],Agreement reinforces my existing support without requiring a shift.,data/llm_archive/MiniMax-M3/5efbc6b68c82156ddef31652cf6c46eb1b01319b2c1fcd1d4aaf84c16d39e1f3.json
+HR0216,MiniMax-M3,mute,[-0.36],"Strong policy opposition conflicts sharply, and the tie is relatively weak.",data/llm_archive/MiniMax-M3/99f4025e281ce0c4034661ee53303c16c4022f63492b1163876c75bc73a6636c.json
+HR0217,deepseek-flash,keep,[-0.753],Aligned; keep existing tie.,data/llm_archive/deepseek-flash/bf6fedad32808be637fb77eb4a90630888a0f3235ba614c498e5f0b5ac170154.json
+HR0218,deepseek-flash,unfollow,[-0.65],Extreme opposite statement from a weak tie; ending follow.,data/llm_archive/deepseek-flash/e2362c9de23efd9bcf3374a70af41a65f4253c52d9365158b338ba58e3fcf33d.json
+HR0219,deepseek-flash,unfollow,[-0.509],"Opposed and weak tie; shift slightly, then unfollow.",data/llm_archive/deepseek-flash/aa3c77e8c84a9f4b8bd58b409dc5c41a55df3ec5b2774c4e9c713c9aeca44b3e.json
+HR0220,deepseek-flash,keep,[-0.45],Peer is close to my stance; keep the tie.,data/llm_archive/deepseek-flash/e1d9c52f33eb21c45d8b87f13a4a9ca51a2c056d0bb7e6371a45697e722b2d5f.json
+HR0221,MiniMax-M3,mute,[-0.462],"The claim strongly contradicts my stance, and limited tolerance favors muting.",data/llm_archive/MiniMax-M3/515d89a3111c9ccf81b3a575800f6a0c3bdbdbb199e0dd428aa8c7769fc8ab71.json
+HR0222,deepseek-flash,mute,[0.534],Far opposing view; mute to limit exposure and retain tie.,data/llm_archive/deepseek-flash/3a5416b23602d08771fb865372df3915b5aa58b3685431592c3ecb059eec13cf.json
+HR0223,MiniMax-M3,keep,[-0.476],"Close opposition aligns with me; as a bridger, I retain the relationship.",data/llm_archive/MiniMax-M3/1e7a958d7218b400951088cce64ba398b49910b9fbf2657435b7580600c2e312.json
+HR0224,deepseek-flash,keep,[-0.33],Close same-side statement; tail keeps tie.,data/llm_archive/deepseek-flash/5e97ebcd3493d6cd5806259486d5e6c19cd19eee5f29cdbf13769e5e2a9bda0b.json
+HR0225,deepseek-flash,mute,[0.354],Clearly opposing but tie is strong; mute and shift slightly away.,data/llm_archive/deepseek-flash/026675ddbdd6a8091bc7624ef669d9509b07ee3d90c9e51eb13bd35f73758cd1.json
+HR0226,MiniMax-M3,keep,[-0.67],Peer reinforces my opposition to the incumbent policy.,data/llm_archive/MiniMax-M3/3ec333f2c0bf101a2381ab4ceb320b6156813db3978d4c53779fd7700842ee91.json
+HR0227,deepseek-flash,unfollow,[0.39],Far more pro-incumbent and weak tie; end follow.,data/llm_archive/deepseek-flash/adf8c48dc25d8c14548af0df53c18fae945ac52058b0bc8f61824070bc441fb2.json
+HR0228,deepseek-flash,keep,[-0.6],Peer matches my stance; keep despite weaker tie.,data/llm_archive/deepseek-flash/484c033b68d1e1f1e316c49fbcdf092771e5a31fea2caa15bf3311dda1410031.json
+HR0229,MiniMax-M3,unfollow,[-0.36],"Their pro stance conflicts with my strongly anti view, and the tie is already weak.",data/llm_archive/MiniMax-M3/5e7e7855556a318793393f60503a38f149ca3888e35fb08e0c17f89094b42578.json
+HR0230,MiniMax-M3,mute,[0.466],Strong opposition conflicts with my support; reduce exposure while leaving room to reconsider.,data/llm_archive/MiniMax-M3/7d64c4dff4f4eef48b1a7685e0b7bdef4f94a2e1e23761ffc93fc70e24e37e0f.json
+HR0231,MiniMax-M3,mute,[0.164],"Their opposition conflicts with my pro-policy stance, so I would reduce their visibility.",data/llm_archive/MiniMax-M3/105751c928f78bf757da4960f743550aecdbb779506ad38b78498d871129d70c.json
+HR0232,deepseek-flash,mute,[-0.442],Peer is far outside tolerance; mute to see less while shifting slightly toward them.,data/llm_archive/deepseek-flash/cbf9453958b5242516808d18a97abf46d9779219c9169cc0fd98ba0ddd63afb3.json
+HR0233,MiniMax-M3,mute,[-0.25],"Neutrality dilutes my opposition, and the tie lacks robustness.",data/llm_archive/MiniMax-M3/00004410ff3084f123471b4fe64fddade1538b7be171680949e21ae5e8be9b25.json
+HR0234,deepseek-flash,unfollow,[-0.48],Far opposing view with weak tie; unfollow.,data/llm_archive/deepseek-flash/5217e966df7ba1aaf17b236c6da67c52037f091cd36ac02243d5e571d7a26307.json
+HR0235,MiniMax-M3,mute,[-0.491],"Opposing support conflicts with my stance, so I reduce exposure.",data/llm_archive/MiniMax-M3/2b9a5fcea33b02ef48d8a395939074af976dedd21eba6c8e66a9bc7888954106.json
+HR0236,MiniMax-M3,mute,[0.684],"Strong opposition shifts me, while the moderately strong tie supports retained contact.",data/llm_archive/MiniMax-M3/515d89a3111c9ccf81b3a575800f6a0c3bdbdbb199e0dd428aa8c7769fc8ab71.json
+HR0237,deepseek-flash,keep,[0.58],Close to my stance; keep tie.,data/llm_archive/deepseek-flash/96075a6d30965c7ee65d0d32ec510cea3dfcb468920faae8f958a527d68e470f.json
+HR0238,deepseek-flash,keep,[-0.94],Same anti-incumbent direction; keep and harden slightly.,data/llm_archive/deepseek-flash/b6e57a296dff7bba0eef6d729c5c4c86e40d153bdc7696f0c0f6865a3bfeb77c.json
+HR0239,MiniMax-M3,mute,[-0.491],"Strong support conflicts with my opposition, so I reduce exposure.",data/llm_archive/MiniMax-M3/2b9a5fcea33b02ef48d8a395939074af976dedd21eba6c8e66a9bc7888954106.json
+HR0240,MiniMax-M3,mute,[0.55],Opposing view sharply conflicts with mine and the tie is extremely weak.,data/llm_archive/MiniMax-M3/98d854f9e141eba1d2968755152f6669f834547f4ab48d8e1aeaaadf4b820ece.json
+HR0241,MiniMax-M3,mute,[-0.122],"Their pro-policy view conflicts with my opposition, so I would mute them.",data/llm_archive/MiniMax-M3/105751c928f78bf757da4960f743550aecdbb779506ad38b78498d871129d70c.json
+HR0242,MiniMax-M3,keep,[-0.628],Strong agreement reinforces my negative policy stance.,data/llm_archive/MiniMax-M3/3a76a47705811009e78d9da95598d9260ce84d833f531af3882d18463a60c99a.json
+HR0243,MiniMax-M3,keep,[-0.702],"Strong alignment on opposition, though the relationship is weaker.",data/llm_archive/MiniMax-M3/c48b1ed1a82876f575a7f23aec8e21e29e9413547ed534f3d075095a23ec23a3.json
+HR0244,MiniMax-M3,mute,[-0.421],"Strong opposition conflicts with my negative stance, so reduce exposure.",data/llm_archive/MiniMax-M3/1884661c0e74679cfcae4a49ade4bbf3278363df31582037e5a78dbb5ef79386.json
+HR0245,MiniMax-M3,keep,[0.6],"The peer remains supportive, though slightly less emphatic; keep the relationship.",data/llm_archive/MiniMax-M3/9acc870a74ff92eb59195ef4ab0ba5756e81020f7020495916875988c1f8d6d1.json
+HR0246,MiniMax-M3,mute,[0.3],Strong opposition is far from my positive stance; I want less of this speaker.,data/llm_archive/MiniMax-M3/264b40b8f60ae731a77c09b13a0ae3bf7df14f4f2af4313f5ee3d6a626f605f2.json
+HR0247,MiniMax-M3,keep,[0.744],Strong agreement supports my position and reinforces the existing tie.,data/llm_archive/MiniMax-M3/c2e91b37d2314dd14c9579efdd2206d1cabe93b13ad3bb062fddceead169cb80.json
+HR0248,deepseek-flash,unfollow,[-0.4],Opposite and weak tie; unfollow to reduce exposure.,data/llm_archive/deepseek-flash/aa8b85d5c63a4544d6ab16ddecd5e31779367e9681e93fdcd9b6856afcf84ba1.json
+HR0249,MiniMax-M3,mute,[-0.963],"Strong pro-policy disagreement conflicts with my opposition, so I reduce exposure.",data/llm_archive/MiniMax-M3/7a4dc8e8c7770c5f9a3c9e9fce8a96642abba340ab5ca0fbca5632a9d0e3cf4a.json
+HR0250,MiniMax-M3,mute,[0.38],Direct policy opposition plus weak tie makes continued exposure unproductive.,data/llm_archive/MiniMax-M3/bf93c57db9062b80a39c46b4c17e038559019e4962b2dcc911fd9fe5fda800e9.json
+HR0251,MiniMax-M3,mute,[0.43],Fierce opposition and a weak tie justify seeing less of this speaker.,data/llm_archive/MiniMax-M3/3273bcd1b307c511230a24d0b119d3d2d8ede286d99fc3ec047fcece6024c8c8.json
+HR0252,MiniMax-M3,keep,[0.667],The statement aligns with my strongly positive stance.,data/llm_archive/MiniMax-M3/99f4025e281ce0c4034661ee53303c16c4022f63492b1163876c75bc73a6636c.json
+HR0253,deepseek-flash,mute,[-0.202],Strongly opposite despite high tie; mute to see less.,data/llm_archive/deepseek-flash/b0aa9254a01c5ba5ee0642a71570a066c6215c8fb766d0999d0cdf43b9cd39e7.json
+HR0254,deepseek-flash,keep,[0.646],"Peer is close and stronger; small shift toward them, keep tie.",data/llm_archive/deepseek-flash/567d07355d34501ba9f286169e8f9aa22d06f726068a41f2ae15117b10d6f7fc.json
+HR0255,deepseek-flash,keep,[-0.554],Peer is close on anti-incumbent side; tail keeps tie and shifts slightly.,data/llm_archive/deepseek-flash/2448190b218c273e28e43c74d0aeeb102665113d93cf2c6126659ed8abb49874.json
+HR0256,deepseek-flash,mute,[0.57],"Strongly opposing view beyond tolerance; mute to reduce exposure, keep belief.",data/llm_archive/deepseek-flash/95e2dfc94175386a54f4c4456fef357bb8fa3106be75d5a21a1896ec18631f9d.json
+HR0257,MiniMax-M3,mute,[0.72],"Their strong opposition conflicts with my positive stance, so I reduce exposure.",data/llm_archive/MiniMax-M3/0daff2014b31e7544d3bef803455091c07ea0d4a4ae6e92d4941e53fdd057504.json
+HR0258,MiniMax-M3,mute,[-0.383],"Their pro-incumbent position conflicts with my negative stance, so I reduce exposure.",data/llm_archive/MiniMax-M3/c9f6d1023ba37dba130a95e4a77e31cd6db565b9a83e1d18fdd2c2679ddc3cb5.json
+HR0259,deepseek-flash,keep,[-0.687],Aligned strong agreement; small shift and keep the tie.,data/llm_archive/deepseek-flash/b0aa9254a01c5ba5ee0642a71570a066c6215c8fb766d0999d0cdf43b9cd39e7.json
+HR0260,MiniMax-M3,keep,[-0.385],Moderate opposition aligns with my own direction and supports keeping contact.,data/llm_archive/MiniMax-M3/081e7caceac16ad60ef0a7de17cc4980cd27a05bf6b23292f866c343cf405fa8.json
+HR0261,deepseek-flash,keep,[0.7],"Moderate support matching mine; tiny shift, keep.",data/llm_archive/deepseek-flash/703ab8993245e711b402aa5e6b84847d22d73d2fc87254305cde23577c95249e.json
+HR0262,MiniMax-M3,mute,[-0.545],"The volatile stance shifts toward the peer, but strong disagreement warrants reduced exposure.",data/llm_archive/MiniMax-M3/515d89a3111c9ccf81b3a575800f6a0c3bdbdbb199e0dd428aa8c7769fc8ab71.json
+HR0263,deepseek-flash,keep,[-0.34],Peer is close; keep tie and adjust slightly.,data/llm_archive/deepseek-flash/7285248d56ed16b9b84edd368acd188fa94988e11b0c0181be28f58578740d4c.json
+HR0264,MiniMax-M3,keep,[-0.659],Aligned with my opposition; repeated statement changes nothing.,data/llm_archive/MiniMax-M3/1456fb46e3743f423898a6522efd85db43d1cd92864791eeb2764c0621cbc237.json
+HR0265,deepseek-flash,keep,[0.73],Close same-side statement; keep tie.,data/llm_archive/deepseek-flash/3803ef13184af7eb3c25debb6d6d3274fd3196ee2c2519bc2c4ace63c3da0d48.json
+HR0266,deepseek-flash,mute,[-0.574],"Opposite and far; mute, small shift toward speaker.",data/llm_archive/deepseek-flash/6ab710b50541772aca0147efddc7107481676b788ec9586b70f630689bc8f54f.json
+HR0267,MiniMax-M3,keep,[0.66],Strong agreement reinforces my existing pro-incumbent stance.,data/llm_archive/MiniMax-M3/1102b5a6a9b3a36e367f8122a5e069775f74e4f0595a3945d8eb33b8d078fa51.json
+HR0268,MiniMax-M3,keep,[-0.119],Their neutrality modestly softens my opposition but remains within tolerance.,data/llm_archive/MiniMax-M3/e4bb2f3f63dc4e41f5a02bc1d77ea595afbc4d4f96cc7e91fd8d607f63dabfeb.json
+HR0269,deepseek-flash,keep,[-0.721],Peer reinforces my strong opposition; keep.,data/llm_archive/deepseek-flash/58455587af5687ca3a8eca49539b8ed17dc92a03a89f128a2a0425b3aee145ed.json
+HR0270,deepseek-flash,unfollow,[-0.393],"Opposite stance and low tie strength, beyond tolerance; ending the follow.",data/llm_archive/deepseek-flash/8fa6afef4f0141a1fe83992b857cd9f184a468e3fdef74a917fefa28abfeefc5.json
+HR0271,deepseek-flash,keep,[-0.633],Same anti-incumbent stance; small shift and keep.,data/llm_archive/deepseek-flash/c9111ae11433fcfa2a862ad1fb50c5bc02712c75aa4f2dc0801dab4216f42001.json
+HR0272,MiniMax-M3,mute,[-0.444],"Their support conflicts with my opposition, so I will reduce exposure while keeping contact.",data/llm_archive/MiniMax-M3/997da44543f9f00b28fa03965132e71cd20bf68ec455d361744f6b31ad787586.json
+HR0273,MiniMax-M3,keep,[-0.54],Their opposition closely matches mine.,data/llm_archive/MiniMax-M3/76be634075e39b6795f1fddb902f13ea2b7db0c895c6f8d3acfd3f04683b3786.json
+HR0274,deepseek-flash,keep,[0.68],"Same side, strong tie; keep.",data/llm_archive/deepseek-flash/5217e966df7ba1aaf17b236c6da67c52037f091cd36ac02243d5e571d7a26307.json
+HR0275,deepseek-flash,mute,[-0.594],Far opposing view; mute to limit exposure and retain tie.,data/llm_archive/deepseek-flash/3a5416b23602d08771fb865372df3915b5aa58b3685431592c3ecb059eec13cf.json
+HR0276,MiniMax-M3,keep,[-0.71],Conciliatory framing still expresses strong agreement with my opposition.,data/llm_archive/MiniMax-M3/ac76454afece7760b2b10b183ea608152b4215300d63d93e89b63218c6b6def5.json
+HR0277,MiniMax-M3,keep,[0.67],"Peer remains supportive, but their stated intensity is lower than mine.",data/llm_archive/MiniMax-M3/dbee09aa6182151ec34d98a0b1fdfc4982ab9cad1b0c5a9134d92ce01a5d786c.json
+HR0278,MiniMax-M3,keep,[0.808],The peer's strong support matches my strongly positive stance.,data/llm_archive/MiniMax-M3/dcfd48c9b7be8c084ec26627a0170dc952fa822dfb418fa4c53f87eee6620803.json
+HR0279,deepseek-flash,mute,[0.625],Far opposing view; bridger mutes but keeps weak tie alive.,data/llm_archive/deepseek-flash/57c4bb98333b4fd1938d9faa6ff6d0e31a62030a68c517eda0b0117037510719.json
+HR0280,deepseek-flash,unfollow,[0.4],Opposite and weak tie; tail shifts toward peer and unfollows.,data/llm_archive/deepseek-flash/1500406d7c21946e503bf34483e032340a2a9b113913e30319d56e2b57f63cb6.json
+HR0281,MiniMax-M3,keep,[-0.695],"The peer closely matches my opposition, so the supportive tie remains valuable.",data/llm_archive/MiniMax-M3/6d65dfeb96642fff1bed49f19b6eb55dac66cb6469367e061b26ac7849f1894e.json
+HR0282,MiniMax-M3,keep,[0.565],Clear agreement and perfect tie strength make the connection valuable.,data/llm_archive/MiniMax-M3/31117ed27a920cd50dcddd75554c292a1e9e92bbd99b324440b8720cfa2032d3.json
+HR0283,MiniMax-M3,keep,[0.71],Strong agreement supports my positive stance; the tie remains worth maintaining.,data/llm_archive/MiniMax-M3/77fb64ae366048cf82d951b6706d67a396c6a432d80efcc1dd429b83d52b0e62.json
+HR0284,MiniMax-M3,keep,[0.682],Strong agreement closely matches my positive policy stance.,data/llm_archive/MiniMax-M3/dbf0951f85e3ac706001e2a991792d32f53da0bdb3921e082b66d6549ee65933.json
+HR0285,deepseek-flash,mute,[-0.75],Opposite weak statement is far outside tolerance; mute to see less.,data/llm_archive/deepseek-flash/c38293127fd77c8cdc24388231d88296faf80f1ef080180a8f038071974e25b1.json
+HR0286,MiniMax-M3,unfollow,[-0.661],"Support conflicts with my opposition, and the weak tie makes this volatile connection easy to end.",data/llm_archive/MiniMax-M3/cc56f58c4e3c97758e43e5a127e61f8fc55f6f6bf54b1b67b2073b1055b27cc7.json
+HR0287,deepseek-flash,mute,[-0.205],"Opposing strongly, moderate tie; mute.",data/llm_archive/deepseek-flash/1cbf0f6df3695dbfce71e7cdb483f686fed3330a1018392d99887c511c313866.json
+HR0288,deepseek-flash,keep,[-0.587],Close anti-incumbent peer; keep the tie and shift slightly.,data/llm_archive/deepseek-flash/0924575dff0663ee447558830fa6f98871e5c8a98735c733a2c6662d02b07dd8.json
+HR0289,deepseek-flash,keep,[-0.597],Peer is close to my stance; I keep the tie and nudge slightly.,data/llm_archive/deepseek-flash/5f5d1daa583ac740a952227acff3f27c286f8765d6ccd2d27067aa030b4f0fab.json
+HR0290,deepseek-flash,unfollow,[-0.31],"Opposing view, weak tie; unfollow and soften.",data/llm_archive/deepseek-flash/8f90fcd2e8daf6f4ebf064db367c903c9896fdc435320fe0717ee6775ed55bb5.json
+HR0291,deepseek-flash,mute,[-0.25],Opposing low-tie statement; tail drifts but mutes noise.,data/llm_archive/deepseek-flash/b9840f8f7044bed382cff17a01ab49fa39dbdd75536ff770ad1ae935eb7bb63f.json
+HR0292,deepseek-flash,keep,[-0.606],"Moderately against, less intense than me; slight moderation, keep.",data/llm_archive/deepseek-flash/5f6472dc08d99c9ada6fc28f4f6a1e01a61206eec4961985051d18602d430dde.json
+HR0293,deepseek-flash,mute,[0.738],Far opposite and only moderate tie; mute to see less.,data/llm_archive/deepseek-flash/eededd78f00559d331fd8c96d5b9665c28079d567e32252c1bbbd1fd8dc10491.json
+HR0294,MiniMax-M3,mute,[0.426],Directly opposed statement conflicts substantially with my strong support.,data/llm_archive/MiniMax-M3/6a3d5f11c6df67cf8217a0692b8b41d85a5d5e7289318fb4ad64ca4f9e374d1e.json
+HR0295,MiniMax-M3,keep,[0.677],Strong agreement supports my positive stance and justifies maintaining the tie.,data/llm_archive/MiniMax-M3/1a5d996d170d1b4a25d9b07dcbeb67925f723080bd9c07117bd2f3c9c262906a.json
+HR0296,MiniMax-M3,mute,[0.532],"Direct opposition conflicts with my agenda-setting stance, and the tie is weak.",data/llm_archive/MiniMax-M3/31117ed27a920cd50dcddd75554c292a1e9e92bbd99b324440b8720cfa2032d3.json
+HR0297,deepseek-flash,mute,[-0.52],Peer is far opposite with weak tie; I mute and hold my stance.,data/llm_archive/deepseek-flash/8bd02e84d41645f4470d8903cfac23cc6096ca84363756d02ecf8be75673db57.json
+HR0298,MiniMax-M3,keep,[0.73],Strong agreement reinforces my strongly positive stance.,data/llm_archive/MiniMax-M3/d51ad4e1305c9bba4d8d58e0c3d63dcc8cddfae529d00773dd0cb031c7c3a22a.json
+HR0299,MiniMax-M3,keep,[0.57],Loud agreement reinforces my existing position.,data/llm_archive/MiniMax-M3/ac76454afece7760b2b10b183ea608152b4215300d63d93e89b63218c6b6def5.json
+HR0300,MiniMax-M3,mute,[-0.793],"Strong pro-policy disagreement conflicts with my opposition, so I reduce contact.",data/llm_archive/MiniMax-M3/7a4dc8e8c7770c5f9a3c9e9fce8a96642abba340ab5ca0fbca5632a9d0e3cf4a.json

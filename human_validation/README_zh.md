@@ -59,3 +59,12 @@ python scripts/score_human_validation.py \
 `human_validation/outsourcing_review_package_zh.zip`
 
 里面是规则预填好的 `annotation_sheet_zh_prefilled.csv`、codebook 和审校说明。外包逐条复核/修改后交回；论文里应写成 **human-reviewed rule-prefilled audit**，并披露锚定效应，不能写成完全独立的人工标注。
+
+
+## 第二套规则
+
+第二套外包规则已生成新的 300 条（与第一套不重复）：
+
+`human_validation/outsourcing_review_package_rule2_zh.zip`
+
+包含 `annotation_sheet_zh_rule2_prefilled.csv`、通用 codebook、`RULE2_REVIEWER_README_zh.md`。外包逐条复核后返回两个 CSV。
