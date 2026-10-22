@@ -1,0 +1,145 @@
+{
+  "args": {
+    "seeds": 10,
+    "rounds": 25,
+    "nodes": 100,
+    "out": "results/phase8_real_stance.json"
+  },
+  "dataset": "PolBlogs_Real",
+  "graph_stats": [
+    {
+      "num_nodes": 100,
+      "num_edges": 782,
+      "density": 0.07898989898989899,
+      "reciprocity": 0.30434782608695654,
+      "num_communities": 2,
+      "modularity_q": 0.3999542733905257,
+      "left_frac": 0.49,
+      "right_frac": 0.51
+    },
+    {
+      "num_nodes": 100,
+      "num_edges": 665,
+      "density": 0.06717171717171717,
+      "reciprocity": 0.22255639097744362,
+      "num_communities": 2,
+      "modularity_q": 0.4473518456486325,
+      "left_frac": 0.46,
+      "right_frac": 0.54
+    },
+    {
+      "num_nodes": 100,
+      "num_edges": 673,
+      "density": 0.06797979797979797,
+      "reciprocity": 0.2852897473997028,
+      "num_communities": 2,
+      "modularity_q": 0.3968819177662504,
+      "left_frac": 0.52,
+      "right_frac": 0.48
+    },
+    {
+      "num_nodes": 100,
+      "num_edges": 771,
+      "density": 0.07787878787878788,
+      "reciprocity": 0.2594033722438392,
+      "num_communities": 3,
+      "modularity_q": 0.40889767924289444,
+      "left_frac": 0.49,
+      "right_frac": 0.51
+    },
+    {
+      "num_nodes": 100,
+      "num_edges": 684,
+      "density": 0.06909090909090909,
+      "reciprocity": 0.30994152046783624,
+      "num_communities": 2,
+      "modularity_q": 0.42926329905053817,
+      "left_frac": 0.49,
+      "right_frac": 0.51
+    },
+    {
+      "num_nodes": 100,
+      "num_edges": 807,
+      "density": 0.08151515151515151,
+      "reciprocity": 0.29987608426270135,
+      "num_communities": 2,
+      "modularity_q": 0.43135832008771857,
+      "left_frac": 0.5,
+      "right_frac": 0.5
+    },
+    {
+      "num_nodes": 100,
+      "num_edges": 685,
+      "density": 0.0691919191919192,
+      "reciprocity": 0.26277372262773724,
+      "num_communities": 2,
+      "modularity_q": 0.4297945060377091,
+      "left_frac": 0.53,
+      "right_frac": 0.47
+    },
+    {
+      "num_nodes": 100,
+      "num_edges": 736,
+      "density": 0.07434343434343435,
+      "reciprocity": 0.20923913043478262,
+      "num_communities": 2,
+      "modularity_q": 0.3843398628998276,
+      "left_frac": 0.53,
+      "right_frac": 0.47
+    },
+    {
+      "num_nodes": 100,
+      "num_edges": 775,
+      "density": 0.07828282828282829,
+      "reciprocity": 0.22193548387096773,
+      "num_communities": 3,
+      "modularity_q": 0.376849770707426,
+      "left_frac": 0.55,
+      "right_frac": 0.44999999999999996
+    },
+    {
+      "num_nodes": 100,
+      "num_edges": 808,
+      "density": 0.08161616161616161,
+      "reciprocity": 0.25495049504950495,
+      "num_communities": 2,
+      "modularity_q": 0.3998098687188773,
+      "left_frac": 0.49,
+      "right_frac": 0.51
+    }
+  ],
+  "benchmark": {
+    "DeGroot": {
+      "modularity_q": "0.409±0.018",
+      "polarization": "0.202±0.053",
+      "giant_frac": "0.514±0.010",
+      "small_comm_frac": "0.067±0.101",
+      "rupture_asymmetry": "nan±0.000",
+      "num_comms": "2.300±0.346"
+    },
+    "Hegselmann_Krause": {
+      "modularity_q": "0.487±0.012",
+      "polarization": "0.484±0.011",
+      "giant_frac": "0.519±0.013",
+      "small_comm_frac": "0.133±0.123",
+      "rupture_asymmetry": "0.000±0.000",
+      "num_comms": "2.400±0.369"
+    },
+    "Friedkin_Johnsen": {
+      "modularity_q": "0.409±0.018",
+      "polarization": "0.404±0.008",
+      "giant_frac": "0.514±0.010",
+      "small_comm_frac": "0.067±0.101",
+      "rupture_asymmetry": "nan±0.000",
+      "num_comms": "2.300±0.346"
+    },
+    "Ours_CoEvolution_Engine": {
+      "modularity_q": "0.486±0.011",
+      "polarization": "0.464±0.023",
+      "giant_frac": "0.952±0.101",
+      "small_comm_frac": "0.133±0.123",
+      "rupture_asymmetry": "0.183±0.254",
+      "num_comms": "2.400±0.369"
+    }
+  }
+}

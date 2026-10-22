@@ -47,6 +47,26 @@ with equality if and only if $a_1 = a_2 = \dots = a_K = 1/K$. Combining these tw
 For $K=2$ (bipolar polarization), $Q \leq 1 - 1/2 = 0.500$. For $K=4$ (e.g., the four distinct sub-forums in Reddit ConvoKit), $Q \leq 1 - 1/4 = 0.750$. This mathematically explains why experimental modularity on Reddit saturates around $Q \approx \RedditOursSimplifiedQ \sim \RedditHKQ$, whereas bipolar networks strictly cap at $0.500$.
 \end{proof}
 
+\subsection{Proof of Proposition~\ref{prop:schedule}: Schedule-Induced Unilateral Rupture}
+\label{app:proof_schedule}
+
+The proof is a two-event case analysis. Suppose $i$ evaluates $j$ first and reinforces; by
+Equation~\eqref{eq:weight-update} this means $d=|b_i-b_j|\le 2\theta$. The reinforcement
+update gives $b_i^+ = b_i + \eta(b_j-b_i)$, hence $|b_i^+-b_j|=(1-\eta)d$.
+
+If no belief update reaches $i$ or $j$ before the reverse evaluation, then at that
+evaluation the distance is still $(1-\eta)d\le d\le 2\theta$, so $j$ also reinforces. The
+reverse case, in which $i$ breaks first, leaves both beliefs unchanged and therefore makes
+$j$ break as well. Thus, absent an intervening update, the two directions agree.
+
+Now suppose the only intervening change is a displacement of $j$ away from $i$ by
+$\Delta>0$; the distance at the reverse evaluation is $(1-\eta)d+\Delta$. Since $i$
+reinforced, the dyad is one-sided exactly when $j$ breaks, i.e.\ when
+$(1-\eta)d+\Delta>2\theta$. Conversely, if $j$ breaks, this inequality must hold, so the
+condition is necessary and sufficient in the stated window. If the displacement points
+toward $i$ ($\Delta\le 0$), the distance cannot exceed $(1-\eta)d\le 2\theta$ and no
+one-sided rupture occurs. This proves both claims. $\square$
+
 \subsection{The Multi-Dimensional Update Kernel}
 \label{app:kernel}
 
@@ -257,6 +277,40 @@ the modularity and the number of communities of the Louvain partition of the \em
 topology, and $K_0$ is the quantity that bounds $Q$ through $Q \leq 1-1/K$ (Proposition~1).}
 \label{tab:dataset_metrics}
 \input{tables/dataset_metrics}
+\end{table*}
+
+% =============================================================
+\section{External Validity on a Human-Labeled Stance Graph}
+\label{app:real-stance}
+
+The six-network benchmark above contains only one genuinely empirical graph, and that
+graph (SNAP Higgs) has no stance labels. To add a real stance-labeled check, we use the
+public Political Blogosphere graph of Adamic and Glance (2005): 1,490 political blogs
+with directed blog-to-blog links and human/directory-derived left/right labels. Unlike
+the Higgs camps, these labels are \emph{not} derived from the network topology.
+
+We induce a 100-node subgraph per seed from a top-degree pool, keep the binary label as
+the belief prior (left $-0.7$, right $+0.7$, plus seeded N(0,0.05) jitter only to keep the
+continuous dynamics non-degenerate), and run the same baseline comparison the main
+benchmark uses: mean edges \StanceEdges{}, reciprocity \StanceReciprocity{}, initial
+$Q_0=\StanceInitialQ$, left fraction \StanceLeftFrac{}. On this real-stance graph,
+DeGroot and Friedkin--Johnsen return $Q=\StanceQDeGroot$ and $Q=\StanceQFJ$,
+Hegselmann--Krause gives $Q=\StanceQHK$ with giant component \StanceGiantHK{}, and the
+flagship engine gives $Q=\StanceQEngine$ with giant component \StanceGiantEngine{} and
+$A_{\mathrm{rupture}}=\StanceARupEngine{}$. The engine and HK both raise modularity from
+the initial value, while the engine preserves much more of the giant component; this is a
+single real graph and therefore a scope check rather than a population-level claim.
+Table~\ref{tab:real_stance} reports the full comparison.
+
+\begin{table*}[t]
+\centering
+\small
+\caption{\textbf{External-validity check on the public human-labeled Political
+Blogosphere graph (Adamic--Glance 2005).} Real left/right stance labels, 10 seeds,
+N=100, 25 rounds. Generated from \texttt{results/phase8\_real\_stance.json} by
+\texttt{scripts/generate\_paper\_tables.py}.}
+\label{tab:real_stance}
+\input{tables/real_stance}
 \end{table*}
 
 % =============================================================

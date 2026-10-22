@@ -1,0 +1,8 @@
+=== Phase 8: PolBlogs real-stance external validity (seeds=10, rounds=25, nodes=100) ===
+graph stats: {"num_nodes": 100, "mean_edges": 738.6, "mean_reciprocity": 0.2630313773421472, "mean_Q0": 0.41045013435503996, "mean_left_frac": 0.505}
+
+method | Q | polarization | giant | small-comm | A_rupture
+DeGroot                  | 0.409±0.018 | 0.202±0.053 | 0.514±0.010 | 0.067±0.101 | nan±0.000
+Hegselmann_Krause        | 0.487±0.012 | 0.484±0.011 | 0.519±0.013 | 0.133±0.123 | 0.000±0.000
+Friedkin_Johnsen         | 0.409±0.018 | 0.404±0.008 | 0.514±0.010 | 0.067±0.101 | nan±0.000
+Ours_CoEvolution_Engine  | 0.486±0.011 | 0.464±0.023 | 0.952±0.101 | 0.133±0.123 | 0.183±0.254

@@ -33,6 +33,7 @@ COMMANDS = {
     "phase1b_structural.json": "python -m src.network_evolve.phase1b_structural --seeds 20 --rounds 60 --out results/phase1b_structural.json",
     "phase1c_threshold.json": "python -m src.network_evolve.phase1c_threshold --seeds 10 --rounds 40 --nodes 100 --theta-min 0.15 --theta-max 0.85 --out results/phase1c_threshold.json",
     "phase1c_matched.json": "python -m src.network_evolve.phase1c_threshold --seeds 10 --rounds 40 --nodes 100 --theta-min 0.15 --theta-max 0.85 --matched-degree 6.6 --matched-reciprocity 0.65 --out results/phase1c_matched.json",
+    "phase8_real_stance.json": "python -m src.network_evolve.phase8_real_stance --seeds 10 --rounds 25 --nodes 100 --out results/phase8_real_stance.json",
     "phase2_offline.json": "python -m src.network_evolve.phase2_offline --seeds 20 --n 60 --rounds 30 --out results/phase2_offline.json",
     "phase2_compare.json": "python -m src.network_evolve.phase2_llm replay --seeds 0,1,2 --n 40",
     "phase3.json": "python -m src.network_evolve.phase3 --seeds 20 --rounds 60 --out results/phase3.json",
@@ -45,6 +46,7 @@ COMMANDS = {
     # .log 是对应命令 stdout 的留档（stdout 重定向到该文件），因此共用同一条命令
     "phase1b.log": "python -m src.network_evolve.phase1b --seeds 20 --rounds 60 --out results/phase1b.json  # stdout 留档",
     "phase1b_structural.log": "python -m src.network_evolve.phase1b_structural --seeds 20 --rounds 60 --out results/phase1b_structural.json  # stdout 留档",
+    "phase8_real_stance.log": "python -m src.network_evolve.phase8_real_stance --seeds 10 --rounds 25 --nodes 100 --out results/phase8_real_stance.json  # stdout 留档",
     "phase2_offline.log": "python -m src.network_evolve.phase2_offline --seeds 20 --n 60 --rounds 30 --out results/phase2_offline.json  # stdout 留档",
     "phase4_attribution.log": "python -m src.network_evolve.phase4_attribution --seeds 20 --rounds 30 --nodes 60 --out results/phase4_attribution.json  # stdout 留档",
 }

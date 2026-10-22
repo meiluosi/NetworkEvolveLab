@@ -1,0 +1,1 @@
+External-validity check on the public Political Blogosphere graph (Adamic--Glance 2005): real human/directory-derived left/right labels, 10 seeds, N=100, mean edges 738.6, reciprocity 0.263, initial Q 0.410, left fraction 0.51. Generated from \texttt{results/phase8\_real\_stance.json} by \texttt{scripts/generate\_paper\_tables.py}.

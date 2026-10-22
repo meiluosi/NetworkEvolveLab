@@ -74,6 +74,11 @@ def main():
                 "Phase 3: counterfactual platform interventions (H3)")
         run_cmd(f"{py} -m src.network_evolve.phase4_attribution --seeds 20 --rounds 30 --nodes 60 --out results/phase4_attribution.json",
                 "Phase 4: asymmetric-rupture attribution ablation")
+        run_cmd(f"{py} scripts/build_polblogs_caches.py --nodes 100 --seeds 0-9",
+                "Phase 8: build PolBlogs real-stance caches")
+        run_cmd(f"{py} -m src.network_evolve.phase8_real_stance --seeds 10 --rounds 25 --nodes 100 "
+                "--out results/phase8_real_stance.json",
+                "Phase 8: external validity on the PolBlogs human-labeled stance graph")
 
     if args.benchmarks or args.all:
         cmd = (f"{sys.executable} -m src.network_evolve.benchmark_suite --nodes {args.nodes} "

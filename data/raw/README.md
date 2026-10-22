@@ -106,6 +106,36 @@ topology** (Louvain communities of the induced subgraph), *not* a human annotati
 
 ---
 
+## Political Blogosphere (PolBlogs), Feb 2005 — human-labeled stance graph
+
+| field | value |
+| --- | --- |
+| Dataset page | <http://www-personal.umich.edu/~mejn/netdata/> |
+| Direct download | <http://www-personal.umich.edu/~mejn/netdata/polblogs.zip> |
+| Local file | `data/raw/polblogs.gml` (unzipped from `polblogs.zip`) |
+| Size | 955,025 bytes |
+| SHA256 (GML) | `bd83e3dd2397a57d2252cc212524c21fee6708663136898d4ace523224bdc632` |
+| Content | 1,490 political blogs, directed blog-to-blog links, node `value` 0=left/1=right |
+| Labels | Human/directory-derived political leaning from the original authors; **not** inferred from topology |
+| License/terms | Academic use; cite the source paper below; do not redistribute without attribution |
+| Citation | Lada A. Adamic and Natalie Glance. *The political blogosphere and the 2004 US Election.* Proc. WWW-2005 Workshop on the Weblogging Ecosystem. |
+
+**Derived caches.** `src/network_evolve/datasets_stance.py` selects a seeded top-degree
+subgraph, re-indexes nodes, and maps the binary `value` label to a scalar belief
+(left = −0.7, right = +0.7, plus a seeded N(0, 0.05) jitter only for continuous
+dynamics). Edge weight is the constant 0.6. Caches are written to
+`data/benchmarks/polblogs_real_n{num_nodes}_s{seed}.json`; the raw GML is small enough
+to be kept in the repository. The label is human/directory-derived and must be described
+as such in the paper, unlike the SNAP Higgs topology-derived proxy.
+
+**Build caches:**
+
+```bash
+python scripts/build_polblogs_caches.py --nodes 100 --seeds 0-9
+```
+
+---
+
 ## Other raw files
 
 None yet. Add one section per source file, keeping the same structure:

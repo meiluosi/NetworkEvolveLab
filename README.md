@@ -99,6 +99,11 @@ python -m src.network_evolve.phase4_attribution --seeds 20 --rounds 30 --nodes 6
 # Phase 5 (新增): 模块度 K 社群推广上界的一致性审计
 python -m src.network_evolve.phase5_bound_audit --seeds 10 --rounds 60 --out results/phase5_bound_audit.json
 
+# Phase 8 (新增): 公开真实立场图 PolBlogs 外部效度检查
+python scripts/build_polblogs_caches.py --nodes 100 --seeds 0-9
+python -m src.network_evolve.phase8_real_stance --seeds 10 --rounds 25 --nodes 100 \
+    --out results/phase8_real_stance.json
+
 # Phase 6 (新增): 真实 LLM 认知层挂进旗舰引擎 vs 规则后端（同 seed 配对对照）
 #   输出同时包含 placebo 臂（等量随机 unfollow）与逐事件 LLM-vs-规则一致率；
 #   需要 LLM 凭据：NETWORK_EVOLVE_LLM_BASE_URL / NETWORK_EVOLVE_LLM_API_KEY
