@@ -104,6 +104,11 @@ python scripts/run_phase6_parallel.py --seeds 10 --jobs 10 --rounds 30 --nodes 6
     --llm-events 60 --model MiniMax-M3 --max-tokens 8192 --thinking-budget 0 \
     --out results/phase6_highcov_60_m3.json
 
+# Phase 10: 公开真实立场图 PolBooks 外部效度检查
+python scripts/build_polbooks_caches.py --nodes 100 --seeds 0-9
+python -m src.network_evolve.phase10_polbooks --seeds 10 --rounds 25 --nodes 100 \
+    --out results/phase10_polbooks.json
+
 # Phase 8 (新增): 公开真实立场图 PolBlogs 外部效度检查
 python scripts/build_polblogs_caches.py --nodes 100 --seeds 0-9
 python -m src.network_evolve.phase8_real_stance --seeds 10 --rounds 25 --nodes 100 \

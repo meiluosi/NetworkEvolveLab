@@ -1,0 +1,6 @@
+=== Phase 10: PolBooks human-labeled external validity (seeds=10, rounds=25, nodes=100) ===
+graph stats: {"mean_edges": 802.8, "mean_label": 0.0427, "mean_neg_frac": 0.409}
+DeGroot                  | 0.527±0.009 | 0.055±0.008 | 0.378±0.023 | 0.103±0.117 | nan±0.000
+Hegselmann_Krause        | 0.536±0.007 | 0.429±0.003 | 0.337±0.045 | 0.631±0.077 | 0.000±0.000
+Friedkin_Johnsen         | 0.527±0.009 | 0.339±0.005 | 0.378±0.023 | 0.103±0.117 | nan±0.000
+Ours_CoEvolution_Engine  | 0.508±0.008 | 0.163±0.043 | 1.000±0.000 | 0.000±0.000 | 0.280±0.050

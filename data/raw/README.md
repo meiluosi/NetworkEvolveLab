@@ -136,6 +136,25 @@ python scripts/build_polblogs_caches.py --nodes 100 --seeds 0-9
 
 ---
 
+## Books about US Politics (PolBooks), 2006 — human-labeled stance graph
+
+| field | value |
+| --- | --- |
+| Dataset page | <http://www-personal.umich.edu/~mejn/netdata/> |
+| Direct download | <http://www-personal.umich.edu/~mejn/netdata/polbooks.zip> |
+| Local file | `data/raw/polbooks.gml` (unzipped) |
+| SHA256 (GML) | `29e2439036fa4e13b478a9d4ceda78b5ab4d4d8252882a7f2b6036b028e34848` |
+| Content | 105 books sold on Amazon, co-purchase edges, labels `l`/`n`/`c` |
+| Labels | Human-assigned by Mark Newman from book descriptions/reviews; not topology-derived |
+| Citation | V. Krebs / M. Newman, "Books about US politics" (2006); see orgnet.com |
+
+Derived caches: `src/network_evolve/datasets_polbooks.py` samples 100 of 105
+nodes per seed, maps `l`/`n`/`c` to −0.7/0.0/+0.7, and represents each
+undirected co-purchase edge as reciprocal directed edges. Caches are written to
+`data/benchmarks/polbooks_real_n100_s{seed}.json`.
+
+---
+
 ## Other raw files
 
 None yet. Add one section per source file, keeping the same structure:

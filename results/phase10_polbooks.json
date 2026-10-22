@@ -1,0 +1,105 @@
+{
+  "args": {
+    "seeds": 10,
+    "rounds": 25,
+    "nodes": 100,
+    "out": "results/phase10_polbooks.json"
+  },
+  "dataset": "PolBooks_Real",
+  "graph_stats": [
+    {
+      "num_nodes": 100,
+      "num_edges": 786,
+      "mean_label": 0.04200000000000001,
+      "neg_frac": 0.41
+    },
+    {
+      "num_nodes": 100,
+      "num_edges": 774,
+      "mean_label": 0.03500000000000001,
+      "neg_frac": 0.41
+    },
+    {
+      "num_nodes": 100,
+      "num_edges": 816,
+      "mean_label": 0.042,
+      "neg_frac": 0.41
+    },
+    {
+      "num_nodes": 100,
+      "num_edges": 832,
+      "mean_label": 0.035,
+      "neg_frac": 0.41
+    },
+    {
+      "num_nodes": 100,
+      "num_edges": 826,
+      "mean_label": 0.048999999999999995,
+      "neg_frac": 0.41
+    },
+    {
+      "num_nodes": 100,
+      "num_edges": 732,
+      "mean_label": 0.049,
+      "neg_frac": 0.4
+    },
+    {
+      "num_nodes": 100,
+      "num_edges": 822,
+      "mean_label": 0.028000000000000025,
+      "neg_frac": 0.42
+    },
+    {
+      "num_nodes": 100,
+      "num_edges": 806,
+      "mean_label": 0.055999999999999994,
+      "neg_frac": 0.4
+    },
+    {
+      "num_nodes": 100,
+      "num_edges": 826,
+      "mean_label": 0.055999999999999994,
+      "neg_frac": 0.4
+    },
+    {
+      "num_nodes": 100,
+      "num_edges": 808,
+      "mean_label": 0.035,
+      "neg_frac": 0.42
+    }
+  ],
+  "benchmark": {
+    "DeGroot": {
+      "modularity_q": "0.527±0.009",
+      "polarization": "0.055±0.008",
+      "giant_frac": "0.378±0.023",
+      "small_comm_frac": "0.103±0.117",
+      "rupture_asymmetry": "nan±0.000",
+      "num_comms": "5.300±0.483"
+    },
+    "Hegselmann_Krause": {
+      "modularity_q": "0.536±0.007",
+      "polarization": "0.429±0.003",
+      "giant_frac": "0.337±0.045",
+      "small_comm_frac": "0.631±0.077",
+      "rupture_asymmetry": "0.000±0.000",
+      "num_comms": "10.500±0.773"
+    },
+    "Friedkin_Johnsen": {
+      "modularity_q": "0.527±0.009",
+      "polarization": "0.339±0.005",
+      "giant_frac": "0.378±0.023",
+      "small_comm_frac": "0.103±0.117",
+      "rupture_asymmetry": "nan±0.000",
+      "num_comms": "5.300±0.483"
+    },
+    "Ours_CoEvolution_Engine": {
+      "modularity_q": "0.508±0.008",
+      "polarization": "0.163±0.043",
+      "giant_frac": "1.000±0.000",
+      "small_comm_frac": "0.000±0.000",
+      "rupture_asymmetry": "0.280±0.050",
+      "num_comms": "3.500±0.377"
+    }
+  }
+}

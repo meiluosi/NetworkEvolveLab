@@ -14,6 +14,7 @@ sys.path.insert(0, os.path.abspath("."))
 
 from src.network_evolve.benchmark_suite import DATASETS, get_dataset
 from src.network_evolve.datasets_stance import load_polblogs_real_subgraph
+from src.network_evolve.datasets_polbooks import load_polbooks_real_subgraph
 
 
 def check_dataset(name: str, n: int = 60):
@@ -35,6 +36,17 @@ def main():
         except Exception as exc:  # noqa: BLE001 - validation reports all failures
             failures.append((name, repr(exc)))
             print(f"[FAIL] {name}: {exc!r}")
+    try:
+        g, ideo = load_polbooks_real_subgraph(100, 0)
+        assert g.number_of_nodes() == 100 and g.number_of_edges() > 0
+        vals = np.array(list(ideo.values()), dtype=float)
+        assert np.isfinite(vals).all() and vals.min() >= -1 and vals.max() <= 1
+        neg = float(np.mean(vals < 0))
+        print(f"[ok] {'PolBooks_Real':<24} n=100 edges={g.number_of_edges()} "
+              f"neg_frac={neg:.2f}")
+    except Exception as exc:  # noqa: BLE001
+        failures.append(("PolBooks_Real", repr(exc)))
+        print(f"[FAIL] PolBooks_Real: {exc!r}")
     try:
         g, ideo = load_polblogs_real_subgraph(100, 0)
         assert g.number_of_nodes() == 100 and g.number_of_edges() > 0

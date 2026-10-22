@@ -1,9 +1,9 @@
 {
   "name": "NetworkEvolveLab benchmark",
   "version": "0.1",
-  "description": "5 calibrated surrogates + real SNAP Higgs topology + PolBlogs human-labeled stance graph",
-  "real_graphs": 2,
-  "human_labeled_stance_graphs": 1,
+  "description": "5 calibrated surrogates + real SNAP Higgs topology + PolBlogs and PolBooks human-labeled stance graphs",
+  "real_graphs": 3,
+  "human_labeled_stance_graphs": 2,
   "caches": [
     {
       "cache": "data/benchmarks/birdwatch_network_n30_s0.json",
@@ -502,6 +502,86 @@
       "license": "see data/raw/README.md"
     },
     {
+      "cache": "data/benchmarks/polbooks_real_n100_s0.json",
+      "sha256": "8e3890c5fb4427b1854333f4d46c7af5946911d7a82df02c1f7fa6ffa3e08866",
+      "num_nodes": 100,
+      "num_edges": 393,
+      "source": "Books about US politics (PolBooks), 2006",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/polbooks_real_n100_s1.json",
+      "sha256": "164b98a6d23a37e5b53839117182fa39bd5cb991ebc72e21fd168fea2aad7fab",
+      "num_nodes": 100,
+      "num_edges": 387,
+      "source": "Books about US politics (PolBooks), 2006",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/polbooks_real_n100_s2.json",
+      "sha256": "6cd9127f8b1e553d85a2a8fbee615442278a08740f103da6df78dc7f96acb36a",
+      "num_nodes": 100,
+      "num_edges": 408,
+      "source": "Books about US politics (PolBooks), 2006",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/polbooks_real_n100_s3.json",
+      "sha256": "13700abc2e34105a8b4bd1cb5f466b35abe47d2f4fcf35731e7e9625aeb384ff",
+      "num_nodes": 100,
+      "num_edges": 416,
+      "source": "Books about US politics (PolBooks), 2006",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/polbooks_real_n100_s4.json",
+      "sha256": "94d104da1a02e863dc04da071d64eeb97d7257935ca87cd0fdb78440d8894626",
+      "num_nodes": 100,
+      "num_edges": 413,
+      "source": "Books about US politics (PolBooks), 2006",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/polbooks_real_n100_s5.json",
+      "sha256": "8fcfaea4c4b999c928908f279eab77be2efec6e9c49f6d72d592dd53e1519abc",
+      "num_nodes": 100,
+      "num_edges": 366,
+      "source": "Books about US politics (PolBooks), 2006",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/polbooks_real_n100_s6.json",
+      "sha256": "c538cc8241f8caa5120c3fc5c581e3fe9e37f174c09fa681ca1893f2d8356a22",
+      "num_nodes": 100,
+      "num_edges": 411,
+      "source": "Books about US politics (PolBooks), 2006",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/polbooks_real_n100_s7.json",
+      "sha256": "1e72c28faf4fa8fdb9eb2c8e86189a7b098f74c1577107779f11a076eecf7a9b",
+      "num_nodes": 100,
+      "num_edges": 403,
+      "source": "Books about US politics (PolBooks), 2006",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/polbooks_real_n100_s8.json",
+      "sha256": "3b2a57c74f49159967942362a5a51e1a4a11f11225a5f91e24906b69bb09087c",
+      "num_nodes": 100,
+      "num_edges": 413,
+      "source": "Books about US politics (PolBooks), 2006",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/polbooks_real_n100_s9.json",
+      "sha256": "443bf188ab5e38061d7617ed4295349f4b694cafa56ee1c655c028e075290277",
+      "num_nodes": 100,
+      "num_edges": 404,
+      "source": "Books about US politics (PolBooks), 2006",
+      "license": "see data/raw/README.md"
+    },
+    {
       "cache": "data/benchmarks/reddit_convokit_n30_s0.json",
       "sha256": "b548b6edeee08065ba59c1c9de95ca05f44110ea214c7f71307fcfd357f8a98f",
       "num_nodes": 0,
@@ -848,8 +928,18 @@
       "file": "data/raw/polblogs.txt",
       "label": "PolBlogs metadata",
       "sha256": "9e77bf937cda1b0aa19532eee6e54a10074487906c25541624ff1977fc41d14e"
+    },
+    {
+      "file": "data/raw/polbooks.gml",
+      "label": "PolBooks (human stance labels)",
+      "sha256": "29e2439036fa4e13b478a9d4ceda78b5ab4d4d8252882a7f2b6036b028e34848"
+    },
+    {
+      "file": "data/raw/polbooks.txt",
+      "label": "PolBooks metadata",
+      "sha256": "8baf61f8ec2823b38610ab45952599dc589bf6dc1a7ef1253be75b5b017a0f53"
     }
   ],
   "provenance": "results/PROVENANCE.json",
-  "note": "Not yet a D&B/JOSS-ready leaderboard: 2 real graphs, no hidden test split. Add 1-2 more real stance graphs and a submission format before D&B."
+  "note": "Not yet a D&B/JOSS-ready leaderboard: 3 real graphs, no hidden test split. Add 1-2 more real platform graphs and a submission format before D&B."
 }

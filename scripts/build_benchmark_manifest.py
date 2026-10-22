@@ -40,7 +40,9 @@ def build_manifest():
         })
     raw = []
     for fname, label in (("polblogs.gml", "PolBlogs (human stance labels)"),
-                         ("polblogs.txt", "PolBlogs metadata")):
+                         ("polblogs.txt", "PolBlogs metadata"),
+                         ("polbooks.gml", "PolBooks (human stance labels)"),
+                         ("polbooks.txt", "PolBooks metadata")):
         path = os.path.join(ROOT, "data", "raw", fname)
         if os.path.exists(path):
             raw.append({"file": f"data/raw/{fname}", "label": label, "sha256": sha(path)})
@@ -48,14 +50,14 @@ def build_manifest():
         "name": "NetworkEvolveLab benchmark",
         "version": "0.1",
         "description": "5 calibrated surrogates + real SNAP Higgs topology + "
-                       "PolBlogs human-labeled stance graph",
-        "real_graphs": 2,
-        "human_labeled_stance_graphs": 1,
+                       "PolBlogs and PolBooks human-labeled stance graphs",
+        "real_graphs": 3,
+        "human_labeled_stance_graphs": 2,
         "caches": caches,
         "raw_sources": raw,
         "provenance": "results/PROVENANCE.json",
-        "note": "Not yet a D&B/JOSS-ready leaderboard: 2 real graphs, no hidden test split. "
-                "Add 1-2 more real stance graphs and a submission format before D&B.",
+        "note": "Not yet a D&B/JOSS-ready leaderboard: 3 real graphs, no hidden test split. "
+                "Add 1-2 more real platform graphs and a submission format before D&B.",
     }
     return manifest
 

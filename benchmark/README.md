@@ -11,8 +11,9 @@ provides a validation entry point for a future NeurIPS D&B / JOSS package.
 - 5 calibrated surrogate networks (Twitter 2020, SNAP Higgs surrogate, Reddit
   ConvoKit, DEBATE, Birdwatch/Community Notes);
 - 1 real topology graph: SNAP Higgs (no stance labels; topology-derived camps);
-- 1 real **human-labeled** stance graph: Political Blogosphere (PolBlogs,
-  Adamic & Glance 2005; left/right `value` labels);
+- 2 real **human-labeled** stance graphs: Political Blogosphere (PolBlogs,
+  Adamic & Glance 2005; left/right labels) and Books about US Politics (PolBooks,
+  human-assigned liberal/neutral/conservative labels);
 - frozen result JSONs and a SHA256 provenance manifest.
 
 ## Registry manifest
@@ -48,7 +49,7 @@ python -m src.network_evolve.phase8_real_stance --seeds 10 --rounds 25 \
 
 ## Status / next additions
 
-The current public benchmark has **2 real graphs** (one with human stance
+The current public benchmark has **3 real graphs** (two with human stance
 labels).  A NeurIPS D&B submission would benefit from 1-2 additional real
 platform graphs with stance labels and a per-task leaderboard; those are
 deliberately not fabricated here.  JOSS-style packaging has the `network-evolve` entry point, MIT license, a
