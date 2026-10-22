@@ -1,12 +1,15 @@
 """综合基准与多 SOTA 方法评测套件（Unified Benchmark & SOTA Suite）：
-跨五大黄金实证数据集（Twitter Election, SNAP Higgs, Reddit ConvoKit, DEBATE, Birdwatch），
-评测 6 种观点动力学与拓扑演化方法：
+跨黄金实证数据集（Twitter Election, SNAP Higgs, Reddit ConvoKit, DEBATE, Birdwatch，
+以及真实 SNAP Higgs 公开子图 SNAP_Higgs_Real），
+评测 7 种观点动力学与拓扑演化方法：
   1. DeGroot (1974)
   2. Hegselmann-Krause (2002)
   3. Friedkin-Johnsen (1990)
   4. Generative Agents (Park et al., 2023)
   5. Prompt-Rewire (Gu et al., 2025)
-  6. Ours (NetworkEvolveLab Co-evolution)
+  6. Ours (CoEvolution) —— 简化重实现（保留为消融参照）
+  7. Ours (CoEvolution Engine) —— 本项目旗舰引擎 CoEvolutionEngine 的真实实现
+     （第 7 行是修复前的核心缺陷：旗舰方法此前并未使用自己的主引擎参与对比）
 """
 import argparse
 import json
@@ -20,6 +23,8 @@ from .baselines import (
     DeGrootModel, HegselmannKrauseModel, FriedkinJohnsenModel,
     GenerativeAgentsMemoryModel, GuEtAlPromptRewireModel, OursCoEvolutionModel
 )
+from .engine import CoEvolutionEngine
+from .metrics import engine_metrics
 from .expkit import mean_ci, fmt
 
 DATASETS = [
@@ -27,9 +32,22 @@ DATASETS = [
     "SNAP_Higgs_Twitter",
     "Reddit_ConvoKit",
     "DEBATE_Benchmark",
-    "Birdwatch_Community_Notes"
+    "Birdwatch_Community_Notes",
 ]
-MODELS = ["DeGroot", "Hegselmann_Krause", "Friedkin_Johnsen", "Park_et_al_2023", "Gu_et_al_2025", "Ours_CoEvolution"]
+MODELS = ["DeGroot", "Hegselmann_Krause", "Friedkin_Johnsen", "Park_et_al_2023", "Gu_et_al_2025",
+          "Ours_CoEvolution_Simplified", "Ours_CoEvolution_Engine"]
+
+# 真实公开数据（SNAP Higgs 原始边表派生）是否可用
+try:
+    from .datasets_real import load_higgs_real_subgraph
+    _REAL_HIGGS_AVAILABLE = True
+except Exception:  # pragma: no cover - 仅在依赖缺失时触发
+    load_higgs_real_subgraph = None
+    _REAL_HIGGS_AVAILABLE = False
+
+if _REAL_HIGGS_AVAILABLE:
+    DATASETS.append("SNAP_Higgs_Real")
+
 
 def get_dataset(dname: str, n: int, s: int):
     if dname == "Twitter_Election_2020":
@@ -48,7 +66,23 @@ def get_dataset(dname: str, n: int, s: int):
         return load_debate_network(num_nodes=n, seed=s)
     elif dname == "Birdwatch_Community_Notes":
         return load_birdwatch_network(num_nodes=n, seed=s)
+    elif dname == "SNAP_Higgs_Real":
+        # 真实公开数据子图（由 SNAP higgs-social_network 原始边表派生）
+        return load_higgs_real_subgraph(num_nodes=n, seed=s)
     raise ValueError(dname)
+
+
+def run_engine_method(g, ideo, s: int, rounds: int):
+    """用旗舰引擎 CoEvolutionEngine 在给定数据集上跑 rounds 轮，返回与基线同口径的指标。"""
+    n = g.number_of_nodes()
+    engine = CoEvolutionEngine(num_nodes=n, seed=s, base_tolerance=0.4, bridger_tolerance=0.7,
+                               p_form=0.1, theta_attract=0.4, heterogeneous=True, block_diff=1.2,
+                               rec_friction=1.0, init_graph=g, init_beliefs=ideo)
+    init_edges = set(engine.graph.g.edges())
+    for _ in range(rounds):
+        engine.run_round()
+    return engine_metrics(engine, init_edges)
+
 
 def instantiate_model(mname: str, g, ideo, s: int):
     if mname == "DeGroot":
@@ -61,7 +95,7 @@ def instantiate_model(mname: str, g, ideo, s: int):
         return GenerativeAgentsMemoryModel(g, ideo, memory_window=5, seed=s)
     elif mname == "Gu_et_al_2025":
         return GuEtAlPromptRewireModel(g, ideo, seed=s)
-    elif mname == "Ours_CoEvolution":
+    elif mname == "Ours_CoEvolution_Simplified":
         return OursCoEvolutionModel(g, ideo, theta=0.40, block_diff=1.2, div_rec=0.15, seed=s)
     raise ValueError(mname)
 
@@ -75,8 +109,9 @@ def main():
 
     print(f"=== SOTA 方法与黄金数据集大一统综合评测 (Seeds={args.seeds}, Nodes={args.nodes}, Rounds={args.rounds}) ===")
     
-    results = {"args": vars(args), "benchmark": {}}
-    metric_keys = ["modularity_q", "polarization", "giant_frac", "small_comm_frac", "rupture_asymmetry"]
+    results = {"args": vars(args), "benchmark": {}, "real_higgs_available": _REAL_HIGGS_AVAILABLE}
+    metric_keys = ["modularity_q", "polarization", "giant_frac", "small_comm_frac", "rupture_asymmetry",
+                   "num_comms"]
 
     for dname in DATASETS:
         print(f"\n>>> Dataset: {dname}")
@@ -87,8 +122,11 @@ def main():
             runs = []
             for s in range(args.seeds):
                 g, ideo = get_dataset(dname, args.nodes, s)
-                model = instantiate_model(mname, g, ideo, s)
-                res = model.run(rounds=args.rounds)
+                if mname == "Ours_CoEvolution_Engine":
+                    res = run_engine_method(g, ideo, s, args.rounds)
+                else:
+                    model = instantiate_model(mname, g, ideo, s)
+                    res = model.run(rounds=args.rounds)
                 runs.append(res)
             
             row = {}

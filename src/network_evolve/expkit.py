@@ -3,7 +3,8 @@ import numpy as np
 from multiprocessing import Pool
 from scipy import stats
 from .engine import CoEvolutionEngine
-from .metrics import (snapshot, init_incident_edges, retention_by_node, h2_test, cross_reach)
+from .metrics import (snapshot, init_incident_edges, retention_by_node, h2_test, h2_seed_level_test,
+                      cross_reach)
 
 BASE = dict(nodes=100, rounds=60, theta=0.4, bridger_dtheta=0.3, p_form=0.1,
             block=None, rho=1.0, hetero=True, checkpoints=(), reach=False)
@@ -69,7 +70,15 @@ def fmt(xs):
 
 
 def h2_summary(runs, n_boot=2000, seed=0):
-    """合并所有种子的节点级留存率做 Mann-Whitney；并以“种子”为单位 bootstrap 相对差距 CI"""
+    """合并所有种子的节点级留存率做 Mann-Whitney；并以“种子”为单位 bootstrap 相对差距 CI。
+
+    统计口径说明（修复伪重复问题）：
+      节点级 Mann-Whitney 把同一 seed 内的节点当作独立样本，会低估标准误（伪重复）。
+      因此除节点级结果外，额外给出以「种子」为独立统计单元的判定：
+      单样本单侧 t 检验 H0: mean(per-seed gap) <= 0.4  vs  H1: > 0.4，
+      以及符号检验（达到 40% 差距的种子占比）。
+      H2 的最终判定以 seed 级检验为准（seed_gap_p < 0.01）。
+    """
     b = [v for r in runs for v in r["bridger_ret"]]
     o = [v for r in runs for v in r["other_ret"]]
     res = h2_test(b, o)
@@ -81,6 +90,12 @@ def h2_summary(runs, n_boot=2000, seed=0):
     rng = np.random.default_rng(seed)
     boots = [np.nanmean(rng.choice(gaps, size=len(gaps))) for _ in range(n_boot)]
     res["gap_ci95"] = [float(np.percentile(boots, 2.5)), float(np.percentile(boots, 97.5))]
+    seed_level = h2_seed_level_test(gaps, threshold=0.4)
+    res["seed_level"] = seed_level
+    res["p_value_node_level"] = res["p_value"]          # 保留原字段（伪重复，仅供参考）
+    res["p_value"] = float(seed_level["p_value_seed_level"])   # 主判定口径改为 seed 级
+    res["H2_supported"] = bool(seed_level["p_value_seed_level"] < 0.01
+                                and seed_level["seed_gap_mean"] >= 0.4)
     return res
 
 

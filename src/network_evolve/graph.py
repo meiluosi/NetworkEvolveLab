@@ -9,13 +9,21 @@ class DynamicSocialGraph:
     支持多种初始网络拓扑生成（Erdos-Renyi、Barabasi-Albert无标度、Watts-Strogatz小世界、实证双极图）
     """
     def __init__(self, num_nodes: int = 50, initial_density: float = 0.08, seed: int = 42,
-                 topology_type: str = "erdos_renyi"):
+                 topology_type: str = "erdos_renyi", init_graph=None):
         self.rng = np.random.default_rng(seed)
         self.num_nodes = num_nodes
         self.topology_type = topology_type
-        
+
         self.g = nx.DiGraph()
         self.g.add_nodes_from(range(num_nodes))
+
+        if init_graph is not None:
+            # 导入外部（实证数据集）拓扑：保留其自身边权，缺失时用固定默认权重
+            for u, v in init_graph.edges():
+                if u < num_nodes and v < num_nodes and u != v:
+                    w = init_graph[u][v].get("weight", None)
+                    self.g.add_edge(u, v, weight=float(w) if w is not None else 0.6)
+            return
 
         if topology_type == "scale_free" or topology_type == "barabasi_albert":
             # Barabasi-Albert 无标度网络，体现幂律度分布
@@ -71,13 +79,16 @@ class DynamicSocialGraph:
     def update_edge_weight(self, u: int, v: int, delta: float) -> float:
         """更新 edge (u -> v) 的权重，若 <= 0 则删除连边 (Unfollow)"""
         if self.g.has_edge(u, v):
-            new_w = self.g[u][v]["weight"] + delta
+            # 直接走 adj 字典，避免每次访问都重建 networkx 的 AtlasView
+            # （数值语义与 self.g[u][v] 完全一致，作用的是同一个字典对象）。
+            edge = self.g.adj[u][v]
+            new_w = edge["weight"] + delta
             if new_w <= 0.0:
                 self.g.remove_edge(u, v)
                 return 0.0
             else:
                 new_w = min(1.0, new_w)
-                self.g[u][v]["weight"] = new_w
+                edge["weight"] = new_w
                 return new_w
         elif delta > 0.0:
             # 建立新连边

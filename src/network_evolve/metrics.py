@@ -30,6 +30,37 @@ def snapshot(engine) -> Dict[str, float]:
         "cross_edge_frac": cross / m if m else 0.0,
         "giant_frac": giant / g.number_of_nodes(),
         "num_components": nx.number_weakly_connected_components(g),
+        "small_comm_frac": float(np.mean([len(c) <= 5 for c in comms])) if comms else 0.0,
+    }
+
+
+def engine_metrics(engine, init_edges) -> Dict[str, float]:
+    """把旗舰引擎 CoEvolutionEngine 的终态折算为与 baselines 同口径的基准指标。
+
+    口径与 baselines.BaseOpinionModel.get_metrics 完全一致（Louvain 模块度、信念方差极化度、
+    最大弱连通巨片占比、小社群占比、互惠二元组非对称断裂率），确保横向对比是同尺度的。
+    """
+    g = engine.graph.g
+    und = g.to_undirected()
+    m = g.number_of_edges()
+    if m > 0:
+        comms = nx.community.louvain_communities(und, weight="weight", seed=0)
+        q = float(nx.community.modularity(und, comms, weight="weight"))
+    else:
+        comms, q = [set(engine.agents.keys())], 0.0
+    beliefs = np.array([a.belief for a in engine.agents.values()], dtype=float)
+    sizes = [len(c) for c in comms]
+    giant = max((len(c) for c in nx.weakly_connected_components(g)), default=0) / max(g.number_of_nodes(), 1)
+    asym = asymmetry_stats(g, init_edges)
+    return {
+        "modularity_q": q,
+        "polarization": float(np.var(beliefs)),
+        "giant_frac": float(giant),
+        "small_comm_frac": float(np.mean([s <= 5 for s in sizes])) if sizes else 0.0,
+        "rupture_asymmetry": asym["rupture_asymmetry"],
+        "num_edges": float(m),
+        "num_comms": float(len(comms)),
+        "n_mutual_broken": asym["n_mutual_broken"],
     }
 
 
@@ -52,6 +83,59 @@ def h2_test(bridger_ret, other_ret) -> Dict[str, float]:
     return {"bridger_mean": float(b.mean()), "other_mean": float(o.mean()),
             "relative_gap": float(rel_gap), "p_value": float(p),
             "H2_supported": bool(rel_gap >= 0.4 and p < 0.01)}
+
+
+def h2_seed_level_test(seed_gaps, threshold: float = 0.4) -> Dict[str, float]:
+    """以「种子」为独立统计单元的 H2 判定（避免节点级伪重复）。
+
+    seed_gaps: 每个种子的相对留存率差距 (other_mean - bridger_mean) / other_mean。
+    H2 要求差距 >= threshold（即 Bridger 留存率至少低 40%）。
+    预注册判据「至少低 40% 且 p<0.01」拆为两个独立部分：
+      · 效应量：mean(seed_gap) >= threshold（0.40）
+      · 显著性：单样本单侧 t 检验 H0: mean(gap) <= 0 vs H1: > 0
+    另附更严格的对照检验 p_value_threshold（H0: mean(gap) <= 0.40），仅作参考。
+    """
+    g = np.asarray([x for x in seed_gaps if np.isfinite(x)], dtype=float)
+    if len(g) < 2:
+        return {"seed_gap_mean": float(g.mean()) if len(g) else float("nan"),
+                "seed_gap_median": float(np.median(g)) if len(g) else float("nan"),
+                "p_value_seed_level": float("nan"),
+                "frac_seeds_passing": float("nan"), "n_seeds": int(len(g))}
+    if np.allclose(g, g[0]):
+        # 退化情形：所有种子的差距完全相同（方差为 0），t 检验无定义
+        p_pos = 1.0 if g[0] <= 0 else 0.0
+        p_thr = 1.0 if g[0] <= threshold else 0.0
+    else:
+        _, p_pos = stats.ttest_1samp(g, 0.0, alternative="greater")
+        _, p_thr = stats.ttest_1samp(g, threshold, alternative="greater")
+    # 符号检验：差距为正的种子比例（H0: p = 0.5）
+    binom_p = float(stats.binomtest(int(np.sum(g > 0)), len(g), 0.5, alternative="greater").pvalue)
+    frac = float(np.mean(g >= threshold))
+    return {"seed_gap_mean": float(g.mean()), "seed_gap_median": float(np.median(g)),
+            "p_value_seed_level": float(p_pos), "p_value_threshold": float(p_thr),
+            "p_value_sign_test": binom_p,
+            "frac_seeds_passing": frac, "n_seeds": int(len(g))}
+
+
+def asymmetry_stats(g, initial_edges) -> Dict[str, float]:
+    """互惠二元组中的非对称断裂统计。
+
+    仅统计初始为互惠 (u<->v) 的二元组：任一侧断裂记为 any_broken，
+    其中仅一侧断裂（另一侧保留）记为 one_sided。非对称断裂率 = one_sided / any_broken。
+    当没有任何互惠二元组断裂时返回 NaN，同时给出分母，避免 NaN 被误读为 0。
+    """
+    mutual = {(u, v) for (u, v) in initial_edges if (v, u) in initial_edges and u < v}
+    one_broken = 0
+    any_broken = 0
+    for u, v in mutual:
+        has_uv, has_vu = g.has_edge(u, v), g.has_edge(v, u)
+        if not (has_uv and has_vu):
+            any_broken += 1
+            if has_uv != has_vu:
+                one_broken += 1
+    asym = one_broken / any_broken if any_broken else float("nan")
+    return {"rupture_asymmetry": float(asym), "n_mutual": float(len(mutual)),
+            "n_mutual_broken": float(any_broken), "n_one_sided": float(one_broken)}
 
 
 def cross_reach(engine, n_sims: int = 200, beta: float = 0.5, seed: int = 123) -> float:
