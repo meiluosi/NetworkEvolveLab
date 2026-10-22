@@ -85,6 +85,13 @@ def collect_artifacts():
             for fname in sorted(os.listdir(sd)):
                 if fname.endswith(".json"):
                     items.append((f"data/llm/{seed_dir}/{fname}", LLM_ARTIFACT_COMMAND))
+    bench_dir = os.path.join(ROOT, "data", "benchmarks")
+    if os.path.isdir(bench_dir):
+        for fname in sorted(os.listdir(bench_dir)):
+            if fname.endswith(".json"):
+                items.append(("data/benchmarks/" + fname,
+                              "src/network_evolve/benchmark_suite.py / scripts/build_real_higgs_caches.py "
+                              "(受控基准图与真实 SNAP Higgs 诱导子图缓存)"))
     # 统一 LLM 后端的内容寻址归档：每条记录都是一次真实 API 调用的完整收据
     # （模型标识 / temperature / input-output-thinking token / response id / stop reason），
     # 同时充当缓存，因此也是「论文数字来自真实调用」的证据链。

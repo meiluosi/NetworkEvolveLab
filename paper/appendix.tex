@@ -443,7 +443,7 @@ Three specific misuse and harm channels deserve naming.
     polarize a community while every public graph metric still looks healthy.
     \item \textbf{Efficiency results read as prescriptions.} The counterfactual platform
     policies are efficiency results, not prescriptions --- our own policy arms show that two
-    of the three pre-registered interventions fail their criteria, and a reader who treats
+    of the three pre-specified interventions fail their criteria, and a reader who treats
     the surviving arm as a recommendation would be over-reading the evidence.
     \item \textbf{Surrogates cited as populations.} The surrogate benchmarks are calibrated to
     published statistics but are \emph{not} the datasets they are named after; citing them as
@@ -478,7 +478,7 @@ To validate micro-cognitive fidelity under real foundation models, agents in Pha
 All API requests were executed with batching ($K_{\mathrm{events}}=12$ per dispatch) and semantic caching. The archived execution receipts in \texttt{data/llm/seed*/final.json} record:
 \begin{itemize}
     \item Total batched API calls executed: \LlmCalls{} (covering \LlmPairs{} dyadic interaction evaluations across \LlmSeeds{} seeds).
-    \item Budget ceiling pre-registered: 100 API calls. Actual consumption: \LlmCalls\% of budget.
+    \item Budget ceiling pre-specified: 100 API calls. Actual consumption: \LlmCalls\% of budget.
     \item Each dyadic decision was logged with the listener profile, the observed statement, the returned belief vector, the relationship action and a natural-language rationale.
 \end{itemize}
 \paragraph{Disclosed receipt gap for the historical arm, and how it is closed.}

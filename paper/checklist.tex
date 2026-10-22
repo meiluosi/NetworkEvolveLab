@@ -28,7 +28,7 @@
     \answerYes{Yes. The object of study is a \emph{model} of co-evolution between cognitive and topological state, evaluated on synthetic initial conditions and on one public, de-identified network. We do not profile individuals, we do not collect or re-identify any personal data, and no claim in the paper is about a demographic group.}
 
     \item Do your main claims in the abstract and introduction accurately reflect the paper's contributions and scope?
-    \answerYes{Yes. Every quantitative statement in the abstract and introduction is emitted by \texttt{scripts/generate\_paper\_tables.py} directly from the frozen result files (\texttt{results/*.json}); the \texttt{--check} mode of that script fails the build if any macro in the text drifts from the results. Pre-registered hypotheses that failed are reported as failures (H1, H2 falsified; H3 not supported) rather than reframed.}
+    \answerYes{Yes. Every quantitative statement in the abstract and introduction is emitted by \texttt{scripts/generate\_paper\_tables.py} directly from the frozen result files (\texttt{results/*.json}); the \texttt{--check} mode of that script fails the build if any macro in the text drifts from the results. Pre-specified hypotheses that failed are reported as failures (H1, H2 falsified; H3 not supported) rather than reframed.}
 
     \item Do you clarify how the proposed methodological approach is appropriate for the claims made?
     \answerYes{Yes. Sections~\ref{sec:theory} and~\ref{sec:theory-scalar} state which engine produced which numbers (the scalar flagship engine, $d=1$, produces every H1/H2/H3 and benchmark figure; the multi-dimensional semantic arm, $d=3$, is used only for the LLM experiments and the attribution control arms), and Section~\ref{sec:attribution} isolates the two candidate mechanisms for asymmetric rupture instead of asserting one.}
@@ -73,7 +73,7 @@
     \answerYes{Yes. Section~\ref{sec:related} relates the model to fixed-topology opinion dynamics (DeGroot, Hegselmann--Krause, Friedkin--Johnsen), co-evolving networks, LLM-as-subject simulations, echo-chamber and recommendation-feedback literature, and modularity-based community detection with its known upper bounds.}
 
     \item Did you discuss the implications of your theoretical results for policy, practice, or further research in the social science domain?
-    \answerYes{Yes. Section~\ref{sec:discussion} translates the counterfactual policy arms into concrete implications for platform interventions (and reports that only one of three pre-registered interventions is not supported), and states the further-research directions that the negative results open up.}
+    \answerYes{Yes. Section~\ref{sec:discussion} translates the counterfactual policy arms into concrete implications for platform interventions (and reports that only one of three pre-specified interventions is not supported), and states the further-research directions that the negative results open up.}
 \end{enumerate}
 
 \item Additionally, if you are including theoretical proofs\ldots
