@@ -696,6 +696,7 @@ def build_macros():
     p3 = os.path.join(RESULTS, "phase3.json")
     p4 = os.path.join(RESULTS, "phase4_attribution.json")
     bench = os.path.join(RESULTS, "sota_benchmark.json")
+    p7 = os.path.join(RESULTS, "phase7_scaling.json")
     if not (os.path.exists(p1b) and os.path.exists(p3)):
         return None
 
@@ -704,6 +705,7 @@ def build_macros():
     d3 = d3_full["results"]
     d4 = json.load(open(p4, encoding="utf-8")) if os.path.exists(p4) else None
     db = json.load(open(bench, encoding="utf-8")) if os.path.exists(bench) else None
+    d7 = json.load(open(p7, encoding="utf-8")) if os.path.exists(p7) else None
 
     defs = []
 
@@ -746,6 +748,8 @@ def build_macros():
         "ScalingConvergenceN": "n/a", "ScalingConvergenceRoundOne": "n/a",
         "ScalingConvergenceRoundTwo": "n/a", "ScalingConvergenceDelta": "n/a",
         "ScalingConvergenceP": "n/a",
+        "ScalingMatchedQMin": "n/a", "ScalingMatchedQMax": "n/a",
+        "ScalingQTotalRise": "n/a", "ScalingCollapseGap": "n/a",
         "ARupScalarAsyncUniform": "n/a", "ARupIsoAsync": "n/a",
         "ARupIsoAsyncUniform": "n/a", "ARupAnisoAsyncUniform": "n/a",
         "ScheduleEffectPure": "n/a", "ScheduleEffectPureP": "n/a",
@@ -753,6 +757,12 @@ def build_macros():
         "SpeakerBiasEffect": "n/a", "SpeakerBiasEffectP": "n/a",
         "AnisotropyEffectUniform": "n/a", "AnisotropyEffectUniformP": "n/a",
         "ARupScalarAsyncUniformZeroFrac": "n/a",
+        "ScheduleInteraction": "n/a", "ScheduleInteractionP": "n/a",
+        "ScheduleInteractionCILow": "n/a", "ScheduleInteractionCIHigh": "n/a",
+        "HThreeDoseSlope": "n/a",
+        "CrossEdgePolicyOneGainPP": "n/a", "CrossEdgeCombGainPP": "n/a",
+        "RedditHKQ": "n/a", "RedditHKK": "n/a", "RedditHKBound": "n/a",
+        "RedditOursSimplifiedQ": "n/a",
         "LlmRuleAgreementRate": "92.9%", "LlmRuleAgreementDecisions": "1824",
         "LlmPlaceboQDelta": "+0.043", "LlmPlaceboQP": "< 0.001",
         "HTwoBetweennessBridger": "0.520", "HTwoBetweennessOther": "0.524",
@@ -829,6 +839,29 @@ def build_macros():
     macro("CrossEdgeComb", f"{comb_cross:.3f}")
     macro("CrossEdgePolicyOneGain", f"{(p1_cross / base_cross - 1) * 100:.0f}%")
     macro("CrossEdgeCombGain", f"{(comb_cross / base_cross - 1) * 100:.0f}%")
+    macro("CrossEdgePolicyOneGainPP", f"{(p1_cross - base_cross) * 100:+.1f}")
+    macro("CrossEdgeCombGainPP", f"{(comb_cross - base_cross) * 100:+.1f}")
+    dose = d3.get("dose_response_div_rec", {})
+    if "0.05" in dose:
+        macro("HThreeDoseSlope", f"{dose['0.05']['delta_q_mean']:+.3f}")
+
+    # —— 高模块度示例（Reddit ConvoKit × HK）：供正文引用，避免手写 0.735/0.750 ——
+    if db:
+        reddit_hk = (db.get("benchmark", {})
+                       .get("Reddit_ConvoKit", {})
+                       .get("Hegselmann_Krause", {}))
+        if reddit_hk:
+            q_hk = float(str(reddit_hk.get("modularity_q", "nan")).split("±")[0])
+            k_hk = int(round(float(str(reddit_hk.get("num_comms", "nan")).split("±")[0])))
+            macro("RedditHKQ", f"{q_hk:.3f}")
+            macro("RedditHKK", str(k_hk))
+            macro("RedditHKBound", f"{1 - 1 / k_hk:.3f}")
+        reddit_simple = (db.get("benchmark", {})
+                           .get("Reddit_ConvoKit", {})
+                           .get("Ours_CoEvolution_Simplified", {}))
+        if reddit_simple:
+            q_simple = float(str(reddit_simple.get("modularity_q", "nan")).split("±")[0])
+            macro("RedditOursSimplifiedQ", f"{q_simple:.3f}")
 
     # —— Phase 4 归因 ——
     if d4:
@@ -863,6 +896,15 @@ def build_macros():
         if "anisotropy_effect_async_uniform" in c:
             macro("AnisotropyEffectUniform", f"{c['anisotropy_effect_async_uniform']['mean_diff']:+.3f}")
             macro("AnisotropyEffectUniformP", f"{c['anisotropy_effect_async_uniform']['p_value_wilcoxon']:.3g}")
+        interactions = d4.get("interactions", {})
+        inter = interactions.get("interaction_schedule_anisotropy_uniform")
+        if inter:
+            m_int = inter.get("mean_diff", float("nan"))
+            h_int = inter.get("ci95", float("nan"))
+            macro("ScheduleInteraction", f"{m_int:+.4f}")
+            macro("ScheduleInteractionP", f"{inter.get('p_value_wilcoxon', float('nan')):.3g}")
+            macro("ScheduleInteractionCILow", f"{m_int - h_int:+.4f}")
+            macro("ScheduleInteractionCIHigh", f"{m_int + h_int:+.4f}")
         if "scalar_sync" in arms:
             macro("ARupScalarSyncZeroFrac", f"{arms['scalar_sync']['frac_seeds_exactly_zero']:.0%}")
         if "isotropic_sync" in arms:
@@ -1076,6 +1118,22 @@ def build_macros():
             macro("ScalingMatchedBigDensity",
                   f"{m7[big_common].get('init_mean_indegree_mean', float('nan')):.1f}")
             macro("ScalingFixedPBigSeeds", str(f7[big_common].get("n_seeds", "n/a")))
+            # matched 臂跨规模的 Q 范围，以及 matched vs fixed-p 的密度塌陷差
+            q_by_size = {
+                s: m7[s].get("modularity_q", {}).get("mean")
+                for s in common
+                if m7[s].get("modularity_q", {}).get("mean") is not None
+            }
+            if q_by_size:
+                macro("ScalingMatchedQMin", f"{min(q_by_size.values()):.3f}")
+                macro("ScalingMatchedQMax", f"{max(q_by_size.values()):.3f}")
+                if "60" in q_by_size and big_common in q_by_size:
+                    macro("ScalingQTotalRise",
+                          f"{q_by_size[big_common] - q_by_size['60']:+.3f}")
+            matched_big = m7[big_common].get("modularity_q", {}).get("mean")
+            fixed_big = f7[big_common].get("modularity_q", {}).get("mean")
+            if matched_big is not None and fixed_big is not None:
+                macro("ScalingCollapseGap", f"{matched_big - fixed_big:+.3f}")
             # 固定-p 臂里模块度最低的一格（密度爆炸导致 Q 塌陷的位置）
             worst_n, worst_q = None, None
             for k, v in f7.items():

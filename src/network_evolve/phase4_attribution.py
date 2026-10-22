@@ -166,6 +166,49 @@ def _paired_contrast(a_runs, b_runs, label):
     return out
 
 
+def _interaction_contrast(a_runs, b_runs, c_runs, d_runs, label):
+    """交互项 (A-B) - (C-D)，同 seed 配对；用于检验两个发生器是否可加。
+
+    例如 A=各向异性异步均匀、B=各向异性同步、C=各向同性异步均匀、D=各向同性同步：
+        (async-sync | anisotropic) - (async-sync | isotropic)
+    负值表示异步调度效应在强各向异性下被削弱（次可加/饱和），正值表示超可加。
+    这里同时给出配对均值、95% CI、Wilcoxon 与单样本 t 检验。
+    """
+    maps = []
+    for runs in (a_runs, b_runs, c_runs, d_runs):
+        maps.append({r["seed"]: r["rupture_asymmetry"] for r in runs})
+    seeds = sorted(set.intersection(*(set(m) for m in maps)))
+    diffs = []
+    for s in seeds:
+        vals = [m[s] for m in maps]
+        if all(np.isfinite(v) for v in vals):
+            va, vb, vc, vd = vals
+            diffs.append((va - vb) - (vc - vd))
+    diffs = np.array(diffs, dtype=float)
+    out = {"contrast": label, "n_pairs": int(len(diffs))}
+    if len(diffs) < 2:
+        out.update({"mean_diff": float("nan"), "p_value_wilcoxon": float("nan"),
+                    "p_value_paired_t": float("nan"), "n_both_zero": 0})
+        return out
+    try:
+        p_w = float(stats.wilcoxon(diffs, alternative="two-sided").pvalue) if np.any(diffs != 0) else 1.0
+    except ValueError:
+        p_w = 1.0
+    p_t = float(stats.ttest_1samp(diffs, 0.0).pvalue)
+    m, h = mean_ci(diffs)
+    out.update({
+        "mean_diff": float(m),
+        "median_diff": float(np.median(diffs)),
+        "ci95": float(h),
+        "p_value_wilcoxon": p_w,
+        "p_value_paired_t": p_t,
+        "n_positive": int(np.sum(diffs > 0)),
+        "n_negative": int(np.sum(diffs < 0)),
+        "n_both_zero": int(np.sum(diffs == 0)),
+    })
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser(description="Phase 4: Asymmetric-rupture mechanism attribution ablation")
     ap.add_argument("--seeds", type=int, default=20)
@@ -193,7 +236,7 @@ def main():
 
     by_arm = {arm: [r for r in raw if r["arm"] == arm] for arm in ARMS}
 
-    out = {"args": vars(a), "arms": {}, "contrasts": {}}
+    out = {"args": vars(a), "arms": {}, "contrasts": {}, "interactions": {}}
 
     P("\narm | A_rupture mean±CI | frac(A≡0) | frac(A未定义) | n_mutual_broken | polarization | modularity")
     for arm, runs in by_arm.items():
@@ -254,6 +297,24 @@ def main():
         P(f"{label}: mean ΔA = {c['mean_diff']:+.4f} (n={c['n_pairs']}, "
           f"pos={c.get('n_positive', 0)}, both-zero={c.get('n_both_zero', 0)}) "
           f"wilcoxon p={c['p_value_wilcoxon']:.3g}")
+
+    P("\n=== 交互项（可加性检验，配对 difference-in-differences）===")
+    interactions = [
+        ("interaction_schedule_anisotropy_uniform",
+         "multidim_async_uniform", "multidim_sync",
+         "isotropic_async_uniform", "isotropic_sync",
+         "交互项（均匀发言）：[各向异性 async-sync] − [各向同性 async-sync]"),
+        ("interaction_schedule_anisotropy_weighted",
+         "multidim_async", "multidim_sync",
+         "isotropic_async", "isotropic_sync",
+         "交互项（加权发言）：[各向异性 async-sync] − [各向同性 async-sync]"),
+    ]
+    for key, a1, b1, c1, d1, label in interactions:
+        c = _interaction_contrast(by_arm[a1], by_arm[b1], by_arm[c1], by_arm[d1], label)
+        out["interactions"][key] = c
+        P(f"{label}: mean ΔA_int = {c['mean_diff']:+.4f} "
+          f"(95% CI ±{c.get('ci95', float('nan')):.4f}; n={c['n_pairs']}; "
+          f"wilcoxon p={c['p_value_wilcoxon']:.3g}; t p={c['p_value_paired_t']:.3g})")
 
     # 汇总各臂 A(t) 轨迹均值
     out["trajectories"] = {}

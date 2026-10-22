@@ -501,6 +501,32 @@
       "n_both_zero": 0
     }
   },
+  "interactions": {
+    "interaction_schedule_anisotropy_uniform": {
+      "contrast": "交互项（均匀发言）：[各向异性 async-sync] − [各向同性 async-sync]",
+      "n_pairs": 20,
+      "mean_diff": -0.03869478425918213,
+      "median_diff": -0.034355203619909506,
+      "ci95": 0.04908006946624136,
+      "p_value_wilcoxon": 0.14290618896484375,
+      "p_value_paired_t": 0.1153478527938095,
+      "n_positive": 8,
+      "n_negative": 12,
+      "n_both_zero": 0
+    },
+    "interaction_schedule_anisotropy_weighted": {
+      "contrast": "交互项（加权发言）：[各向异性 async-sync] − [各向同性 async-sync]",
+      "n_pairs": 20,
+      "mean_diff": -0.04842998577298842,
+      "median_diff": -0.029561752594904504,
+      "ci95": 0.05247278420520333,
+      "p_value_wilcoxon": 0.10539817810058594,
+      "p_value_paired_t": 0.06844146544582191,
+      "n_positive": 9,
+      "n_negative": 11,
+      "n_both_zero": 0
+    }
+  },
   "trajectories": {
     "scalar_sync": {
       "5": 0.0,

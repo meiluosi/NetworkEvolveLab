@@ -44,7 +44,7 @@ with equality if and only if $a_1 = a_2 = \dots = a_K = 1/K$. Combining these tw
 \begin{equation}
     Q = \sum_{c=1}^K \frac{e_{cc}}{2m} - \sum_{c=1}^K a_c^2 \leq 1 - \frac{1}{K}.
 \end{equation}
-For $K=2$ (bipolar polarization), $Q \leq 1 - 1/2 = 0.500$. For $K=4$ (e.g., the four distinct sub-forums in Reddit ConvoKit), $Q \leq 1 - 1/4 = 0.750$. This mathematically explains why experimental modularity on Reddit saturates around $Q \approx 0.654 \sim 0.735$, whereas bipolar networks strictly cap at $0.500$.
+For $K=2$ (bipolar polarization), $Q \leq 1 - 1/2 = 0.500$. For $K=4$ (e.g., the four distinct sub-forums in Reddit ConvoKit), $Q \leq 1 - 1/4 = 0.750$. This mathematically explains why experimental modularity on Reddit saturates around $Q \approx \RedditOursSimplifiedQ \sim \RedditHKQ$, whereas bipolar networks strictly cap at $0.500$.
 \end{proof}
 
 \subsection{Detailed Derivation of Proposition 2: Positive Lebesgue Measure of Asymmetric Rupture Polytope}
@@ -327,9 +327,9 @@ realized community count $K$. We verify this exhaustively over all \AuditCellsCh
 The audit reports \AuditViolations{} violations, and the realized community counts span
 $K=2$ (bipolar surrogates), $K \in \{3,4,5\}$ (multi-community surrogates) and
 $K \in \{8,9\}$ (the empirical SNAP Higgs subgraph). Every high-modularity cell in
-Table~\ref{tab:sota_matrix} --- for instance $Q=0.735$ on Reddit ConvoKit under
+Table~\ref{tab:sota_matrix} --- for instance $Q=\RedditHKQ$ on Reddit ConvoKit under
 Hegselmann--Krause --- is therefore fully consistent with the theory: it corresponds to a
-realized $K=4$ partition whose bound is $0.750$, not to a violation of a universal $0.500$
+realized $K=\RedditHKK$ partition whose bound is \RedditHKBound, not to a violation of a universal $0.500$
 cap. This closes the contradiction between the theory and the benchmark matrix that the
 earlier version of this manuscript left open.
 
@@ -406,9 +406,11 @@ Six limitations are material.
     a 10-arm factorial combination of synchronous, asynchronous uniform-speaker, and
     asynchronous weighted-speaker schedules. The results demonstrate that asynchronous
     scheduling artifacts arise from pure temporal timing rather than speaker frequency bias
-    ($\Delta A = \SpeakerBiasEffect$, $p = \SpeakerBiasEffectP$), and that scheduling and semantic
-    anisotropy exhibit sub-additive saturation rather than independent additivity
-    ($\Delta A = \ScheduleEffectMultidimPure$, $p = \ScheduleEffectMultidimPureP$).
+    ($\Delta A = \SpeakerBiasEffect$, $p = \SpeakerBiasEffectP$), and that the schedule effect
+    is descriptively attenuated under strong semantic anisotropy, although a formal paired
+    interaction test does not reject zero ($\Delta A_{\mathrm{int}} = \ScheduleInteraction$,
+    95\% CI $[\ScheduleInteractionCILow, \ScheduleInteractionCIHigh]$,
+    $p = \ScheduleInteractionP$).
     \item \textbf{Resolution of the reach metric.} The reach metric is a seeded
     independent-cascade estimate whose variance across seeds is large relative to the policy
     effects we report, which limits the resolution of RQ3.

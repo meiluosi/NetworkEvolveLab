@@ -26,6 +26,10 @@ Multi-d=3 / async / original tol (reference) | 0.134±0.038 | 0.00 | 0.00 | 31.6
 个体各向异性效应（异步加权）：各向异性 - 各向同性: mean ΔA = +0.1678 (n=20, pos=18, both-zero=1) wilcoxon p=0.00025
 容忍度规则效应（异步）：原始规则 - 听者依赖规则: mean ΔA = -0.0934 (n=20, pos=5, both-zero=0) wilcoxon p=0.000851
 
+=== 交互项（可加性检验，配对 difference-in-differences）===
+交互项（均匀发言）：[各向异性 async-sync] − [各向同性 async-sync]: mean ΔA_int = -0.0387 (95% CI ±0.0491; n=20; wilcoxon p=0.143; t p=0.115)
+交互项（加权发言）：[各向异性 async-sync] − [各向同性 async-sync]: mean ΔA_int = -0.0484 (95% CI ±0.0525; n=20; wilcoxon p=0.105; t p=0.0684)
+
 === 演化轨迹 A(t) 均值 ===
 Scalar d=1 / sync                         : t=5: 0.000 | t=10: 0.000 | t=15: 0.000 | t=20: 0.000 | t=25: 0.000 | t=30: 0.000
 Scalar d=1 / async (uniform speaker)      : t=5: 0.531 | t=10: 0.087 | t=15: 0.053 | t=20: 0.053 | t=25: 0.053 | t=30: 0.053

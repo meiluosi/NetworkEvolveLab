@@ -39,7 +39,7 @@ COMMANDS = {
     "sota_benchmark.json": "python -m src.network_evolve.benchmark_suite --nodes 60 --rounds 25 --seeds 10 --out results/sota_benchmark.json",
     "robustness_sweep.json": "python -m src.network_evolve.phase_robustness --seeds 10 --rounds 40 --out results/robustness_sweep.json",
     "phase6_llm_engine.json": "python -m src.network_evolve.phase6_llm_engine --seeds 10 --rounds 30 --nodes 60 --llm-events 6 --budget-calls 400 --out results/phase6_llm_engine.json",
-    "phase7_scaling.json": "python -m src.network_evolve.phase7_scaling --sizes 60,100,250,500,1000 --seeds 10 --rounds 60 --real-higgs --out results/phase7_scaling.json",
+    "phase7_scaling.json": "python -m src.network_evolve.phase7_scaling --sizes 60,100,250,500,1000 --seeds 10 --rounds 60 --fixed-p-large-sizes 1000 --fixed-p-large-seeds 3 --convergence-check --real-higgs --out results/phase7_scaling.json",
     # .log 是对应命令 stdout 的留档（stdout 重定向到该文件），因此共用同一条命令
     "phase1b.log": "python -m src.network_evolve.phase1b --seeds 20 --rounds 60 --out results/phase1b.json  # stdout 留档",
     "phase2_offline.log": "python -m src.network_evolve.phase2_offline --seeds 20 --n 60 --rounds 30 --out results/phase2_offline.json  # stdout 留档",
