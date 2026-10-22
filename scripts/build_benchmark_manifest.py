@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Write benchmark/manifest.json: dataset registry, caches, and source hashes."""
+import argparse
 import hashlib
 import json
 import os
@@ -20,7 +21,7 @@ def sha(path):
     return h.hexdigest()
 
 
-def main():
+def build_manifest():
     caches = []
     for fname in sorted(os.listdir(BENCH)):
         if not fname.endswith(".json"):
@@ -56,10 +57,30 @@ def main():
         "note": "Not yet a D&B/JOSS-ready leaderboard: 2 real graphs, no hidden test split. "
                 "Add 1-2 more real stance graphs and a submission format before D&B.",
     }
+    return manifest
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--check", action="store_true",
+                    help="verify benchmark/manifest.json is current without writing")
+    a = ap.parse_args()
+    manifest = build_manifest()
+    if a.check:
+        if not os.path.exists(OUT):
+            print(f"[FAIL] missing {OUT}")
+            return 1
+        old = json.load(open(OUT, encoding="utf-8"))
+        if old != manifest:
+            print(f"[STALE] {OUT}; run python scripts/build_benchmark_manifest.py")
+            return 1
+        print(f"[ok] {OUT} is current")
+        return 0
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(manifest, f, indent=2, ensure_ascii=False)
-    print(f"[write] {OUT} ({len(caches)} caches, {len(raw)} raw sources)")
+    print(f"[write] {OUT} ({len(manifest['caches'])} caches, {len(manifest['raw_sources'])} raw sources)")
+    return 0
 
 
 if __name__ == "__main__":

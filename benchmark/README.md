@@ -51,5 +51,6 @@ python -m src.network_evolve.phase8_real_stance --seeds 10 --rounds 25 \
 The current public benchmark has **2 real graphs** (one with human stance
 labels).  A NeurIPS D&B submission would benefit from 1-2 additional real
 platform graphs with stance labels and a per-task leaderboard; those are
-deliberately not fabricated here.  JOSS-style packaging also needs a stable
-Python entry point, API docs, and CI coverage for this directory.
+deliberately not fabricated here.  JOSS-style packaging has the `network-evolve` entry point, MIT license, a
+manifest check, and a CI validation step; it still needs narrated API docs
+and 1-2 more real graphs before a D&B submission.

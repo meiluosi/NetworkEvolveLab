@@ -44,6 +44,10 @@ jobs:
     - name: Verify Publication Figure Generation Pipeline
       run: |
         python reproduce.py --figures
+    - name: Verify Benchmark Manifest and Real-Data Loaders
+      run: |
+        python scripts/build_benchmark_manifest.py --check
+        python scripts/validate_benchmark.py
 
     - name: Verify ICWSM Submission Package Is In Sync With Sources
       run: |
