@@ -68,3 +68,13 @@ python scripts/score_human_validation.py \
 `human_validation/outsourcing_review_package_rule2_zh.zip`
 
 包含 `annotation_sheet_zh_rule2_prefilled.csv`、通用 codebook、`RULE2_REVIEWER_README_zh.md`。外包逐条复核后返回两个 CSV。
+
+
+## 第二套规则审计
+
+第二套规则预填的内部审计结果：
+
+- [rule2_audit_report.md](rule_audit/rule2_audit_report.md)
+- [rule2_audit_report.json](rule_audit/rule2_audit_report.json)
+
+这是按外包方规则机械预填的 rule audit，不是人工逐条标注；不能写成 human validation。

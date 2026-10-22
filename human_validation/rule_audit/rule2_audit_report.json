@@ -1,0 +1,116 @@
+{
+  "warning": "Rule supplied by outsourced annotator, mechanically applied; NOT per-row human annotation",
+  "n": 300,
+  "by_model": {
+    "deepseek-flash": {
+      "n": 150,
+      "reasonable_rate": 0.5733333333333334,
+      "preferred_match_rate": 0.42,
+      "model_actions": {
+        "mute": 54,
+        "unfollow": 21,
+        "keep": 75
+      },
+      "prefilled_actions": {
+        "keep": 71,
+        "mute": 37,
+        "block": 27,
+        "unfollow": 15
+      }
+    },
+    "MiniMax-M3": {
+      "n": 150,
+      "reasonable_rate": 0.64,
+      "preferred_match_rate": 0.44,
+      "model_actions": {
+        "mute": 69,
+        "keep": 75,
+        "unfollow": 6
+      },
+      "prefilled_actions": {
+        "keep": 75,
+        "mute": 37,
+        "unfollow": 11,
+        "block": 27
+      }
+    }
+  },
+  "by_rule_category": {
+    "strong_vs_opposite": {
+      "n": 86,
+      "reasonable_rate": 0.8604651162790697,
+      "preferred_match_rate": 0.2441860465116279,
+      "model_actions": {
+        "mute": 73,
+        "unfollow": 12,
+        "keep": 1
+      },
+      "prefilled_actions": {
+        "keep": 47,
+        "block": 18,
+        "mute": 21
+      }
+    },
+    "same_strong": {
+      "n": 99,
+      "reasonable_rate": 1.0,
+      "preferred_match_rate": 1.0,
+      "model_actions": {
+        "keep": 99
+      },
+      "prefilled_actions": {
+        "keep": 99
+      }
+    },
+    "same_other": {
+      "n": 49,
+      "reasonable_rate": 0.061224489795918366,
+      "preferred_match_rate": 0.061224489795918366,
+      "model_actions": {
+        "keep": 45,
+        "mute": 3,
+        "unfollow": 1
+      },
+      "prefilled_actions": {
+        "mute": 49
+      }
+    },
+    "moderate_vs_strong_opposite": {
+      "n": 36,
+      "reasonable_rate": 0.0,
+      "preferred_match_rate": 0.0,
+      "model_actions": {
+        "unfollow": 9,
+        "mute": 25,
+        "keep": 2
+      },
+      "prefilled_actions": {
+        "block": 36
+      }
+    },
+    "moderate_vs_moderate_opposite": {
+      "n": 26,
+      "reasonable_rate": 0.19230769230769232,
+      "preferred_match_rate": 0.19230769230769232,
+      "model_actions": {
+        "mute": 21,
+        "unfollow": 5
+      },
+      "prefilled_actions": {
+        "unfollow": 26
+      }
+    },
+    "moderate_vs_weak_or_neutral": {
+      "n": 4,
+      "reasonable_rate": 0.25,
+      "preferred_match_rate": 0.25,
+      "model_actions": {
+        "keep": 3,
+        "mute": 1
+      },
+      "prefilled_actions": {
+        "mute": 4
+      }
+    }
+  }
+}
