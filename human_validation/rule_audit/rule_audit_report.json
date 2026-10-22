@@ -1,0 +1,60 @@
+{
+  "n": 300,
+  "seed": 20261023,
+  "warning": "SYNTHETIC author-specified rule labels; NOT human annotation",
+  "rule_counts": {
+    "opposite_other": 122,
+    "same_direction": 128,
+    "strong_opposite": 37,
+    "neutral_vs_strong": 2,
+    "neutral_vs_weak_moderate": 11
+  },
+  "by_model": {
+    "MiniMax-M3": {
+      "n": 150,
+      "reasonable_rate": 0.8466666666666667,
+      "preferred_match_rate": 0.54
+    },
+    "deepseek-flash": {
+      "n": 150,
+      "reasonable_rate": 0.84,
+      "preferred_match_rate": 0.52
+    }
+  },
+  "by_rule_category": {
+    "neutral_vs_strong": {
+      "n": 2,
+      "reasonable_rate": 0.0
+    },
+    "neutral_vs_weak_moderate": {
+      "n": 11,
+      "reasonable_rate": 0.8181818181818182
+    },
+    "opposite_other": {
+      "n": 122,
+      "reasonable_rate": 0.860655737704918
+    },
+    "same_direction": {
+      "n": 128,
+      "reasonable_rate": 1.0
+    },
+    "strong_opposite": {
+      "n": 37,
+      "reasonable_rate": 0.2972972972972973
+    }
+  },
+  "model_action_distribution": {
+    "MiniMax-M3": {
+      "keep": 75,
+      "mute": 70,
+      "unfollow": 5,
+      "block": 0
+    },
+    "deepseek-flash": {
+      "keep": 75,
+      "mute": 38,
+      "unfollow": 35,
+      "block": 2
+    }
+  }
+}

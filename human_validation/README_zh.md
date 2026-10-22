@@ -45,3 +45,8 @@ python scripts/score_human_validation.py \
 - 两人“是否合理”的 Cohen's κ ≥ 0.6 才作为强人工验证；
 - κ < 0.6 只能写成 inconclusive，不能硬说人工验证通过；
 - 保留分歧样本，做简短仲裁记录。
+
+
+## 规则审计（不要把规则审计当成人类标注）
+
+`human_validation/rule_audit/` 是按作者口述规则生成的**合成参照标签**，只用于内部诊断，不是人类标注，不能写成 human validation，也不能算人工 κ。真正的人工校验仍然使用本目录的中文外包包。
