@@ -1,0 +1,855 @@
+{
+  "name": "NetworkEvolveLab benchmark",
+  "version": "0.1",
+  "description": "5 calibrated surrogates + real SNAP Higgs topology + PolBlogs human-labeled stance graph",
+  "real_graphs": 2,
+  "human_labeled_stance_graphs": 1,
+  "caches": [
+    {
+      "cache": "data/benchmarks/birdwatch_network_n30_s0.json",
+      "sha256": "c1d75f86c60fca0a9968fff1468df573cc978910844c15149f5b676ec3d6b1a7",
+      "num_nodes": 30,
+      "num_edges": 100,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/birdwatch_network_n30_s1.json",
+      "sha256": "62aaae589fe3a51dfbe552f87a0d9738ce8cf596afb0fff503bd13d2c1ab375e",
+      "num_nodes": 30,
+      "num_edges": 110,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/birdwatch_network_n30_s42.json",
+      "sha256": "314227e8c3a15193e3e1b50d0cd9e317c04b1c6de4b60aaabd28e49479e8336e",
+      "num_nodes": 30,
+      "num_edges": 106,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/birdwatch_network_n60_s0.json",
+      "sha256": "330e2f7a53f364b8fa214e497e054184e9f576d608b4aa891d0801b11ab2806c",
+      "num_nodes": 60,
+      "num_edges": 421,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/birdwatch_network_n60_s1.json",
+      "sha256": "789db7503509477164c6bb28b17cd4584a1b555b62addd02af8b464d43482ad9",
+      "num_nodes": 60,
+      "num_edges": 411,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/birdwatch_network_n60_s2.json",
+      "sha256": "213e3c6dd91b309f06f540255e606f6ee67b482b216566fafbfc8346ec00a929",
+      "num_nodes": 60,
+      "num_edges": 421,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/birdwatch_network_n60_s3.json",
+      "sha256": "ccd6c7d71864ed0a5fcb0ebc97415f209b62895a26415f4ea39c78817f9ff2d1",
+      "num_nodes": 60,
+      "num_edges": 440,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/birdwatch_network_n60_s4.json",
+      "sha256": "380f1e09e3eb4eac8bb0147ef2cba26c70c746d7bbd4f45aeacc4a9066564570",
+      "num_nodes": 60,
+      "num_edges": 446,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/birdwatch_network_n60_s5.json",
+      "sha256": "40ad266ff68e57ade289b149709b92fc7752daa97aa72254811a449fc06815bc",
+      "num_nodes": 60,
+      "num_edges": 449,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/birdwatch_network_n60_s6.json",
+      "sha256": "b1ea36e1afa7b62c6ced3bcb1a3022290f4f57d53186145bf3cbf2d7e76cd3bf",
+      "num_nodes": 60,
+      "num_edges": 451,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/birdwatch_network_n60_s7.json",
+      "sha256": "89814285cfbffa8e4409c09c704651d1f714e91da3ed4efc27304757b4137ff6",
+      "num_nodes": 60,
+      "num_edges": 423,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/birdwatch_network_n60_s8.json",
+      "sha256": "4739668999f5a7cc3cc00fb740e1b66b01a17ac909f37a61a17daf7dc51f3107",
+      "num_nodes": 60,
+      "num_edges": 436,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/birdwatch_network_n60_s9.json",
+      "sha256": "25da77ad335ea6c0a230970f0bb6aa5c69cceef00b27451344d9e48f9613a16a",
+      "num_nodes": 60,
+      "num_edges": 448,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/birdwatch_notes_n30_s42.json",
+      "sha256": "9171fa4d0c08256c6c011764ed8dcd895aac55c85eec7756b34746aa73e19faa",
+      "num_nodes": 0,
+      "num_edges": 0,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/birdwatch_notes_n60_s42.json",
+      "sha256": "9171fa4d0c08256c6c011764ed8dcd895aac55c85eec7756b34746aa73e19faa",
+      "num_nodes": 0,
+      "num_edges": 0,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/debate_network_n30_s0.json",
+      "sha256": "bf5491878555dd7b5a61dc7f6e0f10ee90bbbc4832fbde45fcc9a56627855e9f",
+      "num_nodes": 30,
+      "num_edges": 78,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/debate_network_n30_s1.json",
+      "sha256": "32bcfba78f8f4581a2268009eb4d0c73ba243c9c87357db8f5ae987c8109bc35",
+      "num_nodes": 30,
+      "num_edges": 105,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/debate_network_n30_s42.json",
+      "sha256": "0021bd61e9a6344d1980de8b0967df1aecbef6db656816fd7cbb79b30c0c8b09",
+      "num_nodes": 30,
+      "num_edges": 103,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/debate_network_n60_s0.json",
+      "sha256": "52fd7777e7c3e2bdcd766f08085f2b958fc0287ae1283d0880120c12fa2e00a4",
+      "num_nodes": 60,
+      "num_edges": 410,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/debate_network_n60_s1.json",
+      "sha256": "f9ca42e89880779d042ae6dfbb7091fea9dc045f946618ab161767a12f955f59",
+      "num_nodes": 60,
+      "num_edges": 368,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/debate_network_n60_s2.json",
+      "sha256": "38c7186f36e6e228006c7d826dc67542a50bbf561a51af76341eae2e65e5d070",
+      "num_nodes": 60,
+      "num_edges": 397,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/debate_network_n60_s3.json",
+      "sha256": "190bc1b6a9443c5dc41a6b8823db35b72a442885011a9cc8f3be5450bb63d094",
+      "num_nodes": 60,
+      "num_edges": 381,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/debate_network_n60_s4.json",
+      "sha256": "88d0bc7cf79c6dc2d94a0aea08760f323b06aaf84e5723d82fef3b393d6a51d2",
+      "num_nodes": 60,
+      "num_edges": 370,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/debate_network_n60_s5.json",
+      "sha256": "5e68f011ab9cdd64f3e3d1f78667f7ed816faa4918d821f1fef412b870103708",
+      "num_nodes": 60,
+      "num_edges": 424,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/debate_network_n60_s6.json",
+      "sha256": "59dcf22ce854b793a6f6d106000a0b8ae06c18e4e6bd9eef3e2901c45355bafc",
+      "num_nodes": 60,
+      "num_edges": 404,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/debate_network_n60_s7.json",
+      "sha256": "00c74589a27832af9a21a480b09b172bcb9262780c60b98783a6224cd694ac6d",
+      "num_nodes": 60,
+      "num_edges": 397,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/debate_network_n60_s8.json",
+      "sha256": "a723df59cabd61a50380d6ee5607795bfb1eba4a771a8b85b0c7d7054ba0ab6f",
+      "num_nodes": 60,
+      "num_edges": 352,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/debate_network_n60_s9.json",
+      "sha256": "2315ca818ea1813617324a80f44d8867420d1253ac119c3076b243116f4d2dde",
+      "num_nodes": 60,
+      "num_edges": 432,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n1000_s0.json",
+      "sha256": "2196100ae79f905353c49df2c8b3e80df0bf9bf17a37db65eee51735b55b1059",
+      "num_nodes": 1000,
+      "num_edges": 14863,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n1000_s1.json",
+      "sha256": "ffebeb1a9f0f6ef7e58753bbdcb0f0a6d074d4676977d0b299893a45ca2ad51d",
+      "num_nodes": 1000,
+      "num_edges": 14370,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n1000_s2.json",
+      "sha256": "91dc530901f441e34be9012101d9a51f093b41933aaeafbd6039dcbe55035880",
+      "num_nodes": 1000,
+      "num_edges": 14362,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n1000_s3.json",
+      "sha256": "49d8a2752bd4fe504fa9091ce2eb8b374c341731d6528b49b990e1196a86d7f9",
+      "num_nodes": 1000,
+      "num_edges": 15798,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n1000_s4.json",
+      "sha256": "be5d2bb8aa38c5288c325b4ee93da5c167e5bd7723ecaab77bdb71439acc60cc",
+      "num_nodes": 1000,
+      "num_edges": 14185,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n1000_s5.json",
+      "sha256": "bcbad3a5a417e05e7b4815fecafcfed48e4165dd6fa0f1fa0b10e14d3e2c0392",
+      "num_nodes": 1000,
+      "num_edges": 15565,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n1000_s6.json",
+      "sha256": "1291b3d3962340af87dad1239b8fc4e05b1ee928f9ebc260b5a109ac4b872323",
+      "num_nodes": 1000,
+      "num_edges": 14490,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n1000_s7.json",
+      "sha256": "4d114cb3695cb661e4fe12fd2eb6932ccb197102c921bab60ab8cd749213fa3f",
+      "num_nodes": 1000,
+      "num_edges": 15878,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n1000_s8.json",
+      "sha256": "b3ca2a20d6c3fe149f87716303a964d6e19a6cf137153ff60cab89a6003075f2",
+      "num_nodes": 1000,
+      "num_edges": 14442,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n1000_s9.json",
+      "sha256": "394657b35c488662be0fbe509decd25adea3da74715c6f5b6a673a8fb6c51ef9",
+      "num_nodes": 1000,
+      "num_edges": 14561,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n100_s0.json",
+      "sha256": "234e4cedabe44e161e67966f7c60615ceafaf2b652188f19beddc43ad39b2233",
+      "num_nodes": 100,
+      "num_edges": 572,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n100_s1.json",
+      "sha256": "4cf2ef821e7c4141dd6f6f5243a84df68de118e267acbdd31e818474bfab7224",
+      "num_nodes": 100,
+      "num_edges": 413,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n100_s2.json",
+      "sha256": "a2c284c5fb6a389491f9e1d58aae1e98abb50fd89d67ea337b6e08f61e7edf2c",
+      "num_nodes": 100,
+      "num_edges": 523,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n60_s0.json",
+      "sha256": "e090f60c182e17411c4b16f19a4c0d80b1be6cd4469660e3ec68996a173b7871",
+      "num_nodes": 60,
+      "num_edges": 282,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n60_s1.json",
+      "sha256": "1e8c5fa843c3bd920b5ceee4180db20141ca89510a703efeb453543b44f00cfb",
+      "num_nodes": 60,
+      "num_edges": 220,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n60_s2.json",
+      "sha256": "acacd5c922107cf1748102abf15b123b4d9b895e23739ca1cde400a3276f6e9e",
+      "num_nodes": 60,
+      "num_edges": 217,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n60_s3.json",
+      "sha256": "84b203d5964cbffa7ab535e92aee6eec43715b69863c4bcba05ad410ee256d0a",
+      "num_nodes": 60,
+      "num_edges": 230,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n60_s4.json",
+      "sha256": "c714d1f4a0f98a9cb40dec523acce36eb8f3b037cfdcc85577016db6ed4a7baf",
+      "num_nodes": 60,
+      "num_edges": 192,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n60_s5.json",
+      "sha256": "dfc4537c463f5542bad84bf5bbadd88078929001779f8cae4c3b4ec3622d3d83",
+      "num_nodes": 60,
+      "num_edges": 228,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n60_s6.json",
+      "sha256": "ee620a2d7411069990475ebfd0167b2dda77b16b38a566093457ba19e8d349e0",
+      "num_nodes": 60,
+      "num_edges": 201,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n60_s7.json",
+      "sha256": "197783b4f9954556c31b863a3ea434fe13e6b71a510dd6b6f672b37bc1735e9a",
+      "num_nodes": 60,
+      "num_edges": 184,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n60_s8.json",
+      "sha256": "18afbba47fbc9ccb6cc315294aa2856663f382398e606bd3f0b6beacbc8ded0e",
+      "num_nodes": 60,
+      "num_edges": 258,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n60_s9.json",
+      "sha256": "7a2bb7f10099e70dd5d484f6a42e8030ba07bf0aab192b36142d6d5e8985b89e",
+      "num_nodes": 60,
+      "num_edges": 217,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/higgs_real_n80_s0.json",
+      "sha256": "798b175bbc3d360757fa55e6ae9a659f4d9803e08d03f9c13f2df9e87d369924",
+      "num_nodes": 80,
+      "num_edges": 411,
+      "source": "SNAP Higgs Twitter social network (friends/followers)",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/polblogs_real_n100_s0.json",
+      "sha256": "4670783cb256b3548e54dd07c9a6d2de94fde091ce6f5e2d7b58b40bcbb481e0",
+      "num_nodes": 100,
+      "num_edges": 782,
+      "source": "Political Blogosphere (PolBlogs), Feb 2005",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/polblogs_real_n100_s1.json",
+      "sha256": "e2b7a80060cbbaab2843640fd704ad5add794a2f1f33bf42634239bc9d383010",
+      "num_nodes": 100,
+      "num_edges": 665,
+      "source": "Political Blogosphere (PolBlogs), Feb 2005",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/polblogs_real_n100_s2.json",
+      "sha256": "53ac586eb2924f0ca6273ec125405d5306b7e1487a10821da37b06bde60214e8",
+      "num_nodes": 100,
+      "num_edges": 673,
+      "source": "Political Blogosphere (PolBlogs), Feb 2005",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/polblogs_real_n100_s3.json",
+      "sha256": "5aa6e2fd385839dc5dfe107d418d5523d7f049e9fb6c5feb27f9819b2ff92d85",
+      "num_nodes": 100,
+      "num_edges": 771,
+      "source": "Political Blogosphere (PolBlogs), Feb 2005",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/polblogs_real_n100_s4.json",
+      "sha256": "975948195b0d73cad01ac122a9d5ff8f14612168d3059bb8dd5c493f22768331",
+      "num_nodes": 100,
+      "num_edges": 684,
+      "source": "Political Blogosphere (PolBlogs), Feb 2005",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/polblogs_real_n100_s5.json",
+      "sha256": "ad80aa244731f907ed37632ded89afb8f1edc5cbcb6067da637001a216a8932d",
+      "num_nodes": 100,
+      "num_edges": 807,
+      "source": "Political Blogosphere (PolBlogs), Feb 2005",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/polblogs_real_n100_s6.json",
+      "sha256": "430d7bcb426ceddf49306dbab12b5f6da868bbfb461e731f24ef9f60c2fc4033",
+      "num_nodes": 100,
+      "num_edges": 685,
+      "source": "Political Blogosphere (PolBlogs), Feb 2005",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/polblogs_real_n100_s7.json",
+      "sha256": "e1329ef802fb2643b0920b3cd40e00f19b779a5108bffe1ff5597072e957e517",
+      "num_nodes": 100,
+      "num_edges": 736,
+      "source": "Political Blogosphere (PolBlogs), Feb 2005",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/polblogs_real_n100_s8.json",
+      "sha256": "f54a40a17f69306675e6f7eaaf4cfeb3a71f8ef4f45bb16e0dfcfa44db911fa9",
+      "num_nodes": 100,
+      "num_edges": 775,
+      "source": "Political Blogosphere (PolBlogs), Feb 2005",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/polblogs_real_n100_s9.json",
+      "sha256": "543fa5a06d1fae16578930a6abb608a8e7c579578c868803583c11b1168088f0",
+      "num_nodes": 100,
+      "num_edges": 808,
+      "source": "Political Blogosphere (PolBlogs), Feb 2005",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/reddit_convokit_n30_s0.json",
+      "sha256": "b548b6edeee08065ba59c1c9de95ca05f44110ea214c7f71307fcfd357f8a98f",
+      "num_nodes": 0,
+      "num_edges": 53,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/reddit_convokit_n30_s1.json",
+      "sha256": "657f224dba2ff4278a78c8379409ea5f16613108836c8c1c19512a87d5d2b0f3",
+      "num_nodes": 0,
+      "num_edges": 65,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/reddit_convokit_n32_s42.json",
+      "sha256": "ffe9bb10de8b2514cc02df19198a1b3afc99ffb070d5a110010a20cb957f90b9",
+      "num_nodes": 0,
+      "num_edges": 75,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/reddit_convokit_n60_s0.json",
+      "sha256": "f17ae5d33d4d11b418e837f192f6eb3c561dacf321f1b6875de878175089de7f",
+      "num_nodes": 0,
+      "num_edges": 223,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/reddit_convokit_n60_s1.json",
+      "sha256": "f34ef45acd0037875e217fa096e0cf4ee0274d4b85f7108e87e13b8da067b06a",
+      "num_nodes": 0,
+      "num_edges": 245,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/reddit_convokit_n60_s2.json",
+      "sha256": "542b9bbbc13cf617413de26a51ee2b977b8614f524b9ae732c44f1bc894618db",
+      "num_nodes": 0,
+      "num_edges": 239,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/reddit_convokit_n60_s3.json",
+      "sha256": "39d66497958160be81c1caa85ddd1f2f2bd72331f464ec8ed56dabe514dd51a2",
+      "num_nodes": 0,
+      "num_edges": 226,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/reddit_convokit_n60_s4.json",
+      "sha256": "9731e9751b8d46c7f8d2c7a410e2a92064b2e5fe0544d8abb4d315a4dec1f881",
+      "num_nodes": 0,
+      "num_edges": 246,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/reddit_convokit_n60_s5.json",
+      "sha256": "4da200041c302362c5b9982f61bd912c65fd9fd7bffec0f956c59c1a3e9ac8e6",
+      "num_nodes": 0,
+      "num_edges": 236,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/reddit_convokit_n60_s6.json",
+      "sha256": "5a191e0f63254f45cf2301ac7a46720da99e1e867ed8bb8f0d5313c1a11cc9f3",
+      "num_nodes": 0,
+      "num_edges": 253,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/reddit_convokit_n60_s7.json",
+      "sha256": "c52cfde511ae0297bc273b61598c5f3e385bddfecaac88007cb4dd14d258fae1",
+      "num_nodes": 0,
+      "num_edges": 251,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/reddit_convokit_n60_s8.json",
+      "sha256": "e8aaaa8d289f684ecb529e7412977daea81b75e5b633bfd13accd19c0d49fdfe",
+      "num_nodes": 0,
+      "num_edges": 251,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/reddit_convokit_n60_s9.json",
+      "sha256": "8c78a0cc1640230c73542014f5707f758c73abdadc1c7370edf43d7e65409798",
+      "num_nodes": 0,
+      "num_edges": 243,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/snap_higgs_n30_s0.json",
+      "sha256": "6397f9b60887041abf8ab86ef7f8ab9c254dcd4db1a3dce6f4e46834cc2f55e2",
+      "num_nodes": 0,
+      "num_edges": 138,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/snap_higgs_n30_s1.json",
+      "sha256": "a15170be4fadea04485ca1a07d6ab410480f16246eed9761314c297ae7eba33e",
+      "num_nodes": 0,
+      "num_edges": 147,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/snap_higgs_n30_s42.json",
+      "sha256": "4cedff706015be4950ed6508b411a68a4cf70d131be1e88fd82eb3d2d5a42089",
+      "num_nodes": 0,
+      "num_edges": 141,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/snap_higgs_n60_s0.json",
+      "sha256": "027210d7571935db2b46f743e238759eea62a08a0dec41b7a3c9306818de149b",
+      "num_nodes": 0,
+      "num_edges": 339,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/snap_higgs_n60_s1.json",
+      "sha256": "cfdfc11fef5a477d7e06bccb8e85fdfa891ddeaf8e2d49cb52b8859a330e184a",
+      "num_nodes": 0,
+      "num_edges": 332,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/snap_higgs_n60_s2.json",
+      "sha256": "f4a314b2bd35dedf60039d0447b3c6343b7d5865bacf51ecf55d9cc863d79ed3",
+      "num_nodes": 0,
+      "num_edges": 339,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/snap_higgs_n60_s3.json",
+      "sha256": "4604199b6fc45a0abecd8dbf7cf3747fa96d36bef5a619007628c04fe4b072a3",
+      "num_nodes": 0,
+      "num_edges": 326,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/snap_higgs_n60_s4.json",
+      "sha256": "53b6755ee19fc43a090a83bbc57b6b79dd35ab188e595f0ef24f95562fc22633",
+      "num_nodes": 0,
+      "num_edges": 342,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/snap_higgs_n60_s5.json",
+      "sha256": "9ff84845c868b4e36ffa79bfe733b2133baa65341cb0727679f8a17661541a5f",
+      "num_nodes": 0,
+      "num_edges": 338,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/snap_higgs_n60_s6.json",
+      "sha256": "ad36bbe8bb5ea06dc3a0831cecdf1d80db18f214406f444efd1feeb5caaaa2ad",
+      "num_nodes": 0,
+      "num_edges": 352,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/snap_higgs_n60_s7.json",
+      "sha256": "4b4534d25eea60c6d792874b569cace1694fa0026c79c7df27fc584e68131e1d",
+      "num_nodes": 0,
+      "num_edges": 334,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/snap_higgs_n60_s8.json",
+      "sha256": "7ed3366047411ed380b634bb61bd71fd30a79b06b7d9a2d02f479d907a272aad",
+      "num_nodes": 0,
+      "num_edges": 345,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/snap_higgs_n60_s9.json",
+      "sha256": "d43fc8979c1ffb6a9288e921e46b3f3bd8597b10cb784b9bacf613f58fbf681a",
+      "num_nodes": 0,
+      "num_edges": 344,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/snap_higgs_n80_s42.json",
+      "sha256": "d4fbbbc4237f93fd879a45e03f557afe4fd8bf57b3d9b66cc248d2bb4d40f2b0",
+      "num_nodes": 0,
+      "num_edges": 526,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/twitter_election_n30_s0.json",
+      "sha256": "f1c8a2c955b417c2dab47f1b345205421185aae2b6068386b528ac204613caac",
+      "num_nodes": 30,
+      "num_edges": 182,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/twitter_election_n30_s1.json",
+      "sha256": "a6f82ca59464729211e1df48f0bad1aee2b22e091d6b9552f5d6d1f61f70feb2",
+      "num_nodes": 30,
+      "num_edges": 183,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/twitter_election_n30_s42.json",
+      "sha256": "631bf7ecec472bcbbdb0905960cbc35d4476960944c397ade49e2865fb08c5fa",
+      "num_nodes": 30,
+      "num_edges": 184,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/twitter_election_n60_s0.json",
+      "sha256": "473fcbef1f8580a0690c15215edac5e854fa7fe647d9f396210126bf4c210175",
+      "num_nodes": 60,
+      "num_edges": 421,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/twitter_election_n60_s1.json",
+      "sha256": "36f1fb3e7e4299b96c5696d7a98f36d89110b9688be49fc2118ba90485ee3a36",
+      "num_nodes": 60,
+      "num_edges": 423,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/twitter_election_n60_s2.json",
+      "sha256": "fc2ae0bbb4d30f2eb34b4f9a0836787bb38981764d27ad301c383df8fcac9e67",
+      "num_nodes": 60,
+      "num_edges": 420,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/twitter_election_n60_s3.json",
+      "sha256": "cf1e38ed137a58830426e565685f7fc31535c62772966ef5881d90d086f6fff3",
+      "num_nodes": 60,
+      "num_edges": 423,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/twitter_election_n60_s4.json",
+      "sha256": "155c1580e3a7d04126dc2b05407a5a557265696f6fb668bc141ebd2194372944",
+      "num_nodes": 60,
+      "num_edges": 422,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/twitter_election_n60_s42.json",
+      "sha256": "547153188af0d6bec5a13fb3757bf9300accc9a89207f6f0afd32601250d169a",
+      "num_nodes": 60,
+      "num_edges": 422,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/twitter_election_n60_s5.json",
+      "sha256": "d7991149854026c14980915586eb67729dec9bbbbfccd1bb745d412effdc30fd",
+      "num_nodes": 60,
+      "num_edges": 420,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/twitter_election_n60_s6.json",
+      "sha256": "dec499657f836d6543e0e8bdfb5f7855fb6e8c908254fbecc3b1248463b8f102",
+      "num_nodes": 60,
+      "num_edges": 422,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/twitter_election_n60_s7.json",
+      "sha256": "41f386fd247cbdffc9297250ee68c92d4f5be21e6f36fd221680a38c22430c78",
+      "num_nodes": 60,
+      "num_edges": 423,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/twitter_election_n60_s8.json",
+      "sha256": "dfbd5ad684a0f450f954c6ad08e1acac1ce36d26d4afd65389192a23cc63886c",
+      "num_nodes": 60,
+      "num_edges": 423,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/twitter_election_n60_s9.json",
+      "sha256": "83ae48260a70aa3fadced678ce8d2d20037819734da3179924d9c07245b43d98",
+      "num_nodes": 60,
+      "num_edges": 422,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    },
+    {
+      "cache": "data/benchmarks/twitter_election_n80_s42.json",
+      "sha256": "1b0b2e3b9645a68786c0e8ac9c498eed2da7b09a127be0a3bafb3cb34262a6d2",
+      "num_nodes": 80,
+      "num_edges": 587,
+      "source": "synthetic loader",
+      "license": "see data/raw/README.md"
+    }
+  ],
+  "raw_sources": [
+    {
+      "file": "data/raw/polblogs.gml",
+      "label": "PolBlogs (human stance labels)",
+      "sha256": "bd83e3dd2397a57d2252cc212524c21fee6708663136898d4ace523224bdc632"
+    },
+    {
+      "file": "data/raw/polblogs.txt",
+      "label": "PolBlogs metadata",
+      "sha256": "9e77bf937cda1b0aa19532eee6e54a10074487906c25541624ff1977fc41d14e"
+    }
+  ],
+  "provenance": "results/PROVENANCE.json",
+  "note": "Not yet a D&B/JOSS-ready leaderboard: 2 real graphs, no hidden test split. Add 1-2 more real stance graphs and a submission format before D&B."
+}

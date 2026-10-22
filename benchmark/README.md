@@ -15,6 +15,14 @@ provides a validation entry point for a future NeurIPS D&B / JOSS package.
   Adamic & Glance 2005; left/right `value` labels);
 - frozen result JSONs and a SHA256 provenance manifest.
 
+## Registry manifest
+
+`benchmark/manifest.json` lists every cached graph with its SHA256, node/edge counts, source, and recorded raw-source hashes. Regenerate it with:
+
+```bash
+python scripts/build_benchmark_manifest.py
+```
+
 ## Quick validation
 
 ```bash

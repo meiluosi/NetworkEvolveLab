@@ -506,7 +506,12 @@ $\kappa=\LlmHighCovKappa$ and agreement on rule-severe events is \LlmHighCovSeve
 language layer is not a drop-in copy of the rule. The pilot uses one model and no human
 validation, and MiniMax-M3.1-Flash was not rerun at this coverage because its adaptive
 thinking budget consumes the JSON response at high event counts; the archived arm remains
-the receipt-complete reference. Table~\ref{tab:llm_highcov} reports both settings.
+the receipt-complete reference. Table~\ref{tab:llm_highcov} reports both settings; the two rows differ in both model
+and event budget, so they measure coverage sensitivity rather than a controlled model effect.
+No second independent model family was available: the DeepSeek chat model used by the
+authors is not exposed as an API to this repository, and the two MiniMax variants are the
+same family. We therefore report the MiniMax-M3 high-coverage arm and the archived
+MiniMax-M3.1-Flash arm separately and do not estimate a cross-family model effect.
 
 \begin{table*}[t]
 \centering
