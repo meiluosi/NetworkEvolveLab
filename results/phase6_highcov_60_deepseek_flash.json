@@ -1,0 +1,2477 @@
+{
+  "args": {
+    "seeds": 10,
+    "jobs": 10,
+    "rounds": 30,
+    "nodes": 60,
+    "llm_events": 60,
+    "model": "deepseek-flash",
+    "max_tokens": 16384,
+    "thinking_budget": 0,
+    "budget_calls": 400,
+    "out": "results/phase6_highcov_60_deepseek_flash.json",
+    "shard_dir": "results/phase6_highcov_60_deepseek_flash_shards"
+  },
+  "merge_note": "sharded by seed; merged without recomputation of raw events",
+  "design": {
+    "arms": [
+      "rule",
+      "llm_hybrid",
+      "placebo"
+    ],
+    "pairing": "same seed initial conditions",
+    "statistical_unit": "seed",
+    "shards": 10
+  },
+  "per_seed": {
+    "0": {
+      "rule": {
+        "modularity_q": 0.41461547164692825,
+        "polarization": 0.2860753333896052,
+        "giant_frac": 0.9833333333333333,
+        "small_comm_frac": 0.3333333333333333,
+        "rupture_asymmetry": 0.14285714285714285,
+        "num_edges": 347.0,
+        "num_comms": 3.0,
+        "n_mutual_broken": 7.0,
+        "bridger_retention_mean": 0.7551282051282051,
+        "other_retention_mean": 0.5087786500487035,
+        "n_bridger": 5,
+        "n_interactions": 6880
+      },
+      "llm_hybrid": {
+        "modularity_q": 0.41488284190180635,
+        "polarization": 0.3133365626251374,
+        "giant_frac": 0.9833333333333333,
+        "small_comm_frac": 0.25,
+        "rupture_asymmetry": 0.14285714285714285,
+        "num_edges": 328.0,
+        "num_comms": 4.0,
+        "n_mutual_broken": 7.0,
+        "bridger_retention_mean": 0.7551282051282051,
+        "other_retention_mean": 0.5087786500487035,
+        "n_bridger": 5,
+        "n_interactions": 7368
+      },
+      "llm_stats": {
+        "n_events": 1800,
+        "n_valid": 1800,
+        "n_invalid": 0,
+        "n_calls": 30,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 30,
+        "n_applied": 1419,
+        "actions": {
+          "keep": 1361,
+          "mute": 39,
+          "unfollow": 19
+        },
+        "rule_agreement": {
+          "n_compared": 1419,
+          "n_agree": 1383,
+          "confusion": {
+            "reinforce": {
+              "reinforce": 1357,
+              "block": 3,
+              "decay": 1
+            },
+            "decay": {
+              "decay": 15,
+              "block": 20,
+              "reinforce": 4
+            },
+            "block": {
+              "block": 11,
+              "decay": 8
+            }
+          },
+          "llm_action_counts": {
+            "reinforce": 1361,
+            "decay": 39,
+            "block": 19
+          },
+          "rule_action_counts": {
+            "reinforce": 1361,
+            "decay": 24,
+            "block": 34
+          }
+        },
+        "n_interactions": 7368,
+        "placebo": {
+          "n_unfollows": 0
+        }
+      },
+      "placebo": {
+        "modularity_q": 0.4033958106305209,
+        "polarization": 0.28358754370349415,
+        "giant_frac": 0.9833333333333333,
+        "small_comm_frac": 0.3333333333333333,
+        "rupture_asymmetry": 0.3333333333333333,
+        "num_edges": 321.0,
+        "num_comms": 3.0,
+        "n_mutual_broken": 9.0,
+        "bridger_retention_mean": 0.7084615384615385,
+        "other_retention_mean": 0.4710514203562333,
+        "n_bridger": 5,
+        "n_interactions": 6860
+      },
+      "placebo_stats": {
+        "n_events": 0,
+        "n_valid": 0,
+        "n_invalid": 0,
+        "n_calls": 0,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 0,
+        "n_applied": 0,
+        "actions": {},
+        "rule_agreement": {
+          "n_compared": 0,
+          "n_agree": 0,
+          "confusion": {},
+          "llm_action_counts": {},
+          "rule_action_counts": {}
+        },
+        "n_interactions": 6860,
+        "placebo": {
+          "n_unfollows": 19
+        }
+      }
+    },
+    "1": {
+      "rule": {
+        "modularity_q": 0.46295251260422554,
+        "polarization": 0.2745684238095462,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.0,
+        "rupture_asymmetry": 0.1111111111111111,
+        "num_edges": 317.0,
+        "num_comms": 2.0,
+        "n_mutual_broken": 9.0,
+        "bridger_retention_mean": 0.637922077922078,
+        "other_retention_mean": 0.5029322281996079,
+        "n_bridger": 5,
+        "n_interactions": 8551
+      },
+      "llm_hybrid": {
+        "modularity_q": 0.47329751407956855,
+        "polarization": 0.40953448941742515,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.0,
+        "rupture_asymmetry": 0.0,
+        "num_edges": 312.0,
+        "num_comms": 2.0,
+        "n_mutual_broken": 8.0,
+        "bridger_retention_mean": 0.6197402597402597,
+        "other_retention_mean": 0.49043593661240736,
+        "n_bridger": 5,
+        "n_interactions": 8137
+      },
+      "llm_stats": {
+        "n_events": 1800,
+        "n_valid": 1800,
+        "n_invalid": 0,
+        "n_calls": 30,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 30,
+        "n_applied": 1343,
+        "actions": {
+          "keep": 1272,
+          "mute": 49,
+          "unfollow": 22
+        },
+        "rule_agreement": {
+          "n_compared": 1343,
+          "n_agree": 1282,
+          "confusion": {
+            "reinforce": {
+              "block": 10,
+              "reinforce": 1260,
+              "decay": 2
+            },
+            "decay": {
+              "block": 26,
+              "decay": 13,
+              "reinforce": 10
+            },
+            "block": {
+              "block": 9,
+              "decay": 10,
+              "reinforce": 3
+            }
+          },
+          "llm_action_counts": {
+            "reinforce": 1272,
+            "decay": 49,
+            "block": 22
+          },
+          "rule_action_counts": {
+            "block": 45,
+            "reinforce": 1273,
+            "decay": 25
+          }
+        },
+        "n_interactions": 8137,
+        "placebo": {
+          "n_unfollows": 0
+        }
+      },
+      "placebo": {
+        "modularity_q": 0.46254718127001415,
+        "polarization": 0.3594181006890594,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.0,
+        "rupture_asymmetry": 0.1111111111111111,
+        "num_edges": 294.0,
+        "num_comms": 2.0,
+        "n_mutual_broken": 9.0,
+        "bridger_retention_mean": 0.5768831168831168,
+        "other_retention_mean": 0.4535713870205849,
+        "n_bridger": 5,
+        "n_interactions": 7321
+      },
+      "placebo_stats": {
+        "n_events": 0,
+        "n_valid": 0,
+        "n_invalid": 0,
+        "n_calls": 0,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 0,
+        "n_applied": 0,
+        "actions": {},
+        "rule_agreement": {
+          "n_compared": 0,
+          "n_agree": 0,
+          "confusion": {},
+          "llm_action_counts": {},
+          "rule_action_counts": {}
+        },
+        "n_interactions": 7321,
+        "placebo": {
+          "n_unfollows": 22
+        }
+      }
+    },
+    "2": {
+      "rule": {
+        "modularity_q": 0.467637584197172,
+        "polarization": 0.3330398672350005,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.5,
+        "rupture_asymmetry": 0.0,
+        "num_edges": 253.0,
+        "num_comms": 4.0,
+        "n_mutual_broken": 2.0,
+        "bridger_retention_mean": 0.6406410256410257,
+        "other_retention_mean": 0.49677194018103105,
+        "n_bridger": 5,
+        "n_interactions": 6044
+      },
+      "llm_hybrid": {
+        "modularity_q": 0.46714053414403567,
+        "polarization": 0.30169160662957656,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.3333333333333333,
+        "rupture_asymmetry": 0.0,
+        "num_edges": 270.0,
+        "num_comms": 3.0,
+        "n_mutual_broken": 2.0,
+        "bridger_retention_mean": 0.6406410256410257,
+        "other_retention_mean": 0.49677194018103105,
+        "n_bridger": 5,
+        "n_interactions": 6821
+      },
+      "llm_stats": {
+        "n_events": 1800,
+        "n_valid": 1800,
+        "n_invalid": 0,
+        "n_calls": 30,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 30,
+        "n_applied": 1267,
+        "actions": {
+          "mute": 49,
+          "keep": 1191,
+          "unfollow": 26,
+          "block": 1
+        },
+        "rule_agreement": {
+          "n_compared": 1267,
+          "n_agree": 1212,
+          "confusion": {
+            "decay": {
+              "block": 27,
+              "decay": 13,
+              "reinforce": 9
+            },
+            "reinforce": {
+              "reinforce": 1186,
+              "block": 3,
+              "decay": 2
+            },
+            "block": {
+              "block": 13,
+              "decay": 14
+            }
+          },
+          "llm_action_counts": {
+            "decay": 49,
+            "reinforce": 1191,
+            "block": 27
+          },
+          "rule_action_counts": {
+            "block": 43,
+            "reinforce": 1195,
+            "decay": 29
+          }
+        },
+        "n_interactions": 6821,
+        "placebo": {
+          "n_unfollows": 0
+        }
+      },
+      "placebo": {
+        "modularity_q": 0.4687019649687473,
+        "polarization": 0.35078926432304747,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.4,
+        "rupture_asymmetry": 0.3333333333333333,
+        "num_edges": 240.0,
+        "num_comms": 5.0,
+        "n_mutual_broken": 3.0,
+        "bridger_retention_mean": 0.5852564102564102,
+        "other_retention_mean": 0.43248294634658263,
+        "n_bridger": 5,
+        "n_interactions": 5915
+      },
+      "placebo_stats": {
+        "n_events": 0,
+        "n_valid": 0,
+        "n_invalid": 0,
+        "n_calls": 0,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 0,
+        "n_applied": 0,
+        "actions": {},
+        "rule_agreement": {
+          "n_compared": 0,
+          "n_agree": 0,
+          "confusion": {},
+          "llm_action_counts": {},
+          "rule_action_counts": {}
+        },
+        "n_interactions": 5915,
+        "placebo": {
+          "n_unfollows": 27
+        }
+      }
+    },
+    "3": {
+      "rule": {
+        "modularity_q": 0.4745618220534901,
+        "polarization": 0.4682635758006461,
+        "giant_frac": 0.9833333333333333,
+        "small_comm_frac": 0.3333333333333333,
+        "rupture_asymmetry": 0.0,
+        "num_edges": 347.0,
+        "num_comms": 3.0,
+        "n_mutual_broken": 3.0,
+        "bridger_retention_mean": 0.6539393939393939,
+        "other_retention_mean": 0.5087980617125002,
+        "n_bridger": 5,
+        "n_interactions": 6741
+      },
+      "llm_hybrid": {
+        "modularity_q": 0.47002277905847956,
+        "polarization": 0.45918458828858133,
+        "giant_frac": 0.9833333333333333,
+        "small_comm_frac": 0.3333333333333333,
+        "rupture_asymmetry": 0.0,
+        "num_edges": 300.0,
+        "num_comms": 3.0,
+        "n_mutual_broken": 3.0,
+        "bridger_retention_mean": 0.6539393939393939,
+        "other_retention_mean": 0.5128889708034092,
+        "n_bridger": 5,
+        "n_interactions": 6749
+      },
+      "llm_stats": {
+        "n_events": 1800,
+        "n_valid": 1800,
+        "n_invalid": 0,
+        "n_calls": 30,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 30,
+        "n_applied": 1267,
+        "actions": {
+          "keep": 1193,
+          "mute": 49,
+          "unfollow": 23,
+          "block": 2
+        },
+        "rule_agreement": {
+          "n_compared": 1267,
+          "n_agree": 1222,
+          "confusion": {
+            "reinforce": {
+              "block": 4,
+              "reinforce": 1188,
+              "decay": 1
+            },
+            "decay": {
+              "block": 25,
+              "decay": 19,
+              "reinforce": 5
+            },
+            "block": {
+              "block": 15,
+              "decay": 9,
+              "reinforce": 1
+            }
+          },
+          "llm_action_counts": {
+            "reinforce": 1193,
+            "decay": 49,
+            "block": 25
+          },
+          "rule_action_counts": {
+            "block": 44,
+            "reinforce": 1194,
+            "decay": 29
+          }
+        },
+        "n_interactions": 6749,
+        "placebo": {
+          "n_unfollows": 0
+        }
+      },
+      "placebo": {
+        "modularity_q": 0.4949456024106973,
+        "polarization": 0.513937283887763,
+        "giant_frac": 0.9833333333333333,
+        "small_comm_frac": 0.25,
+        "rupture_asymmetry": 0.2,
+        "num_edges": 304.0,
+        "num_comms": 4.0,
+        "n_mutual_broken": 5.0,
+        "bridger_retention_mean": 0.5524242424242425,
+        "other_retention_mean": 0.45087100659293167,
+        "n_bridger": 5,
+        "n_interactions": 5512
+      },
+      "placebo_stats": {
+        "n_events": 0,
+        "n_valid": 0,
+        "n_invalid": 0,
+        "n_calls": 0,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 0,
+        "n_applied": 0,
+        "actions": {},
+        "rule_agreement": {
+          "n_compared": 0,
+          "n_agree": 0,
+          "confusion": {},
+          "llm_action_counts": {},
+          "rule_action_counts": {}
+        },
+        "n_interactions": 5512,
+        "placebo": {
+          "n_unfollows": 25
+        }
+      }
+    },
+    "4": {
+      "rule": {
+        "modularity_q": 0.4485567892584594,
+        "polarization": 0.4662772817166985,
+        "giant_frac": 0.9833333333333333,
+        "small_comm_frac": 0.25,
+        "rupture_asymmetry": 0.0,
+        "num_edges": 316.0,
+        "num_comms": 4.0,
+        "n_mutual_broken": 5.0,
+        "bridger_retention_mean": 0.6141414141414141,
+        "other_retention_mean": 0.4752508097962643,
+        "n_bridger": 5,
+        "n_interactions": 8735
+      },
+      "llm_hybrid": {
+        "modularity_q": 0.4458489879666323,
+        "polarization": 0.41304571979243626,
+        "giant_frac": 0.9833333333333333,
+        "small_comm_frac": 0.3333333333333333,
+        "rupture_asymmetry": 0.0,
+        "num_edges": 317.0,
+        "num_comms": 3.0,
+        "n_mutual_broken": 5.0,
+        "bridger_retention_mean": 0.6449106449106449,
+        "other_retention_mean": 0.4783676929131474,
+        "n_bridger": 5,
+        "n_interactions": 8256
+      },
+      "llm_stats": {
+        "n_events": 1800,
+        "n_valid": 1800,
+        "n_invalid": 0,
+        "n_calls": 30,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 30,
+        "n_applied": 1281,
+        "actions": {
+          "mute": 35,
+          "keep": 1226,
+          "unfollow": 20
+        },
+        "rule_agreement": {
+          "n_compared": 1281,
+          "n_agree": 1246,
+          "confusion": {
+            "decay": {
+              "decay": 10,
+              "block": 25
+            },
+            "reinforce": {
+              "reinforce": 1222,
+              "block": 4
+            },
+            "block": {
+              "block": 14,
+              "decay": 6
+            }
+          },
+          "llm_action_counts": {
+            "decay": 35,
+            "reinforce": 1226,
+            "block": 20
+          },
+          "rule_action_counts": {
+            "decay": 16,
+            "reinforce": 1222,
+            "block": 43
+          }
+        },
+        "n_interactions": 8256,
+        "placebo": {
+          "n_unfollows": 0
+        }
+      },
+      "placebo": {
+        "modularity_q": 0.4571292035546046,
+        "polarization": 0.4431812429010874,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.0,
+        "rupture_asymmetry": 0.0,
+        "num_edges": 298.0,
+        "num_comms": 2.0,
+        "n_mutual_broken": 5.0,
+        "bridger_retention_mean": 0.5401709401709403,
+        "other_retention_mean": 0.44522109203927385,
+        "n_bridger": 5,
+        "n_interactions": 7008
+      },
+      "placebo_stats": {
+        "n_events": 0,
+        "n_valid": 0,
+        "n_invalid": 0,
+        "n_calls": 0,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 0,
+        "n_applied": 0,
+        "actions": {},
+        "rule_agreement": {
+          "n_compared": 0,
+          "n_agree": 0,
+          "confusion": {},
+          "llm_action_counts": {},
+          "rule_action_counts": {}
+        },
+        "n_interactions": 7008,
+        "placebo": {
+          "n_unfollows": 20
+        }
+      }
+    },
+    "5": {
+      "rule": {
+        "modularity_q": 0.44421270042830663,
+        "polarization": 0.2506886308924606,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.0,
+        "rupture_asymmetry": 0.2857142857142857,
+        "num_edges": 314.0,
+        "num_comms": 2.0,
+        "n_mutual_broken": 7.0,
+        "bridger_retention_mean": 0.6975091575091575,
+        "other_retention_mean": 0.4630200859746314,
+        "n_bridger": 5,
+        "n_interactions": 7127
+      },
+      "llm_hybrid": {
+        "modularity_q": 0.4631531141712911,
+        "polarization": 0.372814108540951,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.0,
+        "rupture_asymmetry": 0.2857142857142857,
+        "num_edges": 326.0,
+        "num_comms": 2.0,
+        "n_mutual_broken": 7.0,
+        "bridger_retention_mean": 0.6775091575091575,
+        "other_retention_mean": 0.4492459812914358,
+        "n_bridger": 5,
+        "n_interactions": 7993
+      },
+      "llm_stats": {
+        "n_events": 1800,
+        "n_valid": 1800,
+        "n_invalid": 0,
+        "n_calls": 30,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 30,
+        "n_applied": 1221,
+        "actions": {
+          "keep": 1158,
+          "mute": 38,
+          "unfollow": 24,
+          "block": 1
+        },
+        "rule_agreement": {
+          "n_compared": 1221,
+          "n_agree": 1171,
+          "confusion": {
+            "reinforce": {
+              "reinforce": 1147,
+              "block": 9,
+              "decay": 2
+            },
+            "decay": {
+              "block": 24,
+              "decay": 14
+            },
+            "block": {
+              "block": 10,
+              "decay": 15
+            }
+          },
+          "llm_action_counts": {
+            "reinforce": 1158,
+            "decay": 38,
+            "block": 25
+          },
+          "rule_action_counts": {
+            "reinforce": 1147,
+            "block": 43,
+            "decay": 31
+          }
+        },
+        "n_interactions": 7993,
+        "placebo": {
+          "n_unfollows": 0
+        }
+      },
+      "placebo": {
+        "modularity_q": 0.4397790395359834,
+        "polarization": 0.3291784975139087,
+        "giant_frac": 0.9833333333333333,
+        "small_comm_frac": 0.25,
+        "rupture_asymmetry": 0.2857142857142857,
+        "num_edges": 291.0,
+        "num_comms": 4.0,
+        "n_mutual_broken": 7.0,
+        "bridger_retention_mean": 0.6821245421245422,
+        "other_retention_mean": 0.4048074400347127,
+        "n_bridger": 5,
+        "n_interactions": 6650
+      },
+      "placebo_stats": {
+        "n_events": 0,
+        "n_valid": 0,
+        "n_invalid": 0,
+        "n_calls": 0,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 0,
+        "n_applied": 0,
+        "actions": {},
+        "rule_agreement": {
+          "n_compared": 0,
+          "n_agree": 0,
+          "confusion": {},
+          "llm_action_counts": {},
+          "rule_action_counts": {}
+        },
+        "n_interactions": 6650,
+        "placebo": {
+          "n_unfollows": 25
+        }
+      }
+    },
+    "6": {
+      "rule": {
+        "modularity_q": 0.46224229179817555,
+        "polarization": 0.3367484650424049,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.0,
+        "rupture_asymmetry": 0.25,
+        "num_edges": 333.0,
+        "num_comms": 2.0,
+        "n_mutual_broken": 8.0,
+        "bridger_retention_mean": 0.6323593073593072,
+        "other_retention_mean": 0.534249665960896,
+        "n_bridger": 5,
+        "n_interactions": 5492
+      },
+      "llm_hybrid": {
+        "modularity_q": 0.45058250878536865,
+        "polarization": 0.3842264363170893,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.0,
+        "rupture_asymmetry": 0.25,
+        "num_edges": 331.0,
+        "num_comms": 2.0,
+        "n_mutual_broken": 8.0,
+        "bridger_retention_mean": 0.6073593073593073,
+        "other_retention_mean": 0.5325967733989124,
+        "n_bridger": 5,
+        "n_interactions": 5134
+      },
+      "llm_stats": {
+        "n_events": 1800,
+        "n_valid": 1800,
+        "n_invalid": 0,
+        "n_calls": 30,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 30,
+        "n_applied": 1447,
+        "actions": {
+          "mute": 54,
+          "keep": 1371,
+          "unfollow": 22
+        },
+        "rule_agreement": {
+          "n_compared": 1447,
+          "n_agree": 1386,
+          "confusion": {
+            "decay": {
+              "block": 42,
+              "decay": 6,
+              "reinforce": 6
+            },
+            "reinforce": {
+              "reinforce": 1365,
+              "decay": 1,
+              "block": 5
+            },
+            "block": {
+              "block": 15,
+              "decay": 7
+            }
+          },
+          "llm_action_counts": {
+            "decay": 54,
+            "reinforce": 1371,
+            "block": 22
+          },
+          "rule_action_counts": {
+            "block": 62,
+            "reinforce": 1371,
+            "decay": 14
+          }
+        },
+        "n_interactions": 5134,
+        "placebo": {
+          "n_unfollows": 0
+        }
+      },
+      "placebo": {
+        "modularity_q": 0.45402445668624636,
+        "polarization": 0.3260265467538725,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.0,
+        "rupture_asymmetry": 0.3333333333333333,
+        "num_edges": 307.0,
+        "num_comms": 2.0,
+        "n_mutual_broken": 9.0,
+        "bridger_retention_mean": 0.6323593073593072,
+        "other_retention_mean": 0.48822223379710017,
+        "n_bridger": 5,
+        "n_interactions": 4695
+      },
+      "placebo_stats": {
+        "n_events": 0,
+        "n_valid": 0,
+        "n_invalid": 0,
+        "n_calls": 0,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 0,
+        "n_applied": 0,
+        "actions": {},
+        "rule_agreement": {
+          "n_compared": 0,
+          "n_agree": 0,
+          "confusion": {},
+          "llm_action_counts": {},
+          "rule_action_counts": {}
+        },
+        "n_interactions": 4695,
+        "placebo": {
+          "n_unfollows": 22
+        }
+      }
+    },
+    "7": {
+      "rule": {
+        "modularity_q": 0.4545553857471031,
+        "polarization": 0.32154559525023685,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.0,
+        "rupture_asymmetry": 0.1,
+        "num_edges": 342.0,
+        "num_comms": 2.0,
+        "n_mutual_broken": 10.0,
+        "bridger_retention_mean": 0.717113997113997,
+        "other_retention_mean": 0.5639065539332919,
+        "n_bridger": 5,
+        "n_interactions": 6596
+      },
+      "llm_hybrid": {
+        "modularity_q": 0.43678927920483174,
+        "polarization": 0.36002778789981843,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.0,
+        "rupture_asymmetry": 0.1,
+        "num_edges": 345.0,
+        "num_comms": 2.0,
+        "n_mutual_broken": 10.0,
+        "bridger_retention_mean": 0.717113997113997,
+        "other_retention_mean": 0.5639065539332919,
+        "n_bridger": 5,
+        "n_interactions": 6468
+      },
+      "llm_stats": {
+        "n_events": 1800,
+        "n_valid": 1800,
+        "n_invalid": 0,
+        "n_calls": 30,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 30,
+        "n_applied": 1434,
+        "actions": {
+          "keep": 1382,
+          "mute": 29,
+          "unfollow": 22,
+          "block": 1
+        },
+        "rule_agreement": {
+          "n_compared": 1434,
+          "n_agree": 1400,
+          "confusion": {
+            "reinforce": {
+              "block": 6,
+              "reinforce": 1376
+            },
+            "decay": {
+              "decay": 14,
+              "block": 15
+            },
+            "block": {
+              "block": 10,
+              "decay": 13
+            }
+          },
+          "llm_action_counts": {
+            "reinforce": 1382,
+            "decay": 29,
+            "block": 23
+          },
+          "rule_action_counts": {
+            "block": 31,
+            "reinforce": 1376,
+            "decay": 27
+          }
+        },
+        "n_interactions": 6468,
+        "placebo": {
+          "n_unfollows": 0
+        }
+      },
+      "placebo": {
+        "modularity_q": 0.44498989369153014,
+        "polarization": 0.35100954879506646,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.0,
+        "rupture_asymmetry": 0.18181818181818182,
+        "num_edges": 319.0,
+        "num_comms": 3.0,
+        "n_mutual_broken": 11.0,
+        "bridger_retention_mean": 0.6036075036075036,
+        "other_retention_mean": 0.5008459454983519,
+        "n_bridger": 5,
+        "n_interactions": 6036
+      },
+      "placebo_stats": {
+        "n_events": 0,
+        "n_valid": 0,
+        "n_invalid": 0,
+        "n_calls": 0,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 0,
+        "n_applied": 0,
+        "actions": {},
+        "rule_agreement": {
+          "n_compared": 0,
+          "n_agree": 0,
+          "confusion": {},
+          "llm_action_counts": {},
+          "rule_action_counts": {}
+        },
+        "n_interactions": 6036,
+        "placebo": {
+          "n_unfollows": 23
+        }
+      }
+    },
+    "8": {
+      "rule": {
+        "modularity_q": 0.4093712237955641,
+        "polarization": 0.30728569223922786,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.0,
+        "rupture_asymmetry": 0.0,
+        "num_edges": 269.0,
+        "num_comms": 4.0,
+        "n_mutual_broken": 5.0,
+        "bridger_retention_mean": 0.54,
+        "other_retention_mean": 0.48246755769483035,
+        "n_bridger": 5,
+        "n_interactions": 5782
+      },
+      "llm_hybrid": {
+        "modularity_q": 0.3985789312473869,
+        "polarization": 0.31461407421971466,
+        "giant_frac": 0.9833333333333333,
+        "small_comm_frac": 0.2,
+        "rupture_asymmetry": 0.0,
+        "num_edges": 274.0,
+        "num_comms": 5.0,
+        "n_mutual_broken": 5.0,
+        "bridger_retention_mean": 0.54,
+        "other_retention_mean": 0.48246755769483035,
+        "n_bridger": 5,
+        "n_interactions": 6205
+      },
+      "llm_stats": {
+        "n_events": 1800,
+        "n_valid": 1800,
+        "n_invalid": 0,
+        "n_calls": 30,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 30,
+        "n_applied": 1346,
+        "actions": {
+          "keep": 1270,
+          "mute": 48,
+          "unfollow": 27,
+          "block": 1
+        },
+        "rule_agreement": {
+          "n_compared": 1346,
+          "n_agree": 1297,
+          "confusion": {
+            "reinforce": {
+              "reinforce": 1268,
+              "block": 2
+            },
+            "decay": {
+              "block": 24,
+              "decay": 20,
+              "reinforce": 4
+            },
+            "block": {
+              "block": 9,
+              "decay": 19
+            }
+          },
+          "llm_action_counts": {
+            "reinforce": 1270,
+            "decay": 48,
+            "block": 28
+          },
+          "rule_action_counts": {
+            "reinforce": 1272,
+            "block": 35,
+            "decay": 39
+          }
+        },
+        "n_interactions": 6205,
+        "placebo": {
+          "n_unfollows": 0
+        }
+      },
+      "placebo": {
+        "modularity_q": 0.42188423239235473,
+        "polarization": 0.3148077562160843,
+        "giant_frac": 1.0,
+        "small_comm_frac": 0.2,
+        "rupture_asymmetry": 0.2857142857142857,
+        "num_edges": 247.0,
+        "num_comms": 5.0,
+        "n_mutual_broken": 7.0,
+        "bridger_retention_mean": 0.413076923076923,
+        "other_retention_mean": 0.43302919302919296,
+        "n_bridger": 5,
+        "n_interactions": 5611
+      },
+      "placebo_stats": {
+        "n_events": 0,
+        "n_valid": 0,
+        "n_invalid": 0,
+        "n_calls": 0,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 0,
+        "n_applied": 0,
+        "actions": {},
+        "rule_agreement": {
+          "n_compared": 0,
+          "n_agree": 0,
+          "confusion": {},
+          "llm_action_counts": {},
+          "rule_action_counts": {}
+        },
+        "n_interactions": 5611,
+        "placebo": {
+          "n_unfollows": 28
+        }
+      }
+    },
+    "9": {
+      "rule": {
+        "modularity_q": 0.4056459305553495,
+        "polarization": 0.3860702688323724,
+        "giant_frac": 0.9833333333333333,
+        "small_comm_frac": 0.25,
+        "rupture_asymmetry": 0.0,
+        "num_edges": 333.0,
+        "num_comms": 4.0,
+        "n_mutual_broken": 11.0,
+        "bridger_retention_mean": 0.5367676767676768,
+        "other_retention_mean": 0.5765961284860807,
+        "n_bridger": 5,
+        "n_interactions": 6844
+      },
+      "llm_hybrid": {
+        "modularity_q": 0.3762213525018965,
+        "polarization": 0.37794540751772493,
+        "giant_frac": 0.9833333333333333,
+        "small_comm_frac": 0.2,
+        "rupture_asymmetry": 0.0,
+        "num_edges": 336.0,
+        "num_comms": 5.0,
+        "n_mutual_broken": 11.0,
+        "bridger_retention_mean": 0.5582828282828283,
+        "other_retention_mean": 0.5773031991931513,
+        "n_bridger": 5,
+        "n_interactions": 6200
+      },
+      "llm_stats": {
+        "n_events": 1800,
+        "n_valid": 1800,
+        "n_invalid": 0,
+        "n_calls": 30,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 30,
+        "n_applied": 1418,
+        "actions": {
+          "keep": 1349,
+          "block": 3,
+          "mute": 38,
+          "unfollow": 28
+        },
+        "rule_agreement": {
+          "n_compared": 1418,
+          "n_agree": 1374,
+          "confusion": {
+            "reinforce": {
+              "reinforce": 1348,
+              "decay": 1
+            },
+            "block": {
+              "block": 22,
+              "decay": 8,
+              "reinforce": 1
+            },
+            "decay": {
+              "block": 27,
+              "reinforce": 7,
+              "decay": 4
+            }
+          },
+          "llm_action_counts": {
+            "reinforce": 1349,
+            "block": 31,
+            "decay": 38
+          },
+          "rule_action_counts": {
+            "reinforce": 1356,
+            "block": 49,
+            "decay": 13
+          }
+        },
+        "n_interactions": 6200,
+        "placebo": {
+          "n_unfollows": 0
+        }
+      },
+      "placebo": {
+        "modularity_q": 0.4094117935338002,
+        "polarization": 0.4113948900464218,
+        "giant_frac": 0.9833333333333333,
+        "small_comm_frac": 0.25,
+        "rupture_asymmetry": 0.0,
+        "num_edges": 303.0,
+        "num_comms": 4.0,
+        "n_mutual_broken": 11.0,
+        "bridger_retention_mean": 0.46454545454545454,
+        "other_retention_mean": 0.5076041104031536,
+        "n_bridger": 5,
+        "n_interactions": 6500
+      },
+      "placebo_stats": {
+        "n_events": 0,
+        "n_valid": 0,
+        "n_invalid": 0,
+        "n_calls": 0,
+        "n_cache_hits": 0,
+        "n_rounds_with_llm": 0,
+        "n_applied": 0,
+        "actions": {},
+        "rule_agreement": {
+          "n_compared": 0,
+          "n_agree": 0,
+          "confusion": {},
+          "llm_action_counts": {},
+          "rule_action_counts": {}
+        },
+        "n_interactions": 6500,
+        "placebo": {
+          "n_unfollows": 30
+        }
+      }
+    }
+  },
+  "arms": {
+    "rule": {
+      "modularity_q": {
+        "mean": 0.4444351712084774,
+        "ci95": 0.018236080933851054,
+        "per_seed": [
+          0.41461547164692825,
+          0.46295251260422554,
+          0.467637584197172,
+          0.4745618220534901,
+          0.4485567892584594,
+          0.44421270042830663,
+          0.46224229179817555,
+          0.4545553857471031,
+          0.4093712237955641,
+          0.4056459305553495
+        ]
+      },
+      "polarization": {
+        "mean": 0.3430563134208199,
+        "ci95": 0.0538828574311047,
+        "per_seed": [
+          0.2860753333896052,
+          0.2745684238095462,
+          0.3330398672350005,
+          0.4682635758006461,
+          0.4662772817166985,
+          0.2506886308924606,
+          0.3367484650424049,
+          0.32154559525023685,
+          0.30728569223922786,
+          0.3860702688323724
+        ]
+      },
+      "giant_frac": {
+        "mean": 0.9933333333333332,
+        "ci95": 0.006156811963305142,
+        "per_seed": [
+          0.9833333333333333,
+          1.0,
+          1.0,
+          0.9833333333333333,
+          0.9833333333333333,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.9833333333333333
+        ]
+      },
+      "small_comm_frac": {
+        "mean": 0.16666666666666666,
+        "ci95": 0.13477184978112336,
+        "per_seed": [
+          0.3333333333333333,
+          0.0,
+          0.5,
+          0.3333333333333333,
+          0.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.25
+        ]
+      },
+      "rupture_asymmetry": {
+        "mean": 0.08896825396825396,
+        "ci95": 0.07826649450407133,
+        "per_seed": [
+          0.14285714285714285,
+          0.1111111111111111,
+          0.0,
+          0.0,
+          0.0,
+          0.2857142857142857,
+          0.25,
+          0.1,
+          0.0,
+          0.0
+        ]
+      },
+      "num_comms": {
+        "mean": 3.0,
+        "ci95": 0.6744449589239768,
+        "per_seed": [
+          3.0,
+          2.0,
+          4.0,
+          3.0,
+          4.0,
+          2.0,
+          2.0,
+          2.0,
+          4.0,
+          4.0
+        ]
+      },
+      "num_edges": {
+        "mean": 317.1,
+        "ci95": 23.053417612335313,
+        "per_seed": [
+          347.0,
+          317.0,
+          253.0,
+          347.0,
+          316.0,
+          314.0,
+          333.0,
+          342.0,
+          269.0,
+          333.0
+        ]
+      },
+      "bridger_retention_mean": {
+        "mean": 0.6425522255522255,
+        "ci95": 0.05003308423882552,
+        "per_seed": [
+          0.7551282051282051,
+          0.637922077922078,
+          0.6406410256410257,
+          0.6539393939393939,
+          0.6141414141414141,
+          0.6975091575091575,
+          0.6323593073593072,
+          0.717113997113997,
+          0.54,
+          0.5367676767676768
+        ]
+      },
+      "other_retention_mean": {
+        "mean": 0.5112771681987838,
+        "ci95": 0.026459848529105365,
+        "per_seed": [
+          0.5087786500487035,
+          0.5029322281996079,
+          0.49677194018103105,
+          0.5087980617125002,
+          0.4752508097962643,
+          0.4630200859746314,
+          0.534249665960896,
+          0.5639065539332919,
+          0.48246755769483035,
+          0.5765961284860807
+        ]
+      },
+      "n_interactions": {
+        "mean": 6879.2,
+        "ci95": 762.5474065720801,
+        "per_seed": [
+          6880.0,
+          8551.0,
+          6044.0,
+          6741.0,
+          8735.0,
+          7127.0,
+          5492.0,
+          6596.0,
+          5782.0,
+          6844.0
+        ]
+      }
+    },
+    "llm_hybrid": {
+      "modularity_q": {
+        "mean": 0.4396517843061297,
+        "ci95": 0.023668545088863534,
+        "per_seed": [
+          0.41488284190180635,
+          0.47329751407956855,
+          0.46714053414403567,
+          0.47002277905847956,
+          0.4458489879666323,
+          0.4631531141712911,
+          0.45058250878536865,
+          0.43678927920483174,
+          0.3985789312473869,
+          0.3762213525018965
+        ]
+      },
+      "polarization": {
+        "mean": 0.3706420781248455,
+        "ci95": 0.03591296366834712,
+        "per_seed": [
+          0.3133365626251374,
+          0.40953448941742515,
+          0.30169160662957656,
+          0.45918458828858133,
+          0.41304571979243626,
+          0.372814108540951,
+          0.3842264363170893,
+          0.36002778789981843,
+          0.31461407421971466,
+          0.37794540751772493
+        ]
+      },
+      "giant_frac": {
+        "mean": 0.9916666666666666,
+        "ci95": 0.00628376989681696,
+        "per_seed": [
+          0.9833333333333333,
+          1.0,
+          1.0,
+          0.9833333333333333,
+          0.9833333333333333,
+          1.0,
+          1.0,
+          1.0,
+          0.9833333333333333,
+          0.9833333333333333
+        ]
+      },
+      "small_comm_frac": {
+        "mean": 0.16499999999999998,
+        "ci95": 0.10759017895834368,
+        "per_seed": [
+          0.25,
+          0.0,
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333,
+          0.0,
+          0.0,
+          0.0,
+          0.2,
+          0.2
+        ]
+      },
+      "rupture_asymmetry": {
+        "mean": 0.07785714285714285,
+        "ci95": 0.08048373466070034,
+        "per_seed": [
+          0.14285714285714285,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.2857142857142857,
+          0.25,
+          0.1,
+          0.0,
+          0.0
+        ]
+      },
+      "num_comms": {
+        "mean": 3.1,
+        "ci95": 0.8564388794429341,
+        "per_seed": [
+          4.0,
+          2.0,
+          3.0,
+          3.0,
+          3.0,
+          2.0,
+          2.0,
+          2.0,
+          5.0,
+          5.0
+        ]
+      },
+      "num_edges": {
+        "mean": 313.9,
+        "ci95": 18.189550474220344,
+        "per_seed": [
+          328.0,
+          312.0,
+          270.0,
+          300.0,
+          317.0,
+          326.0,
+          331.0,
+          345.0,
+          274.0,
+          336.0
+        ]
+      },
+      "bridger_retention_mean": {
+        "mean": 0.6414624819624819,
+        "ci95": 0.047065809734447864,
+        "per_seed": [
+          0.7551282051282051,
+          0.6197402597402597,
+          0.6406410256410257,
+          0.6539393939393939,
+          0.6449106449106449,
+          0.6775091575091575,
+          0.6073593073593073,
+          0.717113997113997,
+          0.54,
+          0.5582828282828283
+        ]
+      },
+      "other_retention_mean": {
+        "mean": 0.5092763256070321,
+        "ci95": 0.02817198181941248,
+        "per_seed": [
+          0.5087786500487035,
+          0.49043593661240736,
+          0.49677194018103105,
+          0.5128889708034092,
+          0.4783676929131474,
+          0.4492459812914358,
+          0.5325967733989124,
+          0.5639065539332919,
+          0.48246755769483035,
+          0.5773031991931513
+        ]
+      },
+      "n_interactions": {
+        "mean": 6933.1,
+        "ci95": 718.4923945948457,
+        "per_seed": [
+          7368.0,
+          8137.0,
+          6821.0,
+          6749.0,
+          8256.0,
+          7993.0,
+          5134.0,
+          6468.0,
+          6205.0,
+          6200.0
+        ]
+      }
+    },
+    "placebo": {
+      "modularity_q": {
+        "mean": 0.4456809178674499,
+        "ci95": 0.02015902059333294,
+        "per_seed": [
+          0.4033958106305209,
+          0.46254718127001415,
+          0.4687019649687473,
+          0.4949456024106973,
+          0.4571292035546046,
+          0.4397790395359834,
+          0.45402445668624636,
+          0.44498989369153014,
+          0.42188423239235473,
+          0.4094117935338002
+        ]
+      },
+      "polarization": {
+        "mean": 0.36833306748298056,
+        "ci95": 0.04928192927486328,
+        "per_seed": [
+          0.28358754370349415,
+          0.3594181006890594,
+          0.35078926432304747,
+          0.513937283887763,
+          0.4431812429010874,
+          0.3291784975139087,
+          0.3260265467538725,
+          0.35100954879506646,
+          0.3148077562160843,
+          0.4113948900464218
+        ]
+      },
+      "giant_frac": {
+        "mean": 0.9933333333333332,
+        "ci95": 0.006156811963305142,
+        "per_seed": [
+          0.9833333333333333,
+          1.0,
+          1.0,
+          0.9833333333333333,
+          1.0,
+          0.9833333333333333,
+          1.0,
+          1.0,
+          1.0,
+          0.9833333333333333
+        ]
+      },
+      "small_comm_frac": {
+        "mean": 0.16833333333333333,
+        "ci95": 0.11063004766083949,
+        "per_seed": [
+          0.3333333333333333,
+          0.0,
+          0.4,
+          0.25,
+          0.0,
+          0.25,
+          0.0,
+          0.0,
+          0.2,
+          0.25
+        ]
+      },
+      "rupture_asymmetry": {
+        "mean": 0.20643578643578642,
+        "ci95": 0.09413426151239211,
+        "per_seed": [
+          0.3333333333333333,
+          0.1111111111111111,
+          0.3333333333333333,
+          0.2,
+          0.0,
+          0.2857142857142857,
+          0.3333333333333333,
+          0.18181818181818182,
+          0.2857142857142857,
+          0.0
+        ]
+      },
+      "num_comms": {
+        "mean": 3.4,
+        "ci95": 0.8396772022973148,
+        "per_seed": [
+          3.0,
+          2.0,
+          5.0,
+          4.0,
+          2.0,
+          4.0,
+          2.0,
+          3.0,
+          5.0,
+          4.0
+        ]
+      },
+      "num_edges": {
+        "mean": 292.4,
+        "ci95": 19.704299328688748,
+        "per_seed": [
+          321.0,
+          294.0,
+          240.0,
+          304.0,
+          298.0,
+          291.0,
+          307.0,
+          319.0,
+          247.0,
+          303.0
+        ]
+      },
+      "bridger_retention_mean": {
+        "mean": 0.5758909978909978,
+        "ci95": 0.06470760231926054,
+        "per_seed": [
+          0.7084615384615385,
+          0.5768831168831168,
+          0.5852564102564102,
+          0.5524242424242425,
+          0.5401709401709403,
+          0.6821245421245422,
+          0.6323593073593072,
+          0.6036075036075036,
+          0.413076923076923,
+          0.46454545454545454
+        ]
+      },
+      "other_retention_mean": {
+        "mean": 0.4587706775118118,
+        "ci95": 0.023499316091570598,
+        "per_seed": [
+          0.4710514203562333,
+          0.4535713870205849,
+          0.43248294634658263,
+          0.45087100659293167,
+          0.44522109203927385,
+          0.4048074400347127,
+          0.48822223379710017,
+          0.5008459454983519,
+          0.43302919302919296,
+          0.5076041104031536
+        ]
+      },
+      "n_interactions": {
+        "mean": 6210.8,
+        "ci95": 575.7450262390398,
+        "per_seed": [
+          6860.0,
+          7321.0,
+          5915.0,
+          5512.0,
+          7008.0,
+          6650.0,
+          4695.0,
+          6036.0,
+          5611.0,
+          6500.0
+        ]
+      }
+    }
+  },
+  "contrasts": {
+    "llm_minus_rule": {
+      "modularity_q": {
+        "mean_diff_llm_minus_rule": -0.004783386902347681,
+        "mean_diff": -0.004783386902347681,
+        "ci95": [
+          0.009828946398390073,
+          -0.009828946398390073
+        ],
+        "p_value_paired_t": 0.2995076082172954,
+        "n_positive": 3,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          0.0002673702548781076,
+          0.010345001475343008,
+          -0.0004970500531363276,
+          -0.004539042995010567,
+          -0.002707801291827072,
+          0.018940413742984497,
+          -0.011659783012806901,
+          -0.017766106542271343,
+          -0.010792292548177207,
+          -0.029424578053453
+        ]
+      },
+      "polarization": {
+        "mean_diff_llm_minus_rule": 0.02758576470402559,
+        "mean_diff": 0.02758576470402559,
+        "ci95": [
+          0.04397967982741981,
+          -0.04397967982741981
+        ],
+        "p_value_paired_t": 0.18961398034164795,
+        "n_positive": 6,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          0.027261229235532203,
+          0.13496606560787894,
+          -0.03134826060542395,
+          -0.009078987512064762,
+          -0.05323156192426226,
+          0.12212547764849041,
+          0.047477971274684394,
+          0.03848219264958158,
+          0.007328381980486798,
+          -0.008124861314647458
+        ]
+      },
+      "giant_frac": {
+        "mean_diff_llm_minus_rule": -0.0016666666666666718,
+        "mean_diff": -0.0016666666666666718,
+        "ci95": [
+          0.0037702619380901763,
+          -0.0037702619380901763
+        ],
+        "p_value_paired_t": 0.34343639613791355,
+        "n_positive": 0,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.01666666666666672,
+          0.0
+        ]
+      },
+      "small_comm_frac": {
+        "mean_diff_llm_minus_rule": -0.0016666666666666663,
+        "mean_diff": -0.0016666666666666663,
+        "ci95": [
+          0.0691671539121848,
+          -0.0691671539121848
+        ],
+        "p_value_paired_t": 0.9577201416990279,
+        "n_positive": 2,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          -0.08333333333333331,
+          0.0,
+          -0.16666666666666669,
+          0.0,
+          0.08333333333333331,
+          0.0,
+          0.0,
+          0.0,
+          0.2,
+          -0.04999999999999999
+        ]
+      },
+      "rupture_asymmetry": {
+        "mean_diff_llm_minus_rule": -0.01111111111111111,
+        "mean_diff": -0.01111111111111111,
+        "ci95": [
+          0.025135079587267767,
+          -0.025135079587267767
+        ],
+        "p_value_paired_t": 0.34343639613791355,
+        "n_positive": 0,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          0.0,
+          -0.1111111111111111,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "num_comms": {
+        "mean_diff_llm_minus_rule": 0.1,
+        "mean_diff": 0.1,
+        "ci95": [
+          0.527836671332623,
+          -0.527836671332623
+        ],
+        "p_value_paired_t": 0.6783097418055797,
+        "n_positive": 3,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          1.0,
+          0.0,
+          -1.0,
+          0.0,
+          -1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ]
+      },
+      "num_edges": {
+        "mean_diff_llm_minus_rule": -3.2,
+        "mean_diff": -3.2,
+        "ci95": [
+          13.002976973489474,
+          -13.002976973489474
+        ],
+        "p_value_paired_t": 0.591296786922336,
+        "n_positive": 6,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          -19.0,
+          -5.0,
+          17.0,
+          -47.0,
+          1.0,
+          12.0,
+          -2.0,
+          3.0,
+          5.0,
+          3.0
+        ]
+      },
+      "n_interactions": {
+        "mean_diff_llm_minus_rule": 53.9,
+        "mean_diff": 53.9,
+        "ci95": [
+          391.9542913564437,
+          -391.9542913564437
+        ],
+        "p_value_paired_t": 0.7628221891173871,
+        "n_positive": 5,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          488.0,
+          -414.0,
+          777.0,
+          8.0,
+          -479.0,
+          866.0,
+          -358.0,
+          -128.0,
+          423.0,
+          -644.0
+        ]
+      }
+    },
+    "placebo_vs_rule": {
+      "modularity_q": {
+        "mean_diff_llm_minus_rule": 0.0012457466589724908,
+        "mean_diff": 0.0012457466589724908,
+        "ci95": [
+          0.007349941072719245,
+          -0.007349941072719245
+        ],
+        "p_value_paired_t": 0.7103121781123687,
+        "n_positive": 5,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          -0.011219661016407367,
+          -0.00040533133421138956,
+          0.0010643807715752795,
+          0.02038378035720717,
+          0.008572414296145248,
+          -0.004433660892323221,
+          -0.008217835111929195,
+          -0.009565492055572944,
+          0.012513008596790609,
+          0.003765862978450718
+        ]
+      },
+      "polarization": {
+        "mean_diff_llm_minus_rule": 0.025276754062160612,
+        "mean_diff": 0.025276754062160612,
+        "ci95": [
+          0.025674050571563585,
+          -0.025674050571563585
+        ],
+        "p_value_paired_t": 0.052942452576032646,
+        "n_positive": 7,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          -0.002487789686111075,
+          0.08484967687951317,
+          0.01774939708804696,
+          0.04567370808711696,
+          -0.02309603881561112,
+          0.07848986662144813,
+          -0.010721918288532417,
+          0.029463953544829613,
+          0.007522063976856452,
+          0.025324621214049436
+        ]
+      },
+      "giant_frac": {
+        "mean_diff_llm_minus_rule": 0.0,
+        "mean_diff": 0.0,
+        "ci95": [
+          0.005620374657699826,
+          -0.005620374657699826
+        ],
+        "p_value_paired_t": 1.0,
+        "n_positive": 1,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.01666666666666672,
+          -0.01666666666666672,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "small_comm_frac": {
+        "mean_diff_llm_minus_rule": 0.0016666666666666718,
+        "mean_diff": 0.0016666666666666718,
+        "ci95": [
+          0.10170393683562483,
+          -0.10170393683562483
+        ],
+        "p_value_paired_t": 0.9712376713109162,
+        "n_positive": 2,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          0.0,
+          0.0,
+          -0.09999999999999998,
+          -0.08333333333333331,
+          -0.25,
+          0.25,
+          0.0,
+          0.0,
+          0.2,
+          0.0
+        ]
+      },
+      "rupture_asymmetry": {
+        "mean_diff_llm_minus_rule": 0.11746753246753246,
+        "mean_diff": 0.11746753246753246,
+        "ci95": [
+          0.0906988652025341,
+          -0.0906988652025341
+        ],
+        "p_value_paired_t": 0.016762313342220263,
+        "n_positive": 6,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          0.19047619047619047,
+          0.0,
+          0.3333333333333333,
+          0.2,
+          0.0,
+          0.0,
+          0.08333333333333331,
+          0.08181818181818182,
+          0.2857142857142857,
+          0.0
+        ]
+      },
+      "num_comms": {
+        "mean_diff_llm_minus_rule": 0.4,
+        "mean_diff": 0.4,
+        "ci95": [
+          0.768985567747116,
+          -0.768985567747116
+        ],
+        "p_value_paired_t": 0.26949945378301204,
+        "n_positive": 5,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          -2.0,
+          2.0,
+          0.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "num_edges": {
+        "mean_diff_llm_minus_rule": -24.7,
+        "mean_diff": -24.7,
+        "ci95": [
+          5.663430421096321,
+          -5.663430421096321
+        ],
+        "p_value_paired_t": 4.003083887547278e-06,
+        "n_positive": 0,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          -26.0,
+          -23.0,
+          -13.0,
+          -43.0,
+          -18.0,
+          -23.0,
+          -26.0,
+          -23.0,
+          -22.0,
+          -30.0
+        ]
+      },
+      "n_interactions": {
+        "mean_diff_llm_minus_rule": -668.4,
+        "mean_diff": -668.4,
+        "ci95": [
+          404.6136063777622,
+          -404.6136063777622
+        ],
+        "p_value_paired_t": 0.004647231842145923,
+        "n_positive": 0,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          -20.0,
+          -1230.0,
+          -129.0,
+          -1229.0,
+          -1727.0,
+          -477.0,
+          -797.0,
+          -560.0,
+          -171.0,
+          -344.0
+        ]
+      }
+    },
+    "llm_vs_placebo": {
+      "modularity_q": {
+        "mean_diff_llm_minus_rule": -0.006029133561320172,
+        "mean_diff": -0.006029133561320172,
+        "ci95": [
+          0.012852186150494403,
+          -0.012852186150494403
+        ],
+        "p_value_paired_t": 0.31624137877173997,
+        "n_positive": 3,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          0.011487031271285475,
+          0.010750332809554397,
+          -0.001561430824711607,
+          -0.024922823352217738,
+          -0.01128021558797232,
+          0.023374074635307718,
+          -0.0034419479008777065,
+          -0.008200614486698399,
+          -0.023305301144967816,
+          -0.03319044103190372
+        ]
+      },
+      "polarization": {
+        "mean_diff_llm_minus_rule": 0.002309010641864978,
+        "mean_diff": 0.002309010641864978,
+        "ci95": [
+          0.030304516822816926,
+          -0.030304516822816926
+        ],
+        "p_value_paired_t": 0.8669666816196819,
+        "n_positive": 5,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          0.029749018921643278,
+          0.05011638872836577,
+          -0.04909765769347091,
+          -0.05475269559918172,
+          -0.03013552310865114,
+          0.043635611027042276,
+          0.05819988956321681,
+          0.009018239104751968,
+          -0.00019368199636965455,
+          -0.033449482528696894
+        ]
+      },
+      "giant_frac": {
+        "mean_diff_llm_minus_rule": -0.0016666666666666718,
+        "mean_diff": -0.0016666666666666718,
+        "ci95": [
+          0.006767827300893981,
+          -0.006767827300893981
+        ],
+        "p_value_paired_t": 0.5910512317836047,
+        "n_positive": 1,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.01666666666666672,
+          0.01666666666666672,
+          0.0,
+          0.0,
+          -0.01666666666666672,
+          0.0
+        ]
+      },
+      "small_comm_frac": {
+        "mean_diff_llm_minus_rule": -0.0033333333333333383,
+        "mean_diff": -0.0033333333333333383,
+        "ci95": [
+          0.10511753531291247,
+          -0.10511753531291247
+        ],
+        "p_value_paired_t": 0.9443822363953533,
+        "n_positive": 2,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          -0.08333333333333331,
+          0.0,
+          -0.06666666666666671,
+          0.08333333333333331,
+          0.3333333333333333,
+          -0.25,
+          0.0,
+          0.0,
+          0.0,
+          -0.04999999999999999
+        ]
+      },
+      "rupture_asymmetry": {
+        "mean_diff_llm_minus_rule": -0.12857864357864357,
+        "mean_diff": -0.12857864357864357,
+        "ci95": [
+          0.08587084421282853,
+          -0.08587084421282853
+        ],
+        "p_value_paired_t": 0.008034193785502908,
+        "n_positive": 0,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          -0.19047619047619047,
+          -0.1111111111111111,
+          -0.3333333333333333,
+          -0.2,
+          0.0,
+          0.0,
+          -0.08333333333333331,
+          -0.08181818181818182,
+          -0.2857142857142857,
+          0.0
+        ]
+      },
+      "num_comms": {
+        "mean_diff_llm_minus_rule": -0.3,
+        "mean_diff": -0.3,
+        "ci95": [
+          0.8294576263798362,
+          -0.8294576263798362
+        ],
+        "p_value_paired_t": 0.4343801970835002,
+        "n_positive": 3,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          1.0,
+          0.0,
+          -2.0,
+          -1.0,
+          1.0,
+          -2.0,
+          0.0,
+          -1.0,
+          0.0,
+          1.0
+        ]
+      },
+      "num_edges": {
+        "mean_diff_llm_minus_rule": 21.5,
+        "mean_diff": 21.5,
+        "ci95": [
+          8.67160245760738,
+          -8.67160245760738
+        ],
+        "p_value_paired_t": 0.0003305740632521907,
+        "n_positive": 9,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          7.0,
+          18.0,
+          30.0,
+          -4.0,
+          19.0,
+          35.0,
+          24.0,
+          26.0,
+          27.0,
+          33.0
+        ]
+      },
+      "n_interactions": {
+        "mean_diff_llm_minus_rule": 722.3,
+        "mean_diff": 722.3,
+        "ci95": [
+          356.9692365405394,
+          -356.9692365405394
+        ],
+        "p_value_paired_t": 0.0013329355222081965,
+        "n_positive": 9,
+        "n_pairs": 10,
+        "per_seed_diff": [
+          508.0,
+          816.0,
+          906.0,
+          1237.0,
+          1248.0,
+          1343.0,
+          439.0,
+          432.0,
+          594.0,
+          -300.0
+        ]
+      }
+    },
+    "modularity_q": {
+      "mean_diff_llm_minus_rule": -0.004783386902347681,
+      "ci95": [
+        0.009828946398390073,
+        -0.009828946398390073
+      ],
+      "p_value_paired_t": 0.2995076082172954,
+      "n_positive": 3,
+      "n_pairs": 10,
+      "per_seed_diff": [
+        0.0002673702548781076,
+        0.010345001475343008,
+        -0.0004970500531363276,
+        -0.004539042995010567,
+        -0.002707801291827072,
+        0.018940413742984497,
+        -0.011659783012806901,
+        -0.017766106542271343,
+        -0.010792292548177207,
+        -0.029424578053453
+      ]
+    },
+    "polarization": {
+      "mean_diff_llm_minus_rule": 0.02758576470402559,
+      "ci95": [
+        0.04397967982741981,
+        -0.04397967982741981
+      ],
+      "p_value_paired_t": 0.18961398034164795,
+      "n_positive": 6,
+      "n_pairs": 10,
+      "per_seed_diff": [
+        0.027261229235532203,
+        0.13496606560787894,
+        -0.03134826060542395,
+        -0.009078987512064762,
+        -0.05323156192426226,
+        0.12212547764849041,
+        0.047477971274684394,
+        0.03848219264958158,
+        0.007328381980486798,
+        -0.008124861314647458
+      ]
+    },
+    "giant_frac": {
+      "mean_diff_llm_minus_rule": -0.0016666666666666718,
+      "ci95": [
+        0.0037702619380901763,
+        -0.0037702619380901763
+      ],
+      "p_value_paired_t": 0.34343639613791355,
+      "n_positive": 0,
+      "n_pairs": 10,
+      "per_seed_diff": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.01666666666666672,
+        0.0
+      ]
+    },
+    "small_comm_frac": {
+      "mean_diff_llm_minus_rule": -0.0016666666666666663,
+      "ci95": [
+        0.0691671539121848,
+        -0.0691671539121848
+      ],
+      "p_value_paired_t": 0.9577201416990279,
+      "n_positive": 2,
+      "n_pairs": 10,
+      "per_seed_diff": [
+        -0.08333333333333331,
+        0.0,
+        -0.16666666666666669,
+        0.0,
+        0.08333333333333331,
+        0.0,
+        0.0,
+        0.0,
+        0.2,
+        -0.04999999999999999
+      ]
+    },
+    "rupture_asymmetry": {
+      "mean_diff_llm_minus_rule": -0.01111111111111111,
+      "ci95": [
+        0.025135079587267767,
+        -0.025135079587267767
+      ],
+      "p_value_paired_t": 0.34343639613791355,
+      "n_positive": 0,
+      "n_pairs": 10,
+      "per_seed_diff": [
+        0.0,
+        -0.1111111111111111,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "num_comms": {
+      "mean_diff_llm_minus_rule": 0.1,
+      "ci95": [
+        0.527836671332623,
+        -0.527836671332623
+      ],
+      "p_value_paired_t": 0.6783097418055797,
+      "n_positive": 3,
+      "n_pairs": 10,
+      "per_seed_diff": [
+        1.0,
+        0.0,
+        -1.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ]
+    },
+    "num_edges": {
+      "mean_diff_llm_minus_rule": -3.2,
+      "ci95": [
+        13.002976973489474,
+        -13.002976973489474
+      ],
+      "p_value_paired_t": 0.591296786922336,
+      "n_positive": 6,
+      "n_pairs": 10,
+      "per_seed_diff": [
+        -19.0,
+        -5.0,
+        17.0,
+        -47.0,
+        1.0,
+        12.0,
+        -2.0,
+        3.0,
+        5.0,
+        3.0
+      ]
+    },
+    "n_interactions": {
+      "mean_diff_llm_minus_rule": 53.9,
+      "ci95": [
+        391.9542913564437,
+        -391.9542913564437
+      ],
+      "p_value_paired_t": 0.7628221891173871,
+      "n_positive": 5,
+      "n_pairs": 10,
+      "per_seed_diff": [
+        488.0,
+        -414.0,
+        777.0,
+        8.0,
+        -479.0,
+        866.0,
+        -358.0,
+        -128.0,
+        423.0,
+        -644.0
+      ]
+    }
+  },
+  "llm_stats_total": {
+    "n_events": 18000,
+    "n_valid": 18000,
+    "n_invalid": 0,
+    "n_calls": 300,
+    "n_cache_hits": 0,
+    "n_rounds_with_llm": 300,
+    "n_applied": 13443,
+    "n_interactions": 69331,
+    "actions": {
+      "keep": 12773,
+      "mute": 428,
+      "unfollow": 233,
+      "block": 9
+    }
+  },
+  "llm_coverage": {
+    "llm_asked_events": 18000,
+    "llm_decided_events": 13443,
+    "engine_interactions_llm_arm": 69331,
+    "coverage_of_interactions": 0.1938959484213411,
+    "parse_success_rate": 1.0,
+    "action_distribution": {
+      "keep": 12773,
+      "mute": 428,
+      "unfollow": 233,
+      "block": 9
+    },
+    "rule_agreement": {
+      "n_compared": 13443,
+      "n_agree": 12973,
+      "confusion": {
+        "reinforce": {
+          "reinforce": 12717,
+          "block": 46,
+          "decay": 10
+        },
+        "decay": {
+          "decay": 128,
+          "block": 255,
+          "reinforce": 45
+        },
+        "block": {
+          "block": 128,
+          "decay": 109,
+          "reinforce": 5
+        }
+      },
+      "llm_action_counts": {
+        "reinforce": 12773,
+        "decay": 428,
+        "block": 242
+      },
+      "rule_action_counts": {
+        "reinforce": 12767,
+        "decay": 247,
+        "block": 429
+      },
+      "agreement_rate": 0.9650375660194896,
+      "cohen_kappa": 0.6375473960728372,
+      "rule_block_events": 429,
+      "rule_decay_events": 247,
+      "rule_severe_events": 676,
+      "severe_agreement": 256,
+      "severe_agreement_rate": 0.378698224852071
+    }
+  },
+  "llm_ledger": {
+    "api_calls": 300,
+    "cache_hits": 0,
+    "shards": 10,
+    "note": "per-seed shards; each shard's calls are distinct API requests",
+    "totals": {
+      "input_tokens": 1850769,
+      "output_tokens": 2316755,
+      "thinking_tokens": 1632909
+    },
+    "distinct_requests_in_experiment": 300
+  },
+  "placebo": {
+    "n_unfollows_per_seed": [
+      19.0,
+      22.0,
+      27.0,
+      25.0,
+      20.0,
+      25.0,
+      22.0,
+      23.0,
+      28.0,
+      30.0
+    ]
+  }
+}

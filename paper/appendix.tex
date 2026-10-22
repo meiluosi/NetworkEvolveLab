@@ -496,31 +496,40 @@ the LLM decision with the rule counterfactual on the same event. Generated from
 \label{app:llm-highcov}
 
 The archived Phase~6 arm covers \LlmArmCoverage{} of realised interactions, so its structural
-null could be a coverage artifact. To test this, we rerun the same paired design with 60
-events per round (10 seeds, \LlmHighCovApiCalls{} fresh calls; \LlmHighCovInputTokens{} input and \LlmHighCovOutputTokens{} output tokens; MiniMax-M3 with thinking disabled) and reach
-\LlmHighCovCoverage{} applied coverage. The structural answer is unchanged: modularity changes
-by \LlmHighCovQDelta{} (paired $t$, $p=\LlmHighCovQP$) and rupture asymmetry by
-\LlmHighCovRupDelta{} ($p=\LlmHighCovRupP$); the placebo arm differs from rule by
-\LlmHighCovPlaceboQDelta. Behavioural agreement, however, degrades: Cohen's
-$\kappa=\LlmHighCovKappa$ and agreement on rule-severe events is \LlmHighCovSevereRate, so the
-language layer is not a drop-in copy of the rule. The pilot uses one model and no human
-validation, and MiniMax-M3.1-Flash was not rerun at this coverage because its adaptive
-thinking budget consumes the JSON response at high event counts; the archived arm remains
-the receipt-complete reference. Table~\ref{tab:llm_highcov} reports both settings; the two rows differ in both model
-and event budget, so they measure coverage sensitivity rather than a controlled model effect.
-No second independent model family was available: the DeepSeek chat model used by the
-authors is not exposed as an API to this repository, and the two MiniMax variants are the
-same family. We therefore report the MiniMax-M3 high-coverage arm and the archived
-MiniMax-M3.1-Flash arm separately and do not estimate a cross-family model effect. No human validation of individual actions was performed; the sampling and
-annotation protocol is documented in the repository but is not presented as a result.
+null could be a coverage artifact. We therefore rerun the paired design with 60 events per
+round and 10 seeds, and add a second, independent model family. The MiniMax-M3 arm makes
+\LlmHighCovApiCalls{} fresh calls (\LlmHighCovInputTokens{} input, \LlmHighCovOutputTokens{}
+output tokens) and reaches \LlmHighCovCoverage{} applied coverage; it changes modularity by
+\LlmHighCovQDelta{} ($p=\LlmHighCovQP$) and rupture asymmetry by \LlmHighCovRupDelta{}
+($p=\LlmHighCovRupP$), with placebo difference \LlmHighCovPlaceboQDelta. Its action agreement
+falls to $\kappa=\LlmHighCovKappa$ and \LlmHighCovSevereRate{} on rule-severe events.
+
+The DeepSeek-flash arm uses the same 10 seeds and 60 events per round, makes
+\LlmDeepSeekApiCalls{} calls (\LlmDeepSeekInputTokens{} input, \LlmDeepSeekOutputTokens{}
+output tokens including reasoning), parses \emph{all} decisions after raising the output cap
+to 16k, and reaches \LlmDeepSeekCoverage{} applied coverage. It also changes neither
+modularity ($\Delta Q=\LlmDeepSeekQDelta$, $p=\LlmDeepSeekQP$) nor rupture asymmetry
+($\Delta A=\LlmDeepSeekRupDelta$, $p=\LlmDeepSeekRupP$); the placebo difference is
+\LlmDeepSeekPlaceboQDelta. Its action policy is closer to the rule backend
+($\kappa=\LlmDeepSeekKappa$, severe-event agreement \LlmDeepSeekSevereRate). The two families
+therefore differ in how often they copy the rule, but not in the structural effect.
+
+Caveats: both are provider models, not open-weight; the DeepSeek arm spends reasoning tokens
+and required a larger output cap; MiniMax-M3.1-Flash was not rerun at this coverage because
+its adaptive thinking budget truncates the JSON response at high event counts; no human
+validation of individual actions was performed. Table~\ref{tab:llm_highcov} reports all
+three settings and the archived low-coverage reference; the low-coverage rows differ in both
+model and event budget, so they are not a controlled model comparison.
 
 \begin{table*}[t]
 \centering
 \small
-\caption{\textbf{Coverage sensitivity of the Phase~6 structural null.} The archived arm runs
-at 2.5\% coverage with MiniMax-M3.1-Flash; the high-coverage pilot raises the event budget
-and uses MiniMax-M3 (thinking disabled). Both are paired by seed against the rule backend.
-Generated from \texttt{results/phase6\_highcov\_60\_m3.json} by
+\caption{\textbf{Coverage and model sensitivity of the Phase~6 structural null.} The
+archived arm runs at 2.5\% coverage with MiniMax-M3.1-Flash; the high-coverage arms use
+MiniMax-M3 and DeepSeek-flash at 60 events/round. All are paired by seed against the rule
+backend. Generated from \texttt{results/phase6\_llm\_engine.json},
+\texttt{results/phase6\_highcov\_60\_m3.json}, and
+\texttt{results/phase6\_highcov\_60\_deepseek\_flash.json} by
 \texttt{scripts/generate\_paper\_tables.py}.}
 \label{tab:llm_highcov}
 \input{tables/llm_highcov}
@@ -540,12 +549,12 @@ Six limitations are material.
     \item \textbf{Scale of the real-LLM arm.} The receipt-complete Phase~6 arm
     (\LlmArmSeeds{} seeds, \LlmArmDecidedEvents{} LLM-decided interactions,
     \LlmArmApiCalls{} API calls with full token accounting) runs at
-    \LlmArmCoverage{} interaction coverage; a 10-seed pilot raises coverage to
-    \LlmHighCovCoverage{} ($\Delta Q=\LlmHighCovQDelta$, $p=\LlmHighCovQP$) and still finds
-    no structural effect, but it uses a single model (MiniMax-M3) and no human validation
-    of individual actions. The random-unfollow placebo and per-event agreement audits
-    (Appendix~\ref{app:llm-placebo}) bound the noise floor; the high-coverage pilot is in
-    Appendix~\ref{app:llm-highcov}.
+    \LlmArmCoverage{} interaction coverage. Two 10-seed high-coverage arms
+    (MiniMax-M3 at \LlmHighCovCoverage{}, DeepSeek-flash at \LlmDeepSeekCoverage{}) still
+    find no structural effect, but both are provider models, the DeepSeek arm spends
+    reasoning tokens, and no human validation of individual actions was performed. The
+    random-unfollow placebo and per-event agreement audits (Appendix~\ref{app:llm-placebo})
+    bound the noise floor; the high-coverage arms are in Appendix~\ref{app:llm-highcov}.
     \item \textbf{Scope of the attribution ablation.} The ablation spans $d \in \{1,3\}$ and
     a 10-arm factorial combination of synchronous, asynchronous uniform-speaker, and
     asynchronous weighted-speaker schedules. The results demonstrate that asynchronous

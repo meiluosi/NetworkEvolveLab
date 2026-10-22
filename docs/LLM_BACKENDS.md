@@ -75,13 +75,13 @@ the provenance manifest when the experiment is recorded.
 set -a; . ~/.config/network_evolve/deepseek.env; set +a
 python scripts/run_phase6_parallel.py \
   --seeds 10 --jobs 5 --rounds 30 --nodes 60 --llm-events 60 \
-  --model deepseek-chat --max-tokens 8192 --thinking-budget 0 \
+  --model deepseek-flash --max-tokens 16384 --thinking-budget 0 \
   --budget-calls 400 \
   --out results/phase6_highcov_60_deepseek.json \
   --shard-dir results/phase6_highcov_60_deepseek_shards
 ```
 
-This makes 300 batched calls. DeepSeek's rate limits/cost are provider-side;
+This makes 300 batched calls. DeepSeek's rate limits/cost are provider-side; 16k output is required because the model emits reasoning tokens before the JSON;
 the script shards by seed and writes one JSON per seed, then merges the paired
 statistics. Do not use `deepseek-reasoner` for the main arm without checking
 that its response JSON is not truncated; `deepseek-chat` is the
