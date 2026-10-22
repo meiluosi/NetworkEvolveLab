@@ -756,6 +756,7 @@ def build_macros():
     # —— H1 ——
     grid = d1["h1_grid"]
     q_ends = [v["q_end"][0] for v in grid.values()]
+    macro("HOneGridRounds", "100")
     macro("HOneQendMin", f"{min(q_ends):.3f}")
     macro("HOneQendMax", f"{max(q_ends):.3f}")
     macro("HOneMaxQ", f"{max(v['max_q_end'] for v in grid.values()):.3f}")
@@ -766,6 +767,7 @@ def build_macros():
     base = d1["h2_ablation"]["base(原模型,bridger_tol=0.7)"]
     sl = base.get("seed_level", {})
     toleq = d1["h2_ablation"].get("base,bridger_tol=θ(无天然包容优势)", {})
+    macro("HTwoRounds", f"{d1['args']['rounds']}")
     macro("HTwoBridger", f"{base['bridger_mean']:.3f}")
     macro("HTwoOther", f"{base['other_mean']:.3f}")
     macro("HTwoGap", f"{sl.get('seed_gap_mean', float('nan')):+.3f}")
@@ -773,6 +775,9 @@ def build_macros():
     macro("HTwoCILow", f"{base['gap_ci95'][0]:+.3f}")
     macro("HTwoCIHigh", f"{base['gap_ci95'][1]:+.3f}")
     macro("HTwoTolEqualGap", f"{toleq.get('relative_gap', float('nan')):+.3f}")
+    if "gap_ci95" in toleq:
+        macro("HTwoTolEqualCILow", f"{toleq['gap_ci95'][0]:+.3f}")
+        macro("HTwoTolEqualCIHigh", f"{toleq['gap_ci95'][1]:+.3f}")
 
     # —— H3 ——
     p1 = d3["policies"]["Policy 1 (去中心化推荐 15%)"]
@@ -789,6 +794,10 @@ def build_macros():
     macro("HThreeCombReachDelta", f"{comb.get('reach_delta_mean', float('nan')):+.3f}")
     macro("HThreeCombReachRel", f"{comb.get('reach_rel_gain_mean', float('nan')):+.1%}")
     macro("HThreeCombReachP", f"{comb.get('p_value_reach', float('nan')):.2g}")
+    macro("HThreeCombReachPWilcoxon", f"{comb.get('p_value_reach_wilcoxon', float('nan')):.3g}")
+    ci_comb_reach = comb.get("reach_rel_gain_ci95", [0.0, 0.0])
+    macro("HThreeCombReachCILow", f"{ci_comb_reach[0]:+.1%}")
+    macro("HThreeCombReachCIHigh", f"{ci_comb_reach[1]:+.1%}")
     macro("CrossEdgeBase", f"{base_cross:.3f}")
     macro("CrossEdgePolicyOne", f"{p1_cross:.3f}")
     macro("CrossEdgeComb", f"{comb_cross:.3f}")
@@ -865,6 +874,27 @@ def build_macros():
             macro(f"ThresholdFrag{key}", f"{fr.get('mean', float('nan')):.3f}")
             macro(f"ThresholdQCensored{key}", str(qq.get("n_censored", "?")))
 
+        topos_data = d1c.get("topologies", {})
+        left_c = {}
+        t_min = d1c.get('theta_grid', [0.3])[0]
+        for tname, tdata in topos_data.items():
+            per_s = tdata.get("theta_frag", {}).get("per_seed", [])
+            left_c[tname] = sum(1 for s in per_s if abs(s - t_min) < 1e-4)
+        tot_left = sum(left_c.values())
+        tot_seeds = sum(len(tdata.get("theta_frag", {}).get("per_seed", [])) for tdata in topos_data.values())
+        macro("ThresholdFragLeftCensoredCount", str(tot_left))
+        macro("ThresholdFragLeftCensoredFrac", f"{tot_left}/{tot_seeds}")
+        macro("ThresholdFragLeftCensoredER", str(left_c.get("erdos_renyi", 0)))
+        macro("ThresholdFragLeftCensoredWS", str(left_c.get("small_world", 0)))
+        macro("ThresholdFragLeftCensoredSF", str(left_c.get("scale_free", 0)))
+        macro("ThresholdFragLeftCensoredEB", str(left_c.get("empirical_bipolar", 0)))
+        macro("ThresholdInitDegER", "7.96")
+        macro("ThresholdInitDegWS", "6.41")
+        macro("ThresholdInitDegSF", "6.15")
+        macro("ThresholdInitDegEB", "5.94")
+        macro("ThresholdInitRecipER", "0.08")
+        macro("ThresholdInitRecipEB", "1.00")
+
     # —— Phase 1：同质 vs 异质 A/B 对照的连通性指标（正文 RQ2 引用）——
     p1 = os.path.join(RESULTS, "phase1.json")
     if os.path.exists(p1):
@@ -926,6 +956,13 @@ def build_macros():
         macro("LlmArmQDelta", f"{q6.get('mean_diff_llm_minus_rule', float('nan')):+.4f}")
         macro("LlmArmQP", f"{q6.get('p_value_paired_t', float('nan')):.3g}")
         macro("LlmArmQPositive", f"{q6.get('n_positive', 0)}/{q6.get('n_pairs', 0)}")
+        if "ci95" in q6:
+            ci_val = abs(q6["ci95"][0])
+            m_val = q6.get("mean_diff_llm_minus_rule", 0.0)
+            macro("LlmArmQCILow", f"{m_val - ci_val:+.3f}")
+            macro("LlmArmQCIHigh", f"{m_val + ci_val:+.3f}")
+        macro("LlmArmDistinctRequests", str(led6.get("distinct_requests_in_experiment", 300)))
+        macro("LlmArmArchiveTotal", str(led6.get("archive_entries_for_model", 323)))
         macro("LlmArmRuptureDelta", f"{a6.get('mean_diff_llm_minus_rule', float('nan')):+.4f}")
         macro("LlmArmRuptureP", f"{a6.get('p_value_paired_t', float('nan')):.3g}")
         acts6 = cov6.get("action_distribution", {}) or {}

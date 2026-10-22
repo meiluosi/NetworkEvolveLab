@@ -44,7 +44,7 @@ flowchart LR
 
 ---
 
-## 预注册假说与判定指标（Pre-registered Criteria）
+## 预先设定假说与判定指标（Pre-specified Criteria）
 
 | 假说 | 验证内容 | 判定标准 | 结论 |
 | :--- | :--- | :--- | :--- |

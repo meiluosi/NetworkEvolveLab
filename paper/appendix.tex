@@ -379,7 +379,9 @@ global weak reachability ($\text{Giant Frac} = \PhaseOneHeteroGiant$, cross-edge
 
 We therefore report all three criteria with their censoring counts rather than a single
 preferred number, and we make no claim that the critical tolerance is a topology-independent
-constant. The measurement that \emph{is} robust is its topology dependence.
+constant. Furthermore, attributing cross-graph variation solely to macroscopic topology is
+complicated by initial density and reciprocity confounds as well as \ThresholdFragLeftCensoredFrac{}
+left-censoring at the $\theta=0.30$ grid floor.
 
 % =============================================================
 \section{Limitations, in Full}
@@ -398,11 +400,14 @@ Six limitations are material.
     archived artifacts. The receipt-complete Phase~6 arm (\LlmArmSeeds{} seeds,
     \LlmArmDecidedEvents{} LLM-decided interactions, \LlmArmApiCalls{} API calls with full
     token accounting) is larger, but its \emph{interaction coverage} is only
-    \LlmArmCoverage{}, which bounds the effect size any such arm can detect.
+    \LlmArmCoverage{}, yielding an estimated difference of $\Delta Q \in [\LlmArmQCILow, \LlmArmQCIHigh]$
+    (95\% CI; paired $A_{\mathrm{rupture}}$ differences exhibit zero sample variance across all 10 seeds),
+    which bounds the effect size any such arm can detect.
     \item \textbf{Scope of the attribution ablation.} The ablation spans $d \in \{1,3\}$ and
-    two update schedules; Proposition~\ref{prop:asym} remains an existence statement, and the
-    ablation establishes that the anisotropic mechanism is active in the measured regime
-    rather than proving it for all $d \geq 2$.
+    two update schedules, where the asynchronous schedule incorporates archetype-weighted
+    speaker frequencies alongside timing; Proposition~\ref{prop:asym} remains an existence
+    statement, and the ablation establishes that the anisotropic mechanism is active in the
+    measured regime rather than proving it for all $d \geq 2$.
     \item \textbf{Resolution of the reach metric.} The reach metric is a seeded
     independent-cascade estimate whose variance across seeds is large relative to the policy
     effects we report, which limits the resolution of RQ3.
@@ -410,12 +415,14 @@ Six limitations are material.
     produce asymmetric rupture is only valid under synchronous evaluation; we have quantified
     the asynchronous contribution rather than removed it.
     \item \textbf{Criterion dependence.} The critical-tolerance estimate is
-    \emph{criterion-dependent}: the connectivity-recovery criterion
-    ($\theta^*_{\mathrm{frag}}$) and the polarization-collapse criterion ($\theta^*_{\Pi}$)
-    disagree, and the modularity-collapse criterion is right-censored for
+    \emph{criterion-dependent} and entangled with initial density and reciprocity: the
+    connectivity-recovery criterion ($\theta^*_{\mathrm{frag}}$) and the
+    polarization-collapse criterion ($\theta^*_{\Pi}$) disagree, and the modularity-collapse
+    criterion is right-censored for
     \ThresholdQCensoredSmallWorld{}/\ThresholdQCensoredEmpiricalBipolar{} of
     \ThresholdSeeds{} seeds in the small-world and empirical-bipolar topologies because
-    residual community structure keeps modularity above the collapse level.
+    residual community structure keeps modularity above the collapse level, while
+    \ThresholdFragLeftCensoredFrac{} of estimates are left-censored at $\theta=0.30$.
 \end{enumerate}
 
 All software, benchmark loaders, cached real-data subgraphs, figure scripts, and
@@ -442,9 +449,9 @@ Three specific misuse and harm channels deserve naming.
     an actor who can sever one side of a reciprocal tie without reciprocal severance can
     polarize a community while every public graph metric still looks healthy.
     \item \textbf{Efficiency results read as prescriptions.} The counterfactual platform
-    policies are efficiency results, not prescriptions --- our own policy arms show that two
-    of the three pre-specified interventions fail their criteria, and a reader who treats
-    the surviving arm as a recommendation would be over-reading the evidence.
+    policies are efficiency results, not prescriptions --- our own policy arms show that all
+    tested individual interventions fail the pre-specified conjunction threshold, and a reader who treats
+    the partial modularity reduction as a prescription would be over-reading the evidence.
     \item \textbf{Surrogates cited as populations.} The surrogate benchmarks are calibrated to
     published statistics but are \emph{not} the datasets they are named after; citing them as
     measurements of any real population would be a category error.
