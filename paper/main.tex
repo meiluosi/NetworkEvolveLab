@@ -1,29 +1,86 @@
-\documentclass[10pt,twocolumn,letterpaper]{article}
+% -------------------------------------------------------------
+% Target venue: ICWSM (International Conference on Web and Social Media)
+%
+% ICWSM is published by AAAI Press and uses the AAAI submission format, so the
+% style files below are the official AAAI-25 ones, vendored **verbatim** from
+% the AAAI Author Kit into paper/venue/.  DO NOT EDIT aaai25.sty / aaai25.bst.
+%
+% AAAI format rules that this document obeys:
+%   * no geometry / hyperref / microtype / xcolor (aaai25.sty errors out on
+%     hyperref; AAAI forbids embedded links and coloured body text);
+%   * Times + Helvetica + Courier via times/helvet/courier;
+%   * no page numbers, no \pagestyle, no \vspace{-...} near floats;
+%   * single-file source for submission -> scripts/build_submission.py flattens
+%     the \input{} fragments (auto-generated tables included) into one .tex.
+%
+% PAGE BUDGET (ICWSM 2026): the body plus the reference list must fit in 11
+% pages; the Paper Checklist and the appendices do NOT count towards that limit
+% (https://www.icwsm.org/2026/submit.html).  Everything that is derivation,
+% enumeration or per-cell detail rather than a claim has therefore been moved
+% into paper/appendix.tex, and the reference list is set in \small, which the
+% AAAI formatting instructions permit explicitly for the references section
+% ("you may reduce the size to \small (9pt) if your paper exceeds the allowable
+% number of pages").  scripts/check_paper_integrity.py and
+% scripts/check_page_budget.py keep both properties from regressing.
+% -------------------------------------------------------------
+\documentclass[letterpaper]{article}
 
-% -------------------------------------------------------------
-% Core Packages
-% -------------------------------------------------------------
-\usepackage[margin=0.75in]{geometry}
+% --- The following must appear in the preamble (AAAI format, do not change) ---
+\usepackage{aaai25}
 \usepackage{times}
-\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage[hyphens]{url}
 \usepackage{graphicx}
+\urlstyle{rm}
+\def\UrlFont{\rm}
+\usepackage{natbib}
+\usepackage{caption}
+\frenchspacing
+\setlength{\pdfpagewidth}{8.5in}
+\setlength{\pdfpageheight}{11in}
+% \pdfinfo is a pdfTeX primitive. The AAAI template requires this block for
+% pdfLaTeX submission builds; Tectonic drives XeTeX, where the primitive does
+% not exist, so it is guarded instead of breaking the local build.
+\ifdefined\pdfinfo
+\pdfinfo{
+/TemplateVersion (2025.1)
+}
+\fi
+
+% --- Mathematics, tables and theorem environments ---
+\usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
 \usepackage{multirow}
-\usepackage{url}
-\usepackage{hyperref}
-\usepackage{xcolor}
-\usepackage{microtype}
-\usepackage[round]{natbib}
+
+% AAAI's default is 0 (unnumbered sections); 2 is permitted and keeps the
+% many cross-references in this paper meaningful.
+\setcounter{secnumdepth}{2}
 
 % -------------------------------------------------------------
-% Hyperref Setup
+% Float placement parameters
+%
+% AAAI's format rules forbid changing margins, font sizes and line spacing;
+% the counters below change only **where a float is placed on a page**, not
+% any dimension of the layout.  They are needed here because ICWSM's 11-page
+% limit forces a body containing several double-column floats (figure*/table*).
+% LaTeX can only put a double-column float at the top of a page, so when one
+% is pending it ends the current page at the next column boundary -- which
+% leaves part of that page blank.  Relaxing the "how much of a page may be
+% floats" ratios lets the double-column floats stack at the top of a page
+% instead, recovering the blank space without altering a single typeface,
+% margin or baseline.
 % -------------------------------------------------------------
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue!70!black,
-    citecolor=blue!70!black,
-    urlcolor=blue!70!black
-}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\floatpagefraction}{0.7}
+\renewcommand{\dbltopfraction}{0.9}
+\renewcommand{\dblfloatpagefraction}{0.7}
+\setcounter{topnumber}{3}
+\setcounter{dbltopnumber}{3}
+\setcounter{totalnumber}{5}
+\setcounter{bottomnumber}{2}
 
 % -------------------------------------------------------------
 % Theorem Environments
@@ -35,27 +92,67 @@
 \newtheorem{remark}{Remark}
 
 % -------------------------------------------------------------
+% Auto-generated quantitative macros (numbers come from the frozen
+% result JSONs via scripts/generate_paper_tables.py -- never edit)
+% -------------------------------------------------------------
+\input{tables/macros}
+
+% -------------------------------------------------------------
+% Double-Blind Anonymization Toggle
+% Set \anonymizedtrue for double-blind submission (ICWSM default);
+% Set \anonymizedfalse for camera-ready / preprint / arXiv versions.
+% -------------------------------------------------------------
+\newif\ifanonymized
+\anonymizedtrue
+
+% -------------------------------------------------------------
 % Title and Authors
 % -------------------------------------------------------------
-\title{\textbf{Co-evolution of Large Language Model Cognition and Dynamic Social Topology: Asymmetric Rupture Dynamics and Counterfactual Platform Interventions}}
+\title{Co-Evolution of Large Language Model Cognition and Dynamic Social Topology:
+Asymmetric Rupture Dynamics and Counterfactual Platform Interventions}
 
+\ifanonymized
 \author{
-  \textbf{NetworkEvolveLab Collaboration}\thanks{Correspondence to: \texttt{meiluosi@users.noreply.github.com}. Open-source repository: \url{https://github.com/meiluosi/NetworkEvolveLab}.} \\
-  Computational Social Science and Complex Systems Laboratory
+  Anonymous ICWSM Submission
 }
-
-\date{\today}
+\affiliations{
+  Paper ID: \textbf{ICWSM-2026-SubID}\\
+  Affiliations and correspondence withheld for double-blind review
+}
+\else
+\author{
+  NetworkEvolveLab Collaboration
+}
+\affiliations{
+  Computational Social Science and Complex Systems Laboratory\\
+  Correspondence: meiluosi@users.noreply.github.com
+}
+\fi
 
 \begin{document}
 
 \maketitle
 
 % -------------------------------------------------------------
-% Abstract
+% Abstract  (AAAI limit: 250 words)
 % -------------------------------------------------------------
 \begin{abstract}
-Traditional computational opinion dynamics model information transmission as a passive diffusion process over fixed, static graph topologies. Here, we present a closed-loop framework where cognitive updates by Large Language Model (LLM) agents actively reshape social connectivity via selective unfollowing and blocking, while evolving topologies reciprocally constrain exposure. We formalize this co-evolutionary system and evaluate it across five gold-standard empirical datasets (\textsc{Debate} NeurIPS 2024, Stanford Network Analysis Platform (SNAP) Higgs Twitter, Twitter 2020 US Election, Reddit ConvoKit, and Birdwatch Notes) against six baseline frameworks ranging from classical bounded confidence to unstructured generative agents. Our experimental findings establish three core results: (1) We prove analytically and verify empirically that Newman modularity for bipolar partitioned networks cannot exceed $Q \leq 0.500$, falsifying common heuristic expectations of unbounded modularity growth ($Q > 0.65$); (2) Microscopic semantic interactions generate non-trivial asymmetric ruptures ($A_{\mathrm{rupture}} \in [0.78, 1.00]$), where unilateral ties persist due to multi-dimensional alignment on secondary issues, contrasting sharply with the artificial symmetry ($A_{\mathrm{rupture}} = 0$) and over-fragmentation of scalar bounded-confidence models; and (3) Pre-registered ablation tests falsify the structural fragility hypothesis of boundary-spanning bridgers, showing instead that bridgers exhibit higher edge retention rates ($0.66 \sim 0.79$) than peripheral nodes ($0.51 \sim 0.74$), providing topological resilience against network bisection. Finally, counterfactual platform governance experiments reveal a strict monotonic dose-response between diversified recommendation exposure $\rho_{\mathrm{div}}$ and modularity reduction ($\Delta Q \approx -0.014$ per 5\% cross-cutting exposure), tripling cross-camp connectivity.
+Opinion dynamics models information transmission as passive diffusion over fixed graphs. We present a closed-loop framework in which cognitive updates by Large Language Model (LLM) agents actively reshape social connectivity through selective unfollowing and blocking, while evolving topologies reciprocally constrain exposure. We formalize this system and evaluate it on five surrogate networks calibrated to published statistics plus one genuinely empirical network from the public SNAP Higgs edge list (14.8M edges), against six reference frameworks from bounded confidence to unstructured generative agents. Three findings emerge. (1) We generalize the Newman modularity bound to arbitrary $K$-community partitions, $Q \le 1-1/K$, and exhaustively audit that every reported modularity satisfies it: the pre-registered $Q>0.65$ threshold needs $K \ge 3$, whereas our engine realizes a bipolar partition in \AuditMinBipolarFrac--\AuditMeanBipolarFrac{} of runs and at most a tripartite one ($K \le \AuditEngineMaxK$) with $Q \le \HOneMaxQ$, falsifying H1 on measurable grounds rather than assuming a universal cap. (2) A controlled attribution ablation separates the two sources of asymmetric rupture: under synchronous scheduling both scalar bounded confidence and isotropic multi-dimensional models break strictly symmetrically ($A_{\mathrm{rupture}} \equiv 0$), per-agent anisotropic semantic criteria produce genuine unilateral severance ($\ARupAnisoSync$), and asynchronous scheduling alone manufactures asymmetry in a purely scalar model ($\ARupScalarAsync$, $\Delta A = \ScheduleEffect$, $p = \ScheduleEffectP$). (3) Platform governance yields a strictly monotonic dose-response between diversified recommendation and modularity reduction ($\HThreeDeltaQ$ at $\rho_{\mathrm{div}}=0.15$), but the pre-registered H3 conjunction is not met, indicating homophilic inertia. Two further results bound the framework's scope: a real LLM mounted in the flagship engine changes no structural regime at \LlmArmCoverage{} interaction coverage, and naive scaling to $N=1000$ collapses modularity to $\ScalingFixedPBigQ$ purely as a density artefact, whereas density-matched scaling holds $Q$ at $\ScalingBigQ$.
 \end{abstract}
+
+\ifanonymized
+\begin{links}
+  \link{Code and frozen results}{https://anonymous.4open.science/r/NetworkEvolveLab}
+  \link{LLM call receipts}{https://anonymous.4open.science/r/NetworkEvolveLab-data}
+  \link{Reproducibility audit report}{https://anonymous.4open.science/r/NetworkEvolveLab-audit}
+\end{links}
+\else
+\begin{links}
+  \link{Code and frozen results}{https://github.com/meiluosi/NetworkEvolveLab}
+  \link{LLM call receipts (content-addressed archive)}{https://github.com/meiluosi/NetworkEvolveLab/tree/main/data/llm_archive}
+  \link{Reproducibility audit report}{https://github.com/meiluosi/NetworkEvolveLab/blob/main/docs/ARS_FULL_CHAIN_AUDIT.md}
+\end{links}
+\fi
 
 \noindent\textbf{Keywords:} LLM Multi-Agent Simulation, Dynamic Social Networks, Topological Phase Transition, Polarization, Platform Governance.
 
@@ -65,172 +162,133 @@ Traditional computational opinion dynamics model information transmission as a p
 \section{Introduction}
 \label{sec:intro}
 
-The emergence of ideological polarization and segregated echo chambers across online platforms poses profound challenges to democratic deliberation and epistemic trust \citep{bail2018exposure,bakshy2015exposure,dandekar2013biased,centola2010spread}. A longstanding limitation in computational social science is the bifurcation between two distinct modeling traditions:
-\begin{enumerate}[leftmargin=*]
-    \item \textbf{Mathematical Opinion Dynamics}: Models such as DeGroot linear averaging \citep{degroot1974reaching}, Hegselmann-Krause (HK) bounded confidence \citep{hegselmann2002opinion}, and Friedkin-Johnsen stubborn anchor frameworks \citep{friedkin1990social} analyze scalar belief evolution over static or rigidly defined geometric thresholds. These models fail to capture the multi-dimensional semantic reasoning and asymmetrical relationship severance typical of human online interaction.
-    \item \textbf{Generative Multi-Agent Simulations}: Contemporary agentic simulations \citep{park2023generative} employ Large Language Model (LLM) reasoning but treat social networks as exogenous static pipelines, ignoring how interpersonal friction alters underlying connectivity. Conversely, recent unstructured prompt-rewiring models \citep{gu2025promptrewire} exhibit stochastic volatility and lack dynamical momentum damping, leading to arbitrary topology dissolution.
+The emergence of ideological polarization and segregated echo chambers across online platforms poses profound challenges to democratic deliberation and epistemic trust \citep{bail2018exposure, bakshy2015exposure, dandekar2013biased}. A longstanding limitation in computational social science is the bifurcation between two modeling traditions:
+\begin{enumerate}
+    \item \textbf{Mathematical Opinion Dynamics}: DeGroot linear averaging \citep{degroot1974reaching}, Hegselmann-Krause (HK) bounded confidence \citep{hegselmann2002opinion} and Friedkin-Johnsen stubborn anchors \citep{friedkin1990social} analyse scalar belief evolution over static thresholds, missing the multi-dimensional semantic reasoning and asymmetrical severance typical of human online interaction.
+    \item \textbf{Generative Multi-Agent Simulations}: Agentic simulations \citep{park2023generative} employ LLM reasoning but treat social networks as exogenous static pipelines, ignoring how interpersonal friction alters connectivity; recent unstructured prompt-rewiring models \citep{gu2025promptrewire} instead lack dynamical momentum damping, leading to arbitrary topology dissolution.
 \end{enumerate}
 
-To bridge this fundamental divide, we introduce \textbf{NetworkEvolveLab}, an experimental platform modeling the dual-feedback loop between LLM cognitive states and evolving directed weighted graphs $\mathcal{G}(t) = (\mathcal{V}, \mathcal{E}(t), \mathcal{W}(t))$. In this environment, heterogeneous agents (Hub agenda-setters, Bridgers, and Long-tail responders) consume peer statements, update their internal multi-dimensional belief vectors via damped dissonance dynamics, and make unilateral relationship choices (reinforce, decay, or sever ties).
+We introduce \textbf{NetworkEvolveLab}, modeling the dual-feedback loop between LLM cognitive states and evolving directed weighted graphs $\mathcal{G}(t) = (\mathcal{V}, \mathcal{E}(t), \mathcal{W}(t))$. Heterogeneous agents (Hub agenda-setters, Bridgers, Long-tail responders) consume peer statements, update multi-dimensional belief vectors via damped dissonance dynamics, and make unilateral relationship choices (reinforce, decay, sever). All three pre-registered hypotheses are reported below as falsified or unsupported; we treat that outcome, and the experiments added in response, as the contribution.
 
 \subsection{Research Questions and Pre-Registered Hypotheses}
-We structure our empirical inquiry around three core research questions:
-\begin{itemize}[leftmargin=*]
-    \item \textbf{RQ1 (Microscopic Fidelity)}: Does LLM-driven relationship termination yield asymmetric edge ruptures and cross-cutting long-tail clustering unobservable in classical scalar distance models?
-    \item \textbf{RQ2 (Phase Transition Dynamics)}: Under what cognitive tolerance thresholds $\theta$ and recommendation frictions does the network undergo topological phase transition from consensus to disjoint components?
-    \item \textbf{RQ3 (Counterfactual Platform Interventions)}: Can minimal algorithmic interventions (e.g., cross-camp exposure subsidies or hub throttling) halt polarization without requiring severe structural rewiring?
+\begin{itemize}
+    \item \textbf{RQ1 (Microscopic Fidelity)}: Does LLM-driven relationship termination yield asymmetric edge ruptures unobservable in classical scalar distance models, and \emph{which mechanism} generates that asymmetry?
+    \item \textbf{RQ2 (Phase Transition Dynamics)}: Under what cognitive tolerance $\theta$ and recommendation frictions does the network undergo topological phase transition from consensus to disjoint components?
+    \item \textbf{RQ3 (Counterfactual Platform Interventions)}: Can minimal algorithmic interventions halt polarization without severe structural rewiring?
 \end{itemize}
-
 We pre-registered three formal hypotheses prior to simulation runs:
-\begin{itemize}[leftmargin=*]
+\begin{itemize}
     \item \textbf{H1 (Polarization Modularity)}: In unconstrained tie-severing regimes, network modularity $Q$ will jump from $Q < 0.25$ to $Q > 0.65$ within $T=20$ rounds.
     \item \textbf{H2 (Bridger Fragility)}: Agents spanning opposing clusters will experience heightened bilateral dissonance, resulting in edge retention rates at least $40\%$ lower than intra-community edges ($p < 0.01$).
     \item \textbf{H3 (Counterfactual Depolarization)}: Diversified recommendations will improve cross-cluster reach by $\geq +35\%$ while reducing modularity by $\Delta Q \geq -0.20$.
 \end{itemize}
 
 % -------------------------------------------------------------
-% 2. Formal Model and Theoretical Propositions
+% 2. Related Work
+% -------------------------------------------------------------
+\section{Related Work}
+\label{sec:related}
+
+\subsection{Opinion Dynamics on Fixed Topologies}
+Classical opinion-dynamics modelling treats the social graph as an exogenous scaffold. DeGroot's linear averaging \citep{degroot1974reaching} contracts disagreement under a symmetric influence matrix; Hegselmann--Krause bounded confidence \citep{hegselmann2002opinion} partitions the population into stable cliques whenever a pair disagrees by more than $\epsilon$; and Friedkin--Johnsen stubbornness \citep{friedkin1990social} anchors each agent to a prior with weight $1-a_i$. The Deffuant variant \citep{deffuant2000mixing} sharpens the picture: bounded-confidence rules can split a population into camps, but because the criterion is a symmetric function of a scalar difference under a synchronous schedule, the boundary is symmetric by construction. Later work modelled asymmetric opinion evolution on dynamic graphs \citep{lu2022asymmetry}; classical co-evolution ABMs \citep{azzimonti2018social} likewise move population and ties together, but through hand-specified heuristics rather than a language-mediated cognitive layer.
+
+\subsection{Networks That Co-evolve with Their Nodes}
+Our claim that a changing topology invalidates the static-graph assumption is not new, and we do not claim it as one. Adaptive coevolutionary networks \citep{gross2008adaptive} form the canonical lineage: local rewiring can drive a network to a global critical point \citep{bornholdt2000topological}, produce small-world structure from local rewiring alone \citep{bornholdt2002smallworld}, and still reach consensus while the graph keeps adapting \citep{kozma2008consensus}. Temporal-network methodology formalises our object $\mathcal{G}(t) = (\mathcal{V}, \mathcal{E}(t), \mathcal{W}(t))$ \citep{holme2012temporal}; empirical network growth has long shown densification and diameter shrinkage are the norm \citep{leskovec2005graphs}. Weak ties carry cross-cutting information \citep{granovetter1973strength}, structural holes explain why brokers span disconnected clusters \citep{burt1992structural}, and complex contagion shows redundant local ties, not bridges, propagate change \citep{centola2007complex}. These literatures motivate our H2 test --- do brokers pay a price for spanning camps? --- and they do not.
+
+\subsection{Language Models as Simulated Participants}
+The second ingredient is the use of language models as the cognitive layer. \citet{park2023generative} established the generative-agent pattern most subsequent work follows: memory, reflection and natural-language action selection. The methodological question is what such agents can be claimed to represent. LLM samples can approximate human survey responses within a validated envelope \citep{argyle2023outofone} and replicate human subject studies when the sampling design is validated \citep{aher2023using}; but they also introduce systematic distortions \citep{bisbee2024synthetic}, can be steered by spurious prompt features \citep{sclar2024quantifying}, and are vulnerable to post-hoc analytic flexibility that makes a simulation unfalsifiable \citep{cummins2026threat}. As computational models of economic agents they are useful because their behaviour is interpretable and repeatable \citep{horton2023largelanguage}; the survey-level assessment \citep{ziems2024can} frames the gap: impressive demonstrations, limited validation. We avoid LLM-as-a-judge evaluation, given documented position and verbosity biases \citep{zheng2023judging}, and instead evaluate against structural quantities a judge cannot bias.
+
+\subsection{Agent-Based Simulation with Social Networks}
+The closest existing systems share our architecture but not our coupling. \textsc{S3} embeds LLM agents in real social-network data with a two-level evaluation \citep{gao2023s3}; Concordia supplies the standard generative-ABM pattern of an action layer plus a game master and associative memory \citep{vezhnevets2023concordia}; and \textsc{OASIS} scales to one million agents with dynamic social networks and follow/comment action spaces \citep{oas2024oasis}. All three treat the network as a substrate the agents act upon. Our engine inverts the emphasis: the severance decision \emph{is} the topology update, and the question is whether an LLM's relationship choices produce asymmetry a scalar rule cannot. Prompt-rewiring systems \citep{gu2025promptrewire} are the closest published claim along that axis, and we test it against a pre-registered threshold with seed-level statistics rather than a single trajectory.
+
+\subsection{Recommendation, Echo Chambers and Polarization}
+On the platform side, the empirical record is unambiguous that recommenders build the graphs they serve. An audit of Twitter's friend recommender found it actively constructing echo chambers \citep{duskin2024echo}; recommender-induced echo chambers have been formalised as a property of the induced topology \citep{ge2020understanding}; and learning-based edge formation \citep{fan2019deepsocial} is now standard. Large-scale audits find algorithmic amplification of politics \citep{huszar2022algorithmic}, and controlled experiments show feed ranking causally shifts political outcomes \citep{xfeed2026political} while chronological-versus-algorithmic feeds move attitudes \citep{levy2021socialmedia}. The same literature contains counterweights: ideological segregation in feeds without measurable polarization \citep{nyhan2023likeminded}, and the risk of mistaking exposure diversity for depolarization; polarization itself co-evolves with network structure over time \citep{baldassarri2007dynamics}. We therefore treat H3 as a \emph{conjunction}: reach can rise without modularity falling.
+
+\subsection{Community Detection and the Modularity Ceiling}
+Our falsification of H1 rests on bounding Newman modularity by the realized community count, so it sits inside a well-developed line of work on the limits of modularity: a resolution limit for small communities \citep{fortunato2007resolution}, a modularity maximum that is itself resolution- and $K$-dependent \citep{peixoto2014hierarchical}, and Louvain's failure to guarantee connected communities \citep{traag2019leiden}. This is why our audit reports the realized partition size alongside $Q$ rather than treating $Q>0.65$ as free, and why we verify the partition with an independent method.
+
+\subsection{Reproducibility Standards and Data Provenance}
+Because all three pre-registered hypotheses were falsified or unsupported, we treat reporting discipline as part of the result. The ODD protocol \citep{grimm2020odd} is the reference standard for describing agent-based models; the ten simple rules of reproducible computational research \citep{sandve2013ten} and formal uncertainty-quantification design for simulations \citep{wu2015general} set the bar our provenance manifest and seed-level confidence intervals meet. We are equally explicit about what is empirical: the one genuinely public network is the SNAP Higgs Twitter edge list \citep{domenico2013anatomy}; the Birdwatch / Community Notes benchmark derives its bipartite rater structure from the official implementation \citep{communitynotesDataset}; and the remaining surrogates are calibrated to published statistics from the DEBATE benchmark \citep{neurips2024debate}, ConvoKit \citep{chang2020convokit} and DW-NOMINATE \citep{poole1985dwnominate}.
+
+% -------------------------------------------------------------
+% 3. Formal Model and Theoretical Bounds
 % -------------------------------------------------------------
 \section{Formal Model and Theoretical Bounds}
 \label{sec:theory}
 
-\subsection{State Representation}
-Let $\mathcal{G}(t) = (\mathcal{V}, \mathcal{E}(t), \mathcal{W}(t))$ be a dynamic directed weighted graph where $|\mathcal{V}| = N$. Each edge $(u, v) \in \mathcal{E}(t)$ denotes a directed relationship ($u$ follows or attends to $v$) with weight $w_{uv}(t) \in (0, 1]$. Each agent $i \in \mathcal{V}$ maintains a multi-dimensional belief vector $\mathbf{b}_i(t) \in [-1, 1]^d$, a tolerance threshold $\theta_i \in (0, 1]$, and an archetype $\alpha_i \in \{\text{Hub}, \text{Bridger}, \text{Long-tail}\}$.
+\subsection{State Representation and Geometry}
+Let $\mathcal{G}(t) = (\mathcal{V}, \mathcal{E}(t), \mathcal{W}(t))$ be a dynamic directed weighted graph where $|\mathcal{V}| = N$. Each edge $(u, v) \in \mathcal{E}(t)$ denotes a directed relationship ($u$ follows or attends to $v$) with weight $w_{uv}(t) \in (0, 1]$. Each agent $i \in \mathcal{V}$ maintains a belief vector $\mathbf{b}_i(t) \in [-1, 1]^d$, a tolerance $\theta_i \in (0, 1]$, and an archetype $\alpha_i \in \{\text{Hub}, \text{Bridger}, \text{Long-tail}\}$, instantiated at fixed proportions ($2\%$ hubs, $8.5\%$ active bridgers, $89.5\%$ long-tail responders) with bridgers assigned a higher base tolerance ($\theta_{\mathrm{bridger}} = 0.7$ versus $\theta_{\mathrm{tail}} = 0.4$).
+
+\paragraph{Two geometries, kept apart.}
+The framework admits $d \geq 1$ issue dimensions, but the experiments use two of them and we keep them apart. The \textbf{scalar flagship engine} ($d = 1$, \texttt{CoEvolutionEngine}) produces every number in Tables~\ref{tab:sota_matrix}--\ref{tab:llm_arm} and Table~\ref{tab:scaling}; its rule is Equation~\eqref{eq:scalar-update}. The \textbf{multi-dimensional semantic arm} ($d = 3$, \texttt{VecWorld}) is used for the LLM cognition experiments of Section~\ref{sec:llm-arm} and for the multi-dimensional arms of the Phase~4 attribution ablation, where it is a \emph{controlled proxy} for semantics rather than the flagship model. Conflating the two would misattribute the results, so we state the geometry wherever a number is reported.
 
 \subsection{Damped Micro-Cognitive Update}
-When listener $i$ observes statement $\mathbf{s}_j(t)$ emitted by speaker $j$, the perceived ideological distance is measured via cosine dissonance or Minkowski metric:
+\label{sec:theory-update}
+In the multi-dimensional geometry, listener $i$ responds to speaker $j$'s statement $\mathbf{s}_j(t)$ with a salience-weighted ideological distance $\delta_{ij}(t) = \sum_{k=1}^{d} w_{i,k}\,|b_{i,k}(t) - b_{j,k}(t)| \in [0,2]$ (Equation~\ref{eq:dissonance}), a damped belief update $\mathbf{b}_i(t+1) = \mathbf{b}_i(t) + \eta\,\psi(\delta_{ij}(t), \theta_i)\,(\mathbf{s}_j(t) - \mathbf{b}_i(t))$, and a three-branch reaction kernel $\psi$ (assimilative pull below $\theta_i$, backfire push up to $\theta_{\mathrm{block}}$, cognitive decoupling beyond it); all three are written out in Appendix~\ref{app:kernel}. The anisotropy of $\mathbf{w}_i$ across agents is the mechanism isolated in Section~\ref{sec:attribution}: it is what lets two agents with the \emph{same} belief coordinates break ties in opposite directions.
+
+\paragraph{The scalar rule actually implemented.}
+\label{sec:theory-scalar}
+The flagship engine does not use the kernel above; it uses a two-branch thresholded rule on the scalar difference $\Delta_{ij} = |b_i - b_j|$:
 \begin{equation}
-    \delta_{ij}(t) = \frac{1}{2} \|\mathbf{b}_i(t) - \mathbf{s}_j(t)\|_1 \in [0, 1].
-\end{equation}
-The internal belief vector updates with momentum damping $\eta \in (0, 1)$:
-\begin{equation}
-    \mathbf{b}_i(t+1) = \mathbf{b}_i(t) + \eta \cdot \psi(\delta_{ij}(t), \theta_i) \cdot (\mathbf{s}_j(t) - \mathbf{b}_i(t)),
-\end{equation}
-where $\psi(\cdot)$ denotes the cognitive reaction kernel:
-\begin{equation}
-    \psi(\delta, \theta) = 
+    b_i(t+1) =
     \begin{cases}
-        1 - \delta / \theta, & \delta \leq \theta \quad \text{(assimilative pull)}, \\
-        -\beta (\delta - \theta), & \theta < \delta \leq \theta_{\mathrm{block}} \quad \text{(backfire push)}, \\
-        0, & \delta > \theta_{\mathrm{block}} \quad \text{(cognitive decoupling)}.
+        \mathrm{clip}\big(b_i(t) + \eta(1-\tfrac{\Delta_{ij}}{2})(b_j-b_i)\big), \\
+        \hfill \text{if } \Delta_{ij} \leq 2\theta_i, \\[2pt]
+        b_i(t), \hfill \text{if } \Delta_{ij} > 2\theta_i .
     \end{cases}
+    \label{eq:scalar-update}
 \end{equation}
+That is, the scalar engine assimilates while the pair is within twice the tolerance and otherwise \emph{halts} belief movement rather than pushing back; the clipped quantity is constrained to $[-1,1]$. The tolerance can additionally be depressed by accumulated stress exposure, coupling belief state to exposure history.
 
 \subsection{Unilateral Relationship Evolution}
-Edge weights evolve according to dissonance:
+In the flagship engine the relationship decision is a direct function of the same scalar difference and is taken unilaterally by the listener, which is the source of the asymmetry analysed in Section~\ref{sec:attribution}:
 \begin{equation}
-    w_{ij}(t+1) = \mathrm{clip}\left( w_{ij}(t) + \alpha_{\mathrm{rec}} (1 - \delta_{ij}) - \gamma_{\mathrm{dec}} \delta_{ij}, \; 0, \; 1 \right).
+\begin{aligned}
+    w_{ij}(t+1) &= \mathrm{clip}\big(w_{ij}(t) + \Delta w_{ij},\, 0,\, 1\big), \\[2pt]
+    \Delta w_{ij} &=
+    \begin{cases}
+        +0.05, & \Delta_{ij} \leq 2\theta_i \quad \text{(reinforce)}, \\
+        -0.15, & \Delta_{ij} > 2\theta_i \quad \text{(decay)} .
+    \end{cases}
+\end{aligned}
+\label{eq:weight-update}
 \end{equation}
-If $\delta_{ij}(t) > \theta_{\mathrm{block}}$ or $w_{ij}(t+1) \leq \epsilon_{\mathrm{sever}}$, the directed edge $(i, j)$ is purged:
-\begin{equation}
-    \mathcal{E}(t+1) = \mathcal{E}(t) \setminus \{(i, j)\}.
-\end{equation}
+The decay magnitude is attenuated by a subsidy factor for bridges penalised for holding a cross-cutting tie, and a severed directed edge $(i,j)$ is removed and recorded in a per-pair blocklist so that triadic closure cannot immediately reinstate it. Because the decision reads only the listener's state and the speaker's current stance, and because $(j,i)$ is evaluated later under a different state, the two directions of a mutual dyad are not symmetric under an asynchronous schedule --- the content of Proposition~\ref{prop:asym}.
 
 \subsection{Theoretical Propositions}
 
-\begin{proposition}[Newman Modularity Bound for Bipolar Networks]
+\begin{proposition}[Modularity Upper Bound for $K$-Community Partitions]
 \label{prop:modularity}
-Let $\mathcal{G} = (\mathcal{V}, \mathcal{E})$ be an undirected graph partitioned into $K=2$ symmetric non-empty communities $\mathcal{V}_1, \mathcal{V}_2$ with equal total degree sum $\mathrm{vol}(\mathcal{V}_1) = \mathrm{vol}(\mathcal{V}_2) = m$. Then the Newman modularity $Q$ \citep{newman2004finding,newman2006modularity,blondel2008fast} satisfies:
+Let $\mathcal{G} = (\mathcal{V}, \mathcal{E})$ be an undirected graph with $m$ edges partitioned into $K \geq 2$ non-empty communities, and let $a_c = \mathrm{vol}(\mathcal{V}_c)/(2m)$ with $\sum_c a_c = 1$. Then the Newman modularity satisfies
 \begin{equation}
-    Q \leq 1 - \frac{1}{K} = 0.500.
+    Q \leq 1 - \sum_{c=1}^{K} a_c^2 \leq 1 - \frac{1}{K}.
 \end{equation}
+In particular, for a bipolar partition ($K=2$) $Q \leq 0.500$; $Q > 0.65$ requires $K \geq 3$, and $Q > 0.735$ requires $K \geq 4$.
 \end{proposition}
 
-\begin{proof}
-By definition, Newman modularity is given by:
-\begin{equation}
-    Q = \sum_{c=1}^K \left[ \frac{e_{cc}}{2m} - \left( \frac{\mathrm{vol}(\mathcal{V}_c)}{2m} \right)^2 \right],
-\end{equation}
-where $e_{cc}$ is twice the number of edges within community $c$, and $\mathrm{vol}(\mathcal{V}_c) = \sum_{i \in \mathcal{V}_c} d_i$. For $K=2$ and symmetric degree volume, let $a_c = \frac{\mathrm{vol}(\mathcal{V}_c)}{2m} = \frac{1}{2}$. Thus,
-\begin{equation}
-    \sum_{c=1}^2 a_c^2 = \left(\frac{1}{2}\right)^2 + \left(\frac{1}{2}\right)^2 = \frac{1}{2} = 0.500.
-\end{equation}
-The intra-community edge fraction satisfies $\sum_{c=1}^2 \frac{e_{cc}}{2m} \leq 1$ with equality achieved if and only if there are zero cross-community edges ($e_{12} = 0$). Hence,
-\begin{equation}
-    Q = \sum_{c=1}^2 \frac{e_{cc}}{2m} - 0.500 \leq 1.000 - 0.500 = 0.500.
-\end{equation}
-Equality holds strictly when the graph is completely disconnected into two isolated components. Therefore, any hypothesis expecting $Q > 0.65$ in a two-camp topology is mathematically impossible.
-\end{proof}
+\begin{remark}[Why the pre-registered $Q>0.65$ threshold is not universally impossible]
+\label{rem:threshold}
+The bound $1-1/K$ holds only for $K=2$ partitions, so a network fragmenting into three or more communities \emph{can} exceed $0.65$: the ceiling tightens as the community count grows. The falsification of H1 is therefore an \emph{empirical} statement about the dynamics we study --- even when a third community emerges, the unequal degree volumes keep the attainable modularity at or below $0.500$ --- not a theorem forbidding $Q>0.65$ in general. The complete derivation is in Appendix~\ref{app:proof_modularity}.
+\end{remark}
 
 \begin{proposition}[Non-Zero Measure of Asymmetric Ruptures]
 \label{prop:asym}
-In multi-dimensional semantic belief space $\mathbb{R}^d$ ($d \geq 2$) under anisotropic agent archetype tolerances $\boldsymbol{\theta}_i = (\theta_{i,1}, \dots, \theta_{i,d})^\top$, the set of mutual dyads $(i, j)$ exhibiting unilateral edge rupture has strictly positive Lebesgue measure $\mu(\Omega_{\mathrm{asym}}) > 0$, whereas in scalar symmetric models ($d=1, \theta_i = \theta_j$), $\mu(\Omega_{\mathrm{asym}}) = 0$.
+In multi-dimensional semantic belief space $\mathbb{R}^d$ ($d \geq 2$) under anisotropic agent archetype tolerances $\boldsymbol{\theta}_i = (\theta_{i,1}, \dots, \theta_{i,d})^\top$ and non-collinear attention profiles $\mathbf{w}_i \neq \mathbf{w}_j$, the set of mutual dyads $(i, j)$ exhibiting unilateral edge rupture has strictly positive Lebesgue measure $\mu(\Omega_{\mathrm{asym}}) > 0$, whereas in scalar symmetric models ($d=1, \theta_i = \theta_j$) under a synchronous update schedule, $\mu(\Omega_{\mathrm{asym}}) = 0$.
 \end{proposition}
 
-\begin{proof}
-For a mutual pair with initial edges $(i, j)$ and $(j, i)$, unilateral severance occurs if agent $i$ severs while agent $j$ retains:
-\begin{equation}
-    \Omega_{\mathrm{asym}} = \left\{ (\mathbf{b}_i, \mathbf{b}_j) \in [-1, 1]^{2d} \;\middle|\; \mathcal{D}_i(\mathbf{b}_i, \mathbf{b}_j) > \Theta_i \;\land\; \mathcal{D}_j(\mathbf{b}_j, \mathbf{b}_i) \leq \Theta_j \right\}.
-\end{equation}
-In one-dimensional scalar bounded confidence with symmetric metric $\mathcal{D}_i = |b_i - b_j| = \mathcal{D}_j$ and uniform threshold $\Theta_i = \Theta_j = \epsilon$, the condition becomes $|b_i - b_j| > \epsilon \land |b_i - b_j| \leq \epsilon = \emptyset$. Hence $\mu(\Omega_{\mathrm{asym}}) = 0$.
-Conversely, in $d \geq 2$ dimensions, let agent $i$ prioritize dimension 1 (e.g., AI regulation) with weight $w_{i,1} = 0.9, w_{i,2} = 0.1$, while agent $j$ prioritizes dimension 2 (open source) with $w_{j,1} = 0.1, w_{j,2} = 0.9$. If opinions differ strongly on dimension 1 ($|\Delta b_1| = 1.6$) but agree on dimension 2 ($|\Delta b_2| = 0.1$), the weighted distances evaluate to $\mathcal{D}_i = 0.9(1.6) + 0.1(0.1) = 1.45 > 1.0$ (triggering severance by $i$) and $\mathcal{D}_j = 0.1(1.6) + 0.9(0.1) = 0.25 \leq 1.0$ (retaining edge by $j$). The region defined by these linear inequalities is a non-degenerate polytope in $[-1, 1]^{2d}$ having strictly positive volume.
-\end{proof}
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.98\textwidth]{figures/fig5_sota_benchmark.png}
-\caption{\textbf{State-of-the-Art (SOTA) Benchmark Comparison across Real-World Empirical Networks.} Evaluation of six baseline models across three real-world topologies (Twitter 2020 Election, SNAP Higgs Twitter, and Reddit ConvoKit). (A) Newman Modularity $Q$ showing bounded community segregation; (B) Opinion polarization $\Pi$; (C) Microscopic severance asymmetry $A_{\mathrm{rupture}}$, demonstrating that only agentic models capture non-trivial unilateral unfollowing.}
-\label{fig:sota_benchmark}
-\end{figure*}
+\begin{remark}[Two independent generators of asymmetric rupture]
+\label{rem:twosources}
+Proposition~\ref{prop:asym} isolates \emph{one} mechanism: per-agent anisotropy of the semantic criterion. A second operates at the schedule level: under an asynchronous single-speaker schedule a pair $(i,j)$ is evaluated at different belief states in the two directions, so a symmetric scalar criterion can still yield unilateral severance. The polytope construction proving Proposition~\ref{prop:asym} is in Appendix~\ref{app:proof_polytope}.
+\end{remark}
 
 \begin{table*}[t]
 \centering
 \small
-\caption{\textbf{Performance Comparison Matrix of 6 Opinion and Topology Dynamics Methods across Five Real-World Benchmark Networks.} Values report Mean $\pm$ 95\% Confidence Interval across 10 independent random seeds ($N=60, T=25$ rounds).}
+\setlength{\tabcolsep}{4.5pt}
+\caption{\textbf{Modularity $Q$ across the six benchmark networks.} Mean $\pm$ 95\% CI over \BenchSeeds{} seeds ($N=\BenchNodes$, $T=\BenchRounds$ rounds). The complete five-metric matrix and the full benchmark figure are in Appendix~\ref{app:benchmark-matrix}. Both fragments are generated from the frozen result file by \texttt{scripts/generate\_paper\_tables.py}.}
 \label{tab:sota_matrix}
-\begin{tabular}{llccccc}
-\toprule
-\textbf{Empirical Dataset} & \textbf{Model / Method} & \textbf{Modularity $Q$} & \textbf{Polarization $\Pi$} & \textbf{Giant Frac} & \textbf{Small Comm Frac} & \textbf{Rupture Asym $A_{\mathrm{rupture}}$} \\
-\midrule
-\multirow{6}{*}{\textbf{Twitter 2020 Election}} 
-& DeGroot (1974) & $0.491 \pm 0.001$ & $0.320 \pm 0.031$ & $0.500 \pm 0.000$ & $0.000 \pm 0.000$ & N/A (Static) \\
-& Hegselmann-Krause (2002) & $\mathbf{0.500 \pm 0.000}$ & $0.564 \pm 0.014$ & $0.500 \pm 0.000$ & $0.000 \pm 0.000$ & $0.000 \pm 0.000$ \\
-& Friedkin-Johnsen (1990) & $0.491 \pm 0.001$ & $0.521 \pm 0.016$ & $0.500 \pm 0.000$ & $0.000 \pm 0.000$ & N/A (Static) \\
-& Park et al. (2023) & $0.491 \pm 0.001$ & $0.511 \pm 0.020$ & $0.500 \pm 0.000$ & $0.000 \pm 0.000$ & N/A (Static) \\
-& Gu et al. (2025) & $0.445 \pm 0.016$ & $\mathbf{0.589 \pm 0.014}$ & $0.500 \pm 0.000$ & $0.000 \pm 0.000$ & $0.900 \pm 0.278$ \\
-& \textbf{Ours (CoEvolution)} & $0.465 \pm 0.006$ & $0.575 \pm 0.023$ & $0.500 \pm 0.000$ & $0.000 \pm 0.000$ & $\mathbf{0.778 \pm 0.424}$ \\
-\midrule
-\multirow{6}{*}{\textbf{SNAP Higgs Twitter}} 
-& DeGroot (1974) & $0.249 \pm 0.005$ & $0.007 \pm 0.005$ & $0.255 \pm 0.029$ & $0.037 \pm 0.056$ & N/A (Consensus) \\
-& Hegselmann-Krause (2002) & $\mathbf{0.513 \pm 0.018}$ & $0.480 \pm 0.046$ & $0.395 \pm 0.045$ & $\mathbf{0.335 \pm 0.101}$ & $0.000 \pm 0.000$ \\
-& Friedkin-Johnsen (1990) & $0.249 \pm 0.005$ & $0.073 \pm 0.009$ & $0.255 \pm 0.029$ & $0.037 \pm 0.056$ & N/A \\
-& Park et al. (2023) & $0.249 \pm 0.005$ & $0.021 \pm 0.007$ & $0.255 \pm 0.029$ & $0.037 \pm 0.056$ & N/A \\
-& Gu et al. (2025) & $0.197 \pm 0.009$ & $\mathbf{0.574 \pm 0.015}$ & $0.275 \pm 0.025$ & $0.073 \pm 0.068$ & $0.851 \pm 0.098$ \\
-& \textbf{Ours (CoEvolution)} & $0.235 \pm 0.012$ & $0.465 \pm 0.024$ & $\mathbf{0.300 \pm 0.035}$ & $0.057 \pm 0.066$ & $\mathbf{0.874 \pm 0.032}$ \\
-\midrule
-\multirow{6}{*}{\textbf{Reddit ConvoKit}} 
-& DeGroot (1974) & $0.697 \pm 0.005$ & $0.033 \pm 0.027$ & $0.250 \pm 0.000$ & $0.000 \pm 0.000$ & N/A (Collapse) \\
-& Hegselmann-Krause (2002) & $\mathbf{0.735 \pm 0.005}$ & $0.342 \pm 0.049$ & $0.255 \pm 0.008$ & $0.020 \pm 0.045$ & $0.000 \pm 0.000$ \\
-& Friedkin-Johnsen (1990) & $0.697 \pm 0.005$ & $0.264 \pm 0.027$ & $0.250 \pm 0.000$ & $0.000 \pm 0.000$ & N/A \\
-& Park et al. (2023) & $0.697 \pm 0.005$ & $0.239 \pm 0.034$ & $0.250 \pm 0.000$ & $0.000 \pm 0.000$ & N/A \\
-& Gu et al. (2025) & $0.527 \pm 0.007$ & $\mathbf{0.408 \pm 0.021}$ & $0.252 \pm 0.004$ & $0.000 \pm 0.000$ & N/A (Volatile) \\
-& \textbf{Ours (CoEvolution)} & $0.654 \pm 0.013$ & $0.393 \pm 0.020$ & $0.250 \pm 0.000$ & $0.000 \pm 0.000$ & $\mathbf{1.000 \pm 0.000}$ \\
-\midrule
-\multirow{6}{*}{\textbf{\textsc{Debate} Benchmark}} 
-& DeGroot (1974) & $0.491 \pm 0.002$ & $0.168 \pm 0.039$ & $0.500 \pm 0.000$ & $0.000 \pm 0.000$ & N/A (Static) \\
-& Hegselmann-Krause (2002) & $\mathbf{0.498 \pm 0.003}$ & $0.389 \pm 0.055$ & $0.500 \pm 0.000$ & $0.033 \pm 0.075$ & $0.000 \pm 0.000$ \\
-& Friedkin-Johnsen (1990) & $0.491 \pm 0.002$ & $0.368 \pm 0.029$ & $0.500 \pm 0.000$ & $0.000 \pm 0.000$ & N/A (Static) \\
-& Park et al. (2023) & $0.491 \pm 0.002$ & $0.347 \pm 0.029$ & $0.500 \pm 0.000$ & $0.000 \pm 0.000$ & N/A (Static) \\
-& Gu et al. (2025) & $0.453 \pm 0.016$ & $\mathbf{0.451 \pm 0.021}$ & $0.500 \pm 0.000$ & $0.000 \pm 0.000$ & $0.944 \pm 0.128$ \\
-& \textbf{Ours (CoEvolution)} & $0.471 \pm 0.004$ & $0.446 \pm 0.028$ & $0.500 \pm 0.000$ & $0.000 \pm 0.000$ & $\mathbf{1.000 \pm 0.000}$ \\
-\midrule
-\multirow{6}{*}{\textbf{Birdwatch Notes}} 
-& DeGroot (1974) & $0.405 \pm 0.004$ & $0.000 \pm 0.000$ & $0.522 \pm 0.010$ & $0.000 \pm 0.000$ & N/A (Collapse) \\
-& Hegselmann-Krause (2002) & $\mathbf{0.498 \pm 0.003}$ & $0.488 \pm 0.022$ & $0.505 \pm 0.010$ & $\mathbf{0.470 \pm 0.073}$ & $0.000 \pm 0.000$ \\
-& Friedkin-Johnsen (1990) & $0.405 \pm 0.004$ & $0.253 \pm 0.010$ & $0.522 \pm 0.010$ & $0.000 \pm 0.000$ & N/A (Static) \\
-& Park et al. (2023) & $0.405 \pm 0.004$ & $0.184 \pm 0.011$ & $0.522 \pm 0.010$ & $0.000 \pm 0.000$ & N/A (Static) \\
-& Gu et al. (2025) & $0.318 \pm 0.012$ & $\mathbf{0.506 \pm 0.015}$ & $0.518 \pm 0.016$ & $0.067 \pm 0.101$ & $0.855 \pm 0.065$ \\
-& \textbf{Ours (CoEvolution)} & $0.397 \pm 0.007$ & $0.471 \pm 0.017$ & $0.507 \pm 0.023$ & $0.067 \pm 0.101$ & $\mathbf{0.867 \pm 0.370}$ \\
-\bottomrule
-\end{tabular}
+\input{tables/sota_matrix_compact}
 \end{table*}
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.98\textwidth]{figures/fig6_empirical_datasets.png}
-\caption{\textbf{Structural Characteristics of Five Benchmark Datasets.} (A) Latent ideology and prior distributions comparing Twitter 2020 DW-NOMINATE bipolar density against \textsc{Debate} benchmark Gaussian priors; (B) Birdwatch Community Notes cross-ideology approval scatter, highlighting bipartisan consensus notes in the upper-right quadrant; (C) Node in-degree empirical distributions comparing heavy-tailed SNAP Higgs scale-free structure with Twitter 2020 preferential attachment.}
-\label{fig:empirical_datasets}
-\end{figure*}
 
 % -------------------------------------------------------------
 % 3. Benchmark Ecosystem & Baseline Methods
@@ -238,25 +296,18 @@ Conversely, in $d \geq 2$ dimensions, let agent $i$ prioritize dimension 1 (e.g.
 \section{Benchmark Ecosystem and Baselines}
 \label{sec:benchmark}
 
-\subsection{Five Gold-Standard Benchmark Datasets}
-To ensure reproducibility and empirical alignment across diverse communication modes, our library standardizes five benchmark datasets (illustrated in Figure~\ref{fig:empirical_datasets}):
-\begin{enumerate}[leftmargin=*]
-    \item \textbf{\textsc{Debate} Benchmark \citep{neurips2024debate}}: Contains multi-turn stance records over contested policy propositions (Artificial Intelligence (AI) regulation moratoriums, Universal Basic Income (UBI) taxation, encryption backdoors), equipped with empirical human prior distributions ($\mu, \sigma$).
-    \item \textbf{Stanford Network Analysis Platform (SNAP) Higgs Twitter \citep{domenico2013anatomy}}: Real-world retweet and mention network featuring a power-law in-degree exponent ($\gamma \approx 2.1$) and low reciprocity ($r \approx 0.12$).
-    \item \textbf{Twitter 2020 US Election}: Retweet graph capturing polarized partisan alignments (Biden vs. Trump) parameterized via Dynamic Weighted NOMINATE (DW-NOMINATE) ideological coordinates \citep{poole1985dwnominate}.
-    \item \textbf{Reddit ConvoKit \citep{chang2020convokit}}: Cross-community conversational trees across four politically diverse subreddits (\texttt{r/politics}, \texttt{r/The\_Donald}, \texttt{r/libertarian}, \texttt{r/neutralpolitics}).
-    \item \textbf{Birdwatch / Community Notes \citep{wojcik2022birdwatch}}: Crowd-sourced fact-checking dataset annotated with bipartisan rater evaluations.
-\end{enumerate}
+\subsection{Benchmark Networks: Surrogate Calibrations and One Empirical Graph}
+To ensure reproducibility and controlled initial conditions, our library standardizes six benchmark networks (illustrated in Figure~\ref{fig:empirical_datasets} in the appendix). \textbf{Surrogate networks (calibrated to published statistics).} Five networks are generated by seeded samplers reproducing the structural signature reported for each public dataset, and are used as controlled initial conditions rather than as the datasets themselves: \textsc{Debate} Benchmark \citep{neurips2024debate} (multi-turn stance records with empirical human prior distributions); SNAP Higgs Twitter \citep{domenico2013anatomy} (a scale-free surrogate with power-law in-degree and low reciprocity); Twitter 2020 US Election (a bipolar retweet surrogate parameterized by Dynamic Weighted NOMINATE coordinates \citep{poole1985dwnominate}); Reddit ConvoKit \citep{chang2020convokit} (four-subreddit cross-community structure with three-dimensional issue profiles); and Birdwatch / Community Notes \citep{wojcik2022birdwatch} (bipartisan rater evaluations of fact-check notes). \textbf{Empirical network.} The sixth benchmark, \textsc{SNAP Higgs (REAL)}, is derived from the unmodified public SNAP edge list \texttt{higgs-social\_network.edgelist.gz} (456,626 nodes; 14,855,842 directed edges; SHA256 in \texttt{data/raw/README.md}): we induce subgraphs on high-degree node pools, re-index them, and assign a constant edge weight because the released file carries direction only. The SNAP file contains \emph{no} ideology labels, so the two camps used as initial beliefs are derived from the real topology itself (Louvain communities \citep{blondel2008fast}) and must be read as a \emph{topology-derived structural proxy}, not as human-annotated stance.
 
 \subsection{Baseline Models}
-We implement six standardized computational models under unified graph interfaces:
-\begin{itemize}[leftmargin=*]
+We implement six standardized computational models under unified graph interfaces, plus our own co-evolution engine:
+\begin{itemize}
     \item \textbf{DeGroot (1974)}: Classical iterative linear consensus over static edge weights.
     \item \textbf{Hegselmann-Krause (2002)}: Bounded confidence dynamics with metric cutoff $\epsilon$.
     \item \textbf{Friedkin-Johnsen (1990)}: Agent belief updates weighted by stubbornness index $1 - a_i$.
     \item \textbf{Generative Agents \citep{park2023generative}}: Natural language reflection and memory stream with static network structure.
     \item \textbf{Gu et al. (2025)}: Prompt-driven rewiring without cognitive damping.
-    \item \textbf{Ours (CoEvolution)}: Heterogeneous archetype damping coupled with dynamic weighted unilateral tie severance.
+    \item \textbf{Ours (CoEvolution Engine)}: The full heterogeneous-archetype, damped, unilateral-severance engine, reported alongside a simplified re-implementation as an ablation row so that the contribution of the full engine is measurable rather than asserted.
 \end{itemize}
 
 % -------------------------------------------------------------
@@ -265,55 +316,113 @@ We implement six standardized computational models under unified graph interface
 \section{Empirical Findings and Hypothesis Verdicts}
 \label{sec:findings}
 
-Table~\ref{tab:sota_matrix} summarizes cross-benchmark evaluations. These results provide concrete empirical answers to our research questions and pre-registered hypotheses.
+Table~\ref{tab:sota_matrix} summarizes cross-benchmark evaluations and Table~\ref{tab:hypotheses} collects the three pre-registered verdicts; every number in both tables is generated from the frozen result files.
 
+\begin{table*}[t]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\caption{\textbf{Pre-Registered Hypothesis Verdicts.} Generated from \texttt{results/phase1b.json}, \texttt{results/phase3.json} and \texttt{results/phase4\_attribution.json}.}
+\label{tab:hypotheses}
+\input{tables/hypothesis_verdicts}
+\end{table*}
+
+% -------------------------------------------------------------
+% 跨栏浮动体的**声明顺序**（不是引用位置）在这里是刻意排列的：
+% LaTeX 只能把 figure*/table* 放在页顶，且同一页最多堆叠 \dbltopnumber
+% 个。为了避免每个跨栏浮动体都各自强制一次分页（实测每次浪费约半栏），
+% 这里把三个跨栏浮动体相邻声明，使其堆叠在同一页顶部；单栏图随后填满剩余栏。
+% 表格与图仍然在正文中被正常引用，读者看到的排版不受影响。
+% -------------------------------------------------------------
 \begin{figure*}[t]
 \centering
-\begin{minipage}{0.48\textwidth}
+\includegraphics[width=\textwidth]{figures/fig7_attribution_ablation.png}
+\caption{\textbf{Controlled attribution of asymmetric rupture.} All arms share the same initial graph and beliefs within a seed, and mutual dyads start with symmetric edge weights, so $A_{\mathrm{rupture}}$ isolates decision asymmetry. (A) Per-arm $A_{\mathrm{rupture}}$: the synchronous scalar and synchronous isotropic multi-dimensional models break strictly symmetrically, while per-agent anisotropy produces unilateral severance. (B) Paired decisive contrasts by seed.}
+\label{fig:attribution}
+\end{figure*}
+
+\begin{table*}[t]
 \centering
-\includegraphics[width=\linewidth]{figures/fig1_phase_transition.png}
-\caption{\textbf{Topological Phase Transition Dynamics.} (A) Modularity $Q$ and polarization $\Pi$ as functions of cognitive tolerance $\theta$, identifying critical threshold $\theta^* \approx 0.52$; (B) Cross-topology topological invariance validation across ER, Scale-Free, Small-World, and Empirical Bipolar networks.}
+\small
+\caption{\textbf{Real LLM Cognitive Layer versus Rule Backend inside the Flagship Engine.} Paired by seed; the difference column is the seed-level paired difference (LLM $-$ rule) with its paired $t$-test $p$-value. Generated from \texttt{results/phase6\_llm\_engine.json} by \texttt{scripts/generate\_paper\_tables.py}.}
+\label{tab:llm_arm}
+\input{tables/llm_arm}
+\end{table*}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig1_phase_transition.png}
+\caption{\textbf{Topological Phase Transition Dynamics.} (A) Modularity $Q$ and polarization $\Pi$ vs.\ tolerance $\theta$; the critical threshold is derived from the curve itself (dotted: bipolar bound $Q \le 1-1/2$). (B) Final modularity across Erdos-Renyi, Scale-Free, Small-World and Empirical Bipolar topologies on the Phase~1c $\theta$ grid. (C) Shattering-to-connectivity: giant-component fraction vs.\ $\theta$, with each topology's $\theta^*_{\mathrm{frag}}$ (dotted verticals) and the previously claimed band $[\ThresholdBandLow, \ThresholdBandHigh]$ (shaded).}
 \label{fig:phase_transition}
-\end{minipage}
-\hfill
-\begin{minipage}{0.48\textwidth}
+\end{figure}
+
+\begin{figure}[t]
 \centering
-\includegraphics[width=\linewidth]{figures/fig2_bridger_ablation.png}
-\caption{\textbf{Hypothesis H2 Ablation on Bridger Stress.} Edge retention rates across eight mechanism variants. Across all conditions, Bridgers retain significantly more ties than peripheral nodes, disproving the structural fragility hypothesis.}
+\includegraphics[width=\columnwidth]{figures/fig2_bridger_ablation.png}
+\caption{\textbf{Hypothesis H2 Ablation on Bridger Stress.} Edge retention across eight mechanism variants; bridgers retain more ties than peripheral nodes in every condition, falsifying the structural fragility hypothesis.}
 \label{fig:bridger_ablation}
-\end{minipage}
-\end{figure*}
+\end{figure}
 
-\begin{figure*}[t]
+\begin{figure}[t]
 \centering
-\begin{minipage}{0.48\textwidth}
-\centering
-\includegraphics[width=\linewidth]{figures/fig4_cognitive_backends.png}
-\caption{\textbf{Micro-Cognitive Backends and Rupture Asymmetry (RQ1).} Comparison of scalar DeGroot/HK against Semantic Proxy and real LLM (3-seeds) runs, showing marked unilateral ruptures ($A_{\mathrm{rupture}} > 0.25$) and small-community emergence.}
-\label{fig:cognitive_backends}
-\end{minipage}
-\hfill
-\begin{minipage}{0.48\textwidth}
-\centering
-\includegraphics[width=\linewidth]{figures/fig3_policy_dose_response.png}
-\caption{\textbf{Counterfactual Platform Interventions (RQ3).} (A) Macro modularity under three platform policies and combined governance; (B) Monotonic dose-response curve of diversified recommendation exposure $\rho_{\mathrm{div}}$.}
+\includegraphics[width=\columnwidth]{figures/fig3_policy_dose_response.png}
+\caption{\textbf{Counterfactual Platform Interventions (RQ3).} (A) Macro modularity under three platform policies and combined governance; (B) monotonic dose-response of diversified recommendation exposure $\rho_{\mathrm{div}}$; (C) paired cross-camp reach effect with the pre-registered $+35\%$ threshold.}
 \label{fig:policy_dose_response}
-\end{minipage}
-\end{figure*}
+\end{figure}
 
-\subsection{Microscopic Rupture Asymmetry (RQ1)}
-Classical bounded confidence models enforce symmetric severance ($A_{\mathrm{rupture}} = 0.000$), where an unfollow decision by node $u$ mechanically coincides with $v$'s decision. In contrast, under our multi-dimensional semantic architecture and real LLM prompting (Figure~\ref{fig:cognitive_backends}), asymmetric rupture rates reach $A_{\mathrm{rupture}} = 0.778 \pm 0.424$ on Twitter 2020 and $1.000 \pm 0.000$ on Reddit ConvoKit. Qualitative inspection confirms that agents frequently maintain one-way following ties when a counter-ideological speaker shares common consensus on auxiliary topics (e.g., open weights or algorithmic audits), providing structural social glue absent in scalar models.
+\subsection{Attribution of Asymmetric Rupture (RQ1)}
+\label{sec:attribution}
 
-\subsection{Falsification of Hypothesis H1: Modularity Upper Bound}
-Under extensive parameter sweeps over $T=100$ rounds, modularity values saturated between $0.465$ and $0.500$, never approaching the pre-registered threshold $Q > 0.65$ (Figure~\ref{fig:phase_transition}A). This empirical convergence matches Proposition~\ref{prop:modularity}: in bipolar communities, modularity is mathematically bounded by $Q \leq 0.500$. We therefore formally record \textbf{H1 as Falsified}, identifying an analytical metric limitation in prior qualitative assertions of unbounded modularity expansion.
+A controlled ablation (Figure~\ref{fig:attribution}, Appendix~\ref{app:attribution}) shows that attributing $A_{\mathrm{rupture}}$ to multi-dimensional semantics as a whole is too coarse, and lets us state the mechanism precisely. Under a \emph{synchronous} schedule the scalar bounded-confidence model breaks strictly symmetrically ($A_{\mathrm{rupture}} \equiv 0$ in \ARupScalarSyncZeroFrac{} of seeds), and so does the isotropic multi-dimensional model ($A_{\mathrm{rupture}} \equiv 0$ in \ARupIsoSyncZeroFrac{}): dimensionality \emph{per se} is insufficient. Unilateral severance appears only once per-agent anisotropy of the attention profile is introduced ($A_{\mathrm{rupture}} = \ARupAnisoSync$), exactly the hypothesis of Proposition~\ref{prop:asym}. A second, independent generator operates at the schedule level: the asynchronous single-speaker schedule produces asymmetry even in the purely scalar model ($A_{\mathrm{rupture}} = \ARupScalarAsync$; paired $\Delta A = \ScheduleEffect$, Wilcoxon $p = \ScheduleEffectP$). Asymmetric rupture is therefore produced by \emph{per-agent anisotropic semantic criteria} together with \emph{asynchronous evaluation}, and any measurement of $A_{\mathrm{rupture}}$ under an asynchronous schedule must control for the second source.
+
+\subsection{A Real LLM Cognitive Layer Inside the Flagship Engine}
+\label{sec:llm-arm}
+Everything reported so far comes from a rule-based cognitive layer. To make the title-level claim literally true we replace that layer's decision function with a real language model, inside the same flagship scalar engine, and compare the two arms under identical initial conditions.
+
+Both arms share the same seed, hence the same initial graph, the same initial beliefs and the same random stream; the only difference is who decides. In the \emph{rule} arm every listener reaction follows Equations~\eqref{eq:scalar-update} and~\eqref{eq:weight-update}; in the \emph{LLM hybrid} arm, \LlmArmEventsPerRound{} cognitive events per round are sampled from the round's realised interactions and sent to \LlmArmModel{} in a \emph{single batched call}. The model returns, for each event, a stance update and one of \texttt{keep}/\texttt{mute}/\texttt{unfollow}/\texttt{block}, and the decision is applied to the graph \emph{inside} the round --- an unfollow really deletes the edge and enters the blocklist, so triadic closure cannot silently reinstate it. Interactions not covered by the LLM plan keep the rule behaviour, which is why we report coverage explicitly rather than calling the arm ``LLM-only'': over \LlmArmSeeds{} seeds and \LlmArmRounds{} rounds the engine performed \LlmArmInteractions{} interactions, of which \LlmArmDecidedEvents{} were decided by the LLM (\LlmArmCoverage{}). The arm is a \emph{hybrid}, so its effect sizes must be read as those of a partial cognitive substitution.
+
+\paragraph{Outcome.} The LLM layer did not move the network's structural regime (Figure~\ref{fig:llm_arm_scaling}A): modularity changed by $\LlmArmQDelta$ (paired $t$, $p = \LlmArmQP$) and rupture asymmetry by $\LlmArmRuptureDelta$ ($p = \LlmArmRuptureP$). The LLM's own behaviour is nevertheless informative: of the \LlmArmDecidedEvents{} applied decisions, \LlmArmActionKeep{} were \emph{keep}, \LlmArmActionMute{} \emph{mute}, \LlmArmActionUnfollow{} \emph{unfollow} and \LlmArmActionBlock{} \emph{block} --- the model does terminate relationships rather than only re-weighting them. The receipt is complete: \LlmArmApiCalls{} API calls (\LlmArmCacheHits{} cache hits), \LlmArmInputTokens{} input, \LlmArmOutputTokens{} output and \LlmArmThinkingTokens{} thinking tokens, with a parse success rate of \LlmArmParseRate.
+
+A partial cognitive substitution that leaves the structural regime unchanged is consistent with two readings our design cannot separate: either language-mediated severance decisions behave like the rule-based ones in aggregate, or the interventions are individually too small to matter at this coverage. We therefore state only what the experiment supports: within this engine, under this prompt contract, at \LlmArmCoverage{} interaction coverage, replacing the rule backend with a real LLM on a subset of interactions did not measurably change modularity or rupture asymmetry. We do \emph{not} claim that LLM cognition is irrelevant to topology evolution --- the offline multi-dimensional arm and the Phase~4 attribution ablation remain the quantitative evidence for that. The receipts are archived content-addressably, so the experiment replays at zero API cost.
+
+\subsection{Falsification of Hypothesis H1: Modularity Upper Bound and the $K$-Community Audit}
+\label{sec:bound-audit}
+Under extensive parameter sweeps ($T=\HOneRounds$ rounds over \HOneGridCount{} configurations), modularity values converged into the interval $[\HOneQendMin, \HOneQendMax]$, with a maximum of $\HOneMaxQ$ and a pre-registered pass rate of at most \HOnePassRate. Per Remark~\ref{rem:threshold}, this is an empirical statement about the dynamics rather than a universal impossibility: the audit in Section~\ref{sec:bound-audit-num} verifies why the realized modularity never exceeds $0.500$. The realized Louvain partition is bipolar ($K=2$) in \AuditMinBipolarFrac--\AuditMeanBipolarFrac{} of runs and at most tripartite ($K \le \AuditEngineMaxK$); even in the tripartite runs the attainable bound $1-1/K=0.667$ is not reached, because the communities are far from degree-volume balanced and the operative bound is the tighter $1-\sum_c a_c^2$. We therefore record \textbf{H1 as Falsified} on measurable grounds.
+
+\subsection{Numerical Audit of the Generalised Modularity Bound}
+\label{sec:bound-audit-num}
+The generalized bound of Proposition~\ref{prop:modularity} makes a falsifiable prediction for every cell of the benchmark matrix: the reported $Q$ must not exceed $1-1/K$ for the realized community count $K$. We verify this exhaustively over all \AuditCellsChecked{} (dataset $\times$ method) cells and over the \HOneGridCount{}-configuration evolution grid, and find \AuditViolations{} violations. Every high-modularity cell in Table~\ref{tab:sota_matrix} --- for instance $Q=0.735$ on Reddit ConvoKit under HK --- is therefore fully consistent with the theory: it corresponds to a realized $K=4$ partition whose bound is $0.750$, not to a violation of a universal $0.500$ cap (Appendix~\ref{app:bound-audit}).
 
 \subsection{Falsification of Hypothesis H2: Bridger Resilience}
-Hypothesis H2 posited that boundary-spanning Bridgers, exposed to dual-sided cognitive dissonance, would experience accelerated edge severance compared to intra-community nodes. We conducted an 8-stage ablation across 20 independent seeds ($T=60$ rounds), varying baseline tolerance, dynamic dissonance penalties, and cross-exposure sensitivities ($\mathrm{sens} \in [0.3, 0.9]$). As detailed in Figure~\ref{fig:bridger_ablation}, Bridgers achieved an edge retention rate of $0.664 \pm 0.038$ versus $0.511 \pm 0.012$ for other nodes ($p = 1.000$, negative gap of $-29.9\%$). Under extreme pressure discounts ($\mathrm{sens}=0.9, \tau=\theta$), Bridger retention remained higher ($0.787$ vs $0.736$). 
-
-The causal mechanism stems from topological centrality: peripheral nodes (Long-tail) quickly unfollow opposing Hubs after solitary dissonance spikes, whereas Bridgers, situated at cross-cutting structural holes, possess broader tolerance windows that absorb localized variance. Bridgers function as \emph{structural suspension cables} rather than fragile failure points. \textbf{H2 is formally Falsified}.
+Hypothesis H2 posited that boundary-spanning Bridgers, exposed to dual-sided cognitive dissonance, would experience accelerated edge severance compared to intra-community nodes. We conducted an 8-stage ablation across \HOneSeeds{} independent seeds ($T=\HOneRounds$ rounds), varying baseline tolerance, dynamic dissonance penalties, and cross-exposure sensitivities ($\mathrm{sens} \in [0.3, 0.9]$). As detailed in Figure~\ref{fig:bridger_ablation}, Bridgers achieved an edge retention rate of $\HTwoBridger$ versus $\HTwoOther$ for other nodes (seed-level gap $\HTwoGap$, 95\% CI $[\HTwoCILow, \HTwoCIHigh]$, seed-level $p = \HTwoP$), and remained higher even under extreme pressure discounts ($\mathrm{sens}=0.9$, $\tau=\theta$). The mechanism is topological centrality: peripheral nodes quickly unfollow opposing Hubs after solitary dissonance spikes, whereas Bridgers, at cross-cutting structural holes, possess broader tolerance windows that absorb localized variance --- they are \emph{structural suspension cables} rather than fragile failure points. \textbf{H2 is formally Falsified}. All inference uses the seed as the independent statistical unit, avoiding the pseudo-replication inherent in pooling nodes across seeds.
 
 \subsection{Cross-Topology Topological Invariance (RQ2)}
-Phase transition sweeps across Erdos-Renyi (ER), Barabasi-Albert (BA) Scale-Free \citep{barabasi1999emergence}, Watts-Strogatz (WS) Small-World \citep{watts1998collective}, and Empirical Bipolar topologies confirm that the critical tolerance threshold consistently occurs within $\theta^* \in [0.50, 0.55]$ (Figure~\ref{fig:phase_transition}B). Homogeneous baseline networks devoid of Bridgers split into completely isolated subgraphs ($\text{Giant Component Fraction} = 0.543$, cross-edges $= 0$), whereas heterogeneous archetype graphs maintain global weak reachability ($\text{Giant Frac} = 0.999$, cross-edges $= 5.9\%$).
+Phase transition sweeps across Erdos-Renyi (ER), Barabasi-Albert (BA) Scale-Free \citep{barabasi1999emergence}, Watts-Strogatz (WS) Small-World \citep{watts1998collective}, and Empirical Bipolar topologies were re-measured on a fine $\theta$ grid (step \ThresholdGridStep{} over $[\ThresholdGridMin, \ThresholdGridMax]$, \ThresholdSeeds{} seeds per cell). \emph{We report that this measurement contradicts the previously claimed topology-invariant threshold}: under a connectivity-recovery criterion ($\theta^*_{\mathrm{frag}}$) only \ThresholdFragInBand{} of \ThresholdFragEstimates{} seed-level estimates fall in the originally asserted band $[\ThresholdBandLow, \ThresholdBandHigh]$; under a modularity-collapse criterion ($\theta^*_Q$) only \ThresholdQInBand{} do, and under a polarization-collapse criterion ($\theta^*_{\Pi}$) only \ThresholdPolInBand{} do. What \emph{is} robust is that the critical tolerance is topology-dependent rather than universal: $\theta^*_{\mathrm{frag}}$ is \ThresholdFragErdosRenyi{} (ER), \ThresholdFragScaleFree{} (BA), \ThresholdFragSmallWorld{} (WS) and \ThresholdFragEmpiricalBipolar{} (empirical bipolar), a cross-topology spread of \ThresholdFragSpread. The modularity-collapse criterion is ill-suited here: small-world and empirical-bipolar networks retain a \emph{structural} modularity floor, so $\theta^*_Q$ is right-censored for \ThresholdQCensoredSmallWorld{}/\ThresholdQCensoredEmpiricalBipolar{} of \ThresholdSeeds{} seeds --- reported explicitly rather than hidden. Figure~\ref{fig:phase_transition}C shows the shattering-to-connectivity transition directly; homogeneous baseline networks devoid of Bridgers split into isolated subgraphs ($\text{Giant Component Fraction} = \PhaseOneHomoGiant$, cross-edges $= \PhaseOneHomoCross$), whereas heterogeneous archetype graphs maintain global weak reachability ($\text{Giant Frac} = \PhaseOneHeteroGiant$, cross-edges $= \PhaseOneHeteroCross$). Appendix~\ref{app:threshold} reports all three criteria with their per-topology estimates and censoring counts.
+
+\subsection{Network-Size Sensitivity}
+\label{sec:scaling}
+Every experiment above was run on networks of $N \in [60, 100]$, so a reviewer will reasonably ask whether the findings are properties of the mechanism or artefacts of small graphs. We therefore re-ran the flagship engine across $N \in \{\ScalingSizes\}$ (\ScalingSeeds{} seeds, \ScalingRounds{} rounds) and, crucially, on a \emph{genuinely empirical} induced subgraph of the public SNAP Higgs edge list with $N = \ScalingRealHiggsN$ nodes.
+
+The engine's default initial topology is Erd\H{o}s--R\'enyi with a fixed connection probability $p=0.08$, so $|E| = O(N^2)$ and the mean degree grows linearly with $N$: scaling $N$ naively scales the \emph{density} as well, and any density-dependent quantity would masquerade as a size effect. We ran two arms differing in exactly this respect. In the \textbf{density-matched} arm we hold the mean in-degree fixed at $\bar{d} = 7.92$ --- the expected mean in-degree of the paper's main configuration ($N=100$, $p=0.08$) --- by setting $p(N) = \bar{d}/(N-1)$; the $N=100$ cell coincides with the main configuration, so the arms differ only in the parameter being varied. In the \textbf{fixed-$p$} arm we keep $p=0.08$ and let the density grow with $N$, which is what a naive scaling protocol does.
+
+The two arms disagree, and the disagreement is the point. Under density matching, $Q$ is flat: $\ScalingMatchedBigQ$ at $N=\ScalingDensityCompareN$ against $\ScalingBigQ$ at the largest size, with the seed-level regression of $Q$ on $\log N$ giving slope \ScalingQSlope (95\% CI $[\ScalingQSlopeCILow, \ScalingQSlopeCIHigh]$, significant: \ScalingQSlopeSignificant). Under fixed $p$, the same engine on the same seeds collapses to $Q = \ScalingFixedPBigQ$ at $N=\ScalingDensityCompareN$, because the mean degree has grown from \ScalingMatchedBigDensity to \ScalingFixedPBigDensity (the worst cell is $N=\ScalingFixedPCollapseN$ with $Q=\ScalingFixedPCollapseQ$ at mean degree \ScalingFixedPCollapseDensity, $n=\ScalingFixedPBigSeeds$ seeds). \emph{An analyst who scaled the graph naively would have concluded that the mechanism breaks down above a few hundred nodes; the collapse is entirely a density artefact.} This is the most consequential methodological point in the present study, and it is why the size claim is made under density matching rather than under the engine's default configuration.
+
+\begin{table*}[t]
+\centering
+\small
+\caption{\textbf{Network-Size Sensitivity of the Flagship Engine.} Means $\pm$ 95\% CI over \ScalingSeeds{} seeds per size, with the realised mean in-degree shown so that the two density protocols can be read apart; the last row repeats the experiment on an induced subgraph of the real SNAP Higgs edge list. Generated from \texttt{results/phase7\_scaling.json} by \texttt{scripts/generate\_paper\_tables.py}.}
+\label{tab:scaling}
+\input{tables/scaling}
+\end{table*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig8_llm_arm_and_scaling.png}
+\caption{\textbf{(A) A real LLM cognitive layer does not move the structural regime; (B) the size effect is a density effect.} (A) Seed-level paired difference (LLM $-$ rule) for the four scale-invariant metrics of Phase~6; the edge-count difference and the full receipt are in Table~\ref{tab:llm_arm}. No difference is significant. (B) Final modularity $Q$ against $\log N$ for the density-matched arm (blue, mean in-degree held fixed) and for the fixed-$p$ arm (red, mean in-degree growing from $\approx 5$ to $\approx 80$; dotted, right axis). The red collapse is entirely a density artefact; the green dotted line marks the real SNAP Higgs subgraph at $N=1000$.}
+\label{fig:llm_arm_scaling}
+\end{figure*}
+
+The structural regime is stable in $N$ under density matching (Figure~\ref{fig:llm_arm_scaling}B): modularity at the largest size is $Q = \ScalingBigQ$ (against $Q = \ScalingSmallQ$ at the smallest size) and the seed-level regression of $Q$ on $\log N$ has slope \ScalingQSlope (95\% CI $[\ScalingQSlopeCILow, \ScalingQSlopeCIHigh]$, significant: \ScalingQSlopeSignificant). The same holds for rupture asymmetry (slope \ScalingRuptureSlope, CI $[\ScalingRuptureSlopeCILow, \ScalingRuptureSlopeCIHigh]$) and for the bridger gap (slope \ScalingBridgerGapSlope). On the real empirical subgraph at $N = \ScalingRealHiggsN$ the engine yields $Q = \ScalingRealHiggsQ$, giant-component fraction \ScalingRealHiggsGiant and bridger gap \ScalingRealHiggsBridgerGap; a convergence check at $N=\ScalingConvergenceN$ confirms that \ScalingConvergenceRoundTwo{} rounds are not a truncation artefact (paired $t$, $p=\ScalingConvergenceP$). This matters for one specific claim: had $Q$ grown with $N$ because larger graphs admit more communities, the falsification of H1 would have been a small-graph artefact. It does not --- under density matching $Q$ stays inside $[0.427, 0.456]$ from $N=60$ to $N=1000$, i.e.\ below $0.5$, so it violates neither the bipolar bound ($K=2$) nor the tripartite one ($K=3$), and the audit of Section~\ref{sec:bound-audit-num} is not overturned at larger $N$. The $\log N$ slope is small and positive rather than zero: $Q$ rises by less than $0.03$ across a sixteen-fold size range.
 
 % -------------------------------------------------------------
 % 5. Counterfactual Platform Interventions
@@ -321,19 +430,11 @@ Phase transition sweeps across Erdos-Renyi (ER), Barabasi-Albert (BA) Scale-Free
 \section{Counterfactual Platform Governance}
 \label{sec:interventions}
 
-Addressing RQ3, we evaluated three counterfactual platform interventions:
-\begin{enumerate}[leftmargin=*]
-    \item \textbf{Policy 1 (Diversified Recommendation)}: Injecting cross-ideological exposures with rate $\rho_{\mathrm{div}} \in [0.05, 0.30]$.
-    \item \textbf{Policy 2 (Bridger Amplification)}: Subsidizing feed impression weight for active bridgers by $+50\%$.
-    \item \textbf{Policy 3 (Hub De-amplification)}: Throttling high-dissonance broadcast impressions by $-50\%$.
-    \item \textbf{Combined Strategy}: Concurrent execution of Policies 1--3.
-\end{enumerate}
+Addressing RQ3, we evaluated three counterfactual platform interventions --- \textbf{Policy 1}, diversified recommendation injecting cross-ideological exposures at rate $\rho_{\mathrm{div}} \in [0.05, 0.30]$; \textbf{Policy 2}, subsidizing feed impression weight for active bridgers by $+50\%$; \textbf{Policy 3}, throttling high-dissonance broadcast impressions by $-50\%$ --- plus a \textbf{Combined Strategy} executing all three concurrently.
 
-As shown in Figure~\ref{fig:policy_dose_response}A, Policy 1 reduced modularity from $0.442 \pm 0.019$ to $0.404 \pm 0.025$ ($p < 0.0001$) and increased cross-camp edges by $+115\%$. Combined governance further expanded cross-camp edges by $+210\%$ (from $2.0\%$ to $6.2\%$) and raised information reach to $0.555 \pm 0.188$. 
+As shown in Figure~\ref{fig:policy_dose_response}A, Policy 1 reduced modularity by $\HThreeDeltaQ$ ($p = \HThreeDeltaQP$) and increased the cross-camp edge share from \CrossEdgeBase to \CrossEdgePolicyOne (a gain of \CrossEdgePolicyOneGain); combined governance further raised it to \CrossEdgeComb (a gain of \CrossEdgeCombGain). Dose-response sweeps (Figure~\ref{fig:policy_dose_response}B) uncover a strictly monotonic inverse relationship between recommendation rate and modularity: each additional $5\%$ injection of counter-attitudinal content yields a $\Delta Q \approx -0.014$ decrease.
 
-Dose-response sweeps (Figure~\ref{fig:policy_dose_response}B) uncover a strictly monotonic inverse relationship between recommendation rate and modularity: each additional 5\% injection of counter-attitudinal content yields a $\Delta Q \approx -0.014$ decrease. 
-
-However, \textbf{Hypothesis H3 is only Partially Supported}: while reach improved by $>+100\%$ (surpassing the $\geq +35\%$ threshold), modularity did not drop by $\Delta Q \geq -0.20$. This indicates a fundamental \emph{homophilic inertia}: moderate platform recommendations can construct cross-cutting communicative bridges, but cannot dismantle clustered community identity without completely overriding user agency.
+\textbf{Hypothesis H3 is not supported.} The pre-registered criterion is a conjunction, and neither limb is met. Modularity does not fall by $\Delta Q \leq -0.20$ under any tested policy: the measured reduction is \HThreeDeltaQ for diversified recommendation and \HThreeCombDeltaQ{} for combined governance, both highly significant but an order of magnitude smaller than the pre-registered threshold. The reach limb is met only in the combined condition: diversified recommendation alone shifts the cross-camp reach by $\HThreeReachDelta$ (relative gain \HThreeReachRel, $p = \HThreeReachP$, not significant), while combined governance reaches $\HThreeCombReachDelta$ (relative gain \HThreeCombReachRel, $p = \HThreeCombReachP$). We read this as a genuine \emph{homophilic inertia}: moderate platform recommendations can construct cross-cutting communicative bridges and measurably soften echo-chamber boundaries, but they cannot dismantle clustered community identity without overriding user agency. This is a quantitative limit on the intervention, not a failure of the measurement.
 
 % -------------------------------------------------------------
 % 6. Discussion and Conclusion
@@ -341,48 +442,92 @@ However, \textbf{Hypothesis H3 is only Partially Supported}: while reach improve
 \section{Discussion and Conclusion}
 \label{sec:discussion}
 
-By synthesizing multi-agent cognitive simulation with dynamic network analysis, this work demonstrates that the co-evolution of LLM reasoning and graph connectivity generates systemic patterns unaccounted for by static or scalar models. Our findings demonstrate that:
-\begin{enumerate}[leftmargin=*]
-    \item Multi-dimensional semantic alignment naturally generates unilateral link severance, providing micro-foundations for social relationship stickiness.
+By synthesizing multi-agent cognitive simulation with dynamic network analysis, this work shows that the co-evolution of LLM reasoning and graph connectivity generates systemic patterns unaccounted for by static or scalar models:
+\begin{enumerate}
+    \item Modularity in bipolar network evolution is bounded by $1-1/K$ with $K$ the realized community count, and our dynamics stay bipolar or at most tripartite ($K \le \AuditEngineMaxK$) with $Q \le \HOneMaxQ$ throughout --- a measurable, rather than rhetorical, refutation of unbounded-modularity expectations.
     \item Boundary-spanning Bridgers exhibit surprising structural resilience, serving as essential buffers against network shattering.
-    \item Platform recommendations exhibit monotonic depolarization efficacy, constrained by structural homophilic inertia.
+    \item Asymmetric relationship severance is produced by per-agent anisotropic semantic criteria, with asynchronous evaluation acting as an independent and separable source; measuring the former requires controlling for the latter.
+    \item Platform recommendations exhibit monotonic depolarization efficacy, constrained by structural homophilic inertia that bounds the achievable $\Delta Q$.
+    \item The structural regime is robust to the cognitive backend and to network size --- but only under density matching; a naive scaling protocol manufactures a collapse that is an artefact of the density confound, not of the mechanism.
 \end{enumerate}
 
 \subsection{Limitations and Future Work}
-Our study employs standardized 3-dimensional semantic embeddings and curated prompt profiles to ensure bounded computational costs. Future iterations should scale to open-ended text corpora and explore adversarial coordinated disinformation agents. All software, benchmark datasets, and figure generation scripts are provided in our open-source release to support reproducible computational social science.
+Six limitations are material, each stated in full in Appendix~\ref{app:limitations}: the benchmark set is mostly surrogate rather than published data; the real-LLM arms are small in interaction coverage; the attribution ablation spans $d \in \{1,3\}$ and two schedules, so Proposition~\ref{prop:asym} remains an existence statement; the reach metric's seed variance is large relative to the reported policy effects; the claim that scalar models cannot produce asymmetric rupture holds only under synchronous evaluation; and the critical-tolerance estimate is \emph{criterion-dependent}.
 
 % -------------------------------------------------------------
 % AI Assistance and Ethical Disclosure
 % -------------------------------------------------------------
 \section*{AI Assistance and Ethical Disclosure}
+\label{sec:ai-disclosure}
 In strict adherence to the NeurIPS 2026 and ACM publication ethics guidelines on generative AI usage:
-\begin{enumerate}[leftmargin=*]
-    \item \textbf{LLM as Experimental Subject}: In Phase~2, commercial LLM APIs were utilized exclusively as empirical conversational subjects to examine micro-cognitive dissonance updates and relationship tie actions. All 60 dyadic evaluations were logged with semantic hashes and token accounting in our cost ledger (Appendix~\ref{app:prompts}).
-    \item \textbf{Assistive Tooling}: Antigravity and AI coding assistants were employed solely for code refactoring, grammar verification, and simulation harness automation. All formal mathematical derivations, theorem proofs, experimental designs, and empirical analyses were formulated, proven, and verified by the authors. No LLM or generative AI agent holds authorship credit.
+\begin{enumerate}
+    \item \textbf{LLM as Experimental Subject}: In Phase~2, an external LLM backend was used exclusively as the empirical conversational subject to examine micro-cognitive dissonance updates and relationship tie actions; the archived execution receipts record \LlmCalls{} batched API calls covering \LlmPairs{} dyadic evaluations across \LlmSeeds{} seeds, with per-call accounting kept in the cost ledger (Appendix~\ref{app:prompts}). In Phase~6 the same unified decision layer is mounted inside the flagship engine (Section~\ref{sec:llm-arm}), accounted separately in \LlmArmApiCalls{} API calls with \LlmArmInputTokens{} input, \LlmArmOutputTokens{} output and \LlmArmThinkingTokens{} thinking tokens.
+    \item \textbf{Assistive Tooling}: AI coding assistants were employed for code refactoring, grammar verification, simulation harness automation, and an independent full-chain audit of the manuscript, results, and code against a published academic-research integrity checklist. All formal mathematical derivations, theorem proofs, experimental designs, and empirical analyses were formulated, proven, and verified by the authors. No LLM or generative AI agent holds authorship credit.
 \end{enumerate}
 
 % -------------------------------------------------------------
 % Ethics and Broader Impacts
 % -------------------------------------------------------------
 \section*{Ethics and Broader Impacts}
-This research models opinion dynamics and platform intervention mechanisms on public social networks. All benchmark networks (SNAP Higgs, Twitter 2020 Election, Reddit ConvoKit, Birdwatch Community Notes, and DEBATE) are derived from publicly accessible academic archives or fully anonymized synthetic structural topologies. No identifiable private human data or private communications were scraped, intercepted, or re-identified. Research findings on platform interventions are presented to foster scientific understanding of algorithmic diversity and depolarizing platform governance.
+\label{sec:ethics}
+This research models opinion dynamics and platform intervention mechanisms on public social networks. All benchmark networks are either derived from publicly accessible academic archives or are explicitly labelled synthetic structural surrogates; the one empirical network uses the publicly released, anonymized SNAP Higgs edge list, and no private communications, credentials, or personally identifiable content were collected, intercepted, or re-identified. Three misuse channels deserve naming --- asymmetric rupture is a recipe for making polarization faster and less visible; the counterfactual platform policies are efficiency results, not prescriptions; and the surrogate benchmarks are not the datasets they are named after --- and they are stated in full, with their mitigations, in Appendix~\ref{app:ethics}.
 
 % -------------------------------------------------------------
 % Reproducibility and Code Availability
 % -------------------------------------------------------------
 \section*{Reproducibility and Code Availability}
-The complete software package, including dataset loaders, baseline implementations, test suites, and figure generation pipelines, is accessible at \url{https://github.com/meiluosi/NetworkEvolveLab}. All experimental runs are pinned to explicit random seeds, with cost ledgers, execution receipts, and pre-computed benchmark JSON files maintained in the repository.
+\label{sec:repro}
+\ifanonymized
+The complete software package --- dataset loaders, baseline implementations, real-data derivation recipes, the test suite, and the figure and table generation pipelines --- is accessible at \url{https://anonymous.4open.science/r/NetworkEvolveLab}, and all experimental runs are pinned to explicit random seeds. Two machine-checkable guarantees protect the numbers in this manuscript: (i) the tables in Section~\ref{sec:findings} are generated from the frozen result files by \texttt{scripts/generate\_paper\_tables.py}, and a CI job fails if they drift; (ii) \texttt{results/PROVENANCE.json} records, for every experimental artifact, the generating command, the SHA256 digest, the repository commit, and the runtime environment, and a CI job fails if any artifact is modified without updating that manifest.
+\else
+The complete software package --- dataset loaders, baseline implementations, real-data derivation recipes, the test suite, and the figure and table generation pipelines --- is accessible at \url{https://github.com/meiluosi/NetworkEvolveLab}, and all experimental runs are pinned to explicit random seeds. Two machine-checkable guarantees protect the numbers in this manuscript: (i) the tables in Section~\ref{sec:findings} are generated from the frozen result files by \texttt{scripts/generate\_paper\_tables.py}, and a CI job fails if they drift; (ii) \texttt{results/PROVENANCE.json} records, for every experimental artifact, the generating command, the SHA256 digest, the repository commit, and the runtime environment, and a CI job fails if any artifact is modified without updating that manifest.
+\fi
 
 % -------------------------------------------------------------
 % References
+%
+% ICWSM 2026 mandates the following order:
+%     body  ->  references  ->  Paper Checklist  ->  appendices
+% (the checklist "should be included as the first section after the references
+%  in your submission, but before any appendices", and it does not count towards
+%  the page limit).  AAAI's generic rule that a paper concludes with the
+%  references is therefore superseded here by the host conference's explicit
+%  ordering requirement.  See docs/ARS_FULL_CHAIN_AUDIT.md, item F-27.
 % -------------------------------------------------------------
-\bibliographystyle{plainnat}
+%
+% 参考文献
+%
+% AAAI 格式说明（formatting_instructions.tex, "References" 小节）明确写着：
+%   "References may be the same size as surrounding text. However, in this
+%    section (only), you may reduce the size to \small (9pt) if your paper
+%    exceeds the allowable number of pages. Making it any smaller than 9 point
+%    with 10 point linespacing, however, is not allowed."
+% ICWSM 2026 的正文+参考文献上限是 11 页，本稿确实超页，因此按官方允许的
+% 例外把参考文献降到 \small（9pt/10pt，不低于官方下限）。
+%
+% ICWSM 2026 要求的章节顺序：
+%     body  ->  references  ->  Paper Checklist  ->  appendices
+% （Checklist 放在参考文献之后、附录之前；Checklist 与附录都**不计入**页数上限）
+% 见 docs/ARS_FULL_CHAIN_AUDIT.md 的 F-27。
+% -------------------------------------------------------------
+{\small
+\let\oldthebibliography\thebibliography
+\renewcommand{\thebibliography}[1]{%
+  \oldthebibliography{#1}%
+  \setlength{\itemsep}{0pt plus 0.2ex}%
+  \setlength{\parsep}{0pt}%
+}
 \bibliography{references}
+}
+
+% -------------------------------------------------------------
+% ICWSM 2026 mandatory paper checklist (desk-reject without it)
+% -------------------------------------------------------------
+\input{checklist}
 
 % -------------------------------------------------------------
 % Appendix / Supplementary Information
 % -------------------------------------------------------------
-\clearpage
 \appendix
 \input{appendix}
 

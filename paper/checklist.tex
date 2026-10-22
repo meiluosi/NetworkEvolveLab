@@ -1,0 +1,147 @@
+% -------------------------------------------------------------
+% ICWSM 2026 mandatory Paper Checklist.
+%
+% Source of the question list: the official AAAI ICWSM paper checklist
+% (arXiv:2501.09950, "AAAI ICWSM Paper Checklist", written by the AAAI ICWSM
+% 2024 Organizing Committee).  The official instructions say to delete the
+% "Overview" and "Detailed Instructions" sections and to keep only the
+% Checklist heading together with the questions and the answers.
+%
+% The official template colours the answers via \answerYes/\answerNo/\answerNA
+% (xcolor).  AAAI's own formatting rules forbid colour in the body text, so we
+% keep the *macro names* (as the checklist requires answers to be given with
+% the provided macros) but render them without colour.  No question wording
+% has been altered.
+% -------------------------------------------------------------
+
+\newcommand{\answerYes}[1]{\textbf{Yes} --- #1}
+\newcommand{\answerNo}[1]{\textbf{No} --- #1}
+\newcommand{\answerNA}[1]{\textbf{NA} --- #1}
+
+\section{Paper Checklist}
+\label{sec:checklist}
+
+\begin{enumerate}
+\item For most authors\ldots
+\begin{enumerate}
+    \item Would answering this research question advance science without violating social contracts, such as violating privacy norms, perpetuating unfair profiling, exacerbating the socio-economic divide, or implying disrespect to societies or cultures?
+    \answerYes{Yes. The object of study is a \emph{model} of co-evolution between cognitive and topological state, evaluated on synthetic initial conditions and on one public, de-identified network. We do not profile individuals, we do not collect or re-identify any personal data, and no claim in the paper is about a demographic group.}
+
+    \item Do your main claims in the abstract and introduction accurately reflect the paper's contributions and scope?
+    \answerYes{Yes. Every quantitative statement in the abstract and introduction is emitted by \texttt{scripts/generate\_paper\_tables.py} directly from the frozen result files (\texttt{results/*.json}); the \texttt{--check} mode of that script fails the build if any macro in the text drifts from the results. Pre-registered hypotheses that failed are reported as failures (H1, H2 falsified; H3 not supported) rather than reframed.}
+
+    \item Do you clarify how the proposed methodological approach is appropriate for the claims made?
+    \answerYes{Yes. Sections~\ref{sec:theory} and~\ref{sec:theory-scalar} state which engine produced which numbers (the scalar flagship engine, $d=1$, produces every H1/H2/H3 and benchmark figure; the multi-dimensional semantic arm, $d=3$, is used only for the LLM experiments and the attribution control arms), and Section~\ref{sec:attribution} isolates the two candidate mechanisms for asymmetric rupture instead of asserting one.}
+
+    \item Do you clarify what are possible artifacts in the data used, given population-specific distributions?
+    \answerYes{Yes. Five of the six benchmark networks are explicitly labelled \emph{surrogate} calibrations that reproduce published structural statistics but are not the datasets themselves; only \textsc{SNAP Higgs} is derived from the real public edge list. The SNAP file contains no ideology labels, so the two camps used as initial beliefs are a \emph{topology-derived structural proxy} obtained from Louvain communities of the induced subgraph, and are not human-annotated stance. The induced-subgraph sampling (high-degree node pools) is a further selection bias, and both facts are stated in Section~\ref{sec:benchmark} and Appendix~\ref{app:datasets}.}
+
+    \item Did you describe the limitations of your work?
+    \answerYes{Yes. Section~\ref{sec:discussion} and Appendix~\ref{app:prompts} state the limitations explicitly: the LLM arm is a \emph{mixed} backend whose interaction coverage is reported rather than hidden; the earlier LLM arm's receipts were incomplete and this is disclosed; the surrogate networks are not the real datasets; and the engine's scalar update rule is an abstraction, not a model of human cognition.}
+
+    \item Did you discuss any potential negative societal impacts of your work?
+    \answerYes{Yes. Section~\ref{sec:ethics} discusses that (i) a validated model of asymmetric rupture could be used to design interventions that accelerate polarization, (ii) the counterfactual platform policies are efficiency findings, not prescriptions, and (iii) the surrogate calibrations must not be cited as measurements of any real population.}
+
+    \item Did you discuss any potential misuse of your work?
+    \answerYes{Yes. Section~\ref{sec:ethics} notes the misuse channels we consider most plausible --- automating targeted unfollow/block policies at scale, and citing surrogate benchmarks as real-population evidence --- and states the safeguards that make them harder (seeded, released, audited pipelines; the raw public edge list is not redistributed).}
+
+    \item Did you describe steps taken to prevent or mitigate potential negative outcomes of the research, such as data and model documentation, data anonymization, responsible release, access control, and the reproducibility of findings?
+    \answerYes{Yes. All runs are seeded and reproducible bit-for-bit; every result file is covered by an auto-generated provenance manifest with SHA-256 hashes (\texttt{results/PROVENANCE.json}); every real LLM call is stored as a content-addressed receipt so a run can be replayed without further API spend; the raw public edge list is deliberately excluded from version control and only its hash is published; and the human-ideology variable for the real network is a documented proxy rather than an inferred personal trait.}
+
+    \item Have you read the ethics review guidelines and ensured that your paper conforms to them?
+    \answerYes{Yes. We have read the ICWSM ethics guidance and the ACL ethics reading list referenced by the checklist; this submission contains no human-subject data, no crowdsourcing, and no personally identifiable information.}
+\end{enumerate}
+
+\item Additionally, if your study involves hypotheses testing\ldots
+\begin{enumerate}
+    \item Did you clearly state the assumptions underlying all theoretical results?
+    \answerYes{Yes. Proposition~\ref{prop:modularity} assumes a partition into $K$ non-empty groups and a symmetric weighted adjacency matrix; Proposition~\ref{prop:asym} assumes $d \geq 2$, per-agent anisotropic attention profiles $\mathbf{w}_i \neq \mathbf{w}_j$ that are non-collinear, and a synchronous update schedule (the asynchronous case is separated out in Remark~\ref{rem:twosources}).}
+
+    \item Have you provided justifications for all theoretical results?
+    \answerYes{Yes. Both propositions are proved in Appendix~\ref{app:proofs}, and the numerical claim that every reported modularity value satisfies the bound is discharged by an exhaustive per-configuration audit (Phase~5, Section~\ref{sec:bound-audit-num}) rather than by assertion.}
+
+    \item Did you discuss competing hypotheses or theories that might challenge or complement your theoretical results?
+    \answerYes{Yes. Remark~\ref{rem:twosources} separates two distinct generators of asymmetric rupture --- per-agent anisotropy and asynchronous scheduling --- and the attribution ablation (Section~\ref{sec:attribution}) shows that both contribute, so the asymmetry we measure is not evidence for semantic dimensionality per se.}
+
+    \item Have you considered alternative mechanisms or explanations that might account for the same outcomes observed in your study?
+    \answerYes{Yes. The attribution ablation is exactly such a control (six arms isolating dimensionality, anisotropy and scheduling). For the size study we additionally pre-empt the obvious alternative explanation: because the engine's default Erdős--Rényi density is fixed, scaling $N$ also scales the density, so we run a density-matched arm and a fixed-$p$ arm and report both.}
+
+    \item Did you address potential biases or limitations in your theoretical framework?
+    \answerYes{Yes. We state that the upper bound $Q \le 1 - 1/K$ is a property of the partition, not a mechanism-specific law, and that our H1 falsification rests on the measurable facts --- the realized number of communities and the exhaustive bound audit --- rather than on an assumed universal cap.}
+
+    \item Have you related your theoretical results to the existing literature in social science?
+    \answerYes{Yes. Section~\ref{sec:related} relates the model to fixed-topology opinion dynamics (DeGroot, Hegselmann--Krause, Friedkin--Johnsen), co-evolving networks, LLM-as-subject simulations, echo-chamber and recommendation-feedback literature, and modularity-based community detection with its known upper bounds.}
+
+    \item Did you discuss the implications of your theoretical results for policy, practice, or further research in the social science domain?
+    \answerYes{Yes. Section~\ref{sec:discussion} translates the counterfactual policy arms into concrete implications for platform interventions (and reports that only one of three pre-registered interventions is not supported), and states the further-research directions that the negative results open up.}
+\end{enumerate}
+
+\item Additionally, if you are including theoretical proofs\ldots
+\begin{enumerate}
+    \item Did you state the full set of assumptions of all theoretical results?
+    \answerYes{Yes, in the statements of Proposition~\ref{prop:modularity} and Proposition~\ref{prop:asym} and in Appendix~\ref{app:proofs}, where the assumptions are restated before each derivation.}
+
+    \item Did you include complete proofs of all theoretical results?
+    \answerYes{Yes, Appendix~\ref{app:proofs} contains the full derivation of the generalized modularity bound (Appendix~\ref{app:proof_modularity}) and of the positive-measure asymmetry result (Appendix~\ref{app:proof_polytope}), including the construction of the open ball in the difference-vector coordinates.}
+\end{enumerate}
+
+\item Additionally, if you ran machine learning experiments\ldots
+\begin{enumerate}
+    \item Did you include the code, data, and instructions needed to reproduce the main experimental results (either in the supplemental material or as a URL)?
+    \answerYes{Yes. The repository ships the full engine, the seeded experiment drivers, a single \texttt{reproduce.py} entry point with \texttt{--experiments}, \texttt{--paper} and \texttt{--llm-arm} switches, the frozen result files, the provenance manifest with hashes, and the content-addressed LLM call archive. Section~\ref{sec:repro} documents the exact commands.}
+
+    \item Did you specify all training details (e.g., data splits, hyperparameters, how they were chosen)?
+    \answerYes{Yes. There is no model training in the classical sense, but every quantity that determines a run --- agent tolerances, attraction threshold, formation probability, blocking threshold, recommendation friction, update deltas, damping, archetype mixture, round counts, seeds, and the LLM prompt contract and decoding parameters --- is tabulated in Appendix~\ref{app:hyperparams} with the pre-registration document that fixes the pre-analysis choices. Values that were chosen after inspecting pilot runs are labelled as such in the audit report.}
+
+    \item Did you report error bars (e.g., with respect to the random seed after running experiments multiple times)?
+    \answerYes{Yes. Every reported quantity is a seed-level mean with a 95\% confidence interval over \BenchSeeds{} independent seeds, and paired comparisons use a paired $t$-test with the seed as the independent unit; we deliberately avoid treating nodes as independent samples, which would be pseudo-replication.}
+
+    \item Did you include the total amount of compute and the type of resources used (e.g., type of GPUs, internal cluster, or cloud provider)?
+    \answerYes{Yes. The simulation engine is CPU-only and deterministic: it needs no GPU, and the whole benchmark suite runs on a single multi-core CPU with at most \NumProcs{} worker processes, one seed per process. The only remote compute is the LLM arm, whose cost is reported exactly as API calls and input/output/thinking tokens (\LlmArmApiCalls{} calls, \LlmArmInputTokens{} input, \LlmArmOutputTokens{} output, \LlmArmThinkingTokens{} thinking tokens for the model \LlmArmModel); the content-addressed archive makes a replay free of further API spend.}
+
+    \item Do you justify how the proposed evaluation is sufficient and appropriate to the claims made?
+    \answerYes{Yes. The claims are mechanism-level and are matched by mechanism-level controls: the attribution ablation is a $2\times2\times3$ design with twenty seeds per arm, the upper-bound claim is checked by an exhaustive audit of every reported modularity value against the derived bound, and the scale claim is checked on both synthetic and real networks with an explicit density-matching control.}
+
+    \item Do you discuss what is ``the cost'' of misclassification and fault (in)tolerance?
+    \answerYes{Yes, in the two places where an error is possible. First, the LLM decision layer: decisions that fail to parse are counted, reported, and explicitly fall back to \texttt{keep} rather than being silently repaired, and the interaction coverage of the LLM arm is published next to the parse-success rate so that the cost of a malformed decision is visible rather than hidden. Second, the platform policies: each counterfactual arm reports the effect size of the intervention it recommends, so choosing the wrong policy is quantified instead of assumed away.}
+\end{enumerate}
+
+\item Additionally, if you are using existing assets (e.g., code, data, models) or curating/releasing new assets\ldots
+\begin{enumerate}
+    \item If your work uses existing assets, did you cite the creators?
+    \answerYes{Yes. The SNAP Higgs edge list is cited to its creators, and every baseline framework we implement (DeGroot, Hegselmann--Krause, Friedkin--Johnsen, generative agents, prompt-driven rewiring) is cited to its original publication in the Related Work section and in the benchmark table.}
+
+    \item Did you mention the license of the assets?
+    \answerYes{Yes. Appendix~\ref{app:datasets} now states the license of the only third-party asset we use --- the SNAP Higgs edge list, distributed under the SNAP dataset terms of use --- and notes that we redistribute neither the raw file nor node-level records.}
+
+    \item Did you include any new assets in the supplemental material or as a URL?
+    \answerYes{Yes. All new artifacts --- the frozen result files, the machine-generated tables and macros, the provenance manifest with SHA-256 hashes, the figure sources, and the content-addressed LLM call archive --- are published with the code under a permissive open-source license.}
+
+    \item Did you discuss whether and how consent was obtained from people whose data you're using/curating?
+    \answerNA{NA. The only human-generated data we touch is a public, de-identified edge list released by SNAP with no message content, no attributes and no user-identifying fields; we neither redistribute it nor derive node-level records from it, and the public release itself carries the collection terms. We collect no data of our own, so there is no consent step in our pipeline.}
+
+    \item Did you discuss whether the data you are using/curating contains personally identifiable information or offensive content?
+    \answerYes{Yes. The released SNAP file contains only pseudonymous integer node identifiers and directed edges --- no text, no handles, no attributes --- so it carries no offensive content and no directly identifying information; we still exclude it from version control and publish only its SHA-256 so that a reader can verify they obtained the same bytes.}
+
+    \item If you are curating or releasing new datasets, did you discuss how you intend to make your datasets FAIR (see )?
+    \answerNA{NA. We release no new dataset. The artifacts we publish are result files and code, not data collections.}
+
+    \item If you are curating or releasing new datasets, did you create a Datasheet for the Dataset (see )?
+    \answerNA{NA. As above, no new dataset is released; the provenance manifest plays the corresponding role for the result artifacts by recording, for each file, the exact command that produced it and its hash.}
+\end{enumerate}
+
+\item Additionally, if you used crowdsourcing or conducted research with human subjects\ldots
+\begin{enumerate}
+    \item Did you include the full text of instructions given to participants and screenshots?
+    \answerNA{NA. No human participants were recruited and no crowdsourcing was performed.}
+
+    \item Did you describe any potential participant risks, with mentions of Institutional Review Board (IRB) approvals?
+    \answerNA{NA. No human-subject research was conducted, so no IRB approval applies.}
+
+    \item Did you include the estimated hourly wage paid to participants and the total amount spent on participant compensation?
+    \answerNA{NA. No participants were compensated because none were recruited.}
+
+    \item Did you discuss how data is stored, shared, and deidentified?
+    \answerNA{NA. We store no participant data. The one third-party file we read is already de-identified, is not redistributed, and is verified by hash rather than by copy.}
+\end{enumerate}
+\end{enumerate}

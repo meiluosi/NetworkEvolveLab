@@ -1,0 +1,1 @@
+Asynchronous schedule (scalar model): $\Delta A=+0.059$ (Wilcoxon $p=0.000291$); Per-agent salience anisotropy (synchronous): $\Delta A=+0.216$ (Wilcoxon $p=1.91e-06$); Asynchronous schedule (multi-dimensional): $\Delta A=+0.011$ (Wilcoxon $p=0.748$)

@@ -1,0 +1,1 @@
+Values report Mean $\pm$ 95\% Confidence Interval across 10 independent random seeds ($N=60$, $T=25$ rounds).

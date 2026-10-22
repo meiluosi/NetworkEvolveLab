@@ -20,7 +20,7 @@ Equality $Q = 1 - 1/K$ holds if and only if the network has zero cross-community
 \end{theorem}
 
 \begin{proof}
-By Newman's definition \citep{newman2004finding,newman2006modularity}, modularity is formulated as:
+By Newman's definition \citep{newman2006modularity}, modularity is formulated as:
 \begin{equation}
     Q = \sum_{c=1}^K \left[ \frac{e_{cc}}{2m} - a_c^2 \right],
 \end{equation}
@@ -57,7 +57,12 @@ Consider two agents $i$ and $j$ in a $d$-dimensional continuous ideological spac
 \end{equation}
 Let $\Theta_i$ and $\Theta_j$ be the respective severance thresholds. The set of configuration pairs $(\mathbf{b}_i, \mathbf{b}_j) \in [-1, 1]^{2d}$ under which agent $i$ severs the directed link $(i, j)$ while agent $j$ preserves $(j, i)$ is:
 \begin{equation}
-    \Omega_{\mathrm{asym}} = \left\{ (\mathbf{b}_i, \mathbf{b}_j) \in [-1, 1]^{2d} \;\middle|\; \sum_{k=1}^d w_{i,k} |b_{i,k} - b_{j,k}| > \Theta_i \;\land\; \sum_{k=1}^d w_{j,k} |b_{j,k} - b_{i,k}| \leq \Theta_j \right\}.
+    \Omega_{\mathrm{asym}} = \left\{ (\mathbf{b}_i, \mathbf{b}_j) \in [-1, 1]^{2d} \;\middle|\;
+    \begin{aligned}
+        \textstyle\sum_{k=1}^d w_{i,k} |b_{i,k} - b_{j,k}| > \Theta_i \;\land \\
+        \textstyle\sum_{k=1}^d w_{j,k} |b_{j,k} - b_{i,k}| \leq \Theta_j
+    \end{aligned}
+    \right\}.
 \end{equation}
 Let $\Delta_k = |b_{i,k} - b_{j,k}| \in [0, 2]$. Rewriting the conditions in terms of difference vector $\boldsymbol{\Delta} = (\Delta_1, \dots, \Delta_d)^\top$:
 \begin{equation}
@@ -68,15 +73,50 @@ Whenever the weight vectors $\mathbf{w}_i$ and $\mathbf{w}_j$ are non-collinear 
 For $d \geq 2$, the region bounded between these two non-parallel hyperplanes in the positive orthant $[0, 2]^d$ contains an open ball $B(\boldsymbol{\Delta}_0, \epsilon)$ with radius $\epsilon > 0$. Since the mapping $(\mathbf{b}_i, \mathbf{b}_j) \mapsto \boldsymbol{\Delta}$ is a surjective piecewise-linear submersion with full rank $d$, the pre-image $\Omega_{\mathrm{asym}}$ contains an open non-empty set in $\mathbb{R}^{2d}$. Therefore, the Lebesgue measure $\mu(\Omega_{\mathrm{asym}}) > 0$.
 \end{proof}
 
+\subsection{The Multi-Dimensional Update Kernel}
+\label{app:kernel}
+
+Section~\ref{sec:theory-update} states the multi-dimensional cognitive kernel of the semantic
+arm in prose, because the flagship engine does not use it. For completeness we write it
+out. When listener $i$ observes statement $\mathbf{s}_j(t)$ emitted by speaker $j$, the
+perceived ideological distance is the salience-weighted metric
+\begin{equation}
+    \delta_{ij}(t) = \sum_{k=1}^{d} w_{i,k} \, |b_{i,k}(t) - b_{j,k}(t)| \in [0, 2],
+    \label{eq:dissonance}
+\end{equation}
+where $\mathbf{w}_i$ is the attention-weight profile of agent $i$ over the $d$ issue
+dimensions, and the belief vector moves toward the speaker with damping $\eta \in (0, 1]$:
+\begin{equation}
+    \mathbf{b}_i(t+1) = \mathbf{b}_i(t) + \eta \cdot \psi(\delta_{ij}(t), \theta_i) \cdot (\mathbf{s}_j(t) - \mathbf{b}_i(t)),
+    \label{eq:kernel-update}
+\end{equation}
+with the cognitive reaction kernel of Equation~\ref{eq:kernel}
+\begin{equation}
+    \psi(\delta, \theta) =
+    \begin{cases}
+        1 - \delta / 2, & \delta \leq \theta, \\
+        -\beta (\delta - \theta), & \theta < \delta \leq \theta_{\mathrm{block}}, \\
+        0, & \delta > \theta_{\mathrm{block}} .
+    \end{cases}
+    \label{eq:kernel}
+\end{equation}
+The anisotropy of $\mathbf{w}_i$ across agents is the mechanism isolated in
+Section~\ref{sec:attribution}: it is what allows two agents with the \emph{same} belief
+coordinates to break ties in opposite directions. The scalar flagship engine instead
+uses Equation~\eqref{eq:scalar-update}; the two must not be conflated. The damping
+coefficient $\eta$ of Equation~\ref{eq:kernel-update} and the backfire slope $\beta$ are
+listed with all other hyper-parameters in Table~\ref{tab:hyperparameters}.
+
 % =============================================================
 \section{Hyperparameter Configuration and Experimental Protocols}
 \label{app:hyperparams}
 
 Table~\ref{tab:hyperparameters} summarizes the exact hyperparameter values across all simulation phases. All experimental runs were executed with explicit pseudo-random seeds ($s \in \{0, 1, \dots, S-1\}$) to guarantee bitwise reproducibility.
 
-\begin{table}[h]
+\begin{table*}[t]
 \centering
 \small
+\setlength{\tabcolsep}{5pt}
 \caption{\textbf{Comprehensive Hyperparameter Configuration Table across All Phases.}}
 \label{tab:hyperparameters}
 \begin{tabular}{llcc}
@@ -105,34 +145,315 @@ Table~\ref{tab:hyperparameters} summarizes the exact hyperparameter values acros
 & Phase 1b Bridger Ablation Repeats & $S_{\mathrm{phase1b}}$ & $20$ seeds \\
 & SOTA Benchmark Suite Repeats & $S_{\mathrm{bench}}$ & $10$ seeds \\
 & Statistical Confidence Interval Level & $1 - \alpha$ & $95\%$ ($t_{0.025, df}$) \\
+\midrule
+\multirow{5}{*}{\textbf{Phase 3 Policy Evaluation}} 
+& Policy Sweep Repeats & $S_{\mathrm{phase3}}$ & \HThreeSeeds{} seeds \\
+& Simulation Rounds & $T_{\mathrm{phase3}}$ & \HThreeRounds{} rounds \\
+& Diversified Recommendation Exposure & $\rho_{\mathrm{div}}$ & $0.15$ (Policy 1) \\
+& Bridger Amplification / Hub Throttle & $\mu_{\mathrm{bridge}}, \lambda_{\mathrm{hub}}$ & $+50\% / -50\%$ (Combined arm) \\
+& Cross-Community Edge Ratio (outcome) & $\mathrm{CE}_{\mathrm{cross}}$ & \CrossEdgeBase{} $\rightarrow$ \CrossEdgeComb{} (Combined, $+\CrossEdgeCombGain$) \\
+\midrule
+\multirow{5}{*}{\textbf{Phase 4 Attribution}} 
+& Ablation Repeats & $S_{\mathrm{phase4}}$ & \PhaseFourSeeds{} seeds \\
+& Simulation Rounds & $T_{\mathrm{phase4}}$ & \PhaseFourRounds{} rounds \\
+& Network Size / Edge Probability & $N_{\mathrm{phase4}}, p_{\mathrm{edge}}$ & \PhaseFourNodes{} / $0.15$ \\
+& Cognitive Dimensionality & $d_{\mathrm{phase4}}$ & $1$ (scalar HK) vs.\ $3$ (proxy semantics) \\
+& Update Schedule (factor A) & $\mathrm{schedule}$ & asynchronous (single speaker) vs.\ synchronous (all) \\
+\midrule
+\multirow{3}{*}{\textbf{Phase 5 Bound Audit}} 
+& Audit Repeats & $S_{\mathrm{phase5}}$ & \PhaseFiveSeeds{} seeds \\
+& Simulation Rounds & $T_{\mathrm{phase5}}$ & \PhaseFiveRounds{} rounds \\
+& Bound Verified Per Cell & $Q \leq 1 - 1/K$ & \AuditCellsChecked{} benchmark cells $+$ \HOneGridCount{} grid configurations \\
+\midrule
+\multirow{4}{*}{\textbf{Phase 1c Threshold}} 
+& Measurement Repeats & $S_{\mathrm{phase1c}}$ & \ThresholdSeeds{} seeds per cell \\
+& Simulation Rounds & $T_{\mathrm{phase1c}}$ & \ThresholdRounds{} rounds \\
+& Tolerance Grid $\theta$ & $\theta \in [\ThresholdGridMin, \ThresholdGridMax]$ & step \ThresholdGridStep{} (13 grid points) \\
+& Global-Connectivity Criterion & $\text{giant\_frac} \geq 0.99$ & smallest $\theta$ restoring global connectivity \\
+\midrule
+\multirow{4}{*}{\textbf{Phase 6 LLM Arm}} 
+& Measurement Repeats & $S_{\mathrm{phase6}}$ & \LlmArmSeeds{} seeds (paired with the rule arm) \\
+& Simulation Rounds & $T_{\mathrm{phase6}}$ & \LlmArmRounds{} rounds \\
+& LLM Cognitive Events per Round & $K_{\mathrm{events}}$ & \LlmArmEventsPerRound{} events, one batched API call per round \\
+& Cognitive Model & $\mathrm{model}$ & \LlmArmModel{} (temperature 0, max\_tokens 4096, thinking budget 512) \\
+\midrule
+\multirow{3}{*}{\textbf{Phase 7 Scaling}} 
+& Measurement Repeats & $S_{\mathrm{phase7}}$ & \ScalingSeeds{} seeds per size \\
+& Simulation Rounds & $T_{\mathrm{phase7}}$ & \ScalingRounds{} rounds \\
+& Network Sizes & $N$ & \ScalingSizes{} (+ real SNAP Higgs at $N=\ScalingRealHiggsN$) \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 
 % =============================================================
 \section{Empirical Dataset Topology and Structural Metrics}
 \label{app:datasets}
 
-Table~\ref{tab:dataset_metrics} reports the topological properties of the five benchmark networks integrated into the unified benchmark suite (`src/network_evolve/datasets.py`).
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig6_empirical_datasets.png}
+\caption{\textbf{Structural Characteristics of the Benchmark Networks.} (A) Latent ideology and prior distributions comparing the Twitter 2020 bipolar surrogate against \textsc{Debate} benchmark Gaussian priors; (B) Birdwatch Community Notes cross-ideology approval scatter, highlighting bipartisan consensus notes in the upper-right quadrant; (C) node in-degree empirical distributions comparing the scale-free SNAP Higgs surrogate, the Twitter 2020 bipolar surrogate, and the genuinely empirical SNAP Higgs subgraph derived from the public 14.8M-edge edge list.}
+\label{fig:empirical_datasets}
+\end{figure*}
 
-\begin{table}[h]
+Figure~\ref{fig:cognitive_backends} preserves the historical micro-cognitive backend
+comparison --- scalar DeGroot and bounded confidence against the semantic proxy and the
+archived three-seed LLM arm --- together with the rupture asymmetry each produced, so
+that the superseded experiment stays inspectable rather than merely cited.
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig4_cognitive_backends.png}
+\caption{\textbf{Historical Micro-Cognitive Backends and Rupture Asymmetry (RQ1).} Scalar DeGroot/HK against the semantic proxy and the \emph{historical} three-seed LLM arm. This figure is retained for provenance: it is superseded by the ten-seed, receipt-complete Phase~6 experiment of Section~\ref{sec:llm-arm}, which mounts a real LLM inside the flagship engine and reports its interaction coverage explicitly. Note that non-zero $A_{\mathrm{rupture}}$ in this asynchronous setting is not by itself evidence of semantic dimensionality; see Figure~\ref{fig:attribution}.}
+\label{fig:cognitive_backends}
+\end{figure*}
+
+\subsection{Complete Benchmark Comparison Matrix}
+\label{app:benchmark-matrix}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig5_sota_benchmark.png}
+\caption{\textbf{Unified Benchmark Comparison across Surrogate and Empirical Networks.} Six reference models and our co-evolution engine across \BenchDatasetCount{} benchmark networks (five surrogate networks calibrated to published statistics, plus one derived from the full public SNAP Higgs edge list): (A) Newman modularity $Q$; (B) opinion polarization $\Pi$; (C) microscopic severance asymmetry $A_{\mathrm{rupture}}$. The same comparison is given numerically in Table~\ref{tab:sota_matrix} (modularity) and Table~\ref{tab:sota_matrix_full} (all five metrics).}
+\label{fig:sota_benchmark}
+\end{figure*}
+
+Table~\ref{tab:sota_matrix_full} is the complete cross-benchmark matrix: every
+dataset $\times$ method cell for all five reported metrics, with Mean $\pm$ 95\%
+Confidence Interval over \BenchSeeds{} seeds. The body of the paper shows the
+modularity slice of this matrix transposed (Table~\ref{tab:sota_matrix}) so that
+methods can be compared across networks on one line, and Figure~\ref{fig:sota_benchmark}
+gives the same comparison visually for modularity, polarization and severance
+asymmetry; the fragment below is generated from the same frozen result file by
+the same script, so the two views cannot disagree.
+
+\begin{table*}[t]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\caption{\textbf{Complete Performance Comparison Matrix of Opinion and Topology Dynamics Methods across Benchmark Networks.} Values report Mean $\pm$ 95\% Confidence Interval across \BenchSeeds{} independent random seeds ($N=\BenchNodes$, $T=\BenchRounds$ rounds). Generated from \texttt{results/sota\_benchmark.json} by \texttt{scripts/generate\_paper\_tables.py}.}
+\label{tab:sota_matrix_full}
+\input{tables/sota_matrix}
+\end{table*}
+
+Table~\ref{tab:dataset_metrics} reports the measured topological properties of the six networks
+integrated into the unified benchmark suite. Every quantity in the table is \emph{measured
+directly on the cached graphs that the benchmark actually consumed}
+($N=\BenchNodes$, \BenchSeeds{} seeds) by \texttt{scripts/generate\_paper\_tables.py}; none of it is
+transcribed by hand. This matters for integrity: the previous hand-written version of this table
+disagreed with the code on multiple entries (e.g.\ it reported $Q_0=0.21$ for DEBATE and
+$Q_0=0.32$ for Birdwatch, whereas the measured values are $0.491$ and $0.406$), and the surrounding
+text simultaneously claimed three, five and six datasets.
+
+\paragraph{Provenance: real data versus surrogate proxies.}
+Only \textbf{SNAP Higgs Twitter (REAL public data)} is derived from a public dataset --- the
+Stanford SNAP \texttt{higgs-social\_network} edge list (456{,}626 nodes / 14{,}855{,}842 directed
+edges, SHA256 \texttt{8e5ea764\ldots 40265}), from which seeded high-degree induced subgraphs are
+derived; its URL, checksum and derivation recipe are recorded in \texttt{data/raw/README.md}. Its
+ideology prior is \emph{topology-derived} (the two largest Louvain communities \citep{blondel2008fast} of the induced
+subgraph are read as two camps, with a seeded jitter on top) and is therefore a \textbf{structural
+proxy variable}, \emph{not} a human-annotated stance label; the Higgs data contains no political
+annotation of any kind. The remaining five networks are \textbf{synthetic surrogates} that
+reproduce the qualitative topology of their reference sources (dense bipartite debate clusters,
+scale-free hub/bridger/long-tail structure, four forum sub-communities, bipartite rater graphs).
+They are calibrated proxies, and are labelled as such wherever they appear.
+
+\paragraph{Third-party assets, licenses and redistribution policy.}
+The study uses exactly one third-party asset: the SNAP \texttt{higgs-social\_network} edge list,
+distributed by the Stanford SNAP repository under the SNAP dataset terms of use (free for
+research use; the collection is documented in the accompanying JNLP paper \citep{domenico2013anatomy}).
+We \emph{do not redistribute} it: the raw file is excluded from version control, only its SHA-256
+is published, and the derived artifacts we release are (i) seeded induced subgraphs that preserve
+only integer node identifiers and edge directions, and (ii) aggregate statistics. The file contains
+no message text, no user handles, no attributes and no content of any kind --- only pseudonymous
+integer node ids and directed edges --- so it carries no directly identifying information and no
+offensive content. Every baseline framework we implement (DeGroot, Hegselmann--Krause,
+Friedkin--Johnsen, generative agents, prompt-driven rewiring) is re-implemented from its original
+publication rather than copied, and is cited in Section~\ref{sec:related}; the code and the new
+artifacts we release (frozen result files, generated tables and macros, provenance manifest, LLM
+call archive) are published under a permissive open-source license.
+
+\paragraph{Ideology spaces of the surrogate generators.}
+The DEBATE surrogate samples beliefs from the published human-prior mean and standard deviation of
+the NeurIPS 2024 DEBATE benchmark; the Twitter 2020 surrogate uses a bipolar DW-NOMINATE-style
+prior; the Reddit surrogate assigns each node to one of four forum sub-communities with a
+three-dimensional topic vector (economic / social / geopolitical), of which the benchmark uses the
+first coordinate as the scalar prior; the Birdwatch surrogate uses a two-pole rater structure; the
+SNAP-Higgs surrogate uses a Gaussian two-pole prior. In all cases the surrogate topology and the
+surrogate belief prior are generated by the same seeded process, so these datasets must not be
+cited as evidence about the corresponding real-world platforms --- they are controlled
+environments whose qualitative structure is inspired by those platforms.
+
+\begin{table*}[t]
 \centering
 \small
-\caption{\textbf{Topological and Ideological Characteristics of Integrated Benchmark Datasets.}}
+\setlength{\tabcolsep}{4.5pt}
+\caption{\textbf{Measured Topological Characteristics of the Six Integrated Benchmark Networks.}
+Generated by \texttt{scripts/generate\_paper\_tables.py} directly from the cached graphs consumed by
+the benchmark suite. $r$ is the directed reciprocity $2\,\#\mathrm{mutual}/|E|$; $Q_0$ and $K_0$ are
+the modularity and the number of communities of the Louvain partition of the \emph{initial}
+topology, and $K_0$ is the quantity that bounds $Q$ through $Q \leq 1-1/K$ (Proposition~1).}
 \label{tab:dataset_metrics}
-\begin{tabular}{lccccc}
-\toprule
-\textbf{Metric} & \textbf{\textsc{Debate}} & \textbf{SNAP Higgs} & \textbf{Twitter 2020} & \textbf{Reddit Convo} & \textbf{Birdwatch} \\
-\midrule
-Domain Source & NeurIPS 2024 & Stanford SNAP & US Presidential & Reddit Forums & X / Twitter \\
-Interaction Modality & Stance Arguments & Retweet/Cascade & Partisan Retweet & Reply Trees & Review Ratings \\
-Degree Distribution & Dense Bipartite & Power-Law ($\gamma \approx 2.1$) & Scale-Free BA & Small-World WS & Bipartite Rater \\
-Reciprocity $r$ & N/A & $0.12$ & $0.38$ & $0.24$ & $0.05$ \\
-Latent Ideology Space & Gaussian Prior & Continuous & Bipolar DW & 4 Sub-forums & Bipartisan Binary \\
-Baseline Modularity $Q$ & $0.21$ & $0.25$ & $0.46$ & $0.69$ & $0.32$ \\
-\bottomrule
-\end{tabular}
-\end{table}
+\input{tables/dataset_metrics}
+\end{table*}
+
+% =============================================================
+\section{Attribution Ablation Arms}
+\label{app:attribution}
+
+Table~\ref{tab:attribution} lists every arm of the controlled attribution ablation of
+Section~\ref{sec:attribution}: the per-arm severance asymmetry $A_{\mathrm{rupture}}$, the
+fraction of seeds in which the arm breaks strictly symmetrically, and the number of mutual
+dyads broken. The last column is the control that makes the asymmetry column meaningful:
+the synchronous arms break as many mutual dyads as the anisotropic arms, but do so
+symmetrically, which is why a large $A_{\mathrm{rupture}}$ cannot be an artefact of a
+dormant graph.
+
+\begin{table*}[t]
+\centering
+\small
+\caption{\textbf{Attribution Ablation Arms.} Generated from \texttt{results/phase4\_attribution.json}.}
+\label{tab:attribution}
+\input{tables/attribution}
+\end{table*}
+
+% =============================================================
+\section{Exhaustive Numerical Audit of the Generalised Modularity Bound}
+\label{app:bound-audit}
+
+The generalized bound of Proposition~\ref{prop:modularity} makes a falsifiable prediction
+for every cell of the benchmark matrix: the reported $Q$ must not exceed $1-1/K$ for the
+realized community count $K$. We verify this exhaustively over all \AuditCellsChecked{}
+(dataset $\times$ method) cells and over the \HOneGridCount{}-configuration evolution grid.
+The audit reports \AuditViolations{} violations, and the realized community counts span
+$K=2$ (bipolar surrogates), $K \in \{3,4,5\}$ (multi-community surrogates) and
+$K \in \{8,9\}$ (the empirical SNAP Higgs subgraph). Every high-modularity cell in
+Table~\ref{tab:sota_matrix} --- for instance $Q=0.735$ on Reddit ConvoKit under
+Hegselmann--Krause --- is therefore fully consistent with the theory: it corresponds to a
+realized $K=4$ partition whose bound is $0.750$, not to a violation of a universal $0.500$
+cap. This closes the contradiction between the theory and the benchmark matrix that the
+earlier version of this manuscript left open.
+
+The audit is generated by \texttt{scripts/generate\_paper\_tables.py} directly from
+\texttt{results/phase5\_bound\_audit.json} and \texttt{results/sota\_benchmark.json}; the
+machine-readable violation list is stored in the bound-audit result file rather than
+transcribed here, so the claim ``\AuditViolations{} violations'' is reproducible rather
+than asserted.
+
+% =============================================================
+\section{Cross-Topology Critical Tolerance: All Three Criteria}
+\label{app:threshold}
+
+Section~\ref{sec:findings} reports that the previously claimed topology-invariant critical
+tolerance does not survive re-measurement. We give the full accounting here, including the
+per-criterion censoring, so that the negative result can be inspected rather than taken on
+trust.
+
+\paragraph{Connectivity-recovery criterion ($\theta^*_{\mathrm{frag}}$).} The smallest
+tolerance at which the giant component is restored to $\geq 0.99$. Of the
+\ThresholdFragEstimates{} seed-level estimates, \ThresholdFragInBand{} fall inside the
+originally asserted band $[\ThresholdBandLow, \ThresholdBandHigh]$. The per-topology
+estimates are \ThresholdFragErdosRenyi{} (Erd\H{o}s--R\'enyi), \ThresholdFragScaleFree{}
+(Barab\'asi--Albert), \ThresholdFragSmallWorld{} (Watts--Strogatz) and
+\ThresholdFragEmpiricalBipolar{} (empirical bipolar), a cross-topology spread of
+\ThresholdFragSpread.
+
+\paragraph{Modularity-collapse criterion ($\theta^*_Q$).} Only \ThresholdQInBand{} of
+\ThresholdQEstimates{} estimates fall in the asserted band, and the estimate is
+right-censored for \ThresholdQCensoredErdosRenyi{} (ER),
+\ThresholdQCensoredScaleFree{} (scale-free),
+\ThresholdQCensoredSmallWorld{} (small-world) and
+\ThresholdQCensoredEmpiricalBipolar{} (empirical bipolar) of \ThresholdSeeds{} seeds.
+Censoring happens because residual community structure keeps modularity above the collapse
+level even after the giant component has shattered, so no threshold satisfies the
+criterion within the grid. This is why we treat the modularity-collapse criterion as
+ill-suited to the question rather than as a competing answer to it.
+
+\paragraph{Polarization-collapse criterion ($\theta^*_{\Pi}$).} Only \ThresholdPolInBand{}
+of \ThresholdPolEstimates{} estimates fall in the asserted band, with a per-topology spread
+of \ThresholdPolSpread.
+
+\paragraph{Structural control.} Homogeneous baseline networks devoid of Bridgers split into
+completely isolated subgraphs ($\text{Giant Component Fraction} = \PhaseOneHomoGiant$,
+cross-edges $= \PhaseOneHomoCross$), whereas heterogeneous archetype graphs maintain
+global weak reachability ($\text{Giant Frac} = \PhaseOneHeteroGiant$, cross-edges $= \PhaseOneHeteroCross$).
+
+We therefore report all three criteria with their censoring counts rather than a single
+preferred number, and we make no claim that the critical tolerance is a topology-independent
+constant. The measurement that \emph{is} robust is its topology dependence.
+
+% =============================================================
+\section{Limitations, in Full}
+\label{app:limitations}
+
+Six limitations are material.
+
+\begin{enumerate}
+    \item \textbf{Surrogate benchmarks.} Five of the six benchmark networks are
+    \emph{surrogate} calibrations of published statistics rather than the published datasets
+    themselves; only \textsc{SNAP Higgs (REAL)} uses an unmodified public edge list, and even
+    there the camps are topology-derived proxies because the file carries no stance labels.
+    \item \textbf{Scale of the real-LLM arms.} The historical Phase~2 arm remains small
+    (\LlmSeeds{} seeds, \LlmPairs{} dyadic decisions, \LlmCalls{} batched API calls) and its
+    responses lack a full execution receipt (model identifier and token accounting) in the
+    archived artifacts. The receipt-complete Phase~6 arm (\LlmArmSeeds{} seeds,
+    \LlmArmDecidedEvents{} LLM-decided interactions, \LlmArmApiCalls{} API calls with full
+    token accounting) is larger, but its \emph{interaction coverage} is only
+    \LlmArmCoverage{}, which bounds the effect size any such arm can detect.
+    \item \textbf{Scope of the attribution ablation.} The ablation spans $d \in \{1,3\}$ and
+    two update schedules; Proposition~\ref{prop:asym} remains an existence statement, and the
+    ablation establishes that the anisotropic mechanism is active in the measured regime
+    rather than proving it for all $d \geq 2$.
+    \item \textbf{Resolution of the reach metric.} The reach metric is a seeded
+    independent-cascade estimate whose variance across seeds is large relative to the policy
+    effects we report, which limits the resolution of RQ3.
+    \item \textbf{Synchronous-evaluation caveat.} The original claim that scalar models cannot
+    produce asymmetric rupture is only valid under synchronous evaluation; we have quantified
+    the asynchronous contribution rather than removed it.
+    \item \textbf{Criterion dependence.} The critical-tolerance estimate is
+    \emph{criterion-dependent}: the connectivity-recovery criterion
+    ($\theta^*_{\mathrm{frag}}$) and the polarization-collapse criterion ($\theta^*_{\Pi}$)
+    disagree, and the modularity-collapse criterion is right-censored for
+    \ThresholdQCensoredSmallWorld{}/\ThresholdQCensoredEmpiricalBipolar{} of
+    \ThresholdSeeds{} seeds in the small-world and empirical-bipolar topologies because
+    residual community structure keeps modularity above the collapse level.
+\end{enumerate}
+
+All software, benchmark loaders, cached real-data subgraphs, figure scripts, and
+auto-generated tables are provided in our open-source release.
+
+% =============================================================
+\section{Ethics: Misuse Channels and Mitigations}
+\label{app:ethics}
+
+This research models opinion dynamics and platform intervention mechanisms on public social
+networks. All benchmark networks are either derived from publicly accessible academic
+archives or are explicitly labelled synthetic structural surrogates; the one empirical
+network uses the publicly released, anonymized SNAP Higgs edge list, and no private
+communications, credentials, or personally identifiable content were collected,
+intercepted, or re-identified. The real-data subgraph retains only integer node identifiers
+and edge directions. Research findings on platform interventions are presented to foster
+scientific understanding of algorithmic diversity and depolarizing platform governance.
+
+Three specific misuse and harm channels deserve naming.
+
+\begin{enumerate}
+    \item \textbf{Asymmetric rupture as a polarization recipe.} A validated account of
+    \emph{asymmetric rupture} is a recipe for making polarization faster and less visible:
+    an actor who can sever one side of a reciprocal tie without reciprocal severance can
+    polarize a community while every public graph metric still looks healthy.
+    \item \textbf{Efficiency results read as prescriptions.} The counterfactual platform
+    policies are efficiency results, not prescriptions --- our own policy arms show that two
+    of the three pre-registered interventions fail their criteria, and a reader who treats
+    the surviving arm as a recommendation would be over-reading the evidence.
+    \item \textbf{Surrogates cited as populations.} The surrogate benchmarks are calibrated to
+    published statistics but are \emph{not} the datasets they are named after; citing them as
+    measurements of any real population would be a category error.
+\end{enumerate}
+
+Mitigations are concrete rather than aspirational: every run is seeded and auditable, the
+raw public edge list is excluded from version control and published only as a hash, the real
+network's ideology variable is labelled a topology-derived proxy, and the raw LLM call
+archive makes the LLM arm replayable without further API spend.
 
 % =============================================================
 \section{Agent Prompts and LLM Semantic Interaction Schemas}
@@ -154,9 +475,13 @@ To validate micro-cognitive fidelity under real foundation models, agents in Pha
 \end{quote}
 
 \subsection{API Cost Ledger and Token Accounting}
-All API requests were executed with batching ($K_{\mathrm{events}}=12$ per dispatch) and semantic caching. Across all 3 seeds of LLM evaluation, total consumption was strictly audited:
-\begin{itemize}[leftmargin=*]
-    \item Total API calls executed: 6 batch calls (covering 60 dyadic interaction evaluations).
-    \item Budget ceiling pre-registered: 100 API calls. Actual consumption: $6\%$ of budget.
-    \item Total cost incurred: $<\$0.01$ USD.
+All API requests were executed with batching ($K_{\mathrm{events}}=12$ per dispatch) and semantic caching. The archived execution receipts in \texttt{data/llm/seed*/final.json} record:
+\begin{itemize}
+    \item Total batched API calls executed: \LlmCalls{} (covering \LlmPairs{} dyadic interaction evaluations across \LlmSeeds{} seeds).
+    \item Budget ceiling pre-registered: 100 API calls. Actual consumption: \LlmCalls\% of budget.
+    \item Each dyadic decision was logged with the listener profile, the observed statement, the returned belief vector, the relationship action and a natural-language rationale.
 \end{itemize}
+\paragraph{Disclosed receipt gap for the historical arm, and how it is closed.}
+The \emph{historical} Phase~2 artifacts (\texttt{data/llm/seed*/final.json}) record the number of calls, the number of validated responses and the semantic-hash cache behaviour, but \emph{not} the model identifier, sampling temperature, or per-call token counts. That arm therefore cannot be re-executed bit-for-bit against a pinned model, and the paper makes no claim that depends on those fields; we report it as \emph{qualitative semantic evidence} (decision rationales such as ``disagree strongly on regulation, but we agree on open-source'').
+
+The gap is closed for all new work by the unified backend of Section~\ref{sec:llm-arm}: every call now writes a content-addressed receipt recording the model identifier, the temperature, the input/output/thinking token counts, the provider response identifier and the stop reason, plus the parse-success rate and the action distribution (Table~\ref{tab:llm_arm}). Because the archive is keyed by a hash of the full request, a re-run of the same experiment produces \emph{zero} API calls and a bit-identical result, which is a strictly stronger reproducibility property than a fresh call with a possibly different model version. The one thing that remains unrecoverable is the identity of the model that produced the \emph{historical} artifacts, and we state that limitation rather than guessing it.

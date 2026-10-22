@@ -29,10 +29,46 @@ jobs:
         pip install -r requirements.txt
         pip install -e .
 
-    - name: Run 9/9 Unit Tests
+    - name: Run Unit Test Suite (incl. research-invariant regression tests)
       run: |
         python reproduce.py --test
+
+    - name: Verify Paper Tables Are In Sync With Frozen Results
+      run: |
+        python scripts/generate_paper_tables.py --check
+
+    - name: Verify Experiment Provenance Manifest
+      run: |
+        python scripts/record_provenance.py --check
 
     - name: Verify Publication Figure Generation Pipeline
       run: |
         python reproduce.py --figures
+
+    - name: Verify ICWSM Submission Package Is In Sync With Sources
+      run: |
+        # 必须**先**拍平：静态完整性门禁会同时扫描拍平后的投稿包
+        # （检查项 13 的数学模式污染扫描），拍平晚于检查就扫不到。
+        python scripts/build_submission.py
+        python scripts/build_submission.py --check
+
+    - name: Verify Paper LaTeX Static Integrity (macros / labels / inputs / figures / math-mode)
+      run: |
+        python scripts/check_paper_integrity.py
+
+    - name: Compile the Paper PDF (tectonic)
+      run: |
+        # Tectonic 会按需联网取包；这一步保证论文**真的能编译**，
+        # 而不只是通过静态检查（F-21 的三个 LaTeX 缺陷正是被这一步暴露的）。
+        python -m pip install --upgrade tectonic
+        mkdir -p build/icwsm
+        tectonic -X compile build/icwsm/NetworkEvolveLab_ICWSM.tex --outdir build/icwsm --keep-logs
+
+    - name: Enforce ICWSM Page Budget And Compile-Log Health (F-27 / F-29)
+      run: |
+        # ICWSM 2026：Full Papers 正文+参考文献 ≤ 11 页（Checklist 与附录不计入）。
+        # 判定口径：Paper Checklist 必须从第 12 页或更后开始。
+        # 同一道门禁还会扫描编译日志，把 "Missing character"（多余的 `$` 把正文
+        # 吞进数学模式）与 TeX 硬错误直接判为 FAIL。
+        python -m pip install --upgrade pypdf
+        python scripts/check_page_budget.py

@@ -1,0 +1,1 @@
+Phase 6: real-LLM cognitive layer versus the rule backend inside the flagship scalar engine, paired by seed. Generated from results/phase6_llm_engine.json.

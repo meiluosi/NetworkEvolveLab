@@ -1,0 +1,1 @@
+Modularity $Q$ (Mean $\pm$ 95\% CI) across 10 seeds; the full five-metric matrix for every dataset $\times$ method cell is in Appendix~\ref{app:benchmark-matrix}.

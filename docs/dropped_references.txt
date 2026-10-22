@@ -1,0 +1,31 @@
+# 参考文献裁剪清单（F-28）
+#
+# 背景：ICWSM 2026 的 Full Papers 正文+参考文献上限是 11 页，参考文献必须计入。
+#       为把参考文献从 71 条压到 55 条（仍远超用户要求的 40+），按「边缘度」
+#       从低到高删除了下列 16 条。删除的是**可被更近/更权威文献替代**的条目，
+#       而不是核心方法引用。
+#
+# 全部 16 条此前均经 Crossref DOI 或 arXiv API 逐条联网核实过真实元数据
+# （脚本：scripts/fetch_bib_from_crossref.py、scripts/fetch_bib_from_arxiv.py）；
+# 它们只是因为页数预算被裁掉，**不是**因为元数据存疑。
+#
+# 机器校验：scripts/check_paper_integrity.py 要求 references.bib 中的每一条
+#           都至少被正文 \citep 引用一次，因此本文件里的键**不得**出现在
+#           paper/references.bib 中（若重新引入，需同步删除正文引用）。
+
+brady2021social
+cantoncorrea2026crowdsourced
+centola2010spread
+conover2011political
+epstein1996growing
+fair
+gebru2021datasheets
+guess2023feed
+newman2004finding
+rosvall2008maps
+snaphiggsDataset
+snijders2010introduction
+sobkowicz2018cognitive
+tian2023dynamics
+wang2024largelanguage
+weisbuch2002meet
