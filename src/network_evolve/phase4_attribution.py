@@ -41,22 +41,30 @@ from scipy import stats
 from .semantic import VecWorld
 from .expkit import mean_ci, fmt
 
-# —— 实验臂定义：每个臂只与对照臂相差一个因子 ——
+# —— 实验臂定义：完整析因设计 ——
 ARMS = {
-    "scalar_async": dict(d=1, backend="hk", update_mode="async", symmetric_tol=False, isotropic=True),
-    "scalar_sync": dict(d=1, backend="hk", update_mode="sync", symmetric_tol=False, isotropic=True),
-    "multidim_async": dict(d=3, backend="proxy", update_mode="async", symmetric_tol=True, isotropic=False),
-    "multidim_sync": dict(d=3, backend="proxy", update_mode="sync", symmetric_tol=True, isotropic=False),
-    "isotropic_sync": dict(d=3, backend="proxy", update_mode="sync", symmetric_tol=True, isotropic=True),
-    "multidim_async_orig": dict(d=3, backend="proxy", update_mode="async", symmetric_tol=False, isotropic=False),
+    "scalar_sync": dict(d=1, backend="hk", update_mode="sync", symmetric_tol=False, isotropic=True, uniform_speaker=False),
+    "scalar_async_uniform": dict(d=1, backend="hk", update_mode="async", symmetric_tol=False, isotropic=True, uniform_speaker=True),
+    "scalar_async": dict(d=1, backend="hk", update_mode="async", symmetric_tol=False, isotropic=True, uniform_speaker=False),
+    "isotropic_sync": dict(d=3, backend="proxy", update_mode="sync", symmetric_tol=True, isotropic=True, uniform_speaker=False),
+    "isotropic_async_uniform": dict(d=3, backend="proxy", update_mode="async", symmetric_tol=True, isotropic=True, uniform_speaker=True),
+    "isotropic_async": dict(d=3, backend="proxy", update_mode="async", symmetric_tol=True, isotropic=True, uniform_speaker=False),
+    "multidim_sync": dict(d=3, backend="proxy", update_mode="sync", symmetric_tol=True, isotropic=False, uniform_speaker=False),
+    "multidim_async_uniform": dict(d=3, backend="proxy", update_mode="async", symmetric_tol=True, isotropic=False, uniform_speaker=True),
+    "multidim_async": dict(d=3, backend="proxy", update_mode="async", symmetric_tol=True, isotropic=False, uniform_speaker=False),
+    "multidim_async_orig": dict(d=3, backend="proxy", update_mode="async", symmetric_tol=False, isotropic=False, uniform_speaker=False),
 }
 
 ARM_LABELS = {
-    "scalar_async": "Scalar d=1 / async",
     "scalar_sync": "Scalar d=1 / sync",
-    "multidim_async": "Multi-d=3 / async / anisotropic",
-    "multidim_sync": "Multi-d=3 / sync / anisotropic",
+    "scalar_async_uniform": "Scalar d=1 / async (uniform speaker)",
+    "scalar_async": "Scalar d=1 / async (weighted speaker)",
     "isotropic_sync": "Multi-d=3 / sync / isotropic",
+    "isotropic_async_uniform": "Multi-d=3 / async (uniform speaker) / isotropic",
+    "isotropic_async": "Multi-d=3 / async (weighted speaker) / isotropic",
+    "multidim_sync": "Multi-d=3 / sync / anisotropic",
+    "multidim_async_uniform": "Multi-d=3 / async (uniform speaker) / anisotropic",
+    "multidim_async": "Multi-d=3 / async (weighted speaker) / anisotropic",
     "multidim_async_orig": "Multi-d=3 / async / original tol (reference)",
 }
 
@@ -104,17 +112,24 @@ def run_arm(args):
     w = VecWorld(n=n, d=d, backend=cfg["backend"], eps=0.6, seed=seed + 1000,
                  p_edge=p_edge, p_form=0.1, update_mode=cfg["update_mode"],
                  isotropic=cfg["isotropic"], symmetric_tol=cfg["symmetric_tol"],
+                 uniform_speaker=cfg.get("uniform_speaker", False),
                  b_init=b_init, g0=g0, salience_init=sal_init)
-    for _ in range(rounds):
+    from .metrics import asymmetry_stats
+    trajectory_asym = {}
+    for r in range(1, rounds + 1):
         if w.update_mode == "sync":
             w._step_sync()
         else:
             for _ in range(w.n):
                 w.step()
         w.closure()
+        if r in (5, 10, 15, 20, 25, 30):
+            astat = asymmetry_stats(w.g, w.initial_edges)
+            trajectory_asym[str(r)] = float(astat["rupture_asymmetry"])
     m = w.metrics()
     m["arm"] = arm_name
     m["seed"] = seed
+    m["trajectory_asym"] = trajectory_asym
     m["initial_weight_asymmetry"] = initial_weight_asymmetry(g0)
     return m
 
@@ -211,11 +226,23 @@ def main():
     P("\n=== 决定性对比（配对，同 seed）===")
     contrasts = [
         ("schedule_effect_scalar", "scalar_async", "scalar_sync",
-         "调度效应（标量）：异步 - 同步"),
+         "调度效应（标量加权）：异步加权 - 同步"),
+        ("schedule_effect_scalar_pure", "scalar_async_uniform", "scalar_sync",
+         "纯调度效应（标量均匀）：异步均匀 - 同步"),
+        ("speaker_bias_effect_scalar", "scalar_async", "scalar_async_uniform",
+         "发言偏置效应（标量）：加权发言 - 均匀发言"),
+        ("schedule_effect_isotropic_pure", "isotropic_async_uniform", "isotropic_sync",
+         "纯调度效应（各向同性多维）：异步均匀 - 同步"),
+        ("schedule_effect_isotropic_weighted", "isotropic_async", "isotropic_sync",
+         "调度效应（各向同性多维加权）：异步加权 - 同步"),
         ("schedule_effect_multidim", "multidim_async", "multidim_sync",
-         "调度效应（多维）：异步 - 同步"),
+         "调度效应（多维各向异性）：异步加权 - 同步"),
         ("anisotropy_effect_sync", "multidim_sync", "isotropic_sync",
          "个体各向异性效应（同步）：各向异性 - 各向同性"),
+        ("anisotropy_effect_async_uniform", "multidim_async_uniform", "isotropic_async_uniform",
+         "个体各向异性效应（异步均匀）：各向异性 - 各向同性"),
+        ("anisotropy_effect_async_weighted", "multidim_async", "isotropic_async",
+         "个体各向异性效应（异步加权）：各向异性 - 各向同性"),
         ("tolerance_rule_effect", "multidim_async_orig", "multidim_async",
          "容忍度规则效应（异步）：原始规则 - 听者依赖规则"),
     ]
@@ -225,6 +252,19 @@ def main():
         P(f"{label}: mean ΔA = {c['mean_diff']:+.4f} (n={c['n_pairs']}, "
           f"pos={c.get('n_positive', 0)}, both-zero={c.get('n_both_zero', 0)}) "
           f"wilcoxon p={c['p_value_wilcoxon']:.3g}")
+
+    # 汇总各臂 A(t) 轨迹均值
+    out["trajectories"] = {}
+    P("\n=== 演化轨迹 A(t) 均值 ===")
+    for arm, runs in by_arm.items():
+        rounds_keys = ["5", "10", "15", "20", "25", "30"]
+        traj_mean = {}
+        for rk in rounds_keys:
+            vals = [r.get("trajectory_asym", {}).get(rk, float("nan")) for r in runs]
+            valid = [v for v in vals if np.isfinite(v)]
+            traj_mean[rk] = float(np.mean(valid)) if valid else float("nan")
+        out["trajectories"][arm] = traj_mean
+        P(f"{ARM_LABELS[arm]:<42}: " + " | ".join(f"t={rk}: {traj_mean[rk]:.3f}" for rk in rounds_keys))
 
     # —— 归因结论判定 ——
     scalar_sync = out["arms"]["scalar_sync"]

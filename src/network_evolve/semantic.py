@@ -44,6 +44,7 @@ class VecWorld:
     def __init__(self, n=60, d=3, backend="hk", eps=0.7, seed=0, p_edge=0.1, p_form=0.1,
                  theta_attract=0.5, damping=0.1, update_mode="async",
                  isotropic=False, symmetric_tol=False, proxy_tol=0.35,
+                 uniform_speaker=False,
                  b_init=None, g0=None, salience_init=None, llm_policy=None):
         self.rng = np.random.default_rng(seed)
         self.n, self.d, self.backend, self.eps = n, d, backend, eps
@@ -52,11 +53,13 @@ class VecWorld:
         # update_mode: "async" = 每步随机单一发言者（原始实现）；"sync" = 每轮全体同步更新
         # isotropic   : True 时全体智能体使用统一议题权重（各向同性），用于剥离“个体各向异性”这一变量
         # symmetric_tol: True 时容忍度只依赖听者（不随发言者语气激进度变化），保证判据严格对称
+        # uniform_speaker: True 时全体发言概率均匀（1/n），剥离原型发言倾向偏置
         # b_init / g0 / salience_init: 允许不同实验臂共享完全相同的初始条件（受控对比）
         self.update_mode = update_mode
         self.isotropic = isotropic
         self.symmetric_tol = symmetric_tol
         self.proxy_tol = proxy_tol
+        self.uniform_speaker = uniform_speaker
         if b_init is not None:
             # 受控初始条件：直接采用外部给定的信念矩阵（形状须为 (n, d)）
             b = np.array(b_init, dtype=float)
@@ -94,8 +97,11 @@ class VecWorld:
         # 若缺失该约束，closure 会把刚断裂的边立即加回，使「断裂」在终态上被抹掉，
         # 并在互惠二元组上制造虚假的单向断裂（实测：isotropic 对照臂残留 A>0 全部源于此）。
         self.blocked = set()
-        w = np.array([10.0 if i in self.hub else 3.0 if i in self.bridger else 0.5 for i in range(n)])
-        self.speak_p = w / w.sum()
+        if uniform_speaker:
+            self.speak_p = np.full(n, 1.0 / n)
+        else:
+            w = np.array([10.0 if i in self.hub else 3.0 if i in self.bridger else 0.5 for i in range(n)])
+            self.speak_p = w / w.sum()
         self.ledger = None
         # ---- 统一 LLM 认知后端（本次复核新增；此前文件头声称有 llm 后端但 react() 无此分支）----
         # llm_policy 为 None 时 backend="llm" 不可用；注入后 LLM 决策与 proxy/hk/degroot
